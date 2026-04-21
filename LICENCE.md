@@ -1,0 +1,34 @@
+# Licence
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
+The `uaparser_gleam` project is copyright © 2026 Austin Ziegler and is licensed
+under the [Apache License, version 2.0](licences/APACHE-2.0.txt).
+
+`uaparser_gleam` is generated from the source and test description files
+provided by the user agent parser project in [`ua-parser/uap-core`][uap-core],
+copyright 2009 Google Inc and subsequent contributors.
+
+> SPDX Licence Description: [Apache-2.0][apache-2]
+
+## Developer Certificate of Origin
+
+All contributors **must** certify they are willing and able to provide their
+contributions under the terms of this project's licences with the certification
+of the [Developer Certificate of Origin (Version 1.1)](licences/dco.txt).
+
+Such certification is provided by ensuring that a `Signed-off-by`
+[commit trailer][trailer] is present on every commit:
+
+    Signed-off-by: FirstName LastName <email@example.org>
+
+The `Signed-off-by` trailer can be automatically added by git with the `-s` or
+`--signoff` option on `git commit`:
+
+```sh
+git commit --signoff
+```
+
+[apache-2]: https://spdx.org/licenses/Apache-2.0.html
+[trailer]: https://git-scm.com/docs/git-interpret-trailers
+[uap-core]: https://github.com/ua-parser/uap-core
