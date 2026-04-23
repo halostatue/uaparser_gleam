@@ -27,6 +27,10 @@ jobs:
         otp:
           - 27
           - 28
+        include:
+          - gleam: '1.15'
+            otp: 28
+            quality: true
 
     runs-on: ubuntu-latest
 
@@ -42,7 +46,6 @@ jobs:
           allowed-endpoints: >
             api.github.com:443
             builds.hex.pm:443
-            deno.com:443
             github.com:443
             hex.pm:443
             objects.githubusercontent.com:443
@@ -69,11 +72,17 @@ jobs:
 
       - run: gleam deps download
       - run: gleam build --warnings-as-errors
-      - run: gleam format --check src test
       - run: gleam test --target erlang
-      - run: gleam run -m glinter
       - run: gleam run -m benchmark --target erlang
       - run: gleam run -m benchmark_weighted --target erlang
+
+      - name: Format check
+        if: matrix.quality
+        run: gleam format --check src test
+
+      - name: Lint
+        if: matrix.quality
+        run: gleam run -m glinter
 
   test-bun:
     name: Gleam ${{ matrix.gleam }} OTP ${{ matrix.otp }} / Bun ${{ matrix.bun }}
@@ -134,13 +143,12 @@ jobs:
             **/build
 
       - run: gleam deps download
-      - run: gleam format --check src test
       - run: gleam test --target javascript --runtime bun
       - run: gleam run -m benchmark --target javascript --runtime bun
       - run: gleam run -m benchmark_weighted --target javascript --runtime bun
 
   test-deno:
-    name: Gleam ${{ matrix.gleam }} OTP ${{ matrix.otp }} / Deno ${{ matrix.deno}}
+    name: Gleam ${{ matrix.gleam }} OTP ${{ matrix.otp }} / Deno ${{ matrix.deno }}
 
     strategy:
       fail-fast: false
@@ -192,8 +200,6 @@ jobs:
         with:
           deno-version: ${{ matrix.deno }}
 
-      - uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4
-
       - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           key: builds@gleam-${{ steps.beam.outputs.gleam-version }}-otp-${{ steps.beam.outputs.otp-version }}-deno-${{ steps.deno.outputs.deno-version }}-hash-${{ hashFiles('**/manifest.toml') }}
@@ -206,7 +212,7 @@ jobs:
       - run: gleam run -m benchmark_weighted --target javascript --runtime deno
 
   test-node:
-    name: Gleam ${{ matrix.gleam }} OTP ${{ matrix.otp }} / Node ${{ matrix.node}}
+    name: Gleam ${{ matrix.gleam }} OTP ${{ matrix.otp }} / Node ${{ matrix.node }}
 
     strategy:
       fail-fast: false
@@ -234,7 +240,6 @@ jobs:
           allowed-endpoints: >
             api.github.com:443
             builds.hex.pm:443
-            deno.com:443
             github.com:443
             hex.pm:443
             objects.githubusercontent.com:443
@@ -257,8 +262,6 @@ jobs:
         id: node
         with:
           node-version: ${{ matrix.node }}
-
-      - uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4
 
       - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
