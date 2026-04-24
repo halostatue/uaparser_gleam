@@ -2,7 +2,6 @@
 
 import gleam/option.{None, Some}
 import gleeunit
-import gleeunit/should
 import uaparser
 
 pub fn main() {
@@ -11,90 +10,72 @@ pub fn main() {
 
 pub fn ua_parse_0_test() {
   let result = uaparser.parse_user_agent("Luminary/1.0")
-  should.equal(result.family, "Luminary")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Luminary"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1_test() {
   let result =
     uaparser.parse_user_agent("Luminary/70 CFNetwork/978.0.7 Darwin/18.5.0")
-  should.equal(result.family, "Luminary")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "70", minor: None, patch: None)),
-  )
+  assert result.family == "Luminary"
+  assert result.version
+    == Some(uaparser.Version(major: "70", minor: None, patch: None))
 }
 
 pub fn ua_parse_2_test() {
   let result =
     uaparser.parse_user_agent("Luminary/70 CFNetwork/975.0.3 Darwin/18.2.0")
-  should.equal(result.family, "Luminary")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "70", minor: None, patch: None)),
-  )
+  assert result.family == "Luminary"
+  assert result.version
+    == Some(uaparser.Version(major: "70", minor: None, patch: None))
 }
 
 pub fn ua_parse_3_test() {
   let result = uaparser.parse_user_agent("Luminary/1.0.3 build 71/iOS 12.2")
-  should.equal(result.family, "Luminary")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("3"))),
-  )
+  assert result.family == "Luminary"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("3")))
 }
 
 pub fn ua_parse_4_test() {
   let result =
     uaparser.parse_user_agent("Luminary/1.0.2 build 57/Android SDK 28")
-  should.equal(result.family, "Luminary")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("2"))),
-  )
+  assert result.family == "Luminary"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("2")))
 }
 
 pub fn ua_parse_5_test() {
   let result =
     uaparser.parse_user_agent("Luminary/1.0.2 build 57/Android SDK 23")
-  should.equal(result.family, "Luminary")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("2"))),
-  )
+  assert result.family == "Luminary"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("2")))
 }
 
 pub fn ua_parse_6_test() {
   let result =
     uaparser.parse_user_agent("Luminary/70 CFNetwork/976 Darwin/18.2.0")
-  should.equal(result.family, "Luminary")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "70", minor: None, patch: None)),
-  )
+  assert result.family == "Luminary"
+  assert result.version
+    == Some(uaparser.Version(major: "70", minor: None, patch: None))
 }
 
 pub fn ua_parse_7_test() {
   let result =
     uaparser.parse_user_agent("Luminary/70 CFNetwork/978.0.7 Darwin/18.6.0")
-  should.equal(result.family, "Luminary")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "70", minor: None, patch: None)),
-  )
+  assert result.family == "Luminary"
+  assert result.version
+    == Some(uaparser.Version(major: "70", minor: None, patch: None))
 }
 
 pub fn ua_parse_8_test() {
   let result =
     uaparser.parse_user_agent("Luminary/1.0.2 build 57/Android SDK 26")
-  should.equal(result.family, "Luminary")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("2"))),
-  )
+  assert result.family == "Luminary"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("2")))
 }
 
 pub fn ua_parse_9_test() {
@@ -102,17 +83,15 @@ pub fn ua_parse_9_test() {
     uaparser.parse_user_agent(
       "LuminaryStage/3311 CFNetwork/978.0.7 Darwin/18.5.0",
     )
-  should.equal(result.family, "Luminary")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3311", minor: None, patch: None)),
-  )
+  assert result.family == "Luminary"
+  assert result.version
+    == Some(uaparser.Version(major: "3311", minor: None, patch: None))
 }
 
 pub fn ua_parse_10_test() {
   let result = uaparser.parse_user_agent("fakeLuminary/1.0")
-  should.equal(result.family, "Other")
-  should.equal(result.version, None)
+  assert result.family == "Other"
+  assert result.version == None
 }
 
 pub fn ua_parse_11_test() {
@@ -120,11 +99,9 @@ pub fn ua_parse_11_test() {
     uaparser.parse_user_agent(
       "atc/1.0 watchOS/5.1.3 model/Watch3,4 hwp/t8004 build/16S535 (6; dt:156)",
     )
-  should.equal(result.family, "Apple Watch App")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("4"), patch: None)),
-  )
+  assert result.family == "Apple Watch App"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("4"), patch: None))
 }
 
 pub fn ua_parse_12_test() {
@@ -132,11 +109,9 @@ pub fn ua_parse_12_test() {
     uaparser.parse_user_agent(
       "atc/1.0 watchOS/5.2 model/Watch4,4 hwp/t8006 build/16T225 (6; dt:193)",
     )
-  should.equal(result.family, "Apple Watch App")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("4"), patch: None)),
-  )
+  assert result.family == "Apple Watch App"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("4"), patch: None))
 }
 
 pub fn ua_parse_13_test() {
@@ -144,11 +119,9 @@ pub fn ua_parse_13_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; U; en-US) AppleWebKit/531.9 (KHTML, like Gecko) AdobeAIR/2.5.1",
     )
-  should.equal(result.family, "AdobeAIR")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("5"), patch: Some("1"))),
-  )
+  assert result.family == "AdobeAIR"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("5"), patch: Some("1")))
 }
 
 pub fn ua_parse_14_test() {
@@ -156,11 +129,9 @@ pub fn ua_parse_14_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64; Quest 2) AppleWebKit/537.36 (KHTML, like Gecko) OculusBrowser/26.2.0.0.10 SamsungBrowser/4.0 Chrome/110.0.5481.192 VR Safari/537.36",
     )
-  should.equal(result.family, "Oculus Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "26", minor: Some("2"), patch: Some("0"))),
-  )
+  assert result.family == "Oculus Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "26", minor: Some("2"), patch: Some("0")))
 }
 
 pub fn ua_parse_15_test() {
@@ -168,11 +139,9 @@ pub fn ua_parse_15_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64; Quest 3) AppleWebKit/537.36 (KHTML, like Gecko) OculusBrowser/36.6.0.9.50.692136875 Chrome/130.0.6723.191 VR Safari/537.36",
     )
-  should.equal(result.family, "Oculus Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "36", minor: Some("6"), patch: Some("0"))),
-  )
+  assert result.family == "Oculus Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "36", minor: Some("6"), patch: Some("0")))
 }
 
 pub fn ua_parse_16_test() {
@@ -180,11 +149,9 @@ pub fn ua_parse_16_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us; Silk/1.1.0-80) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 Silk-Accelerated=true",
     )
-  should.equal(result.family, "Amazon Silk")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("0-80"))),
-  )
+  assert result.family == "Amazon Silk"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("0-80")))
 }
 
 pub fn ua_parse_17_test() {
@@ -192,11 +159,9 @@ pub fn ua_parse_17_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; en-us; KFTT Build/IML74K) AppleWebKit/535.19 (KHTML, like Gecko) Silk/2.0 Safari/535.19 Silk-Accelerated=false",
     )
-  should.equal(result.family, "Amazon Silk")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Amazon Silk"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_18_test() {
@@ -204,11 +169,9 @@ pub fn ua_parse_18_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; en-us; KFOT Build/IML74K) AppleWebKit/535.19 (KHTML, like Gecko) Silk/2.1 Safari/535.19 Silk-Accelerated=true",
     )
-  should.equal(result.family, "Amazon Silk")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Amazon Silk"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_19_test() {
@@ -216,11 +179,9 @@ pub fn ua_parse_19_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; en-us; KFTT Build/IML74K) AppleWebKit/535.19 (KHTML, like Gecko) Silk/2.2 Safari/535.19 Silk-Accelerated=true",
     )
-  should.equal(result.family, "Amazon Silk")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Amazon Silk"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_20_test() {
@@ -228,11 +189,9 @@ pub fn ua_parse_20_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 4.0.3; en-gb; KFTT Build/IML74K) AppleWebKit/537.36 (KHTML, like Gecko) Silk/3.25 like Chrome/34.0.1847.137 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Amazon Silk")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("25"), patch: None)),
-  )
+  assert result.family == "Amazon Silk"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("25"), patch: None))
 }
 
 pub fn ua_parse_21_test() {
@@ -240,11 +199,9 @@ pub fn ua_parse_21_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 2.2.2; en-gb; HTC Desire Build/FRG83G) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
     )
-  should.equal(result.family, "Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("2"), patch: Some("2"))),
-  )
+  assert result.family == "Android"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("2"), patch: Some("2")))
 }
 
 pub fn ua_parse_22_test() {
@@ -252,11 +209,9 @@ pub fn ua_parse_22_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 2.3.3; en-fr; HTC/WildfireS/1.33.163.2 Build/GRI40) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
     )
-  should.equal(result.family, "Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("3"), patch: Some("3"))),
-  )
+  assert result.family == "Android"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("3"), patch: Some("3")))
 }
 
 pub fn ua_parse_23_test() {
@@ -264,11 +219,9 @@ pub fn ua_parse_23_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 2.3.4; en-us; Kindle Fire Build/GINGERBREAD) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
     )
-  should.equal(result.family, "Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("3"), patch: Some("4"))),
-  )
+  assert result.family == "Android"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("3"), patch: Some("4")))
 }
 
 pub fn ua_parse_24_test() {
@@ -276,11 +229,9 @@ pub fn ua_parse_24_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux;U;Android 2.3.5;en-us;TECNO T3 Build/master) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
     )
-  should.equal(result.family, "Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("3"), patch: Some("5"))),
-  )
+  assert result.family == "Android"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("3"), patch: Some("5")))
 }
 
 pub fn ua_parse_25_test() {
@@ -288,11 +239,9 @@ pub fn ua_parse_25_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 3.0.1; en-us; GT-P7510 Build/HRI83) AppleWebKit/534.13 (KHTML, like Gecko) Version/4.0 Safari/534.13",
     )
-  should.equal(result.family, "Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "Android"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_26_test() {
@@ -300,11 +249,9 @@ pub fn ua_parse_26_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 4.0.3; en-us; KFTT Build/IML74K) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30",
     )
-  should.equal(result.family, "Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("3"))),
-  )
+  assert result.family == "Android"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("3")))
 }
 
 pub fn ua_parse_27_test() {
@@ -312,11 +259,9 @@ pub fn ua_parse_27_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 4.0.3; en-us; KFOT Build/IML74K) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30",
     )
-  should.equal(result.family, "Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("3"))),
-  )
+  assert result.family == "Android"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("3")))
 }
 
 pub fn ua_parse_28_test() {
@@ -324,11 +269,9 @@ pub fn ua_parse_28_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 4.0.3; en-us; Amaze_4G Build/IML74K) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30",
     )
-  should.equal(result.family, "Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("3"))),
-  )
+  assert result.family == "Android"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("3")))
 }
 
 pub fn ua_parse_29_test() {
@@ -336,11 +279,9 @@ pub fn ua_parse_29_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 4.0.4; en-us; PJ83100/2.20.502.7 Build/IMM76D) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.0",
     )
-  should.equal(result.family, "Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("4"))),
-  )
+  assert result.family == "Android"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("4")))
 }
 
 pub fn ua_parse_30_test() {
@@ -348,11 +289,9 @@ pub fn ua_parse_30_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; U; Windows NT 6.1; zh_CN) AppleWebKit/534.7 (KHTML, like Gecko) Chrome/7.0 baidubrowser/1.x Safari/534.7",
     )
-  should.equal(result.family, "Baidu Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: None, patch: None)),
-  )
+  assert result.family == "Baidu Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: None, patch: None))
 }
 
 pub fn ua_parse_31_test() {
@@ -360,11 +299,9 @@ pub fn ua_parse_31_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; baidubrowser 1.x)",
     )
-  should.equal(result.family, "Baidu Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: None, patch: None)),
-  )
+  assert result.family == "Baidu Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: None, patch: None))
 }
 
 pub fn ua_parse_32_test() {
@@ -372,11 +309,9 @@ pub fn ua_parse_32_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 SP-engine/2.74.0 main%2F1.0 matrixstyle/0 flyflow/6.12.3.32 info baiduboxapp/6.12.3.32 (Baidu; P2 18.5) NABar/1.0 themeUA=Theme/default",
     )
-  should.equal(result.family, "Baidu Explorer")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("12"), patch: Some("3"))),
-  )
+  assert result.family == "Baidu Explorer"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("12"), patch: Some("3")))
 }
 
 pub fn ua_parse_33_test() {
@@ -384,11 +319,9 @@ pub fn ua_parse_33_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 SP-engine/3.35.0 main/1.0 baiduboxapp/15.8.0.10 (Baidu; P2 18.5) NABar/1.0 themeUA=Theme/default",
     )
-  should.equal(result.family, "Baidu Explorer")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "15", minor: Some("8"), patch: Some("0"))),
-  )
+  assert result.family == "Baidu Explorer"
+  assert result.version
+    == Some(uaparser.Version(major: "15", minor: Some("8"), patch: Some("0")))
 }
 
 pub fn ua_parse_34_test() {
@@ -396,11 +329,13 @@ pub fn ua_parse_34_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.15 Safari/535.11 QQBrowser/6.13.13719.201",
     )
-  should.equal(result.family, "QQ Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("13"), patch: Some("13719"))),
-  )
+  assert result.family == "QQ Browser"
+  assert result.version
+    == Some(uaparser.Version(
+      major: "6",
+      minor: Some("13"),
+      patch: Some("13719"),
+    ))
 }
 
 pub fn ua_parse_35_test() {
@@ -408,11 +343,9 @@ pub fn ua_parse_35_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6.0; QQBrowser/7.6.21433.400)",
     )
-  should.equal(result.family, "QQ Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("6"), patch: Some("21433"))),
-  )
+  assert result.family == "QQ Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("6"), patch: Some("21433")))
 }
 
 pub fn ua_parse_36_test() {
@@ -420,11 +353,9 @@ pub fn ua_parse_36_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 4.1.1; zh-cn; MI 2S Build/JRO03L) AppleWebKit/537.36 (KHTML, like Gecko)Version/4.0 MQQBrowser/5.0 Mobile Safari/537.36",
     )
-  should.equal(result.family, "QQ Browser Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "QQ Browser Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_37_test() {
@@ -432,11 +363,9 @@ pub fn ua_parse_37_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone 5; CPU iPhone OS 7_0_6 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/6.0 MQQBrowser/5.0.5 Mobile/11B651 Safari/8536.25",
     )
-  should.equal(result.family, "QQ Browser Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("0"), patch: Some("5"))),
-  )
+  assert result.family == "QQ Browser Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("0"), patch: Some("5")))
 }
 
 pub fn ua_parse_38_test() {
@@ -444,11 +373,9 @@ pub fn ua_parse_38_test() {
     uaparser.parse_user_agent(
       "MQQBrowser/371 Mozilla/5.0 (iPhone 4S; CPU iPhone OS 6_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A523 Safari/7534.48.3",
     )
-  should.equal(result.family, "QQ Browser Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "371", minor: None, patch: None)),
-  )
+  assert result.family == "QQ Browser Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "371", minor: None, patch: None))
 }
 
 pub fn ua_parse_39_test() {
@@ -456,11 +383,9 @@ pub fn ua_parse_39_test() {
     uaparser.parse_user_agent(
       "MQQBrowser/1.0/Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; NOKIA; RM-910apacprc200)",
     )
-  should.equal(result.family, "QQ Browser Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "QQ Browser Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_40_test() {
@@ -468,8 +393,8 @@ pub fn ua_parse_40_test() {
     uaparser.parse_user_agent(
       "QQBrowser (Linux; U; zh-cn; HTC Hero Build/FRF91)",
     )
-  should.equal(result.family, "QQ Browser")
-  should.equal(result.version, None)
+  assert result.family == "QQ Browser"
+  assert result.version == None
 }
 
 pub fn ua_parse_41_test() {
@@ -477,11 +402,9 @@ pub fn ua_parse_41_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (BB10; Touch) AppleWebKit/537.3+ (KHTML, like Gecko) Version/10.0.9.388 Mobile Safari/537.3+",
     )
-  should.equal(result.family, "BlackBerry WebKit")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("0"), patch: Some("9"))),
-  )
+  assert result.family == "BlackBerry WebKit"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("0"), patch: Some("9")))
 }
 
 pub fn ua_parse_42_test() {
@@ -489,11 +412,9 @@ pub fn ua_parse_42_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (PlayBook; U; RIM Tablet OS 1.0.0; en-US) AppleWebKit/534.8+ (KHTML, like Gecko) Version/0.0.1 Safari/534.8+",
     )
-  should.equal(result.family, "BlackBerry WebKit")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "BlackBerry WebKit"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_43_test() {
@@ -501,11 +422,9 @@ pub fn ua_parse_43_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (BlackBerry; U; BlackBerry 9800; en-GB) AppleWebKit/534.1+ (KHTML, like Gecko) Version/6.0.0.141 Mobile Safari/534.1+",
     )
-  should.equal(result.family, "BlackBerry WebKit")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "BlackBerry WebKit"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_44_test() {
@@ -513,11 +432,9 @@ pub fn ua_parse_44_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (BlackBerry; U; BlackBerry 9800; en-US) AppleWebKit/534.1  (KHTML, like Gecko) Version/6.0.0.91 Mobile Safari/534.1 ",
     )
-  should.equal(result.family, "BlackBerry WebKit")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "BlackBerry WebKit"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_45_test() {
@@ -525,20 +442,16 @@ pub fn ua_parse_45_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; BOLT/2.101) AppleWebKit/530  (KHTML, like Gecko) Version/4.0 Safari/530.17",
     )
-  should.equal(result.family, "BOLT")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("101"), patch: None)),
-  )
+  assert result.family == "BOLT"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("101"), patch: None))
 }
 
 pub fn ua_parse_46_test() {
   let result = uaparser.parse_user_agent("Bunjalloo/0.7.6(Nintendo DS;U;en)")
-  should.equal(result.family, "Bunjalloo")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("7"), patch: Some("6"))),
-  )
+  assert result.family == "Bunjalloo"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("7"), patch: Some("6")))
 }
 
 pub fn ua_parse_47_test() {
@@ -546,11 +459,9 @@ pub fn ua_parse_47_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; chromeframe; SLCC1; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729)",
     )
-  should.equal(result.family, "IE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_48_test() {
@@ -558,11 +469,9 @@ pub fn ua_parse_48_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; chromeframe; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; Sleipnir 2.8.5)3.0.30729)",
     )
-  should.equal(result.family, "Sleipnir")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("8"), patch: Some("5"))),
-  )
+  assert result.family == "Sleipnir"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("8"), patch: Some("5")))
 }
 
 pub fn ua_parse_49_test() {
@@ -570,8 +479,8 @@ pub fn ua_parse_49_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Windows NT 6.1; Catchpoint) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36",
     )
-  should.equal(result.family, "Catchpoint")
-  should.equal(result.version, None)
+  assert result.family == "Catchpoint"
+  assert result.version == None
 }
 
 pub fn ua_parse_50_test() {
@@ -579,8 +488,8 @@ pub fn ua_parse_50_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Windows NT 6.1; Catchpoint bot) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36",
     )
-  should.equal(result.family, "Catchpoint bot")
-  should.equal(result.version, None)
+  assert result.family == "Catchpoint bot"
+  assert result.version == None
 }
 
 pub fn ua_parse_51_test() {
@@ -588,11 +497,9 @@ pub fn ua_parse_51_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.98 Safari/537.36 CreativeCloud/4.8.1.435",
     )
-  should.equal(result.family, "Adobe CreativeCloud")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("8"), patch: Some("1"))),
-  )
+  assert result.family == "Adobe CreativeCloud"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("8"), patch: Some("1")))
 }
 
 pub fn ua_parse_52_test() {
@@ -600,11 +507,9 @@ pub fn ua_parse_52_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; chromeframe/11.0.660.0)",
     )
-  should.equal(result.family, "Chrome Frame")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "11", minor: Some("0"), patch: Some("660"))),
-  )
+  assert result.family == "Chrome Frame"
+  assert result.version
+    == Some(uaparser.Version(major: "11", minor: Some("0"), patch: Some("660")))
 }
 
 pub fn ua_parse_53_test() {
@@ -612,11 +517,9 @@ pub fn ua_parse_53_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 11; vivo 1904; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/87.0.4280.141 Mobile Safari/537.36 VivoBrowser/11.1.0.1",
     )
-  should.equal(result.family, "VivoBrowser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "11", minor: Some("1"), patch: Some("0"))),
-  )
+  assert result.family == "VivoBrowser"
+  assert result.version
+    == Some(uaparser.Version(major: "11", minor: Some("1"), patch: Some("0")))
 }
 
 pub fn ua_parse_54_test() {
@@ -624,11 +527,9 @@ pub fn ua_parse_54_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 7.1.2; vivo X9Plus Build/N2G47H) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/38.0.2125.102 Mobile Safari/537.36 VivoBrowser/5.2.21",
     )
-  should.equal(result.family, "VivoBrowser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("2"), patch: Some("21"))),
-  )
+  assert result.family == "VivoBrowser"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("2"), patch: Some("21")))
 }
 
 pub fn ua_parse_55_test() {
@@ -636,11 +537,9 @@ pub fn ua_parse_55_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 13; zh-cn; Infinix X6833B Build/SP1A.210812.016) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/103.0.5060.129 HiBrowser/v2.10.1.2 UWS/ Mobile Safari/537.36",
     )
-  should.equal(result.family, "HiBrowser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("10"), patch: Some("1"))),
-  )
+  assert result.family == "HiBrowser"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("10"), patch: Some("1")))
 }
 
 pub fn ua_parse_56_test() {
@@ -648,11 +547,9 @@ pub fn ua_parse_56_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; U; Windows NT 5.2; en-US) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.7499.34 Safari/537.36 HIBrowser/v2.25.7.1",
     )
-  should.equal(result.family, "HiBrowser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("25"), patch: Some("7"))),
-  )
+  assert result.family == "HiBrowser"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("25"), patch: Some("7")))
 }
 
 pub fn ua_parse_57_test() {
@@ -660,11 +557,9 @@ pub fn ua_parse_57_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko)  Mobile/15E148 Weibo (iPhone17,1__weibo__15.4.1__iphone__os18.5)",
     )
-  should.equal(result.family, "Weibo")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "15", minor: Some("4"), patch: Some("1"))),
-  )
+  assert result.family == "Weibo"
+  assert result.version
+    == Some(uaparser.Version(major: "15", minor: Some("4"), patch: Some("1")))
 }
 
 pub fn ua_parse_58_test() {
@@ -672,11 +567,9 @@ pub fn ua_parse_58_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 12; BRT-W09 Build/HONORBRT-W09; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/92.0.4515.105 Mobile Safari/537.36 Weibo (HONOR-BRT-W09__weibo__15.4.2__android__android12)",
     )
-  should.equal(result.family, "Weibo")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "15", minor: Some("4"), patch: Some("2"))),
-  )
+  assert result.family == "Weibo"
+  assert result.version
+    == Some(uaparser.Version(major: "15", minor: Some("4"), patch: Some("2")))
 }
 
 pub fn ua_parse_59_test() {
@@ -684,11 +577,9 @@ pub fn ua_parse_59_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPad; CPU OS 18_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko)  Mobile/15E148 Weibo (iPad8,6__weibo__15.4.1__ipad__os18.4)",
     )
-  should.equal(result.family, "Weibo")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "15", minor: Some("4"), patch: Some("1"))),
-  )
+  assert result.family == "Weibo"
+  assert result.version
+    == Some(uaparser.Version(major: "15", minor: Some("4"), patch: Some("1")))
 }
 
 pub fn ua_parse_60_test() {
@@ -696,8 +587,8 @@ pub fn ua_parse_60_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 17_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 WeiboIntliOS_iPhone_6720",
     )
-  should.equal(result.family, "Weibo")
-  should.equal(result.version, None)
+  assert result.family == "Weibo"
+  assert result.version == None
 }
 
 pub fn ua_parse_61_test() {
@@ -705,8 +596,8 @@ pub fn ua_parse_61_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 14_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 WeiboliteiOS_iPhone_1070",
     )
-  should.equal(result.family, "Weibo")
-  should.equal(result.version, None)
+  assert result.family == "Weibo"
+  assert result.version == None
 }
 
 pub fn ua_parse_62_test() {
@@ -714,11 +605,9 @@ pub fn ua_parse_62_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 9; Pixel 2 XL Build/PPP5.180610.010; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/68.0.3440.85 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Chrome Mobile WebView")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "68", minor: Some("0"), patch: Some("3440"))),
-  )
+  assert result.family == "Chrome Mobile WebView"
+  assert result.version
+    == Some(uaparser.Version(major: "68", minor: Some("0"), patch: Some("3440")))
 }
 
 pub fn ua_parse_63_test() {
@@ -726,11 +615,9 @@ pub fn ua_parse_63_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 7.1.2; Nexus 5X Build/N2G47W; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/58.0.3029.83 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Chrome Mobile WebView")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "58", minor: Some("0"), patch: Some("3029"))),
-  )
+  assert result.family == "Chrome Mobile WebView"
+  assert result.version
+    == Some(uaparser.Version(major: "58", minor: Some("0"), patch: Some("3029")))
 }
 
 pub fn ua_parse_64_test() {
@@ -738,11 +625,9 @@ pub fn ua_parse_64_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 4.4.4; SHV31 Build/S2280) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/33.0.0.0 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Chrome Mobile WebView")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "33", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Chrome Mobile WebView"
+  assert result.version
+    == Some(uaparser.Version(major: "33", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_65_test() {
@@ -750,11 +635,9 @@ pub fn ua_parse_65_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 4.2; Galaxy Nexus Build/JOP40C) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19",
     )
-  should.equal(result.family, "Chrome Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "18", minor: Some("0"), patch: Some("1025"))),
-  )
+  assert result.family == "Chrome Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "18", minor: Some("0"), patch: Some("1025")))
 }
 
 pub fn ua_parse_66_test() {
@@ -762,11 +645,9 @@ pub fn ua_parse_66_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 4.1.1; SPH-L710 Build/JRO03L) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19",
     )
-  should.equal(result.family, "Chrome Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "18", minor: Some("0"), patch: Some("1025"))),
-  )
+  assert result.family == "Chrome Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "18", minor: Some("0"), patch: Some("1025")))
 }
 
 pub fn ua_parse_67_test() {
@@ -774,11 +655,9 @@ pub fn ua_parse_67_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 4.4.2; Nexus 5 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.122 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Chrome Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "35", minor: Some("0"), patch: Some("1916"))),
-  )
+  assert result.family == "Chrome Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "35", minor: Some("0"), patch: Some("1916")))
 }
 
 pub fn ua_parse_68_test() {
@@ -786,11 +665,9 @@ pub fn ua_parse_68_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/534.16 (KHTML, like Gecko) Ubuntu/10.10 Chromium/10.0.648.133 Chrome/10.0.648.133 Safari/534.16",
     )
-  should.equal(result.family, "Chromium")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("0"), patch: Some("648"))),
-  )
+  assert result.family == "Chromium"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("0"), patch: Some("648")))
 }
 
 pub fn ua_parse_69_test() {
@@ -798,11 +675,9 @@ pub fn ua_parse_69_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/532.5 (KHTML, like Gecko) Comodo_Dragon/4.1.1.11 Chrome/4.1.249.1042 Safari/532.5",
     )
-  should.equal(result.family, "Comodo Dragon")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("1"), patch: Some("1"))),
-  )
+  assert result.family == "Comodo Dragon"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("1"), patch: Some("1")))
 }
 
 pub fn ua_parse_70_test() {
@@ -810,11 +685,9 @@ pub fn ua_parse_70_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1.16) Gecko/20110302 Conkeror/0.9.2 (Debian-0.9.2+git100804-1)",
     )
-  should.equal(result.family, "Conkeror")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("2"))),
-  )
+  assert result.family == "Conkeror"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("2")))
 }
 
 pub fn ua_parse_71_test() {
@@ -822,11 +695,9 @@ pub fn ua_parse_71_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64; rv:2.0) Gecko/20110408 conkeror/0.9.3",
     )
-  should.equal(result.family, "Conkeror")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("3"))),
-  )
+  assert result.family == "Conkeror"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("3")))
 }
 
 pub fn ua_parse_72_test() {
@@ -834,11 +705,9 @@ pub fn ua_parse_72_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (SAMSUNG; SAMSUNG-GT-S8500/S8500XXJEE; U; Bada/1.0; nl-nl) AppleWebKit/533.1 (KHTML, like Gecko) Dolfin/2.0 Mobile WVGA SMM-MMS/1.2.0 OPN-B",
     )
-  should.equal(result.family, "Dolfin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Dolfin"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_73_test() {
@@ -846,11 +715,9 @@ pub fn ua_parse_73_test() {
     uaparser.parse_user_agent(
       "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)",
     )
-  should.equal(result.family, "FacebookBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "FacebookBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_74_test() {
@@ -858,11 +725,9 @@ pub fn ua_parse_74_test() {
     uaparser.parse_user_agent(
       "LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/3.1 +http://www.linkedin.com)",
     )
-  should.equal(result.family, "LinkedInBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "LinkedInBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_75_test() {
@@ -870,33 +735,29 @@ pub fn ua_parse_75_test() {
     uaparser.parse_user_agent(
       "Google (+https://developers.google.com/+/web/snippet/)",
     )
-  should.equal(result.family, "GooglePlusBot")
-  should.equal(result.version, None)
+  assert result.family == "GooglePlusBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_76_test() {
   let result =
     uaparser.parse_user_agent("Firefox/11.0 (via ggpht.com GoogleImageProxy)")
-  should.equal(result.family, "GmailImageProxy")
-  should.equal(result.version, None)
+  assert result.family == "GmailImageProxy"
+  assert result.version == None
 }
 
 pub fn ua_parse_77_test() {
   let result = uaparser.parse_user_agent("Twitterbot/1.0")
-  should.equal(result.family, "Twitterbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Twitterbot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_78_test() {
   let result = uaparser.parse_user_agent("WhatsApp/2.17.70 W")
-  should.equal(result.family, "WhatsApp")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("17"), patch: Some("70"))),
-  )
+  assert result.family == "WhatsApp"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("17"), patch: Some("70")))
 }
 
 pub fn ua_parse_79_test() {
@@ -904,11 +765,9 @@ pub fn ua_parse_79_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1.1pre) Gecko/20090717 Ubuntu/9.04 (jaunty) Shiretoko/3.5.1pre",
     )
-  should.equal(result.family, "Firefox (Shiretoko)")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("5"), patch: Some("1pre"))),
-  )
+  assert result.family == "Firefox (Shiretoko)"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("5"), patch: Some("1pre")))
 }
 
 pub fn ua_parse_80_test() {
@@ -916,11 +775,9 @@ pub fn ua_parse_80_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux i686 (x86_64); rv:2.0b4) Gecko/20100818 Firefox/4.0b4",
     )
-  should.equal(result.family, "Firefox Beta")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("b4"))),
-  )
+  assert result.family == "Firefox Beta"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("b4")))
 }
 
 pub fn ua_parse_81_test() {
@@ -928,11 +785,9 @@ pub fn ua_parse_81_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64; rv:2.0b8pre) Gecko/20101031 Firefox-4.0/4.0b8pre",
     )
-  should.equal(result.family, "Firefox Beta")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("b8pre"))),
-  )
+  assert result.family == "Firefox Beta"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("b8pre")))
 }
 
 pub fn ua_parse_82_test() {
@@ -940,11 +795,9 @@ pub fn ua_parse_82_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; U; SunOS i86pc; en-US; rv:1.8.0.5) Gecko/20060728 Firefox/1.5.0.5",
     )
-  should.equal(result.family, "Firefox")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("5"), patch: Some("0"))),
-  )
+  assert result.family == "Firefox"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("5"), patch: Some("0")))
 }
 
 pub fn ua_parse_83_test() {
@@ -952,11 +805,9 @@ pub fn ua_parse_83_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.12) Gecko/20101027 Ubuntu/10.04 (lucid) Firefox/3.6.12",
     )
-  should.equal(result.family, "Firefox")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("6"), patch: Some("12"))),
-  )
+  assert result.family == "Firefox"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("6"), patch: Some("12")))
 }
 
 pub fn ua_parse_84_test() {
@@ -964,11 +815,9 @@ pub fn ua_parse_84_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Mobile; rv:15.0) Gecko/15.0 Firefox/15.0",
     )
-  should.equal(result.family, "Firefox Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "15", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Firefox Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "15", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_85_test() {
@@ -976,11 +825,9 @@ pub fn ua_parse_85_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) FireWeb/1.0.0.0",
     )
-  should.equal(result.family, "FireWeb")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "FireWeb"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_86_test() {
@@ -988,11 +835,9 @@ pub fn ua_parse_86_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
     )
-  should.equal(result.family, "Googlebot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Googlebot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_87_test() {
@@ -1000,21 +845,17 @@ pub fn ua_parse_87_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (DTV) AppleWebKit/531.2+ (KHTML, like Gecko) Espial/6.1.6 AQUOSBrowser/2.0 (US01DTV;V;0001;0001)",
     )
-  should.equal(result.family, "Espial")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("1"), patch: Some("6"))),
-  )
+  assert result.family == "Espial"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("1"), patch: Some("6")))
 }
 
 pub fn ua_parse_88_test() {
   let result =
     uaparser.parse_user_agent("iBrowser/Mini2.8 (Nokia5130c-2/07.97)")
-  should.equal(result.family, "iBrowser Mini")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("8"), patch: None)),
-  )
+  assert result.family == "iBrowser Mini"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("8"), patch: None))
 }
 
 pub fn ua_parse_89_test() {
@@ -1022,11 +863,9 @@ pub fn ua_parse_89_test() {
     uaparser.parse_user_agent(
       "ICE Browser/5.05 (Java 1.4.0; Windows 2000 5.0 x86)",
     )
-  should.equal(result.family, "ICE Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("05"), patch: None)),
-  )
+  assert result.family == "ICE Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("05"), patch: None))
 }
 
 pub fn ua_parse_90_test() {
@@ -1034,11 +873,9 @@ pub fn ua_parse_90_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64; rv:2.0) Gecko/20110417 IceCat/4.0",
     )
-  should.equal(result.family, "IceCat")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IceCat"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_91_test() {
@@ -1046,11 +883,9 @@ pub fn ua_parse_91_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; XBLWP7; ZuneWP7)",
     )
-  should.equal(result.family, "IE Large Screen")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE Large Screen"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_92_test() {
@@ -1058,11 +893,9 @@ pub fn ua_parse_92_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; SAMSUNG; SGH-i917)",
     )
-  should.equal(result.family, "IE Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_93_test() {
@@ -1070,11 +903,9 @@ pub fn ua_parse_93_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; SAMSUNG; SGH-i917)",
     )
-  should.equal(result.family, "IE Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_94_test() {
@@ -1082,11 +913,9 @@ pub fn ua_parse_94_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0; NOKIA; Lumia 800)",
     )
-  should.equal(result.family, "IE Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_95_test() {
@@ -1094,11 +923,9 @@ pub fn ua_parse_95_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; MSIE 10.0; Windows Phone 8.0; Trident/6.0; IEMobile/10.0; ARM; Touch; NOKIA; Lumia 920)",
     )
-  should.equal(result.family, "IE Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_96_test() {
@@ -1106,21 +933,17 @@ pub fn ua_parse_96_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; GTB6; .NET CLR 2.0.50727; .NET CLR 1.1.4322)",
     )
-  should.equal(result.family, "IE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_97_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/4.0 WebTV/2.6 (compatible; MSIE 4.0)")
-  should.equal(result.family, "IE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_98_test() {
@@ -1128,11 +951,9 @@ pub fn ua_parse_98_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 5.17; Mac_PowerPC)",
     )
-  should.equal(result.family, "IE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("17"), patch: None)),
-  )
+  assert result.family == "IE"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("17"), patch: None))
 }
 
 pub fn ua_parse_99_test() {
@@ -1140,11 +961,9 @@ pub fn ua_parse_99_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; ARM; Trident/6.0)",
     )
-  should.equal(result.family, "IE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_100_test() {
@@ -1152,47 +971,37 @@ pub fn ua_parse_100_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; GTB6; chromeframe; .NET CLR 2.0.50727; .NET CLR 1.1.4322; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)",
     )
-  should.equal(result.family, "IE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_101_test() {
   let result = uaparser.parse_user_agent("Java/1.6.0_43")
-  should.equal(result.family, "Java")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("0"), patch: Some("43"))),
-  )
+  assert result.family == "Java"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("0"), patch: Some("43")))
 }
 
 pub fn ua_parse_102_test() {
   let result = uaparser.parse_user_agent("Java/1.7.0_71")
-  should.equal(result.family, "Java")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("0"), patch: Some("71"))),
-  )
+  assert result.family == "Java"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("0"), patch: Some("71")))
 }
 
 pub fn ua_parse_103_test() {
   let result = uaparser.parse_user_agent("Java/1.8.0_25")
-  should.equal(result.family, "Java")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("0"), patch: Some("25"))),
-  )
+  assert result.family == "Java"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("0"), patch: Some("25")))
 }
 
 pub fn ua_parse_104_test() {
   let result = uaparser.parse_user_agent("Java/17.0.6")
-  should.equal(result.family, "Java")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "17", minor: Some("0"), patch: Some("6"))),
-  )
+  assert result.family == "Java"
+  assert result.version
+    == Some(uaparser.Version(major: "17", minor: Some("0"), patch: Some("6")))
 }
 
 pub fn ua_parse_105_test() {
@@ -1200,11 +1009,9 @@ pub fn ua_parse_105_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; en-US) AppleWebKit/528.5+ (KHTML, like Gecko, Safari/528.5+) Version/4.0 Kindle/3.0 (screen 600x800; rotate)",
     )
-  should.equal(result.family, "Kindle")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Kindle"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_106_test() {
@@ -1212,11 +1019,9 @@ pub fn ua_parse_106_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; U; Linux; de-DE) AppleWebKit/527  (KHTML, like Gecko, Safari/419.3) konqueror/4.3.1",
     )
-  should.equal(result.family, "Konqueror")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("3"), patch: Some("1"))),
-  )
+  assert result.family == "Konqueror"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("3"), patch: Some("1")))
 }
 
 pub fn ua_parse_107_test() {
@@ -1224,11 +1029,9 @@ pub fn ua_parse_107_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.17) Gecko/20110414 Lightning/1.0b3pre Thunderbird/3.1.10",
     )
-  should.equal(result.family, "Lightning")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("b3pre"))),
-  )
+  assert result.family == "Lightning"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("b3pre")))
 }
 
 pub fn ua_parse_108_test() {
@@ -1236,8 +1039,8 @@ pub fn ua_parse_108_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux x86_64) AppleWebKit/534.26+ WebKitGTK+/1.4.1 luakit/f3a2dbe",
     )
-  should.equal(result.family, "LuaKit")
-  should.equal(result.version, None)
+  assert result.family == "LuaKit"
+  assert result.version == None
 }
 
 pub fn ua_parse_109_test() {
@@ -1245,21 +1048,17 @@ pub fn ua_parse_109_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.47 Safari/535.11 MRCHROME",
     )
-  should.equal(result.family, "Mail.ru Chromium Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "17", minor: Some("0"), patch: Some("963"))),
-  )
+  assert result.family == "Mail.ru Chromium Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "17", minor: Some("0"), patch: Some("963")))
 }
 
 pub fn ua_parse_110_test() {
   let result =
     uaparser.parse_user_agent("Midori/0.2 (X11; Linux; U; en-us) WebKit/531.2 ")
-  should.equal(result.family, "Midori")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Midori"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_111_test() {
@@ -1267,11 +1066,9 @@ pub fn ua_parse_111_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPad; U; CPU OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B367 Safari/531.21.10",
     )
-  should.equal(result.family, "Mobile Safari")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("4"))),
-  )
+  assert result.family == "Mobile Safari"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("4")))
 }
 
 pub fn ua_parse_112_test() {
@@ -1279,11 +1076,9 @@ pub fn ua_parse_112_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPod; U; CPU iPhone OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8H7 Safari/6533.18.5",
     )
-  should.equal(result.family, "Mobile Safari")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("0"), patch: Some("2"))),
-  )
+  assert result.family == "Mobile Safari"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("0"), patch: Some("2")))
 }
 
 pub fn ua_parse_113_test() {
@@ -1291,8 +1086,8 @@ pub fn ua_parse_113_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 12_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 ManagedBrowser/20181024.1",
     )
-  should.equal(result.family, "Mobile Safari UI/WKWebView")
-  should.equal(result.version, None)
+  assert result.family == "Mobile Safari UI/WKWebView"
+  assert result.version == None
 }
 
 pub fn ua_parse_114_test() {
@@ -1300,11 +1095,9 @@ pub fn ua_parse_114_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.2 Safari/605.1.15",
     )
-  should.equal(result.family, "Safari")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "12", minor: Some("1"), patch: Some("2"))),
-  )
+  assert result.family == "Safari"
+  assert result.version
+    == Some(uaparser.Version(major: "12", minor: Some("1"), patch: Some("2")))
 }
 
 pub fn ua_parse_115_test() {
@@ -1312,8 +1105,8 @@ pub fn ua_parse_115_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 12_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
     )
-  should.equal(result.family, "Mobile Safari UI/WKWebView")
-  should.equal(result.version, None)
+  assert result.family == "Mobile Safari UI/WKWebView"
+  assert result.version == None
 }
 
 pub fn ua_parse_116_test() {
@@ -1321,8 +1114,8 @@ pub fn ua_parse_116_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 12_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 ManagedBrowser/20181024.1",
     )
-  should.equal(result.family, "Mobile Safari UI/WKWebView")
-  should.equal(result.version, None)
+  assert result.family == "Mobile Safari UI/WKWebView"
+  assert result.version == None
 }
 
 pub fn ua_parse_117_test() {
@@ -1330,8 +1123,8 @@ pub fn ua_parse_117_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPod touch; CPU iPhone OS 9_3_2 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Mobile/13F69",
     )
-  should.equal(result.family, "Mobile Safari UI/WKWebView")
-  should.equal(result.version, None)
+  assert result.family == "Mobile Safari UI/WKWebView"
+  assert result.version == None
 }
 
 pub fn ua_parse_118_test() {
@@ -1339,8 +1132,8 @@ pub fn ua_parse_118_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 7_1_2 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) Mobile/11D257",
     )
-  should.equal(result.family, "Mobile Safari UI/WKWebView")
-  should.equal(result.version, None)
+  assert result.family == "Mobile Safari UI/WKWebView"
+  assert result.version == None
 }
 
 pub fn ua_parse_119_test() {
@@ -1348,26 +1141,22 @@ pub fn ua_parse_119_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.3a1) Gecko/20100208 MozillaDeveloperPreview/3.7a1 (.NET CLR 3.5.30729)",
     )
-  should.equal(result.family, "MozillaDeveloperPreview")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("7"), patch: Some("a1"))),
-  )
+  assert result.family == "MozillaDeveloperPreview"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("7"), patch: Some("a1")))
 }
 
 pub fn ua_parse_120_test() {
   let result = uaparser.parse_user_agent("NCSA_Mosaic/2.0 (Windows 3.1)")
-  should.equal(result.family, "NCSA Mosaic")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "NCSA Mosaic"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_121_test() {
   let result = uaparser.parse_user_agent("Mozilla/5.0 (PLAYSTATION 3; 3.55)")
-  should.equal(result.family, "NetFront")
-  should.equal(result.version, None)
+  assert result.family == "NetFront"
+  assert result.version == None
 }
 
 pub fn ua_parse_122_test() {
@@ -1375,15 +1164,15 @@ pub fn ua_parse_122_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (PLAYSTATION 3 4.31) AppleWebKit/531.22.8 (KHTML, like Gecko)",
     )
-  should.equal(result.family, "NetFront NX")
-  should.equal(result.version, None)
+  assert result.family == "NetFront NX"
+  assert result.version == None
 }
 
 pub fn ua_parse_123_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/4.0 (PSP (PlayStation Portable); 2.00)")
-  should.equal(result.family, "NetFront")
-  should.equal(result.version, None)
+  assert result.family == "NetFront"
+  assert result.version == None
 }
 
 pub fn ua_parse_124_test() {
@@ -1391,8 +1180,8 @@ pub fn ua_parse_124_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (PlayStation Vita 1.81) AppleWebKit/531.22.8 (KHTML, like Gecko) Silk/3.2",
     )
-  should.equal(result.family, "NetFront NX")
-  should.equal(result.version, None)
+  assert result.family == "NetFront NX"
+  assert result.version == None
 }
 
 pub fn ua_parse_125_test() {
@@ -1400,11 +1189,9 @@ pub fn ua_parse_125_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; Linux 2.6.10) NetFront/3.3 Kindle/1.0 (screen 600x800)",
     )
-  should.equal(result.family, "NetFront")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "NetFront"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_126_test() {
@@ -1412,8 +1199,8 @@ pub fn ua_parse_126_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Nintendo 3DS; U; ; en) Version/1.7498.US",
     )
-  should.equal(result.family, "NetFront NX")
-  should.equal(result.version, None)
+  assert result.family == "NetFront NX"
+  assert result.version == None
 }
 
 pub fn ua_parse_127_test() {
@@ -1421,20 +1208,16 @@ pub fn ua_parse_127_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Nintendo WiiU) AppleWebKit/534.52 (KHTML, like Gecko) NX/2.1.0.8.21 NintendoBrowser/1.0.0.7494.US",
     )
-  should.equal(result.family, "NetFront NX")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("1"), patch: Some("0"))),
-  )
+  assert result.family == "NetFront NX"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("1"), patch: Some("0")))
 }
 
 pub fn ua_parse_128_test() {
   let result = uaparser.parse_user_agent("HUAWEI-M750/001.00 ACS-NetFront/3.2")
-  should.equal(result.family, "NetFront")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "NetFront"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_129_test() {
@@ -1442,11 +1225,9 @@ pub fn ua_parse_129_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (BREW 3.1.5; U; en-us; Sanyo; NetFront/3.5.1/AMB) Boost SCP3810",
     )
-  should.equal(result.family, "NetFront")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("5"), patch: Some("1"))),
-  )
+  assert result.family == "NetFront"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("5"), patch: Some("1")))
 }
 
 pub fn ua_parse_130_test() {
@@ -1454,11 +1235,9 @@ pub fn ua_parse_130_test() {
     uaparser.parse_user_agent(
       "NetFront/3.5.1 (BREW 3.1.5; U; en-us; LG; NetFront/3.5.1/WAP) Sprint LN240 MMP/2.0 Profile/MIDP-2.1 Configuration/CLDC-1.1",
     )
-  should.equal(result.family, "NetFront")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("5"), patch: Some("1"))),
-  )
+  assert result.family == "NetFront"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("5"), patch: Some("1")))
 }
 
 pub fn ua_parse_131_test() {
@@ -1466,11 +1245,9 @@ pub fn ua_parse_131_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (Brew MP 1.0.2; U; en-us; Sanyo; NetFront/3.5.1/AMB) Sprint E4100",
     )
-  should.equal(result.family, "NetFront")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("5"), patch: Some("1"))),
-  )
+  assert result.family == "NetFront"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("5"), patch: Some("1")))
 }
 
 pub fn ua_parse_132_test() {
@@ -1478,11 +1255,9 @@ pub fn ua_parse_132_test() {
     uaparser.parse_user_agent(
       "PantechP6010/JNUS11072011 BMP/1.0.2 DeviceId/141020 NetFront/4.1 OMC/1.5.3 Profile/MIDP-2.1 Configuration/CLDC-1.1",
     )
-  should.equal(result.family, "NetFront")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "NetFront"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_133_test() {
@@ -1490,11 +1265,9 @@ pub fn ua_parse_133_test() {
     uaparser.parse_user_agent(
       "NetFront/4.2 (BMP 1.0.4; U; en-us; LG; NetFront/4.2/AMB) Boost LG272 MMP/2.0 Profile/MIDP-2.1 Configuration/CLDC-1.1",
     )
-  should.equal(result.family, "NetFront")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "NetFront"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_134_test() {
@@ -1502,11 +1275,9 @@ pub fn ua_parse_134_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (SymbianOS/9.4; U; Series60/5.0 Nokia5800d-1/21.0.025; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/413 (KHTML, like Gecko) Safari/413",
     )
-  should.equal(result.family, "Nokia Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Nokia Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_135_test() {
@@ -1514,11 +1285,9 @@ pub fn ua_parse_135_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Symbian/3; Series60/5.2 NokiaN8-00/013.016; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/525 (KHTML, like Gecko) Version/3.0 BrowserNG/7.2.8.10 3gpp-gba",
     )
-  should.equal(result.family, "Nokia Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("2"), patch: Some("8"))),
-  )
+  assert result.family == "Nokia Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("2"), patch: Some("8")))
 }
 
 pub fn ua_parse_136_test() {
@@ -1526,11 +1295,9 @@ pub fn ua_parse_136_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Symbian/3; Series60/5.2 NokiaN8-00/012.002; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/533.4 (KHTML, like Gecko) NokiaBrowser/7.3.0 Mobile Safari/533.4 3gpp-gba",
     )
-  should.equal(result.family, "Nokia Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("3"), patch: Some("0"))),
-  )
+  assert result.family == "Nokia Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("3"), patch: Some("0")))
 }
 
 pub fn ua_parse_137_test() {
@@ -1538,11 +1305,9 @@ pub fn ua_parse_137_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Symbian/3; Series60/5.3 Nokia701/111.020.0307; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/533.4 (KHTML, like Gecko) NokiaBrowser/7.4.1.14 Mobile Safari/533.4 3gpp-gba",
     )
-  should.equal(result.family, "Nokia Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("4"), patch: Some("1"))),
-  )
+  assert result.family == "Nokia Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("4"), patch: Some("1")))
 }
 
 pub fn ua_parse_138_test() {
@@ -1550,18 +1315,16 @@ pub fn ua_parse_138_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (MeeGo; NokiaN9) AppleWebKit/534.13 (KHTML, like Gecko) NokiaBrowser/8.5.0 Mobile Safari/534.13",
     )
-  should.equal(result.family, "Nokia Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("5"), patch: Some("0"))),
-  )
+  assert result.family == "Nokia Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("5"), patch: Some("0")))
 }
 
 pub fn ua_parse_139_test() {
   let result =
     uaparser.parse_user_agent("ALCATEL-OT510A/382 ObigoInternetBrowser/Q05A")
-  should.equal(result.family, "Obigo")
-  should.equal(result.version, None)
+  assert result.family == "Obigo"
+  assert result.version == None
 }
 
 pub fn ua_parse_140_test() {
@@ -1569,8 +1332,8 @@ pub fn ua_parse_140_test() {
     uaparser.parse_user_agent(
       "Huawei/1.0/0HuaweiG2800/WAP2.0/Obigo-Browser/Q03C MMS/Obigo-MMS/1.2",
     )
-  should.equal(result.family, "Obigo")
-  should.equal(result.version, None)
+  assert result.family == "Obigo"
+  assert result.version == None
 }
 
 pub fn ua_parse_141_test() {
@@ -1578,30 +1341,24 @@ pub fn ua_parse_141_test() {
     uaparser.parse_user_agent(
       "PantechP7040/JLUS04042011 Browser/Obigo/Q05A OMC/1.5.3 Profile/MIDP-2.1 Configuration/CLDC-1.1",
     )
-  should.equal(result.family, "Obigo")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "05", minor: None, patch: None)),
-  )
+  assert result.family == "Obigo"
+  assert result.version
+    == Some(uaparser.Version(major: "05", minor: None, patch: None))
 }
 
 pub fn ua_parse_142_test() {
   let result =
     uaparser.parse_user_agent("OneBrowser/3.0 (SAMSUNG-GT-S5253/S5253DDKJ2)")
-  should.equal(result.family, "ONE Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "ONE Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_143_test() {
   let result = uaparser.parse_user_agent("OneBrowser/3.0 (NokiaC2-00/03.42)")
-  should.equal(result.family, "ONE Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "ONE Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_144_test() {
@@ -1609,11 +1366,9 @@ pub fn ua_parse_144_test() {
     uaparser.parse_user_agent(
       "SAMSUNG-C3053/1.0 Openwave/6.2.3 Profile/MIDP-2.0 Configuration/CLDC-1.1 UP.Browser/6.2.3.3.c.1.101 (GUI) MMP/2.0",
     )
-  should.equal(result.family, "Openwave")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("2"), patch: Some("3"))),
-  )
+  assert result.family == "Openwave"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("2"), patch: Some("3")))
 }
 
 pub fn ua_parse_145_test() {
@@ -1621,11 +1376,9 @@ pub fn ua_parse_145_test() {
     uaparser.parse_user_agent(
       "Opera/9.80 (VRE; Opera Mini/4.2/28.2794; U; en) Presto/2.8.119 Version/11.10",
     )
-  should.equal(result.family, "Opera Mini")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Opera Mini"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_146_test() {
@@ -1633,11 +1386,9 @@ pub fn ua_parse_146_test() {
     uaparser.parse_user_agent(
       "Opera/9.80 (BREW; Opera Mini/5.1.191/27.2202; U; en) Presto/2.8.119 240X400 LG VN271",
     )
-  should.equal(result.family, "Opera Mini")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("1"), patch: Some("191"))),
-  )
+  assert result.family == "Opera Mini"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("1"), patch: Some("191")))
 }
 
 pub fn ua_parse_147_test() {
@@ -1645,11 +1396,9 @@ pub fn ua_parse_147_test() {
     uaparser.parse_user_agent(
       "Opera/9.80 (Series 60; Opera Mini/6.24455/25.677; U; fr) Presto/2.5.25 Version/10.54",
     )
-  should.equal(result.family, "Opera Mini")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("24455"), patch: None)),
-  )
+  assert result.family == "Opera Mini"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("24455"), patch: None))
 }
 
 pub fn ua_parse_148_test() {
@@ -1657,11 +1406,9 @@ pub fn ua_parse_148_test() {
     uaparser.parse_user_agent(
       "Opera/9.80 (BlackBerry; Opera Mini/7.0.31437/28.3030; U; en) Presto/2.8.119 Version/11.10",
     )
-  should.equal(result.family, "Opera Mini")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("0"), patch: Some("31437"))),
-  )
+  assert result.family == "Opera Mini"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("0"), patch: Some("31437")))
 }
 
 pub fn ua_parse_149_test() {
@@ -1669,11 +1416,9 @@ pub fn ua_parse_149_test() {
     uaparser.parse_user_agent(
       "Opera/9.80 (J2ME/MIDP; Opera Mini/9.80 (S60; SymbOS; Opera Mobi/23.348; U; en) Presto/2.5.25 Version/10.54",
     )
-  should.equal(result.family, "Opera Mini")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("80"), patch: None)),
-  )
+  assert result.family == "Opera Mini"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("80"), patch: None))
 }
 
 pub fn ua_parse_150_test() {
@@ -1681,11 +1426,9 @@ pub fn ua_parse_150_test() {
     uaparser.parse_user_agent(
       "Opera/9.80 (J2ME/MIDP; Opera Mini/9.80 (J2ME/22.478; U; en) Presto/2.5.25 Version/10.54",
     )
-  should.equal(result.family, "Opera Mini")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("80"), patch: None)),
-  )
+  assert result.family == "Opera Mini"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("80"), patch: None))
 }
 
 pub fn ua_parse_151_test() {
@@ -1693,11 +1436,9 @@ pub fn ua_parse_151_test() {
     uaparser.parse_user_agent(
       "Opera/9.80 (J2ME/MIDP; Opera Mini/9 (Compatible; MSIE:9.0; iPhone; BlackBerry9700; AppleWebKit/24.746; U; en) Presto/2.5.25 Version/10.54",
     )
-  should.equal(result.family, "Opera Mini")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: None, patch: None)),
-  )
+  assert result.family == "Opera Mini"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: None, patch: None))
 }
 
 pub fn ua_parse_152_test() {
@@ -1705,11 +1446,9 @@ pub fn ua_parse_152_test() {
     uaparser.parse_user_agent(
       "Opera/9.80 (Android; Opera Mini/7.6.35766/35.5706; U; en) Presto/2.8.119 Version/11.10",
     )
-  should.equal(result.family, "Opera Mini")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("6"), patch: Some("35766"))),
-  )
+  assert result.family == "Opera Mini"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("6"), patch: Some("35766")))
 }
 
 pub fn ua_parse_153_test() {
@@ -1717,11 +1456,9 @@ pub fn ua_parse_153_test() {
     uaparser.parse_user_agent(
       "Opera/9.80 (S60; SymbOS; Opera Mobi/275; U; es-ES) Presto/2.4.13 Version/10.00",
     )
-  should.equal(result.family, "Opera Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("00"), patch: None)),
-  )
+  assert result.family == "Opera Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("00"), patch: None))
 }
 
 pub fn ua_parse_154_test() {
@@ -1729,31 +1466,25 @@ pub fn ua_parse_154_test() {
     uaparser.parse_user_agent(
       "Opera/9.80 (Android 3.2; Linux; Opera Tablet/ADR-1106291546; U; en) Presto/2.8.149 Version/11.10",
     )
-  should.equal(result.family, "Opera Tablet")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "11", minor: Some("10"), patch: None)),
-  )
+  assert result.family == "Opera Tablet"
+  assert result.version
+    == Some(uaparser.Version(major: "11", minor: Some("10"), patch: None))
 }
 
 pub fn ua_parse_155_test() {
   let result =
     uaparser.parse_user_agent("Opera/9.30 (Nintendo Wii; U; ; 3642; en)")
-  should.equal(result.family, "Opera")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("30"), patch: None)),
-  )
+  assert result.family == "Opera"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("30"), patch: None))
 }
 
 pub fn ua_parse_156_test() {
   let result =
     uaparser.parse_user_agent("Opera/9.50 (Nintendo DSi; Opera/507; U; en-US)")
-  should.equal(result.family, "Opera")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("50"), patch: None)),
-  )
+  assert result.family == "Opera"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("50"), patch: None))
 }
 
 pub fn ua_parse_157_test() {
@@ -1761,11 +1492,9 @@ pub fn ua_parse_157_test() {
     uaparser.parse_user_agent(
       "Opera/9.80 (Windows NT 5.1; U; ru) Presto/2.5.24 Version/10.53",
     )
-  should.equal(result.family, "Opera")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("53"), patch: None)),
-  )
+  assert result.family == "Opera"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("53"), patch: None))
 }
 
 pub fn ua_parse_158_test() {
@@ -1773,11 +1502,9 @@ pub fn ua_parse_158_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.20 Safari/537.36 OPR/15.0.1147.18 (Edition Next)",
     )
-  should.equal(result.family, "Opera")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "15", minor: Some("0"), patch: Some("1147"))),
-  )
+  assert result.family == "Opera"
+  assert result.version
+    == Some(uaparser.Version(major: "15", minor: Some("0"), patch: Some("1147")))
 }
 
 pub fn ua_parse_159_test() {
@@ -1785,11 +1512,9 @@ pub fn ua_parse_159_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android; 4.1.2; GT-I9100 Build/000000) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1234.12 Mobile Safari/537.22 OPR/14.0.123.123",
     )
-  should.equal(result.family, "Opera Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "14", minor: Some("0"), patch: Some("123"))),
-  )
+  assert result.family == "Opera Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "14", minor: Some("0"), patch: Some("123")))
 }
 
 pub fn ua_parse_160_test() {
@@ -1797,11 +1522,9 @@ pub fn ua_parse_160_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.10 Safari/537.36 OPR/27.0.1689.22 (Edition developer)",
     )
-  should.equal(result.family, "Opera")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "27", minor: Some("0"), patch: Some("1689"))),
-  )
+  assert result.family == "Opera"
+  assert result.version
+    == Some(uaparser.Version(major: "27", minor: Some("0"), patch: Some("1689")))
 }
 
 pub fn ua_parse_161_test() {
@@ -1809,11 +1532,9 @@ pub fn ua_parse_161_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 16; SM-X210 Build/BP2A.250605.031.A3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.7559.132 Safari/537.36 OPX/3.1",
     )
-  should.equal(result.family, "Opera GX")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Opera GX"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_162_test() {
@@ -1821,11 +1542,9 @@ pub fn ua_parse_162_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.7559.109 Safari/537.36 OPX/3.1",
     )
-  should.equal(result.family, "Opera GX")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Opera GX"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_163_test() {
@@ -1833,11 +1552,9 @@ pub fn ua_parse_163_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 16; SM-X115 Build/BP2A.250605.031.A3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.79 Safari/537.36 OPT/2.9",
     )
-  should.equal(result.family, "Opera Touch")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("9"), patch: None)),
-  )
+  assert result.family == "Opera Touch"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("9"), patch: None))
 }
 
 pub fn ua_parse_164_test() {
@@ -1845,11 +1562,9 @@ pub fn ua_parse_164_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 16; SM-X115 Build/BP2A.250605.031.A3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7632.122 Safari/537.36 OPT/2.9",
     )
-  should.equal(result.family, "Opera Touch")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("9"), patch: None)),
-  )
+  assert result.family == "Opera Touch"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("9"), patch: None))
 }
 
 pub fn ua_parse_165_test() {
@@ -1857,11 +1572,9 @@ pub fn ua_parse_165_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.196 Safari/537.36 OPT/2.9",
     )
-  should.equal(result.family, "Opera Touch")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("9"), patch: None)),
-  )
+  assert result.family == "Opera Touch"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("9"), patch: None))
 }
 
 pub fn ua_parse_166_test() {
@@ -1869,11 +1582,9 @@ pub fn ua_parse_166_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0_3 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Coast/3.1.0.79792 Mobile/11B511 Safari/7534.48.3",
     )
-  should.equal(result.family, "Opera Coast")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("1"), patch: Some("0"))),
-  )
+  assert result.family == "Opera Coast"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("1"), patch: Some("0")))
 }
 
 pub fn ua_parse_167_test() {
@@ -1881,17 +1592,15 @@ pub fn ua_parse_167_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 7_1_1 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) OPiOS/8.0.1.80062 Mobile/11D201 Safari/9537.53",
     )
-  should.equal(result.family, "Opera Mini")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "Opera Mini"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_168_test() {
   let result = uaparser.parse_user_agent("SomethingWeNeverKnewExisted")
-  should.equal(result.family, "Other")
-  should.equal(result.version, None)
+  assert result.family == "Other"
+  assert result.version == None
 }
 
 pub fn ua_parse_169_test() {
@@ -1899,11 +1608,9 @@ pub fn ua_parse_169_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Series40; NokiaC2-03/07.48; Profile/MIDP-2.1 Configuration/CLDC-1.1) Gecko/20100401 S40OviBrowser/2.2.0.0.33",
     )
-  should.equal(result.family, "Ovi Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("2"), patch: Some("0"))),
-  )
+  assert result.family == "Ovi Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("2"), patch: Some("0")))
 }
 
 pub fn ua_parse_170_test() {
@@ -1911,11 +1618,9 @@ pub fn ua_parse_170_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Series40; NokiaX2-05/08.35; Profile/MIDP-2.1 Configuration/CLDC-1.1) Gecko/20100401 S40OviBrowser/2.0.2.68.14",
     )
-  should.equal(result.family, "Ovi Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("2"))),
-  )
+  assert result.family == "Ovi Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("2")))
 }
 
 pub fn ua_parse_171_test() {
@@ -1923,11 +1628,9 @@ pub fn ua_parse_171_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 5.1; rv:2.0) Gecko/20110407 Firefox/4.0.3 PaleMoon/4.0.3",
     )
-  should.equal(result.family, "Pale Moon")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("3"))),
-  )
+  assert result.family == "Pale Moon"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("3")))
 }
 
 pub fn ua_parse_172_test() {
@@ -1935,11 +1638,9 @@ pub fn ua_parse_172_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64; rv:3.0) Goanna/20170207 PaleMoon/27.1.0",
     )
-  should.equal(result.family, "Pale Moon")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "27", minor: Some("1"), patch: Some("0"))),
-  )
+  assert result.family == "Pale Moon"
+  assert result.version
+    == Some(uaparser.Version(major: "27", minor: Some("1"), patch: Some("0")))
 }
 
 pub fn ua_parse_173_test() {
@@ -1947,11 +1648,9 @@ pub fn ua_parse_173_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64; rv:3.0) Gecko/20100101 Goanna/20170207 PaleMoon/27.1.0",
     )
-  should.equal(result.family, "Pale Moon")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "27", minor: Some("1"), patch: Some("0"))),
-  )
+  assert result.family == "Pale Moon"
+  assert result.version
+    == Some(uaparser.Version(major: "27", minor: Some("1"), patch: Some("0")))
 }
 
 pub fn ua_parse_174_test() {
@@ -1959,11 +1658,9 @@ pub fn ua_parse_174_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64; rv:45.9) Gecko/20100101 Goanna/3.0 Firefox/45.9 PaleMoon/27.1.0",
     )
-  should.equal(result.family, "Pale Moon")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "27", minor: Some("1"), patch: Some("0"))),
-  )
+  assert result.family == "Pale Moon"
+  assert result.version
+    == Some(uaparser.Version(major: "27", minor: Some("1"), patch: Some("0")))
 }
 
 pub fn ua_parse_175_test() {
@@ -1971,11 +1668,9 @@ pub fn ua_parse_175_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64; rv:Camoufox Camoufox 140.0) Gecko/20100101 Firefox/Camoufox Camoufox 140.0",
     )
-  should.equal(result.family, "Camoufox")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "140", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Camoufox"
+  assert result.version
+    == Some(uaparser.Version(major: "140", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_176_test() {
@@ -1983,11 +1678,9 @@ pub fn ua_parse_176_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:Camoufox Camoufox 140.0) Gecko/20100101 Firefox/Camoufox Camoufox 140.0",
     )
-  should.equal(result.family, "Camoufox")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "140", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Camoufox"
+  assert result.version
+    == Some(uaparser.Version(major: "140", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_177_test() {
@@ -1995,11 +1688,9 @@ pub fn ua_parse_177_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (LG-T500 AppleWebkit/531 Browser/Phantom/V2.0 Widget/LGMW/3.0 MMS/LG-MMS-V1.0/1.2 Java/ASVM/1.1 Profile/MIDP-2.1 Configuration/CLDC-1.1)",
     )
-  should.equal(result.family, "Phantom Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Phantom Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_178_test() {
@@ -2007,11 +1698,9 @@ pub fn ua_parse_178_test() {
     uaparser.parse_user_agent(
       "Pingdom.com_bot_version_1.4_(http://www.pingdom.com/)",
     )
-  should.equal(result.family, "PingdomBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("4"), patch: None)),
-  )
+  assert result.family == "PingdomBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("4"), patch: None))
 }
 
 pub fn ua_parse_179_test() {
@@ -2019,11 +1708,9 @@ pub fn ua_parse_179_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) PingdomTMS/0.8.5 Safari/534.34",
     )
-  should.equal(result.family, "PingdomBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("8"), patch: Some("5"))),
-  )
+  assert result.family == "PingdomBot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("8"), patch: Some("5")))
 }
 
 pub fn ua_parse_180_test() {
@@ -2031,20 +1718,16 @@ pub fn ua_parse_180_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/61.0.3163.100 Chrome/61.0.3163.100 Safari/537.36 PingdomPageSpeed/1.0 (pingbot/2.0; +http://www.pingdom.com/)",
     )
-  should.equal(result.family, "PingdomBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "PingdomBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_181_test() {
   let result = uaparser.parse_user_agent("NewRelicPinger/1.0 (1025794)")
-  should.equal(result.family, "NewRelicPingerBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "NewRelicPingerBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_182_test() {
@@ -2052,11 +1735,9 @@ pub fn ua_parse_182_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML like Gecko) Chrome/80.0.3987.87 Safari/537.36 RuxitSynthetic/1.0 v3111153639319797883 t6205049005192687891",
     )
-  should.equal(result.family, "Ruxit Synthetic")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Ruxit Synthetic"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_183_test() {
@@ -2064,11 +1745,9 @@ pub fn ua_parse_183_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36 RuxitSynthetic/1.0 v1090987875435353284 t2300697156056581802 ath1fb31b7a altpriv cvcv=2 cexpw=1 smf=0",
     )
-  should.equal(result.family, "Ruxit Synthetic")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Ruxit Synthetic"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_184_test() {
@@ -2076,11 +1755,9 @@ pub fn ua_parse_184_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.7559.133 Safari/537.36 RuxitSynthetic/1.0 v148429737999 t4519022964667904509 ath959a1831 altpub cvcv=2",
     )
-  should.equal(result.family, "Ruxit Synthetic")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Ruxit Synthetic"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_185_test() {
@@ -2088,8 +1765,8 @@ pub fn ua_parse_185_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/98 Safari/537.4 (StatusCake)",
     )
-  should.equal(result.family, "StatusCakeBot")
-  should.equal(result.version, None)
+  assert result.family == "StatusCakeBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_186_test() {
@@ -2097,20 +1774,16 @@ pub fn ua_parse_186_test() {
     uaparser.parse_user_agent(
       "Mozilla/3.0 (Planetweb/2.100 JS SSL US; Dreamcast US)",
     )
-  should.equal(result.family, "Planetweb")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("100"), patch: None)),
-  )
+  assert result.family == "Planetweb"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("100"), patch: None))
 }
 
 pub fn ua_parse_187_test() {
   let result = uaparser.parse_user_agent("PyAMF/0.6.1")
-  should.equal(result.family, "PyAMF")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("6"), patch: Some("1"))),
-  )
+  assert result.family == "PyAMF"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("6"), patch: Some("1")))
 }
 
 pub fn ua_parse_188_test() {
@@ -2118,11 +1791,9 @@ pub fn ua_parse_188_test() {
     uaparser.parse_user_agent(
       "python-requests/0.14 CPython/2.6 Linux/2.6-43-server",
     )
-  should.equal(result.family, "Python Requests")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("14"), patch: None)),
-  )
+  assert result.family == "Python Requests"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("14"), patch: None))
 }
 
 pub fn ua_parse_189_test() {
@@ -2130,11 +1801,9 @@ pub fn ua_parse_189_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11i; Linux; C) AppleWebKikt/533.3 (KHTML, like Gecko) QtCarBrowser Safari/533.3",
     )
-  should.equal(result.family, "QtCarBrowser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: None, patch: None)),
-  )
+  assert result.family == "QtCarBrowser"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: None, patch: None))
 }
 
 pub fn ua_parse_190_test() {
@@ -2142,11 +1811,9 @@ pub fn ua_parse_190_test() {
     uaparser.parse_user_agent(
       "Rackspace Monitoring/1.1 (https://monitoring.api.rackspacecloud.com)",
     )
-  should.equal(result.family, "RackspaceBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "RackspaceBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_191_test() {
@@ -2154,8 +1821,8 @@ pub fn ua_parse_191_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; U; BSD Four; en-US) AppleWebKit/533.3 (KHTML, like Gecko) rekonq Safari/533.3",
     )
-  should.equal(result.family, "Rekonq")
-  should.equal(result.version, None)
+  assert result.family == "Rekonq"
+  assert result.version == None
 }
 
 pub fn ua_parse_192_test() {
@@ -2163,11 +1830,9 @@ pub fn ua_parse_192_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux i686) AppleWebKit/534.34 (KHTML, like Gecko) rekonq/1.0 Safari/534.34",
     )
-  should.equal(result.family, "Rekonq")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Rekonq"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_193_test() {
@@ -2175,11 +1840,9 @@ pub fn ua_parse_193_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/534.3 (KHTML, like Gecko) RockMelt/0.8.34.841 Chrome/6.0.472.63 Safari/534.3",
     )
-  should.equal(result.family, "RockMelt")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("8"), patch: Some("34"))),
-  )
+  assert result.family == "RockMelt"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("8"), patch: Some("34")))
 }
 
 pub fn ua_parse_194_test() {
@@ -2187,8 +1850,8 @@ pub fn ua_parse_194_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/418.8 (KHTML, like Gecko) Safari/419.3",
     )
-  should.equal(result.family, "Safari")
-  should.equal(result.version, None)
+  assert result.family == "Safari"
+  assert result.version == None
 }
 
 pub fn ua_parse_195_test() {
@@ -2196,11 +1859,9 @@ pub fn ua_parse_195_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_5; en-us) AppleWebKit/533.18.1 (KHTML, like Gecko) Version/5.0.2 Safari/533.18.5",
     )
-  should.equal(result.family, "Safari")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("0"), patch: Some("2"))),
-  )
+  assert result.family == "Safari"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("0"), patch: Some("2")))
 }
 
 pub fn ua_parse_196_test() {
@@ -2208,11 +1869,9 @@ pub fn ua_parse_196_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_7; en-us) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Safari/530.17 Skyfire/2.0",
     )
-  should.equal(result.family, "Skyfire")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Skyfire"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_197_test() {
@@ -2220,11 +1879,9 @@ pub fn ua_parse_197_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.21 (KHTML, like Gecko) Snowshoe/1.0.0 Safari/537.21",
     )
-  should.equal(result.family, "Snowshoe")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Snowshoe"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_198_test() {
@@ -2232,11 +1889,9 @@ pub fn ua_parse_198_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.17) Gecko/20110414 Thunderbird/3.1.10 ThunderBrowse/3.3.5",
     )
-  should.equal(result.family, "ThunderBrowse")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("3"), patch: Some("5"))),
-  )
+  assert result.family == "ThunderBrowse"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("3"), patch: Some("5")))
 }
 
 pub fn ua_parse_199_test() {
@@ -2244,11 +1899,9 @@ pub fn ua_parse_199_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Thunderbird/24.2.0 Lightning/2.6.4",
     )
-  should.equal(result.family, "Thunderbird")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "24", minor: Some("2"), patch: Some("0"))),
-  )
+  assert result.family == "Thunderbird"
+  assert result.version
+    == Some(uaparser.Version(major: "24", minor: Some("2"), patch: Some("0")))
 }
 
 pub fn ua_parse_200_test() {
@@ -2256,11 +1909,9 @@ pub fn ua_parse_200_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64; rv:24.0) Gecko/20100101 Thunderbird/24.2.0",
     )
-  should.equal(result.family, "Thunderbird")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "24", minor: Some("2"), patch: Some("0"))),
-  )
+  assert result.family == "Thunderbird"
+  assert result.version
+    == Some(uaparser.Version(major: "24", minor: Some("2"), patch: Some("0")))
 }
 
 pub fn ua_parse_201_test() {
@@ -2268,11 +1919,9 @@ pub fn ua_parse_201_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1; rv:45.0) Gecko/20100101 Thunderbird/45.0",
     )
-  should.equal(result.family, "Thunderbird")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "45", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Thunderbird"
+  assert result.version
+    == Some(uaparser.Version(major: "45", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_202_test() {
@@ -2280,11 +1929,9 @@ pub fn ua_parse_202_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:7.0.1) Gecko/20151105 Postbox/4.0.8",
     )
-  should.equal(result.family, "Postbox")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("8"))),
-  )
+  assert result.family == "Postbox"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("8")))
 }
 
 pub fn ua_parse_203_test() {
@@ -2292,17 +1939,15 @@ pub fn ua_parse_203_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; Lotus-Notes/6.0; Windows-NT)",
     )
-  should.equal(result.family, "Lotus Notes")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Lotus Notes"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_204_test() {
   let result = uaparser.parse_user_agent("Superhuman")
-  should.equal(result.family, "Superhuman")
-  should.equal(result.version, None)
+  assert result.family == "Superhuman"
+  assert result.version == None
 }
 
 pub fn ua_parse_205_test() {
@@ -2310,38 +1955,30 @@ pub fn ua_parse_205_test() {
     uaparser.parse_user_agent(
       "YahooMobileMail/1.0 (Android Mail; 1.3.10) (supersonic;HTC;PC36100;2.3.5/GRJ90)",
     )
-  should.equal(result.family, "YahooMobileMail")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "YahooMobileMail"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_206_test() {
   let result = uaparser.parse_user_agent("Barca/2.8.2")
-  should.equal(result.family, "Barca")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("8"), patch: Some("2"))),
-  )
+  assert result.family == "Barca"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("8"), patch: Some("2")))
 }
 
 pub fn ua_parse_207_test() {
   let result = uaparser.parse_user_agent("BarcaPro/1.4.12")
-  should.equal(result.family, "Barca")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("4"), patch: Some("12"))),
-  )
+  assert result.family == "Barca"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("4"), patch: Some("12")))
 }
 
 pub fn ua_parse_208_test() {
   let result = uaparser.parse_user_agent("The Bat! 4.0.0.22")
-  should.equal(result.family, "The Bat!")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "The Bat!"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_209_test() {
@@ -2349,11 +1986,9 @@ pub fn ua_parse_209_test() {
     uaparser.parse_user_agent(
       "MailBar/1.3.2 (Mac OS X Version 10.11.1 (Build 15B42))",
     )
-  should.equal(result.family, "MailBar")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("2"))),
-  )
+  assert result.family == "MailBar"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("2")))
 }
 
 pub fn ua_parse_210_test() {
@@ -2361,11 +1996,9 @@ pub fn ua_parse_210_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.34 (KHTML, like Gecko) kmail2/4.14.2 Safari/534.34",
     )
-  should.equal(result.family, "kmail2")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("14"), patch: Some("2"))),
-  )
+  assert result.family == "kmail2"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("14"), patch: Some("2")))
 }
 
 pub fn ua_parse_211_test() {
@@ -2373,11 +2006,9 @@ pub fn ua_parse_211_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; MSOffice 12)",
     )
-  should.equal(result.family, "Outlook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2007", minor: None, patch: None)),
-  )
+  assert result.family == "Outlook"
+  assert result.version
+    == Some(uaparser.Version(major: "2007", minor: None, patch: None))
 }
 
 pub fn ua_parse_212_test() {
@@ -2385,11 +2016,9 @@ pub fn ua_parse_212_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0; Trident/4.0; InfoPath.2; MSOffice 14)",
     )
-  should.equal(result.family, "Outlook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2010", minor: None, patch: None)),
-  )
+  assert result.family == "Outlook"
+  assert result.version
+    == Some(uaparser.Version(major: "2010", minor: None, patch: None))
 }
 
 pub fn ua_parse_213_test() {
@@ -2397,11 +2026,9 @@ pub fn ua_parse_213_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/6.0; Microsoft Outlook 15.0.4420)",
     )
-  should.equal(result.family, "Outlook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2013", minor: None, patch: None)),
-  )
+  assert result.family == "Outlook"
+  assert result.version
+    == Some(uaparser.Version(major: "2013", minor: None, patch: None))
 }
 
 pub fn ua_parse_214_test() {
@@ -2409,11 +2036,9 @@ pub fn ua_parse_214_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/536.26.14 (KHTML, like Gecko)",
     )
-  should.equal(result.family, "Apple Mail")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "536", minor: Some("26"), patch: Some("14"))),
-  )
+  assert result.family == "Apple Mail"
+  assert result.version
+    == Some(uaparser.Version(major: "536", minor: Some("26"), patch: Some("14")))
 }
 
 pub fn ua_parse_215_test() {
@@ -2421,11 +2046,9 @@ pub fn ua_parse_215_test() {
     uaparser.parse_user_agent(
       "Airmail 1.0 rv:148 (Macintosh; Mac OS X 10.8.3; en_BE)",
     )
-  should.equal(result.family, "Airmail")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Airmail"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_216_test() {
@@ -2433,11 +2056,9 @@ pub fn ua_parse_216_test() {
     uaparser.parse_user_agent(
       "Airmail 1.0.6 rv:196 (Macintosh; Mac OS X 10.8.4; en_GB)",
     )
-  should.equal(result.family, "Airmail")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("6"))),
-  )
+  assert result.family == "Airmail"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("6")))
 }
 
 pub fn ua_parse_217_test() {
@@ -2445,11 +2066,9 @@ pub fn ua_parse_217_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.220 Whale/1.3.45.0 Safari/537.36",
     )
-  should.equal(result.family, "Whale")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("45"))),
-  )
+  assert result.family == "Whale"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("45")))
 }
 
 pub fn ua_parse_218_test() {
@@ -2457,11 +2076,9 @@ pub fn ua_parse_218_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU OS 10_2_1 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) 1Password/6.4.5 (like Version/10.2.1 Mobile/14D27 Safari/600.1.4)",
     )
-  should.equal(result.family, "1Password")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("4"), patch: Some("5"))),
-  )
+  assert result.family == "1Password"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("4"), patch: Some("5")))
 }
 
 pub fn ua_parse_219_test() {
@@ -2469,11 +2086,9 @@ pub fn ua_parse_219_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.220 Whale/1.3.50.3 Safari/537.36",
     )
-  should.equal(result.family, "Whale")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("50"))),
-  )
+  assert result.family == "Whale"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("50")))
 }
 
 pub fn ua_parse_220_test() {
@@ -2481,11 +2096,9 @@ pub fn ua_parse_220_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 11_2_6 like Mac OS X) AppleWebKit/604.5.6 (KHTML, like Gecko) Whale/0.9.1.679 Mobile/15D100 Safari/604.5.6",
     )
-  should.equal(result.family, "Whale")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("1"))),
-  )
+  assert result.family == "Whale"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("1")))
 }
 
 pub fn ua_parse_221_test() {
@@ -2493,11 +2106,9 @@ pub fn ua_parse_221_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 6.0.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Whale/0.9.5.0 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Whale")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("5"))),
-  )
+  assert result.family == "Whale"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("5")))
 }
 
 pub fn ua_parse_222_test() {
@@ -2505,11 +2116,9 @@ pub fn ua_parse_222_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 7.1.2; Nexus 6P Build/WHALE) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.220 Whale/1.3.50.3 Mobile Safari/537.36 sidebar webpanel",
     )
-  should.equal(result.family, "Whale")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("50"))),
-  )
+  assert result.family == "Whale"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("50")))
 }
 
 pub fn ua_parse_223_test() {
@@ -2517,29 +2126,23 @@ pub fn ua_parse_223_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 7.1.2; Nexus 6P Build/WHALE) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.220 Whale/1.3.50.3 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Whale")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("50"))),
-  )
+  assert result.family == "Whale"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("50")))
 }
 
 pub fn ua_parse_224_test() {
   let result = uaparser.parse_user_agent("J2ME/UCWEB7.0.3.45/139/7682")
-  should.equal(result.family, "UC Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("0"), patch: Some("3"))),
-  )
+  assert result.family == "UC Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("0"), patch: Some("3")))
 }
 
 pub fn ua_parse_225_test() {
   let result = uaparser.parse_user_agent("NOKIA6120c/UC Browser7.4.0.65/28/352")
-  should.equal(result.family, "UC Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("4"), patch: Some("0"))),
-  )
+  assert result.family == "UC Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("4"), patch: Some("0")))
 }
 
 pub fn ua_parse_226_test() {
@@ -2547,11 +2150,9 @@ pub fn ua_parse_226_test() {
     uaparser.parse_user_agent(
       "UCWEB/3.0 (iPhone; CPU OS_6; en-US)AppleWebKit/534.1 U3/3.0.0 Mobile",
     )
-  should.equal(result.family, "UC Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "UC Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_227_test() {
@@ -2559,11 +2160,9 @@ pub fn ua_parse_227_test() {
     uaparser.parse_user_agent(
       "UCWEB/2.0 (Linux; U; Opera Mini/7.1.32052/30.2697; en-US; GT-S5302) U2/1.0.0 UCBrowser/9.3.0.440 Mobile",
     )
-  should.equal(result.family, "UC Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("3"), patch: Some("0"))),
-  )
+  assert result.family == "UC Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("3"), patch: Some("0")))
 }
 
 pub fn ua_parse_228_test() {
@@ -2571,20 +2170,16 @@ pub fn ua_parse_228_test() {
     uaparser.parse_user_agent(
       "IUC(U;iOS 5.1.1;Zh-cn;320*480;)/UCWEB7.9.0.94/41/997",
     )
-  should.equal(result.family, "UC Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("9"), patch: Some("0"))),
-  )
+  assert result.family == "UC Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("9"), patch: Some("0")))
 }
 
 pub fn ua_parse_229_test() {
   let result = uaparser.parse_user_agent("Nokia5320di/UCWEB8.0.3.99/28/999")
-  should.equal(result.family, "UC Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("0"), patch: Some("3"))),
-  )
+  assert result.family == "UC Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("0"), patch: Some("3")))
 }
 
 pub fn ua_parse_230_test() {
@@ -2592,11 +2187,9 @@ pub fn ua_parse_230_test() {
     uaparser.parse_user_agent(
       "Nokia201/2.0 (11.21) Profile/MIDP-2.1 Configuration/CLDC-1.1 Mozilla/5.0 (Java; U; en-us; nokia201) UCBrowser8.3.0.154/70/355/UCWEB Mobile",
     )
-  should.equal(result.family, "UC Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("3"), patch: Some("0"))),
-  )
+  assert result.family == "UC Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("3"), patch: Some("0")))
 }
 
 pub fn ua_parse_231_test() {
@@ -2604,11 +2197,9 @@ pub fn ua_parse_231_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (S60V5; U; en-us; NokiaC5-03) AppleWebKit/530.13 (KHTML, like Gecko) UCBrowser/8.7.0.218/50/352/UCWEB Mobile",
     )
-  should.equal(result.family, "UC Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("7"), patch: Some("0"))),
-  )
+  assert result.family == "UC Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("7"), patch: Some("0")))
 }
 
 pub fn ua_parse_232_test() {
@@ -2616,11 +2207,9 @@ pub fn ua_parse_232_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 UBrowser/5.7.14488.1025 Safari/537.36",
     )
-  should.equal(result.family, "UC Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("7"), patch: Some("14488"))),
-  )
+  assert result.family == "UC Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("7"), patch: Some("14488")))
 }
 
 pub fn ua_parse_233_test() {
@@ -2628,11 +2217,9 @@ pub fn ua_parse_233_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 16; en-US; SM-S918B Build/BP2A.250605.031.A3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.6312.80 UCMobile/15.0.7.1383 Mobile Safari/537.36",
     )
-  should.equal(result.family, "UC Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "15", minor: Some("0"), patch: Some("7"))),
-  )
+  assert result.family == "UC Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "15", minor: Some("0"), patch: Some("7")))
 }
 
 pub fn ua_parse_234_test() {
@@ -2640,11 +2227,9 @@ pub fn ua_parse_234_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 13; en-US; SM-G988U Build/TP1A.220624.014) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.6312.80 UCMobile/15.0.7.1383 Mobile Safari/537.36",
     )
-  should.equal(result.family, "UC Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "15", minor: Some("0"), patch: Some("7"))),
-  )
+  assert result.family == "UC Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "15", minor: Some("0"), patch: Some("7")))
 }
 
 pub fn ua_parse_235_test() {
@@ -2652,11 +2237,9 @@ pub fn ua_parse_235_test() {
     uaparser.parse_user_agent(
       "Alcatel-OH5/1.0 UP.Browser/6.1.0.7.7 (GUI) MMP/1.0",
     )
-  should.equal(result.family, "UP.Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("1"), patch: Some("0"))),
-  )
+  assert result.family == "UP.Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("1"), patch: Some("0")))
 }
 
 pub fn ua_parse_236_test() {
@@ -2664,11 +2247,9 @@ pub fn ua_parse_236_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534+ (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22",
     )
-  should.equal(result.family, "WebKit Nightly")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "534", minor: None, patch: None)),
-  )
+  assert result.family == "WebKit Nightly"
+  assert result.version
+    == Some(uaparser.Version(major: "534", minor: None, patch: None))
 }
 
 pub fn ua_parse_237_test() {
@@ -2676,11 +2257,9 @@ pub fn ua_parse_237_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1+ (KHTML, like Gecko) Version/5.1.1 Safari/534.51.22",
     )
-  should.equal(result.family, "WebKit Nightly")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "537", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "WebKit Nightly"
+  assert result.version
+    == Some(uaparser.Version(major: "537", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_238_test() {
@@ -2688,11 +2267,9 @@ pub fn ua_parse_238_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_4) AppleWebKit/537.8+ (KHTML, like Gecko) Version/6.0 Safari/536.25",
     )
-  should.equal(result.family, "WebKit Nightly")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "537", minor: Some("8"), patch: None)),
-  )
+  assert result.family == "WebKit Nightly"
+  assert result.version
+    == Some(uaparser.Version(major: "537", minor: Some("8"), patch: None))
 }
 
 pub fn ua_parse_239_test() {
@@ -2700,11 +2277,9 @@ pub fn ua_parse_239_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (hp-tablet; Linux; hpwOS/3.0.0; U; en-US) AppleWebKit/534.6 (KHTML, like Gecko) wOSBrowser/233.58 Safari/534.6 TouchPad/1.0",
     )
-  should.equal(result.family, "webOS Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "webOS Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_240_test() {
@@ -2712,11 +2287,9 @@ pub fn ua_parse_240_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (webOS/1.2; U; en-US) AppleWebKit/525.27.1 (KHTML, like Gecko) Version/1.0 Safari/525.27.1 Desktop/1.0",
     )
-  should.equal(result.family, "webOS Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "webOS Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_241_test() {
@@ -2724,11 +2297,9 @@ pub fn ua_parse_241_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (hp-tablet; Linux; hpwOS/3.0.5; U; en-US) AppleWebKit/534.6 (KHTML, like Gecko) wOSBrowser/234.83 Safari/534.6 TouchPad/1.0",
     )
-  should.equal(result.family, "webOS Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("5"))),
-  )
+  assert result.family == "webOS Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("5")))
 }
 
 pub fn ua_parse_242_test() {
@@ -2736,8 +2307,8 @@ pub fn ua_parse_242_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; U; Linux i686; nl-NL) AppleWebKit/534.3 (KHTML, like Gecko) WeTab-Browser Safari/534.3",
     )
-  should.equal(result.family, "WeTab")
-  should.equal(result.version, None)
+  assert result.family == "WeTab"
+  assert result.version == None
 }
 
 pub fn ua_parse_243_test() {
@@ -2745,11 +2316,9 @@ pub fn ua_parse_243_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.4 (KHTML, like Gecko) Chrome/22.0.1104.222 YaBrowser/1.5.1104.222 Safari/537.4",
     )
-  should.equal(result.family, "Yandex Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("5"), patch: Some("1104"))),
-  )
+  assert result.family == "Yandex Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("5"), patch: Some("1104")))
 }
 
 pub fn ua_parse_244_test() {
@@ -2757,11 +2326,9 @@ pub fn ua_parse_244_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 5.0.1; GT-I9505 Build/LRX22C) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 YaBrowser/16.2.1.1239.00 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Yandex Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "16", minor: Some("2"), patch: Some("1"))),
-  )
+  assert result.family == "Yandex Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "16", minor: Some("2"), patch: Some("1")))
 }
 
 pub fn ua_parse_245_test() {
@@ -2769,11 +2336,9 @@ pub fn ua_parse_245_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.771 YaBrowser/23.11.2.771 Yowser/2.5 Safari/537.36",
     )
-  should.equal(result.family, "Yandex Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "23", minor: Some("11"), patch: Some("2"))),
-  )
+  assert result.family == "Yandex Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "23", minor: Some("11"), patch: Some("2")))
 }
 
 pub fn ua_parse_246_test() {
@@ -2781,11 +2346,9 @@ pub fn ua_parse_246_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; arm; Android 10; M2006C3MNG) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 YaApp_Android/23.36.1 YaSearchBrowser/23.36.1 BroPP/1.0 SA/3 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Yandex Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "23", minor: Some("36"), patch: Some("1"))),
-  )
+  assert result.family == "Yandex Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "23", minor: Some("36"), patch: Some("1")))
 }
 
 pub fn ua_parse_247_test() {
@@ -2793,17 +2356,15 @@ pub fn ua_parse_247_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; arm_64; Android 13; 23053RN02Y) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.5993.98 YaBrowser/23.11.5.98.00 SA/3 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Yandex Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "23", minor: Some("11"), patch: Some("5"))),
-  )
+  assert result.family == "Yandex Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "23", minor: Some("11"), patch: Some("5")))
 }
 
 pub fn ua_parse_248_test() {
   let result = uaparser.parse_user_agent("Mozilla/5.0 YottaaMonitor;")
-  should.equal(result.family, "YottaaMonitor")
-  should.equal(result.version, None)
+  assert result.family == "YottaaMonitor"
+  assert result.version == None
 }
 
 pub fn ua_parse_249_test() {
@@ -2811,11 +2372,9 @@ pub fn ua_parse_249_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) QtWebEngine/6.10.1 Chrome/134.0.0.0 Safari/537.36",
     )
-  should.equal(result.family, "Qt Web Engine")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("10"), patch: Some("1"))),
-  )
+  assert result.family == "Qt Web Engine"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("10"), patch: Some("1")))
 }
 
 pub fn ua_parse_250_test() {
@@ -2823,11 +2382,9 @@ pub fn ua_parse_250_test() {
     uaparser.parse_user_agent(
       "BrightSign/9.0.211 (XC4055) Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) QtWebEngine/5.15.2 Chrome/87.0.4280.144 Safari/537.36",
     )
-  should.equal(result.family, "Qt Web Engine")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("15"), patch: Some("2"))),
-  )
+  assert result.family == "Qt Web Engine"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("15"), patch: Some("2")))
 }
 
 pub fn ua_parse_251_test() {
@@ -2835,11 +2392,9 @@ pub fn ua_parse_251_test() {
     uaparser.parse_user_agent(
       "BrightSign/USD41V000770/9.0.189 (XT1145) Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/537.36 (KHTML, like Gecko) QtWebEngine/5.15.2 Chrome/87.0.4280.144 Safari/537.36",
     )
-  should.equal(result.family, "Qt Web Engine")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("15"), patch: Some("2"))),
-  )
+  assert result.family == "Qt Web Engine"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("15"), patch: Some("2")))
 }
 
 pub fn ua_parse_252_test() {
@@ -2847,11 +2402,9 @@ pub fn ua_parse_252_test() {
     uaparser.parse_user_agent(
       "BrightSign/8.5.53.2 (XT1144) Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/537.36 (KHTML, like Gecko) QtWebEngine/5.15.2 Chrome/87.0.4280.144 Safari/537.36",
     )
-  should.equal(result.family, "Qt Web Engine")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("15"), patch: Some("2"))),
-  )
+  assert result.family == "Qt Web Engine"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("15"), patch: Some("2")))
 }
 
 pub fn ua_parse_253_test() {
@@ -2859,11 +2412,9 @@ pub fn ua_parse_253_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 OpenWave/93.4.4008.34",
     )
-  should.equal(result.family, "Open Wave")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "93", minor: Some("4"), patch: Some("4008"))),
-  )
+  assert result.family == "Open Wave"
+  assert result.version
+    == Some(uaparser.Version(major: "93", minor: Some("4"), patch: Some("4008")))
 }
 
 pub fn ua_parse_254_test() {
@@ -2871,11 +2422,9 @@ pub fn ua_parse_254_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36 OpenWave/94.4.4471.39",
     )
-  should.equal(result.family, "Open Wave")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "94", minor: Some("4"), patch: Some("4471"))),
-  )
+  assert result.family == "Open Wave"
+  assert result.version
+    == Some(uaparser.Version(major: "94", minor: Some("4"), patch: Some("4471")))
 }
 
 pub fn ua_parse_255_test() {
@@ -2883,11 +2432,13 @@ pub fn ua_parse_255_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Trailer/100.3.3692.93",
     )
-  should.equal(result.family, "Trailer")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "100", minor: Some("3"), patch: Some("3692"))),
-  )
+  assert result.family == "Trailer"
+  assert result.version
+    == Some(uaparser.Version(
+      major: "100",
+      minor: Some("3"),
+      patch: Some("3692"),
+    ))
 }
 
 pub fn ua_parse_256_test() {
@@ -2895,11 +2446,9 @@ pub fn ua_parse_256_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Trailer/97.3.2642.43",
     )
-  should.equal(result.family, "Trailer")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "97", minor: Some("3"), patch: Some("2642"))),
-  )
+  assert result.family == "Trailer"
+  assert result.version
+    == Some(uaparser.Version(major: "97", minor: Some("3"), patch: Some("2642")))
 }
 
 pub fn ua_parse_257_test() {
@@ -2907,11 +2456,9 @@ pub fn ua_parse_257_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Agency/98.8.8175.80",
     )
-  should.equal(result.family, "Agency")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "98", minor: Some("8"), patch: Some("8175"))),
-  )
+  assert result.family == "Agency"
+  assert result.version
+    == Some(uaparser.Version(major: "98", minor: Some("8"), patch: Some("8175")))
 }
 
 pub fn ua_parse_258_test() {
@@ -2919,11 +2466,9 @@ pub fn ua_parse_258_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.5249.91 Safari/537.36 Agency/96.8.6047.48",
     )
-  should.equal(result.family, "Agency")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "96", minor: Some("8"), patch: Some("6047"))),
-  )
+  assert result.family == "Agency"
+  assert result.version
+    == Some(uaparser.Version(major: "96", minor: Some("8"), patch: Some("6047")))
 }
 
 pub fn ua_parse_259_test() {
@@ -2931,11 +2476,9 @@ pub fn ua_parse_259_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Herring/95.5.4464.65",
     )
-  should.equal(result.family, "Herring")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "95", minor: Some("5"), patch: Some("4464"))),
-  )
+  assert result.family == "Herring"
+  assert result.version
+    == Some(uaparser.Version(major: "95", minor: Some("5"), patch: Some("4464")))
 }
 
 pub fn ua_parse_260_test() {
@@ -2943,11 +2486,9 @@ pub fn ua_parse_260_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.81 Safari/537.36 Herring/90.1.1113.2",
     )
-  should.equal(result.family, "Herring")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "90", minor: Some("1"), patch: Some("1113"))),
-  )
+  assert result.family == "Herring"
+  assert result.version
+    == Some(uaparser.Version(major: "90", minor: Some("1"), patch: Some("1113")))
 }
 
 pub fn ua_parse_261_test() {
@@ -2955,11 +2496,9 @@ pub fn ua_parse_261_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 AtContent/95.5.5498.50",
     )
-  should.equal(result.family, "AtContent")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "95", minor: Some("5"), patch: Some("5498"))),
-  )
+  assert result.family == "AtContent"
+  assert result.version
+    == Some(uaparser.Version(major: "95", minor: Some("5"), patch: Some("5498")))
 }
 
 pub fn ua_parse_262_test() {
@@ -2967,11 +2506,9 @@ pub fn ua_parse_262_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 AtContent/94.5.4743.42",
     )
-  should.equal(result.family, "AtContent")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "94", minor: Some("5"), patch: Some("4743"))),
-  )
+  assert result.family == "AtContent"
+  assert result.version
+    == Some(uaparser.Version(major: "94", minor: Some("5"), patch: Some("4743")))
 }
 
 pub fn ua_parse_263_test() {
@@ -2979,11 +2516,9 @@ pub fn ua_parse_263_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 Config/92.2.2788.20",
     )
-  should.equal(result.family, "Config")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "92", minor: Some("2"), patch: Some("2788"))),
-  )
+  assert result.family == "Config"
+  assert result.version
+    == Some(uaparser.Version(major: "92", minor: Some("2"), patch: Some("2788")))
 }
 
 pub fn ua_parse_264_test() {
@@ -2991,11 +2526,9 @@ pub fn ua_parse_264_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Config/91.2.2116.13",
     )
-  should.equal(result.family, "Config")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "91", minor: Some("2"), patch: Some("2116"))),
-  )
+  assert result.family == "Config"
+  assert result.version
+    == Some(uaparser.Version(major: "91", minor: Some("2"), patch: Some("2116")))
 }
 
 pub fn ua_parse_265_test() {
@@ -3003,11 +2536,9 @@ pub fn ua_parse_265_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Viewer/99.9.8865.88",
     )
-  should.equal(result.family, "Viewer")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "99", minor: Some("9"), patch: Some("8865"))),
-  )
+  assert result.family == "Viewer"
+  assert result.version
+    == Some(uaparser.Version(major: "99", minor: Some("9"), patch: Some("8865")))
 }
 
 pub fn ua_parse_266_test() {
@@ -3015,11 +2546,9 @@ pub fn ua_parse_266_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 Viewer/99.9.8959.89",
     )
-  should.equal(result.family, "Viewer")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "99", minor: Some("9"), patch: Some("8959"))),
-  )
+  assert result.family == "Viewer"
+  assert result.version
+    == Some(uaparser.Version(major: "99", minor: Some("9"), patch: Some("8959")))
 }
 
 pub fn ua_parse_267_test() {
@@ -3027,11 +2556,9 @@ pub fn ua_parse_267_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36 LikeWise/94.6.7545.46",
     )
-  should.equal(result.family, "LikeWise")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "94", minor: Some("6"), patch: Some("7545"))),
-  )
+  assert result.family == "LikeWise"
+  assert result.version
+    == Some(uaparser.Version(major: "94", minor: Some("6"), patch: Some("7545")))
 }
 
 pub fn ua_parse_268_test() {
@@ -3039,11 +2566,9 @@ pub fn ua_parse_268_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.5304.115 Safari/537.36 LikeWise/97.6.1745.46",
     )
-  should.equal(result.family, "LikeWise")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "97", minor: Some("6"), patch: Some("1745"))),
-  )
+  assert result.family == "LikeWise"
+  assert result.version
+    == Some(uaparser.Version(major: "97", minor: Some("6"), patch: Some("1745")))
 }
 
 pub fn ua_parse_269_test() {
@@ -3051,11 +2576,9 @@ pub fn ua_parse_269_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.141 CitizenFX/1.0.0.26197 Safari/537.36",
     )
-  should.equal(result.family, "CitizenFX")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "CitizenFX"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_270_test() {
@@ -3063,11 +2586,9 @@ pub fn ua_parse_270_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.141 CitizenFX/1.0.0.25775 Safari/537.36",
     )
-  should.equal(result.family, "CitizenFX")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "CitizenFX"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_271_test() {
@@ -3075,11 +2596,9 @@ pub fn ua_parse_271_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.5238.167 Safari/537.36 Unique/95.7.6476.77",
     )
-  should.equal(result.family, "Unique")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "95", minor: Some("7"), patch: Some("6476"))),
-  )
+  assert result.family == "Unique"
+  assert result.version
+    == Some(uaparser.Version(major: "95", minor: Some("7"), patch: Some("6476")))
 }
 
 pub fn ua_parse_272_test() {
@@ -3087,11 +2606,9 @@ pub fn ua_parse_272_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36 Unique/97.7.6814.65",
     )
-  should.equal(result.family, "Unique")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "97", minor: Some("7"), patch: Some("6814"))),
-  )
+  assert result.family == "Unique"
+  assert result.version
+    == Some(uaparser.Version(major: "97", minor: Some("7"), patch: Some("6814")))
 }
 
 pub fn ua_parse_273_test() {
@@ -3099,11 +2616,9 @@ pub fn ua_parse_273_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0(WindowsNT 10.0; Win64;) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683 R2Client/1.2",
     )
-  should.equal(result.family, "R2Client")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "R2Client"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_274_test() {
@@ -3111,11 +2626,9 @@ pub fn ua_parse_274_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) CEF/128.4.12 Chrome/128.0.6613.138 EOSOverlay/1.3.3.1200 UnrealEngine/EOS-SDK/1.17.1.3-44532354 (Windows/10.0.19041.5915.64bit) R2Client/1.0.0 Safari/537.36",
     )
-  should.equal(result.family, "R2Client")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "R2Client"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_275_test() {
@@ -3123,11 +2636,9 @@ pub fn ua_parse_275_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.6533.120 OBS/32.0.4 Safari/537.36",
     )
-  should.equal(result.family, "OBS Studio")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "32", minor: Some("0"), patch: Some("4"))),
-  )
+  assert result.family == "OBS Studio"
+  assert result.version
+    == Some(uaparser.Version(major: "32", minor: Some("0"), patch: Some("4")))
 }
 
 pub fn ua_parse_276_test() {
@@ -3135,11 +2646,9 @@ pub fn ua_parse_276_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.6533.120 OBS/32.0.2 Safari/537.36",
     )
-  should.equal(result.family, "OBS Studio")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "32", minor: Some("0"), patch: Some("2"))),
-  )
+  assert result.family == "OBS Studio"
+  assert result.version
+    == Some(uaparser.Version(major: "32", minor: Some("0"), patch: Some("2")))
 }
 
 pub fn ua_parse_277_test() {
@@ -3147,11 +2656,9 @@ pub fn ua_parse_277_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.6533.120 OBS/31.0.3 NAVER(pc; prism; prism-pc; 5.0.1;) Safari/537.36",
     )
-  should.equal(result.family, "OBS Studio")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "31", minor: Some("0"), patch: Some("3"))),
-  )
+  assert result.family == "OBS Studio"
+  assert result.version
+    == Some(uaparser.Version(major: "31", minor: Some("0"), patch: Some("3")))
 }
 
 pub fn ua_parse_278_test() {
@@ -3159,11 +2666,9 @@ pub fn ua_parse_278_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 AdobeCEP/12.0.1 Safari/537.36",
     )
-  should.equal(result.family, "Adobe CEP")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "12", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "Adobe CEP"
+  assert result.version
+    == Some(uaparser.Version(major: "12", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_279_test() {
@@ -3171,39 +2676,31 @@ pub fn ua_parse_279_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 AdobeCEP/12.0.1 Safari/537.36",
     )
-  should.equal(result.family, "Adobe CEP")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "12", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "Adobe CEP"
+  assert result.version
+    == Some(uaparser.Version(major: "12", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_280_test() {
   let result = uaparser.parse_user_agent("Roadrunner/IOS/896/4.2606.6")
-  should.equal(result.family, "Roadrunner")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("2606"), patch: Some("6"))),
-  )
+  assert result.family == "Roadrunner"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("2606"), patch: Some("6")))
 }
 
 pub fn ua_parse_281_test() {
   let result = uaparser.parse_user_agent("Roadrunner/IOS/908/4.2607.7")
-  should.equal(result.family, "Roadrunner")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("2607"), patch: Some("7"))),
-  )
+  assert result.family == "Roadrunner"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("2607"), patch: Some("7")))
 }
 
 pub fn ua_parse_282_test() {
   let result =
     uaparser.parse_user_agent("AncestryAndroid/13.5 (deviceType=tablet/6.86)")
-  should.equal(result.family, "AncestryAndroid")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "13", minor: Some("5"), patch: None)),
-  )
+  assert result.family == "AncestryAndroid"
+  assert result.version
+    == Some(uaparser.Version(major: "13", minor: Some("5"), patch: None))
 }
 
 pub fn ua_parse_283_test() {
@@ -3211,11 +2708,9 @@ pub fn ua_parse_283_test() {
     uaparser.parse_user_agent(
       "AncestryAndroid/11.7.3020 (deviceType=tablet/10.90)",
     )
-  should.equal(result.family, "AncestryAndroid")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "11", minor: Some("7"), patch: Some("3020"))),
-  )
+  assert result.family == "AncestryAndroid"
+  assert result.version
+    == Some(uaparser.Version(major: "11", minor: Some("7"), patch: Some("3020")))
 }
 
 pub fn ua_parse_284_test() {
@@ -3223,11 +2718,13 @@ pub fn ua_parse_284_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64; Valve Steam GameOverlay/default/1769025840) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.6478.183 Safari/537.36",
     )
-  should.equal(result.family, "Steam GameOverlay")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "126", minor: Some("0"), patch: Some("6478"))),
-  )
+  assert result.family == "Steam GameOverlay"
+  assert result.version
+    == Some(uaparser.Version(
+      major: "126",
+      minor: Some("0"),
+      patch: Some("6478"),
+    ))
 }
 
 pub fn ua_parse_285_test() {
@@ -3235,11 +2732,13 @@ pub fn ua_parse_285_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64; Valve Client/default/1769025840) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.6478.183 Safari/537.36",
     )
-  should.equal(result.family, "Steam Client")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "126", minor: Some("0"), patch: Some("6478"))),
-  )
+  assert result.family == "Steam Client"
+  assert result.version
+    == Some(uaparser.Version(
+      major: "126",
+      minor: Some("0"),
+      patch: Some("6478"),
+    ))
 }
 
 pub fn ua_parse_286_test() {
@@ -3247,11 +2746,9 @@ pub fn ua_parse_286_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64; Valve Steam Client/default/1690583737) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36",
     )
-  should.equal(result.family, "Steam Client")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "85", minor: Some("0"), patch: Some("4183"))),
-  )
+  assert result.family == "Steam Client"
+  assert result.version
+    == Some(uaparser.Version(major: "85", minor: Some("0"), patch: Some("4183")))
 }
 
 pub fn ua_parse_287_test() {
@@ -3259,11 +2756,13 @@ pub fn ua_parse_287_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64; Valve Steam Gamepad/Steam Deck [Steam Deck Stable]/default/0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.6478.183 Safari/537.36",
     )
-  should.equal(result.family, "Steam Deck")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "126", minor: Some("0"), patch: Some("6478"))),
-  )
+  assert result.family == "Steam Deck"
+  assert result.version
+    == Some(uaparser.Version(
+      major: "126",
+      minor: Some("0"),
+      patch: Some("6478"),
+    ))
 }
 
 pub fn ua_parse_288_test() {
@@ -3271,11 +2770,9 @@ pub fn ua_parse_288_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.6.0 Safari/534.34",
     )
-  should.equal(result.family, "PhantomJS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("0"))),
-  )
+  assert result.family == "PhantomJS"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("0")))
 }
 
 pub fn ua_parse_289_test() {
@@ -3283,11 +2780,9 @@ pub fn ua_parse_289_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (IE 11.0; Windows NT 6.3; Trident/7.0; .NET4.0E; .NET4.0C; rv:11.0) like Gecko",
     )
-  should.equal(result.family, "IE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "11", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE"
+  assert result.version
+    == Some(uaparser.Version(major: "11", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_290_test() {
@@ -3295,11 +2790,9 @@ pub fn ua_parse_290_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; MSIE 9.0; AOL 9.7; AOLBuild 4343.19; Windows NT 6.1; WOW64; Trident/5.0; FunWebProducts)",
     )
-  should.equal(result.family, "AOL")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("7"), patch: Some("4343"))),
-  )
+  assert result.family == "AOL"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("7"), patch: Some("4343")))
 }
 
 pub fn ua_parse_291_test() {
@@ -3307,11 +2800,9 @@ pub fn ua_parse_291_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.3; Win64; x64; Trident/7.0; rv:11.0) like Gecko",
     )
-  should.equal(result.family, "IE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "11", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE"
+  assert result.version
+    == Some(uaparser.Version(major: "11", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_292_test() {
@@ -3319,11 +2810,9 @@ pub fn ua_parse_292_test() {
     uaparser.parse_user_agent(
       "HbbTV/1.1.1 (;Samsung;SmartTV2013;T-FXPDEUC-1102.2;;) WebKit",
     )
-  should.equal(result.family, "HbbTV")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("1"))),
-  )
+  assert result.family == "HbbTV"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("1")))
 }
 
 pub fn ua_parse_293_test() {
@@ -3331,11 +2820,9 @@ pub fn ua_parse_293_test() {
     uaparser.parse_user_agent(
       "HbbTV/1.2.1 (;Panasonic;VIERA 2013;3.672;4101-0003 0002-0000;)",
     )
-  should.equal(result.family, "HbbTV")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: Some("1"))),
-  )
+  assert result.family == "HbbTV"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: Some("1")))
 }
 
 pub fn ua_parse_294_test() {
@@ -3343,11 +2830,9 @@ pub fn ua_parse_294_test() {
     uaparser.parse_user_agent(
       "HbbTV/1.1.1 (;;;;;) firetv-firefox-plugin 1.1.20",
     )
-  should.equal(result.family, "HbbTV")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("1"))),
-  )
+  assert result.family == "HbbTV"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("1")))
 }
 
 pub fn ua_parse_295_test() {
@@ -3355,11 +2840,9 @@ pub fn ua_parse_295_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1; Win64; x64; Trident/7.0; rv:11.0) like Gecko/20100101 Firefox/12.0",
     )
-  should.equal(result.family, "IE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "11", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE"
+  assert result.version
+    == Some(uaparser.Version(major: "11", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_296_test() {
@@ -3367,11 +2850,9 @@ pub fn ua_parse_296_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.89 Vivaldi/1.0.83.38 Safari/537.36",
     )
-  should.equal(result.family, "Vivaldi")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("83"))),
-  )
+  assert result.family == "Vivaldi"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("83")))
 }
 
 pub fn ua_parse_297_test() {
@@ -3379,11 +2860,9 @@ pub fn ua_parse_297_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.105 Safari/537.36 Vivaldi/1.0.162.9",
     )
-  should.equal(result.family, "Vivaldi")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("162"))),
-  )
+  assert result.family == "Vivaldi"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("162")))
 }
 
 pub fn ua_parse_298_test() {
@@ -3391,11 +2870,9 @@ pub fn ua_parse_298_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_2 like Mac OS X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Vivaldi/114",
     )
-  should.equal(result.family, "Vivaldi")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "114", minor: None, patch: None)),
-  )
+  assert result.family == "Vivaldi"
+  assert result.version
+    == Some(uaparser.Version(major: "114", minor: None, patch: None))
 }
 
 pub fn ua_parse_299_test() {
@@ -3403,11 +2880,9 @@ pub fn ua_parse_299_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36 Vivaldi/3.7",
     )
-  should.equal(result.family, "Vivaldi")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("7"), patch: None)),
-  )
+  assert result.family == "Vivaldi"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("7"), patch: None))
 }
 
 pub fn ua_parse_300_test() {
@@ -3415,11 +2890,9 @@ pub fn ua_parse_300_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.9600",
     )
-  should.equal(result.family, "Edge")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "12", minor: Some("9600"), patch: None)),
-  )
+  assert result.family == "Edge"
+  assert result.version
+    == Some(uaparser.Version(major: "12", minor: Some("9600"), patch: None))
 }
 
 pub fn ua_parse_301_test() {
@@ -3427,11 +2900,9 @@ pub fn ua_parse_301_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (Vodafone/1.0/LG-GU280/v10a Browser/Obigo-Q7.3 MMS/LG-MMS-V1.0/1.2 Java/ASVM/1.1 Profile/MIDP-2.1 Configuration/CLDC-1.1)",
     )
-  should.equal(result.family, "Obigo")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "Obigo"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_302_test() {
@@ -3439,11 +2910,9 @@ pub fn ua_parse_302_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 6.12) Vodafone/1.0/HTC_Elf/1.11.164.2",
     )
-  should.equal(result.family, "IE Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("12"), patch: None)),
-  )
+  assert result.family == "IE Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("12"), patch: None))
 }
 
 pub fn ua_parse_303_test() {
@@ -3451,11 +2920,9 @@ pub fn ua_parse_303_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 6.0; Windows CE; IEMobile 8.12; MSIEMobile 6.0) Vodafone/1.0/HTC_HD2/1.44.162.6 (70494)",
     )
-  should.equal(result.family, "IE Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("12"), patch: None)),
-  )
+  assert result.family == "IE Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("12"), patch: None))
 }
 
 pub fn ua_parse_304_test() {
@@ -3463,11 +2930,9 @@ pub fn ua_parse_304_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Mobile; Windows Phone 8.1; Android 4.0; ARM; Trident/7.0; Touch; rv:11.0; IEMobile/11.0; NOKIA; Lumia 920)",
     )
-  should.equal(result.family, "IE Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "11", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "11", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_305_test() {
@@ -3475,11 +2940,9 @@ pub fn ua_parse_305_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (SymbianOS/9.2; U; Series60/3.1 Vodafone/1.0/SamsungSGHi560/I560AEHB1 Profile/MIDP-2.0 Configuration/CLDC-1.1 ) AppleWebKit/413 (KHTML, like Gecko) Safari/413",
     )
-  should.equal(result.family, "Nokia OSS Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Nokia OSS Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_306_test() {
@@ -3487,8 +2950,8 @@ pub fn ua_parse_306_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Vodafone/1.0/LG-KC910/V08h Browser/Teleca-Q7.1 MMS/LG-MMS-V1.0/1.2 MediaPlayer/LGPlayer/1.0 Java/ASVM/1.1 Profile/MIDP-2.1 Configuration/CLDC-1.1)",
     )
-  should.equal(result.family, "Teleca Browser")
-  should.equal(result.version, None)
+  assert result.family == "Teleca Browser"
+  assert result.version == None
 }
 
 pub fn ua_parse_307_test() {
@@ -3496,8 +2959,8 @@ pub fn ua_parse_307_test() {
     uaparser.parse_user_agent(
       "Vodafone/1.0/0Vodafone715/B116 Browser/Obigo-Browser/Q04A MMS/Obigo-MMS/Q04A SyncML/HW-SyncML/1.0 Java/QVM/4.1 Profile/MIDP-2.0 Configuration/CLDC-1.1",
     )
-  should.equal(result.family, "Obigo")
-  should.equal(result.version, None)
+  assert result.family == "Obigo"
+  assert result.version == None
 }
 
 pub fn ua_parse_308_test() {
@@ -3505,11 +2968,9 @@ pub fn ua_parse_308_test() {
     uaparser.parse_user_agent(
       "Opera/9.80 (Android 1.6; Linux; Opera Mobi/ADR-1107051709; U; en) Presto/2.8.149 Version/11.10",
     )
-  should.equal(result.family, "Opera Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "11", minor: Some("10"), patch: None)),
-  )
+  assert result.family == "Opera Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "11", minor: Some("10"), patch: None))
 }
 
 pub fn ua_parse_309_test() {
@@ -3517,11 +2978,9 @@ pub fn ua_parse_309_test() {
     uaparser.parse_user_agent(
       "Opera/9.80 (Windows Mobile; WCE; Opera Mobi/WMD-50430; U; en) Presto/2.4.13 Version/10.00",
     )
-  should.equal(result.family, "Opera Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("00"), patch: None)),
-  )
+  assert result.family == "Opera Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("00"), patch: None))
 }
 
 pub fn ua_parse_310_test() {
@@ -3529,11 +2988,9 @@ pub fn ua_parse_310_test() {
     uaparser.parse_user_agent(
       "(Opera) Vodafone/1.0/HPiPAQDataMessenger/1.00.00 Browser/Opera/9.5 Profile/MIDP-2.0 Configuration/CLDC-1.1 Opera/9.5 (Microsoft Windows; PPC; Opera Mobi/15142; U; en)",
     )
-  should.equal(result.family, "Opera Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("5"), patch: None)),
-  )
+  assert result.family == "Opera Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("5"), patch: None))
 }
 
 pub fn ua_parse_311_test() {
@@ -3541,11 +2998,9 @@ pub fn ua_parse_311_test() {
     uaparser.parse_user_agent(
       "HTC MAX 4G Opera/9.5 (Microsoft Windows; PPC; Opera Mobi/1409; U; ru)",
     )
-  should.equal(result.family, "Opera Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("5"), patch: None)),
-  )
+  assert result.family == "Opera Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("5"), patch: None))
 }
 
 pub fn ua_parse_312_test() {
@@ -3553,11 +3008,9 @@ pub fn ua_parse_312_test() {
     uaparser.parse_user_agent(
       "iBrowser/3.0/Mozilla/5.0 (Linux; U; Android 2.3.6; yy-yy; Karbonn A2 Build/GRK39F) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1",
     )
-  should.equal(result.family, "Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("3"), patch: Some("6"))),
-  )
+  assert result.family == "Android"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("3"), patch: Some("6")))
 }
 
 pub fn ua_parse_313_test() {
@@ -3565,11 +3018,9 @@ pub fn ua_parse_313_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Series40; NokiaC3-01/05.60; Profile/MIDP-2.1 Configuration/CLDC-1.1) Gecko/20100401 S40OviBrowser/2.2.0.0.31",
     )
-  should.equal(result.family, "Ovi Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("2"), patch: Some("0"))),
-  )
+  assert result.family == "Ovi Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("2"), patch: Some("0")))
 }
 
 pub fn ua_parse_314_test() {
@@ -3577,11 +3028,9 @@ pub fn ua_parse_314_test() {
     uaparser.parse_user_agent(
       "iRAPP/1.16.0 NokiaN95_8GB/31.0.015; Series60/3.1 Profile/MIDP-2.0 Configuration/CLDC-1.",
     )
-  should.equal(result.family, "iRAPP")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("16"), patch: None)),
-  )
+  assert result.family == "iRAPP"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("16"), patch: None))
 }
 
 pub fn ua_parse_315_test() {
@@ -3589,11 +3038,9 @@ pub fn ua_parse_315_test() {
     uaparser.parse_user_agent(
       "iRAPP/1.3.0 Nokia5230/50.0.101 Series60/5.0 Profile/MIDP-2.1 Configuration/CLDC-1.1 3gpp-gba",
     )
-  should.equal(result.family, "iRAPP")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "iRAPP"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_316_test() {
@@ -3601,11 +3048,9 @@ pub fn ua_parse_316_test() {
     uaparser.parse_user_agent(
       "iRAPP/3.5.0 NokiaN8-00/111.040.1511 Series60/5.3 Profile/MIDP-2.1 Configuration/CLDC-1.1 3gpp-gba",
     )
-  should.equal(result.family, "iRAPP")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("5"), patch: None)),
-  )
+  assert result.family == "iRAPP"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("5"), patch: None))
 }
 
 pub fn ua_parse_317_test() {
@@ -3613,11 +3058,9 @@ pub fn ua_parse_317_test() {
     uaparser.parse_user_agent(
       "LG-GD710/V10f; Mozilla/5.0 (Profile/MIDP-2.0 Configuration/CLDC-1.1; Opera Mini/att/4.2.14812; U; en) Opera 9.50",
     )
-  should.equal(result.family, "Opera Mini")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("2"), patch: Some("14812"))),
-  )
+  assert result.family == "Opera Mini"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("2"), patch: Some("14812")))
 }
 
 pub fn ua_parse_318_test() {
@@ -3625,11 +3068,9 @@ pub fn ua_parse_318_test() {
     uaparser.parse_user_agent(
       "SAMSUNG-SGH-A897/A897UCJC1; Mozilla/5.0 (Profile/MIDP-2.0 Configuration/CLDC-1.1; Opera Mini/att/4.2.15304; U; fr-US) Opera 9.50",
     )
-  should.equal(result.family, "Opera Mini")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("2"), patch: Some("15304"))),
-  )
+  assert result.family == "Opera Mini"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("2"), patch: Some("15304")))
 }
 
 pub fn ua_parse_319_test() {
@@ -3637,11 +3078,9 @@ pub fn ua_parse_319_test() {
     uaparser.parse_user_agent(
       "MQQBrowser/39 Mozilla/5.0 (iPhone 4S; CPU iPhone OS 6_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A523 Safari/7534.48.3",
     )
-  should.equal(result.family, "QQ Browser Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "39", minor: None, patch: None)),
-  )
+  assert result.family == "QQ Browser Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "39", minor: None, patch: None))
 }
 
 pub fn ua_parse_320_test() {
@@ -3649,11 +3088,9 @@ pub fn ua_parse_320_test() {
     uaparser.parse_user_agent(
       "MQQBrowser/391 Mozilla/5.0 (iPhone 4S; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Mobile/9A334 Safari/7534.48.3",
     )
-  should.equal(result.family, "QQ Browser Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "391", minor: None, patch: None)),
-  )
+  assert result.family == "QQ Browser Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "391", minor: None, patch: None))
 }
 
 pub fn ua_parse_321_test() {
@@ -3661,11 +3098,9 @@ pub fn ua_parse_321_test() {
     uaparser.parse_user_agent(
       "MQQBrowser/20 (Linux; U; 2.3.3; en-us; HTC Desire S Build/GRI40;480*800)",
     )
-  should.equal(result.family, "QQ Browser Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "20", minor: None, patch: None)),
-  )
+  assert result.family == "QQ Browser Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "20", minor: None, patch: None))
 }
 
 pub fn ua_parse_322_test() {
@@ -3673,21 +3108,17 @@ pub fn ua_parse_322_test() {
     uaparser.parse_user_agent(
       "MQQBrowser/Mini2.8 (ZTE-X990/X990_V2_Z12_ESFR_D18F100)",
     )
-  should.equal(result.family, "QQ Browser Mini")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("8"), patch: None)),
-  )
+  assert result.family == "QQ Browser Mini"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("8"), patch: None))
 }
 
 pub fn ua_parse_323_test() {
   let result =
     uaparser.parse_user_agent("MQQBrowser/Mini3.1 (SonyEricssonJ105i/R1HA035)")
-  should.equal(result.family, "QQ Browser Mini")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "QQ Browser Mini"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_324_test() {
@@ -3695,41 +3126,33 @@ pub fn ua_parse_324_test() {
     uaparser.parse_user_agent(
       "QQBrowser/14 (Linux; U; 2.2.2; en-us; Motorola XT316 BUILD/FRG83G) Mobile/0050",
     )
-  should.equal(result.family, "QQ Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "14", minor: None, patch: None)),
-  )
+  assert result.family == "QQ Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "14", minor: None, patch: None))
 }
 
 pub fn ua_parse_325_test() {
   let result =
     uaparser.parse_user_agent("Dolphin 6.5.1 (iPad; iPhone OS 6.1.3; de_DE)")
-  should.equal(result.family, "Dolphin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("5"), patch: Some("1"))),
-  )
+  assert result.family == "Dolphin"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("5"), patch: Some("1")))
 }
 
 pub fn ua_parse_326_test() {
   let result =
     uaparser.parse_user_agent("Dolphin 7.4 (iPhone; iPhone OS 7.0.2; de_DE)")
-  should.equal(result.family, "Dolphin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("4"), patch: None)),
-  )
+  assert result.family == "Dolphin"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("4"), patch: None))
 }
 
 pub fn ua_parse_327_test() {
   let result =
     uaparser.parse_user_agent("Dolphin 7.5.1 (iPhone; iPhone OS 7.0.3; de_DE)")
-  should.equal(result.family, "Dolphin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("5"), patch: Some("1"))),
-  )
+  assert result.family == "Dolphin"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("5"), patch: Some("1")))
 }
 
 pub fn ua_parse_328_test() {
@@ -3737,11 +3160,9 @@ pub fn ua_parse_328_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 2.1-update1; zh-cn; XT701 Build/STCU_31.05.4) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Mobile Safari/530.17 DolphinHDCN/7.0.1",
     )
-  should.equal(result.family, "Dolphin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "Dolphin"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_329_test() {
@@ -3749,11 +3170,9 @@ pub fn ua_parse_329_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 2.2; en-gb; GT-P1000 Build/FROYO) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1 DolphinHDCN/6.3.1",
     )
-  should.equal(result.family, "Dolphin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("3"), patch: Some("1"))),
-  )
+  assert result.family == "Dolphin"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("3"), patch: Some("1")))
 }
 
 pub fn ua_parse_330_test() {
@@ -3761,11 +3180,9 @@ pub fn ua_parse_330_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 4.1.1; en-us; Nexus 7 Build/JRO03D) AppleWebKit/534.30 (KHTML, like Gecko) Dolphin/INT-1.0.4 Mobile Safari/534.30",
     )
-  should.equal(result.family, "Dolphin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("4"))),
-  )
+  assert result.family == "Dolphin"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("4")))
 }
 
 pub fn ua_parse_331_test() {
@@ -3773,11 +3190,9 @@ pub fn ua_parse_331_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_3; en-us) AppleWebKit/533.16 (KHTML, like Gecko) Version/5.0 Safari/533.16 DolphinHDCN/6.1.0",
     )
-  should.equal(result.family, "Dolphin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("1"), patch: Some("0"))),
-  )
+  assert result.family == "Dolphin"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("1"), patch: Some("0")))
 }
 
 pub fn ua_parse_332_test() {
@@ -3785,11 +3200,9 @@ pub fn ua_parse_332_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0(miniGUI/3.x; U; Linux i686; en-US) AppleWebKit/534.26 (KHTML, like Gecko) mDolphin/3.0 chrome/10.0 Safria/534.26",
     )
-  should.equal(result.family, "mDolphin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "mDolphin"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_333_test() {
@@ -3797,31 +3210,29 @@ pub fn ua_parse_333_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0(miniGUI/3.x; U; Linux i686; en; ) AppleWebKit/533.9.0 (KHTML, like Gecko) mDolphin/3.0.0 Safria/533.9.0",
     )
-  should.equal(result.family, "mDolphin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "mDolphin"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_334_test() {
   let result =
     uaparser.parse_user_agent("CFNetwork, iPhone OS 5.1.1, iPhone4,1")
-  should.equal(result.family, "CFNetwork")
-  should.equal(result.version, None)
+  assert result.family == "CFNetwork"
+  assert result.version == None
 }
 
 pub fn ua_parse_335_test() {
   let result =
     uaparser.parse_user_agent("CFNetwork, iPhone OS 7.0.4, iPhone5,2")
-  should.equal(result.family, "CFNetwork")
-  should.equal(result.version, None)
+  assert result.family == "CFNetwork"
+  assert result.version == None
 }
 
 pub fn ua_parse_336_test() {
   let result = uaparser.parse_user_agent("CFNetwork, iPhone OS 7.0, iPhone4,1")
-  should.equal(result.family, "CFNetwork")
-  should.equal(result.version, None)
+  assert result.family == "CFNetwork"
+  assert result.version == None
 }
 
 pub fn ua_parse_337_test() {
@@ -3829,11 +3240,9 @@ pub fn ua_parse_337_test() {
     uaparser.parse_user_agent(
       "Safari5530.17 CFNetwork/438.12 Darwin/9.7.0 (i386) (Macmini2,1)",
     )
-  should.equal(result.family, "CFNetwork")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "438", minor: Some("12"), patch: None)),
-  )
+  assert result.family == "CFNetwork"
+  assert result.version
+    == Some(uaparser.Version(major: "438", minor: Some("12"), patch: None))
 }
 
 pub fn ua_parse_338_test() {
@@ -3841,11 +3250,9 @@ pub fn ua_parse_338_test() {
     uaparser.parse_user_agent(
       "Safari/6533.18.5 CFNetwork/454.9.8 Darwin/10.4.0 (i386) (MacBookPro7,1)",
     )
-  should.equal(result.family, "Safari")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6533", minor: Some("18"), patch: Some("5"))),
-  )
+  assert result.family == "Safari"
+  assert result.version
+    == Some(uaparser.Version(major: "6533", minor: Some("18"), patch: Some("5")))
 }
 
 pub fn ua_parse_339_test() {
@@ -3853,11 +3260,9 @@ pub fn ua_parse_339_test() {
     uaparser.parse_user_agent(
       "Safari/7536.30.1 CFNetwork/520.5.1 Darwin/11.4.2 (i386) (MacBook3,1)",
     )
-  should.equal(result.family, "Safari")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7536", minor: Some("30"), patch: Some("1"))),
-  )
+  assert result.family == "Safari"
+  assert result.version
+    == Some(uaparser.Version(major: "7536", minor: Some("30"), patch: Some("1")))
 }
 
 pub fn ua_parse_340_test() {
@@ -3865,11 +3270,9 @@ pub fn ua_parse_340_test() {
     uaparser.parse_user_agent(
       "Reader Notifier/5 CFNetwork/596.3.3 Darwin/12.3.0 (x86_64) (MacBookPro7,1)",
     )
-  should.equal(result.family, "Reader Notifier")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: None, patch: None)),
-  )
+  assert result.family == "Reader Notifier"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: None, patch: None))
 }
 
 pub fn ua_parse_341_test() {
@@ -3877,11 +3280,9 @@ pub fn ua_parse_341_test() {
     uaparser.parse_user_agent(
       "Safari/9537.71 CFNetwork/673.0.2 Darwin/13.0.1 (x86_64) (MacBookPro11,1)",
     )
-  should.equal(result.family, "Safari")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9537", minor: Some("71"), patch: None)),
-  )
+  assert result.family == "Safari"
+  assert result.version
+    == Some(uaparser.Version(major: "9537", minor: Some("71"), patch: None))
 }
 
 pub fn ua_parse_342_test() {
@@ -3889,11 +3290,9 @@ pub fn ua_parse_342_test() {
     uaparser.parse_user_agent(
       "DEPoker-iPad/1.0.2 CFNetwork/548.1.4 Darwin/11.0.0",
     )
-  should.equal(result.family, "DEPoker")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("2"))),
-  )
+  assert result.family == "DEPoker"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("2")))
 }
 
 pub fn ua_parse_343_test() {
@@ -3901,11 +3300,9 @@ pub fn ua_parse_343_test() {
     uaparser.parse_user_agent(
       "JDSports-iPad/1.1 CFNetwork/672.0.8 Darwin/14.0.0",
     )
-  should.equal(result.family, "JDSports")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "JDSports"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_344_test() {
@@ -3913,11 +3310,9 @@ pub fn ua_parse_344_test() {
     uaparser.parse_user_agent(
       "AngryBirdsBlack-iPhone/1.1.0 CFNetwork/548.1.4 Darwin/11.0.0",
     )
-  should.equal(result.family, "AngryBirdsBlack")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("0"))),
-  )
+  assert result.family == "AngryBirdsBlack"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("0")))
 }
 
 pub fn ua_parse_345_test() {
@@ -3925,11 +3320,9 @@ pub fn ua_parse_345_test() {
     uaparser.parse_user_agent(
       "Bing for iPad/1.1.2 CFNetwork/485.13.9 Darwin/11.0.0",
     )
-  should.equal(result.family, "Bing for iPad")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("2"))),
-  )
+  assert result.family == "Bing for iPad"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("2")))
 }
 
 pub fn ua_parse_346_test() {
@@ -3937,11 +3330,9 @@ pub fn ua_parse_346_test() {
     uaparser.parse_user_agent(
       "NightstandPaid-iPad/1.3.1 CFNetwork/548.1.4 Darwin/11.0.0",
     )
-  should.equal(result.family, "NightstandPaid")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("1"))),
-  )
+  assert result.family == "NightstandPaid"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("1")))
 }
 
 pub fn ua_parse_347_test() {
@@ -3949,11 +3340,9 @@ pub fn ua_parse_347_test() {
     uaparser.parse_user_agent(
       "Glo-De-iPad/1.4.7 CFNetwork/672.0.2 Darwin/14.0.0",
     )
-  should.equal(result.family, "Glo-De")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("4"), patch: Some("7"))),
-  )
+  assert result.family == "Glo-De"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("4"), patch: Some("7")))
 }
 
 pub fn ua_parse_348_test() {
@@ -3961,11 +3350,9 @@ pub fn ua_parse_348_test() {
     uaparser.parse_user_agent(
       "Island for iPhone/1.95 CFNetwork/672.0.2 Darwin/14.0.0",
     )
-  should.equal(result.family, "Island for iPhone")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("95"), patch: None)),
-  )
+  assert result.family == "Island for iPhone"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("95"), patch: None))
 }
 
 pub fn ua_parse_349_test() {
@@ -3973,11 +3360,9 @@ pub fn ua_parse_349_test() {
     uaparser.parse_user_agent(
       "WormsiPhone-iPad/2.3 CFNetwork/548.1.4 Darwin/11.0.0",
     )
-  should.equal(result.family, "WormsiPhone")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "WormsiPhone"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_350_test() {
@@ -3985,11 +3370,9 @@ pub fn ua_parse_350_test() {
     uaparser.parse_user_agent(
       "Rummy LITE iPad/2.3.0 CFNetwork/609.1.4 Darwin/13.0.0",
     )
-  should.equal(result.family, "Rummy LITE iPad")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("3"), patch: Some("0"))),
-  )
+  assert result.family == "Rummy LITE iPad"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("3"), patch: Some("0")))
 }
 
 pub fn ua_parse_351_test() {
@@ -3997,11 +3380,9 @@ pub fn ua_parse_351_test() {
     uaparser.parse_user_agent(
       "MobileRSSFree-iPad/3.1 CFNetwork/467.12 Darwin/10.3.1",
     )
-  should.equal(result.family, "MobileRSSFree")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "MobileRSSFree"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_352_test() {
@@ -4009,11 +3390,9 @@ pub fn ua_parse_352_test() {
     uaparser.parse_user_agent(
       "MobileRSSFree-iPad/3.1.4 CFNetwork/485.13.9 Darwin/11.0.0",
     )
-  should.equal(result.family, "MobileRSSFree")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("1"), patch: Some("4"))),
-  )
+  assert result.family == "MobileRSSFree"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("1"), patch: Some("4")))
 }
 
 pub fn ua_parse_353_test() {
@@ -4021,11 +3400,9 @@ pub fn ua_parse_353_test() {
     uaparser.parse_user_agent(
       "babbelIndonesian-iPad/4.0.1 CFNetwork/672.0.8 Darwin/14.0.0",
     )
-  should.equal(result.family, "babbelIndonesian")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "babbelIndonesian"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_354_test() {
@@ -4033,11 +3410,9 @@ pub fn ua_parse_354_test() {
     uaparser.parse_user_agent(
       "WeltMobile-iPad/4.2 CFNetwork/609.1.4 Darwin/13.0.0",
     )
-  should.equal(result.family, "WeltMobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "WeltMobile"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_355_test() {
@@ -4045,31 +3420,25 @@ pub fn ua_parse_355_test() {
     uaparser.parse_user_agent(
       "IMPlusFull-iPad/7.9.1 CFNetwork/548.0.4 Darwin/11.0.0",
     )
-  should.equal(result.family, "IMPlusFull")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("9"), patch: Some("1"))),
-  )
+  assert result.family == "IMPlusFull"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("9"), patch: Some("1")))
 }
 
 pub fn ua_parse_356_test() {
   let result =
     uaparser.parse_user_agent("Cooliris/1.3 CFNetwork/342.1 Darwin/9.4.1")
-  should.equal(result.family, "Cooliris")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "Cooliris"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_357_test() {
   let result =
     uaparser.parse_user_agent("Poof/1.0 CFNetwork/485.12.7 Darwin/10.4.0")
-  should.equal(result.family, "Poof")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Poof"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_358_test() {
@@ -4077,11 +3446,9 @@ pub fn ua_parse_358_test() {
     uaparser.parse_user_agent(
       "Parking Mania Free/1.9.5.0 CFNetwork/548.0.4 Darwin/11.0.0",
     )
-  should.equal(result.family, "Parking Mania Free")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("9"), patch: Some("5"))),
-  )
+  assert result.family == "Parking Mania Free"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("9"), patch: Some("5")))
 }
 
 pub fn ua_parse_359_test() {
@@ -4089,21 +3456,17 @@ pub fn ua_parse_359_test() {
     uaparser.parse_user_agent(
       "Planet Boing!/1.4.8 CFNetwork/609.1.4 Darwin/13.0.0",
     )
-  should.equal(result.family, "Planet Boing!")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("4"), patch: Some("8"))),
-  )
+  assert result.family == "Planet Boing!"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("4"), patch: Some("8")))
 }
 
 pub fn ua_parse_360_test() {
   let result =
     uaparser.parse_user_agent("PlayTube/1.7 CFNetwork/672.0.2 Darwin/14.0.0")
-  should.equal(result.family, "PlayTube")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("7"), patch: None)),
-  )
+  assert result.family == "PlayTube"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("7"), patch: None))
 }
 
 pub fn ua_parse_361_test() {
@@ -4111,11 +3474,9 @@ pub fn ua_parse_361_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 2.2.1; es-us) AppleWebKit/534.12 (KHTML, like Gecko) Puffin/1.3.2913S Mobile Safari/534.12",
     )
-  should.equal(result.family, "Puffin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("2913"))),
-  )
+  assert result.family == "Puffin"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("2913")))
 }
 
 pub fn ua_parse_362_test() {
@@ -4123,11 +3484,9 @@ pub fn ua_parse_362_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 3.2.1; es-es) AppleWebKit/534.35 (KHTML, like Gecko) Chrome/11.0.696.65 Safari/534.35 Puffin/2.0.6440M Mobile",
     )
-  should.equal(result.family, "Puffin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("6440"))),
-  )
+  assert result.family == "Puffin"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("6440")))
 }
 
 pub fn ua_parse_363_test() {
@@ -4135,11 +3494,9 @@ pub fn ua_parse_363_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 3.2; en-gb) AppleWebKit/534.35 (KHTML, like Gecko) Chrome/11.0.696.65 Safari/534.35 Puffin/2.0.5932M Mobile",
     )
-  should.equal(result.family, "Puffin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("5932"))),
-  )
+  assert result.family == "Puffin"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("5932")))
 }
 
 pub fn ua_parse_364_test() {
@@ -4147,11 +3504,9 @@ pub fn ua_parse_364_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 4.1.1; en-us) AppleWebKit/534.35 (KHTML, like Gecko)  Chrome/11.0.696.65 Safari/534.35 Puffin/2.9909AT Mobile",
     )
-  should.equal(result.family, "Puffin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("9909"), patch: None)),
-  )
+  assert result.family == "Puffin"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("9909"), patch: None))
 }
 
 pub fn ua_parse_365_test() {
@@ -4159,11 +3514,9 @@ pub fn ua_parse_365_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 4.2.2; de-de) AppleWebKit/534.35 (KHTML, like Gecko)  Chrome/11.0.696.65 Safari/534.35 Puffin/3.11558AT Mobile",
     )
-  should.equal(result.family, "Puffin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("11558"), patch: None)),
-  )
+  assert result.family == "Puffin"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("11558"), patch: None))
 }
 
 pub fn ua_parse_366_test() {
@@ -4171,11 +3524,9 @@ pub fn ua_parse_366_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 4.2.2; en-us) AppleWebKit/534.35 (KHTML, like Gecko)  Chrome/11.0.696.65 Safari/534.35 Puffin/3.11558AP Mobile",
     )
-  should.equal(result.family, "Puffin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("11558"), patch: None)),
-  )
+  assert result.family == "Puffin"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("11558"), patch: None))
 }
 
 pub fn ua_parse_367_test() {
@@ -4183,11 +3534,9 @@ pub fn ua_parse_367_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; U; Linux i686; th-TH@calendar=gregorian) AppleWebKit/534.12 (KHTML, like Gecko) Puffin/1.3.2665MS Safari/534.12",
     )
-  should.equal(result.family, "Puffin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("2665"))),
-  )
+  assert result.family == "Puffin"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("2665")))
 }
 
 pub fn ua_parse_368_test() {
@@ -4195,11 +3544,9 @@ pub fn ua_parse_368_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; U; Linux x86_64; ar-AE) AppleWebKit/534.35 (KHTML, like Gecko)  Chrome/11.0.696.65 Safari/534.35 Puffin/3.10990IT",
     )
-  should.equal(result.family, "Puffin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("10990"), patch: None)),
-  )
+  assert result.family == "Puffin"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("10990"), patch: None))
 }
 
 pub fn ua_parse_369_test() {
@@ -4207,11 +3554,9 @@ pub fn ua_parse_369_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; U; Linux x86_64; ar-SA) AppleWebKit/534.35 (KHTML, like Gecko)  Chrome/11.0.696.65 Safari/534.35 Puffin/3.11546IP",
     )
-  should.equal(result.family, "Puffin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("11546"), patch: None)),
-  )
+  assert result.family == "Puffin"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("11546"), patch: None))
 }
 
 pub fn ua_parse_370_test() {
@@ -4219,11 +3564,9 @@ pub fn ua_parse_370_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; U; Linux x86_64; ar-ae) AppleWebKit/534.35 (KHTML, like Gecko)  Chrome/11.0.696.65 Safari/534.35 Puffin/2.10977AP",
     )
-  should.equal(result.family, "Puffin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("10977"), patch: None)),
-  )
+  assert result.family == "Puffin"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("10977"), patch: None))
 }
 
 pub fn ua_parse_371_test() {
@@ -4231,11 +3574,9 @@ pub fn ua_parse_371_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; U; Linux x86_64; de-at) AppleWebKit/534.35 (KHTML, like Gecko)  Chrome/11.0.696.65 Safari/534.35 Puffin/2.10977AT",
     )
-  should.equal(result.family, "Puffin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("10977"), patch: None)),
-  )
+  assert result.family == "Puffin"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("10977"), patch: None))
 }
 
 pub fn ua_parse_372_test() {
@@ -4243,11 +3584,9 @@ pub fn ua_parse_372_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPad; U; CPU OS 7_0_6 like Mac OS X; de-DE) AppleWebKit/534.35 (KHTML, like Gecko)  Chrome/11.0.696.65 Safari/534.35 Puffin/3.11558IT Mobile",
     )
-  should.equal(result.family, "Puffin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("11558"), patch: None)),
-  )
+  assert result.family == "Puffin"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("11558"), patch: None))
 }
 
 pub fn ua_parse_373_test() {
@@ -4255,11 +3594,9 @@ pub fn ua_parse_373_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; U; CPU iPhone OS 7_0_6 like Mac OS X; de-DE) AppleWebKit/534.35 (KHTML, like Gecko)  Chrome/11.0.696.65 Safari/534.35 Puffin/3.11558IP Mobile",
     )
-  should.equal(result.family, "Puffin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("11558"), patch: None)),
-  )
+  assert result.family == "Puffin"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("11558"), patch: None))
 }
 
 pub fn ua_parse_374_test() {
@@ -4267,11 +3604,9 @@ pub fn ua_parse_374_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPod; U; CPU iPhone OS 4_3_5 like Mac OS X; en-US) AppleWebKit/534.12 (KHTML, like Gecko) Puffin/1.3.3102MS Mobile Safari/534.12",
     )
-  should.equal(result.family, "Puffin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("3102"))),
-  )
+  assert result.family == "Puffin"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("3102")))
 }
 
 pub fn ua_parse_375_test() {
@@ -4279,11 +3614,9 @@ pub fn ua_parse_375_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPod; U; CPU iPhone OS 5_1_1 like Mac OS X; de-DE) AppleWebKit/534.35 (KHTML, like Gecko)  Chrome/11.0.696.65 Safari/534.35 Puffin/3.9174IP Mobile",
     )
-  should.equal(result.family, "Puffin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("9174"), patch: None)),
-  )
+  assert result.family == "Puffin"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("9174"), patch: None))
 }
 
 pub fn ua_parse_376_test() {
@@ -4291,11 +3624,9 @@ pub fn ua_parse_376_test() {
     uaparser.parse_user_agent(
       "MacAppStore/2.0 (Macintosh; OS X 10.10.2; 14C81f) AppleWebKit/0600.3.10.2",
     )
-  should.equal(result.family, "MacAppStore")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "MacAppStore"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_377_test() {
@@ -4303,11 +3634,9 @@ pub fn ua_parse_377_test() {
     uaparser.parse_user_agent(
       "iTunes/12.0.1 (Macintosh; OS X 10.9.2) AppleWebKit/537.74.9",
     )
-  should.equal(result.family, "iTunes")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "12", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "iTunes"
+  assert result.version
+    == Some(uaparser.Version(major: "12", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_378_test() {
@@ -4315,11 +3644,9 @@ pub fn ua_parse_378_test() {
     uaparser.parse_user_agent(
       "Ant/Ant-Nutch-1.1 (Ant Nutch Crawler; http://www.ant.com; crawler@ant.com)",
     )
-  should.equal(result.family, "Ant-Nutch")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Ant-Nutch"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_379_test() {
@@ -4327,11 +3654,9 @@ pub fn ua_parse_379_test() {
     uaparser.parse_user_agent(
       "Axtaris Web Crawler/Axtaris-1.0.1 (Hello from Axtaris.org | Web-Crawler; http://axtaris.org; crawler at axtaris dot org)",
     )
-  should.equal(result.family, "Axtaris")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "Axtaris"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_380_test() {
@@ -4339,11 +3664,9 @@ pub fn ua_parse_380_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko PTST/1.0",
     )
-  should.equal(result.family, "WebPageTest.org bot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "WebPageTest.org bot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_381_test() {
@@ -4351,11 +3674,9 @@ pub fn ua_parse_381_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.0 Safari/537.36 PTST/1.0",
     )
-  should.equal(result.family, "WebPageTest.org bot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "WebPageTest.org bot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_382_test() {
@@ -4363,11 +3684,13 @@ pub fn ua_parse_382_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 6.0.1; Moto G (4) Build/MPJ24.139-64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Mobile Safari/537.36 PTST/180521.140508",
     )
-  should.equal(result.family, "WebPageTest.org bot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "180521", minor: Some("140508"), patch: None)),
-  )
+  assert result.family == "WebPageTest.org bot"
+  assert result.version
+    == Some(uaparser.Version(
+      major: "180521",
+      minor: Some("140508"),
+      patch: None,
+    ))
 }
 
 pub fn ua_parse_383_test() {
@@ -4375,11 +3698,9 @@ pub fn ua_parse_383_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 6.0.1; Moto G (4) Build/MPJ24.139-64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Mobile Safari/537.36 PTST/391",
     )
-  should.equal(result.family, "WebPageTest.org bot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "391", minor: None, patch: None)),
-  )
+  assert result.family == "WebPageTest.org bot"
+  assert result.version
+    == Some(uaparser.Version(major: "391", minor: None, patch: None))
 }
 
 pub fn ua_parse_384_test() {
@@ -4387,8 +3708,8 @@ pub fn ua_parse_384_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Datanyze; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36",
     )
-  should.equal(result.family, "Datanyze")
-  should.equal(result.version, None)
+  assert result.family == "Datanyze"
+  assert result.version == None
 }
 
 pub fn ua_parse_385_test() {
@@ -4396,11 +3717,9 @@ pub fn ua_parse_385_test() {
     uaparser.parse_user_agent(
       "CazoodleBot/CazoodleBot-0.1 (CazoodleBot Crawler; http://www.cazoodle.com/cazoodlebot; cazoodlebot@cazoodle.com)",
     )
-  should.equal(result.family, "CazoodleBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "CazoodleBot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_386_test() {
@@ -4408,11 +3727,9 @@ pub fn ua_parse_386_test() {
     uaparser.parse_user_agent(
       "Isara-Search/Isara-1.0 (A non-profit web crawler operated by a charity organization.; www.isara.org; webmaster@isara.org)",
     )
-  should.equal(result.family, "Isara")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Isara"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_387_test() {
@@ -4420,11 +3737,9 @@ pub fn ua_parse_387_test() {
     uaparser.parse_user_agent(
       "noobot Spider/Noobot-1.2 (noobot-bot; http://www.noobot.fr)",
     )
-  should.equal(result.family, "Noobot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Noobot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_388_test() {
@@ -4432,40 +3747,32 @@ pub fn ua_parse_388_test() {
     uaparser.parse_user_agent(
       "asked/Nutch-0.8 (web crawler; http://asked.jp; epicurus at gmail dot com)",
     )
-  should.equal(result.family, "Nutch")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("8"), patch: None)),
-  )
+  assert result.family == "Nutch"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("8"), patch: None))
 }
 
 pub fn ua_parse_389_test() {
   let result = uaparser.parse_user_agent("nutch crawler/Nutch-2.2")
-  should.equal(result.family, "Nutch")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Nutch"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_390_test() {
   let result =
     uaparser.parse_user_agent("Spider/Nutch-2.3-SNAPSHOT (Webcrawler)")
-  should.equal(result.family, "Nutch")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "Nutch"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_391_test() {
   let result =
     uaparser.parse_user_agent("SheenBot/SheenBot-1.0.4 (Sheen web crawler)")
-  should.equal(result.family, "SheenBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("4"))),
-  )
+  assert result.family == "SheenBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("4")))
 }
 
 pub fn ua_parse_392_test() {
@@ -4473,11 +3780,9 @@ pub fn ua_parse_392_test() {
     uaparser.parse_user_agent(
       "SaladSpoon/ShopSalad 1.0 (Search Engine crawler for ShopSalad.com; http://shopsalad.com/en/partners.html; crawler AT shopsalad.com)",
     )
-  should.equal(result.family, "ShopSalad")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "ShopSalad"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_393_test() {
@@ -4485,11 +3790,9 @@ pub fn ua_parse_393_test() {
     uaparser.parse_user_agent(
       "TailsweepBlogCrawler/Tailsweep-2.9-SNAPSHOT (http://www.tailsweep.com/; bot at [tailsweep] dot com)",
     )
-  should.equal(result.family, "Tailsweep")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("9"), patch: None)),
-  )
+  assert result.family == "Tailsweep"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("9"), patch: None))
 }
 
 pub fn ua_parse_394_test() {
@@ -4497,11 +3800,9 @@ pub fn ua_parse_394_test() {
     uaparser.parse_user_agent(
       "SAE/fetchurl-22wy0njxnm WordPress/3.2.1; http://1.webfront.sinaapp.com",
     )
-  should.equal(result.family, "fetchurl")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "22", minor: None, patch: None)),
-  )
+  assert result.family == "fetchurl"
+  assert result.version
+    == Some(uaparser.Version(major: "22", minor: None, patch: None))
 }
 
 pub fn ua_parse_395_test() {
@@ -4509,20 +3810,16 @@ pub fn ua_parse_395_test() {
     uaparser.parse_user_agent(
       "RedBot/redbot-1.0 (Rediff.com Crawler; redbot at rediff dot com)",
     )
-  should.equal(result.family, "redbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "redbot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_396_test() {
   let result = uaparser.parse_user_agent("IS Alpha/zcspider-0.1")
-  should.equal(result.family, "zcspider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "zcspider"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_397_test() {
@@ -4530,11 +3827,9 @@ pub fn ua_parse_397_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; 008/0.85; http://www.80legs.com/webcrawler.html) Gecko/2008032620",
     )
-  should.equal(result.family, "008")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("85"), patch: None)),
-  )
+  assert result.family == "008"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("85"), patch: None))
 }
 
 pub fn ua_parse_398_test() {
@@ -4542,11 +3837,9 @@ pub fn ua_parse_398_test() {
     uaparser.parse_user_agent(
       "Altresium/4.6 (+http://www.altresium.com/bot.html)",
     )
-  should.equal(result.family, "Altresium")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("6"), patch: None)),
-  )
+  assert result.family == "Altresium"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("6"), patch: None))
 }
 
 pub fn ua_parse_399_test() {
@@ -4554,21 +3847,17 @@ pub fn ua_parse_399_test() {
     uaparser.parse_user_agent(
       "Argus/1.1 (Nutch; http://www.simpy.com/bot.html; feedback at simpy dot com)",
     )
-  should.equal(result.family, "Argus")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Argus"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_400_test() {
   let result =
     uaparser.parse_user_agent("Argus/2.8.65 CFNetwork/609 Darwin/13.0.0")
-  should.equal(result.family, "Argus")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("8"), patch: Some("65"))),
-  )
+  assert result.family == "Argus"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("8"), patch: Some("65")))
 }
 
 pub fn ua_parse_401_test() {
@@ -4576,11 +3865,9 @@ pub fn ua_parse_401_test() {
     uaparser.parse_user_agent(
       "DoCoMo/2.0 P05A(c100;TB;W24H15) (compatible; BaiduMobaider/1.0;  http://www.baidu.jp/spider/)",
     )
-  should.equal(result.family, "BaiduMobaider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "BaiduMobaider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_402_test() {
@@ -4588,11 +3875,9 @@ pub fn ua_parse_402_test() {
     uaparser.parse_user_agent(
       "BoardReader/1.0 (http://boardreader.com/info/robots.htm)-Machine1",
     )
-  should.equal(result.family, "BoardReader")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "BoardReader"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_403_test() {
@@ -4600,11 +3885,9 @@ pub fn ua_parse_403_test() {
     uaparser.parse_user_agent(
       "DNSGroup/0.1 (DNS Group Crawler; http://www.dnsgroup.com/; crawler@dnsgroup.com)",
     )
-  should.equal(result.family, "DNSGroup")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "DNSGroup"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_404_test() {
@@ -4612,21 +3895,17 @@ pub fn ua_parse_404_test() {
     uaparser.parse_user_agent(
       "DataparkSearch/4.35-02122005 ( http://www.dataparksearch.org/)",
     )
-  should.equal(result.family, "DataparkSearch")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("35"), patch: None)),
-  )
+  assert result.family == "DataparkSearch"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("35"), patch: None))
 }
 
 pub fn ua_parse_405_test() {
   let result =
     uaparser.parse_user_agent("EDI/1.6.0 (Edacious & Intelligent Web Crawler)")
-  should.equal(result.family, "EDI")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("0"))),
-  )
+  assert result.family == "EDI"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("0")))
 }
 
 pub fn ua_parse_406_test() {
@@ -4634,11 +3913,9 @@ pub fn ua_parse_406_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Goodzer/2.0; crawler@goodzer.com)",
     )
-  should.equal(result.family, "Goodzer")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Goodzer"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_407_test() {
@@ -4646,11 +3923,9 @@ pub fn ua_parse_407_test() {
     uaparser.parse_user_agent(
       "Grub/2.0 (Grub.org crawler; http://www.grub.org/; bot@grub.org)",
     )
-  should.equal(result.family, "Grub")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Grub"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_408_test() {
@@ -4658,11 +3933,9 @@ pub fn ua_parse_408_test() {
     uaparser.parse_user_agent(
       "INGRID/2.0 (http://spsearch.ilse.nl/; Startpagina dochter links spider)",
     )
-  should.equal(result.family, "INGRID")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "INGRID"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_409_test() {
@@ -4670,11 +3943,9 @@ pub fn ua_parse_409_test() {
     uaparser.parse_user_agent(
       "INGRID/3.0 MT (webcrawler@NOSPAMexperimental.net; http://aanmelden.ilse.nl/?aanmeld_mode=webhints)",
     )
-  should.equal(result.family, "INGRID")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "INGRID"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_410_test() {
@@ -4682,11 +3953,9 @@ pub fn ua_parse_410_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Infohelfer/1.2.0; +http://www.infohelfer.de/crawler.php)",
     )
-  should.equal(result.family, "Infohelfer")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: Some("0"))),
-  )
+  assert result.family == "Infohelfer"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: Some("0")))
 }
 
 pub fn ua_parse_411_test() {
@@ -4694,11 +3963,9 @@ pub fn ua_parse_411_test() {
     uaparser.parse_user_agent(
       "LOOQ/0.1 alfa (LOOQ Crawler for european sites; http://looq.eu; root (at) looq dot eu)",
     )
-  should.equal(result.family, "LOOQ")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "LOOQ"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_412_test() {
@@ -4706,11 +3973,9 @@ pub fn ua_parse_412_test() {
     uaparser.parse_user_agent(
       "LinkedInBot/1.0 (compatible; Mozilla/5.0; Jakarta Commons-HttpClient/3.1  http://www.linkedin.com)",
     )
-  should.equal(result.family, "LinkedInBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "LinkedInBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_413_test() {
@@ -4718,11 +3983,9 @@ pub fn ua_parse_413_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; PathDefender/1.0; +http://www.pathdefender.com/help/crawler)",
     )
-  should.equal(result.family, "PathDefender")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "PathDefender"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_414_test() {
@@ -4730,21 +3993,17 @@ pub fn ua_parse_414_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Peew/1.0; http://www.peew.de/crawler/)",
     )
-  should.equal(result.family, "Peew")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Peew"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_415_test() {
   let result =
     uaparser.parse_user_agent("PostPost/1.0 ( http://postpo.st/crawlers)")
-  should.equal(result.family, "PostPost")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "PostPost"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_416_test() {
@@ -4752,11 +4011,9 @@ pub fn ua_parse_416_test() {
     uaparser.parse_user_agent(
       "Steeler/1.3 (http://www.tkl.iis.u-tokyo.ac.jp/~crawler/)",
     )
-  should.equal(result.family, "Steeler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "Steeler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_417_test() {
@@ -4764,11 +4021,9 @@ pub fn ua_parse_417_test() {
     uaparser.parse_user_agent(
       "Steeler/3.3 (http://www.tkl.iis.u-tokyo.ac.jp/~crawler/)",
     )
-  should.equal(result.family, "Steeler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "Steeler"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_418_test() {
@@ -4776,29 +4031,23 @@ pub fn ua_parse_418_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Steeler/3.5; http://www.tkl.iis.u-tokyo.ac.jp/~crawler/)",
     )
-  should.equal(result.family, "Steeler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("5"), patch: None)),
-  )
+  assert result.family == "Steeler"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("5"), patch: None))
 }
 
 pub fn ua_parse_419_test() {
   let result = uaparser.parse_user_agent("VSE/1.0 (testcrawler@hotmail.com)")
-  should.equal(result.family, "VSE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "VSE"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_420_test() {
   let result = uaparser.parse_user_agent("VSE/1.0 (vsecrawler@hotmail.com)")
-  should.equal(result.family, "VSE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "VSE"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_421_test() {
@@ -4806,21 +4055,17 @@ pub fn ua_parse_421_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; WebCrunch/1.2; +http://webcrunch.net/crawler)",
     )
-  should.equal(result.family, "WebCrunch")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "WebCrunch"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_422_test() {
   let result =
     uaparser.parse_user_agent("WebZIP/7.0 (http://www.spidersoft.com)")
-  should.equal(result.family, "WebZIP")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "WebZIP"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_423_test() {
@@ -4828,11 +4073,9 @@ pub fn ua_parse_423_test() {
     uaparser.parse_user_agent(
       "Y!J-BRI/0.0.1 crawler ( http://help.yahoo.co.jp/help/jp/search/indexing/indexing-15.html )",
     )
-  should.equal(result.family, "Y!J-BRI")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "Y!J-BRI"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_424_test() {
@@ -4840,11 +4083,9 @@ pub fn ua_parse_424_test() {
     uaparser.parse_user_agent(
       "Y!J-BRW/1.0 crawler (http://help.yahoo.co.jp/help/jp/search/indexing/indexing-15.html)",
     )
-  should.equal(result.family, "Y!J-BRW")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Y!J-BRW"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_425_test() {
@@ -4852,11 +4093,9 @@ pub fn ua_parse_425_test() {
     uaparser.parse_user_agent(
       "YahooSeeker/1.0 (compatible; Mozilla 4.0; MSIE 5.5; http://help.yahoo.com/help/us/shop/merchant/)",
     )
-  should.equal(result.family, "YahooSeeker")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "YahooSeeker"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_426_test() {
@@ -4864,11 +4103,9 @@ pub fn ua_parse_426_test() {
     uaparser.parse_user_agent(
       "envolk/1.7 ( http://www.envolk.com/envolkspider.html)",
     )
-  should.equal(result.family, "envolk")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("7"), patch: None)),
-  )
+  assert result.family == "envolk"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("7"), patch: None))
 }
 
 pub fn ua_parse_427_test() {
@@ -4876,11 +4113,9 @@ pub fn ua_parse_427_test() {
     uaparser.parse_user_agent(
       "sproose/1.0beta (sproose bot; http://www.sproose.com/bot.html; crawler@sproose.com)",
     )
-  should.equal(result.family, "sproose")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "sproose"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_428_test() {
@@ -4888,11 +4123,9 @@ pub fn ua_parse_428_test() {
     uaparser.parse_user_agent(
       "wminer/1.2 (North America Web Crawler; http://www.wminer.com/bot; info at wminer dot com)",
     )
-  should.equal(result.family, "wminer")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "wminer"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_429_test() {
@@ -4900,11 +4133,9 @@ pub fn ua_parse_429_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 4.0; MSIECrawler; Windows 95)",
     )
-  should.equal(result.family, "MSIECrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "MSIECrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_430_test() {
@@ -4912,21 +4143,17 @@ pub fn ua_parse_430_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/4.0; FDM; MSIECrawler; Media Center PC 5.0)",
     )
-  should.equal(result.family, "MSIECrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "MSIECrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_431_test() {
   let result =
     uaparser.parse_user_agent("Apache-HttpClient/4.0-beta2 (java 1.5)")
-  should.equal(result.family, "Apache-HttpClient")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Apache-HttpClient"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_432_test() {
@@ -4934,21 +4161,17 @@ pub fn ua_parse_432_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 2.1-update1; de-de; E10i Build/2.1.1.C.0.0) AppleWebKit/530.17 (KHTML, like Gecko) Version/4.0 Mobile Safari/530.17 Google-HTTP-Java-Client/1.10.3-beta (gzip)",
     )
-  should.equal(result.family, "Google-HTTP-Java-Client")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("10"), patch: Some("3"))),
-  )
+  assert result.family == "Google-HTTP-Java-Client"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("10"), patch: Some("3")))
 }
 
 pub fn ua_parse_433_test() {
   let result =
     uaparser.parse_user_agent("Google-HTTP-Java-Client/1.13.1-beta (gzip)")
-  should.equal(result.family, "Google-HTTP-Java-Client")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("13"), patch: Some("1"))),
-  )
+  assert result.family == "Google-HTTP-Java-Client"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("13"), patch: Some("1")))
 }
 
 pub fn ua_parse_434_test() {
@@ -4956,11 +4179,9 @@ pub fn ua_parse_434_test() {
     uaparser.parse_user_agent(
       "Google-YouTubeSample/1.0 Google-HTTP-Java-Client/1.7.0-beta (gzip) Google-HTTP-Java-Client/1.7.0-beta (gzip)",
     )
-  should.equal(result.family, "Google-HTTP-Java-Client")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("7"), patch: Some("0"))),
-  )
+  assert result.family == "Google-HTTP-Java-Client"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("7"), patch: Some("0")))
 }
 
 pub fn ua_parse_435_test() {
@@ -4968,104 +4189,86 @@ pub fn ua_parse_435_test() {
     uaparser.parse_user_agent(
       "JNLP/1.7.0 javaws/10.17.2.02 (<internal>) Java/1.7.0_17",
     )
-  should.equal(result.family, "JNLP")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("7"), patch: Some("0"))),
-  )
+  assert result.family == "JNLP"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("7"), patch: Some("0")))
 }
 
 pub fn ua_parse_436_test() {
   let result =
     uaparser.parse_user_agent("JNLP/6.0 javaws/1.6.0_14 (b08) Java/1.6.0_14")
-  should.equal(result.family, "JNLP")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "JNLP"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_437_test() {
   let result = uaparser.parse_user_agent("Mozilla/5.0 (Python-urllib2)")
-  should.equal(result.family, "Python-urllib")
-  should.equal(result.version, None)
+  assert result.family == "Python-urllib"
+  assert result.version == None
 }
 
 pub fn ua_parse_438_test() {
   let result = uaparser.parse_user_agent("Python-urllib/1.15")
-  should.equal(result.family, "Python-urllib")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("15"), patch: None)),
-  )
+  assert result.family == "Python-urllib"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("15"), patch: None))
 }
 
 pub fn ua_parse_439_test() {
   let result = uaparser.parse_user_agent("IMVU Client/498.0 Python-urllib/2.7")
-  should.equal(result.family, "Python-urllib")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("7"), patch: None)),
-  )
+  assert result.family == "Python-urllib"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("7"), patch: None))
 }
 
 pub fn ua_parse_440_test() {
   let result = uaparser.parse_user_agent("Python-urllib/3.4")
-  should.equal(result.family, "Python-urllib")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("4"), patch: None)),
-  )
+  assert result.family == "Python-urllib"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("4"), patch: None))
 }
 
 pub fn ua_parse_441_test() {
   let result = uaparser.parse_user_agent("TLSProber/0.8")
-  should.equal(result.family, "TLSProber")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("8"), patch: None)),
-  )
+  assert result.family == "TLSProber"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("8"), patch: None))
 }
 
 pub fn ua_parse_442_test() {
   let result = uaparser.parse_user_agent("Asynchronous WinHTTP/1.0")
-  should.equal(result.family, "WinHTTP")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "WinHTTP"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_443_test() {
   let result = uaparser.parse_user_agent("1470.net crawler")
-  should.equal(result.family, "1470.net crawler")
-  should.equal(result.version, None)
+  assert result.family == "1470.net crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_444_test() {
   let result =
     uaparser.parse_user_agent("50.nu/0.01 (  http://50.nu/bot.html )")
-  should.equal(result.family, "50.nu")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("01"), patch: None)),
-  )
+  assert result.family == "50.nu"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("01"), patch: None))
 }
 
 pub fn ua_parse_445_test() {
   let result = uaparser.parse_user_agent("8bo Crawler Bot")
-  should.equal(result.family, "8bo Crawler Bot")
-  should.equal(result.version, None)
+  assert result.family == "8bo Crawler Bot"
+  assert result.version == None
 }
 
 pub fn ua_parse_446_test() {
   let result =
     uaparser.parse_user_agent("Aboundex/0.2 (http://www.aboundex.com/crawler/)")
-  should.equal(result.family, "Aboundex")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Aboundex"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_447_test() {
@@ -5073,27 +4276,23 @@ pub fn ua_parse_447_test() {
     uaparser.parse_user_agent(
       "Accoona-AI-Agent/1.1.1 (crawler at accoona dot com)",
     )
-  should.equal(result.family, "Accoona-AI-Agent")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("1"))),
-  )
+  assert result.family == "Accoona-AI-Agent"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("1")))
 }
 
 pub fn ua_parse_448_test() {
   let result =
     uaparser.parse_user_agent("Accoona-Biz-Agent/1.1.1 crawler@accoona.com")
-  should.equal(result.family, "Accoona-Biz-Agent")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("1"))),
-  )
+  assert result.family == "Accoona-Biz-Agent"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("1")))
 }
 
 pub fn ua_parse_449_test() {
   let result = uaparser.parse_user_agent("AdsBot-Google")
-  should.equal(result.family, "AdsBot-Google")
-  should.equal(result.version, None)
+  assert result.family == "AdsBot-Google"
+  assert result.version == None
 }
 
 pub fn ua_parse_450_test() {
@@ -5101,8 +4300,8 @@ pub fn ua_parse_450_test() {
     uaparser.parse_user_agent(
       "AppEngine-Google; ( http://code.google.com/appengine)",
     )
-  should.equal(result.family, "AppEngine-Google")
-  should.equal(result.version, None)
+  assert result.family == "AppEngine-Google"
+  assert result.version == None
 }
 
 pub fn ua_parse_451_test() {
@@ -5110,30 +4309,28 @@ pub fn ua_parse_451_test() {
     uaparser.parse_user_agent(
       "Inne: Mozilla/2.0 (compatible; Ask Jeeves/Teoma;  http://sp.ask.com/docs/about/tech_crawling.html)",
     )
-  should.equal(result.family, "Ask Jeeves")
-  should.equal(result.version, None)
+  assert result.family == "Ask Jeeves"
+  assert result.version == None
 }
 
 pub fn ua_parse_452_test() {
   let result = uaparser.parse_user_agent("BaiDuSpider")
-  should.equal(result.family, "BaiDuSpider")
-  should.equal(result.version, None)
+  assert result.family == "BaiDuSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_453_test() {
   let result = uaparser.parse_user_agent("Baiduspider")
-  should.equal(result.family, "Baiduspider")
-  should.equal(result.version, None)
+  assert result.family == "Baiduspider"
+  assert result.version == None
 }
 
 pub fn ua_parse_454_test() {
   let result =
     uaparser.parse_user_agent("'Mozilla/5.0 (compatible; Baiduspider/2.0; +ht'")
-  should.equal(result.family, "Baiduspider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Baiduspider"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_455_test() {
@@ -5141,8 +4338,8 @@ pub fn ua_parse_455_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Baiduspider-cpro; +http://www.baidu.com/search/spider.html)",
     )
-  should.equal(result.family, "Baiduspider-cpro")
-  should.equal(result.version, None)
+  assert result.family == "Baiduspider-cpro"
+  assert result.version == None
 }
 
 pub fn ua_parse_456_test() {
@@ -5150,14 +4347,14 @@ pub fn ua_parse_456_test() {
     uaparser.parse_user_agent(
       "Baiduspider-image ( http://www.baidu.com/search/spider.htm)",
     )
-  should.equal(result.family, "Baiduspider-image")
-  should.equal(result.version, None)
+  assert result.family == "Baiduspider-image"
+  assert result.version == None
 }
 
 pub fn ua_parse_457_test() {
   let result = uaparser.parse_user_agent("Baiduspider-testbranch")
-  should.equal(result.family, "Baiduspider-testbranch")
-  should.equal(result.version, None)
+  assert result.family == "Baiduspider-testbranch"
+  assert result.version == None
 }
 
 pub fn ua_parse_458_test() {
@@ -5165,11 +4362,9 @@ pub fn ua_parse_458_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534  (KHTML, like Gecko) BingPreview/1.0b",
     )
-  should.equal(result.family, "BingPreview")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "BingPreview"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_459_test() {
@@ -5177,11 +4372,9 @@ pub fn ua_parse_459_test() {
     uaparser.parse_user_agent(
       "BlogBridge 6.7 (http://www.blogbridge.com/) 1.6.0_18",
     )
-  should.equal(result.family, "BlogBridge")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("7"), patch: None)),
-  )
+  assert result.family == "BlogBridge"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("7"), patch: None))
 }
 
 pub fn ua_parse_460_test() {
@@ -5189,8 +4382,8 @@ pub fn ua_parse_460_test() {
     uaparser.parse_user_agent(
       "BoardReader Blog Indexer(http://boardreader.com)",
     )
-  should.equal(result.family, "BoardReader Blog Indexer")
-  should.equal(result.version, None)
+  assert result.family == "BoardReader Blog Indexer"
+  assert result.version == None
 }
 
 pub fn ua_parse_461_test() {
@@ -5198,8 +4391,8 @@ pub fn ua_parse_461_test() {
     uaparser.parse_user_agent(
       "BoardReader Favicon Fetcher /1.0 info@boardreader.com",
     )
-  should.equal(result.family, "BoardReader Favicon Fetcher")
-  should.equal(result.version, None)
+  assert result.family == "BoardReader Favicon Fetcher"
+  assert result.version == None
 }
 
 pub fn ua_parse_462_test() {
@@ -5207,20 +4400,16 @@ pub fn ua_parse_462_test() {
     uaparser.parse_user_agent(
       "Mozilla 4.0(compatible; BotSeer/1.0;  http://botseer.ist.psu.edu)",
     )
-  should.equal(result.family, "BotSeer")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "BotSeer"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_463_test() {
   let result = uaparser.parse_user_agent("CRAWL-E/0.6.4")
-  should.equal(result.family, "CRAWL-E")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("6"), patch: Some("4"))),
-  )
+  assert result.family == "CRAWL-E"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("6"), patch: Some("4")))
 }
 
 pub fn ua_parse_464_test() {
@@ -5228,11 +4417,9 @@ pub fn ua_parse_464_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Charlotte/1.0b; charlotte@beta.spider.com)",
     )
-  should.equal(result.family, "Charlotte")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Charlotte"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_465_test() {
@@ -5240,11 +4427,9 @@ pub fn ua_parse_465_test() {
     uaparser.parse_user_agent(
       "Checklinks/1.3 (pywikipedia robot; http://toolserver.org/~dispenser/view/Checklinks)",
     )
-  should.equal(result.family, "Checklinks")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "Checklinks"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_466_test() {
@@ -5252,17 +4437,15 @@ pub fn ua_parse_466_test() {
     uaparser.parse_user_agent(
       "Comodo HTTP(S) Crawler - http://www.instantssl.com/crawler",
     )
-  should.equal(result.family, "Comodo HTTP(S) Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Comodo HTTP(S) Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_467_test() {
   let result = uaparser.parse_user_agent("Comodo-Webinspector-Crawler 2.1")
-  should.equal(result.family, "Comodo-Webinspector-Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Comodo-Webinspector-Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_468_test() {
@@ -5270,11 +4453,9 @@ pub fn ua_parse_468_test() {
     uaparser.parse_user_agent(
       "Comodo-Webinspector-Crawler 2.2.2, http://www.comodorobot.com",
     )
-  should.equal(result.family, "Comodo-Webinspector-Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("2"), patch: Some("2"))),
-  )
+  assert result.family == "Comodo-Webinspector-Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("2"), patch: Some("2")))
 }
 
 pub fn ua_parse_469_test() {
@@ -5282,18 +4463,16 @@ pub fn ua_parse_469_test() {
     uaparser.parse_user_agent(
       "ConveraCrawler/0.9c ( http://www.authoritativeweb.com/crawl)",
     )
-  should.equal(result.family, "ConveraCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: None)),
-  )
+  assert result.family == "ConveraCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: None))
 }
 
 pub fn ua_parse_470_test() {
   let result =
     uaparser.parse_user_agent("CrawlConvera0.1 (CrawlConvera@yahoo.com)")
-  should.equal(result.family, "CrawlConvera")
-  should.equal(result.version, None)
+  assert result.family == "CrawlConvera"
+  assert result.version == None
 }
 
 pub fn ua_parse_471_test() {
@@ -5301,11 +4480,9 @@ pub fn ua_parse_471_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; MSIE or Firefox mutant; not on Windows server; + http://tab.search.daum.net/aboutWebSearch.html) Daumoa/3.0",
     )
-  should.equal(result.family, "Daumoa")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Daumoa"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_472_test() {
@@ -5313,11 +4490,9 @@ pub fn ua_parse_472_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Firefox compatible; MS IE compatible;  http://search.daum.net/) Daumoa-feedfetcher/2.0",
     )
-  should.equal(result.family, "Daumoa-feedfetcher")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Daumoa-feedfetcher"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_473_test() {
@@ -5325,8 +4500,8 @@ pub fn ua_parse_473_test() {
     uaparser.parse_user_agent(
       "Feed Seeker Bot (RSS Feed Seeker http://www.MyNewFavoriteThing.com/fsb.php)",
     )
-  should.equal(result.family, "Feed Seeker Bot")
-  should.equal(result.version, None)
+  assert result.family == "Feed Seeker Bot"
+  assert result.version == None
 }
 
 pub fn ua_parse_474_test() {
@@ -5334,8 +4509,8 @@ pub fn ua_parse_474_test() {
     uaparser.parse_user_agent(
       "Flamingo_SearchEngine (+http://www.flamingosearch.com/bot)",
     )
-  should.equal(result.family, "Flamingo_SearchEngine")
-  should.equal(result.version, None)
+  assert result.family == "Flamingo_SearchEngine"
+  assert result.version == None
 }
 
 pub fn ua_parse_475_test() {
@@ -5343,8 +4518,8 @@ pub fn ua_parse_475_test() {
     uaparser.parse_user_agent(
       "FollowSite Bot ( http://www.followsite.com/bot.html )",
     )
-  should.equal(result.family, "FollowSite Bot")
-  should.equal(result.version, None)
+  assert result.family == "FollowSite Bot"
+  assert result.version == None
 }
 
 pub fn ua_parse_476_test() {
@@ -5352,11 +4527,9 @@ pub fn ua_parse_476_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Genieo/1.0 http://www.genieo.com/webfilter.html",
     )
-  should.equal(result.family, "Genieo")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Genieo"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_477_test() {
@@ -5364,11 +4537,9 @@ pub fn ua_parse_477_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible;  MSIE 5.01; GomezAgent 2.0; Windows NT)",
     )
-  should.equal(result.family, "GomezAgent")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "GomezAgent"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_478_test() {
@@ -5376,11 +4547,9 @@ pub fn ua_parse_478_test() {
     uaparser.parse_user_agent(
       "Googlebot v2.1 (+http://www.google.com/bot.html) (http://www.openwebspider.org/)",
     )
-  should.equal(result.family, "Googlebot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Googlebot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_479_test() {
@@ -5388,20 +4557,16 @@ pub fn ua_parse_479_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)",
     )
-  should.equal(result.family, "Googlebot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Googlebot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_480_test() {
   let result = uaparser.parse_user_agent("Googlebot/2.2")
-  should.equal(result.family, "Googlebot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Googlebot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_481_test() {
@@ -5409,20 +4574,16 @@ pub fn ua_parse_481_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; Mozilla 4.0(compatible; Googlebot/5.0;  http://www.google.com/googlebot); en-US;)",
     )
-  should.equal(result.family, "Googlebot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Googlebot"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_482_test() {
   let result = uaparser.parse_user_agent("Googlebot-Image/1.0")
-  should.equal(result.family, "Googlebot-Image")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Googlebot-Image"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_483_test() {
@@ -5430,8 +4591,8 @@ pub fn ua_parse_483_test() {
     uaparser.parse_user_agent(
       "Googlebot-Mobile (compatible; Googlebot-Mobile/2.1; +http://www.google.com/bot.html)",
     )
-  should.equal(result.family, "Googlebot-Mobile")
-  should.equal(result.version, None)
+  assert result.family == "Googlebot-Mobile"
+  assert result.version == None
 }
 
 pub fn ua_parse_484_test() {
@@ -5439,38 +4600,34 @@ pub fn ua_parse_484_test() {
     uaparser.parse_user_agent(
       "DoCoMo//2.0 N905i(c100;TB;W24H16) (compatible; Googlebot-Mobile/2.1; +http://www.google.com/bot.html)",
     )
-  should.equal(result.family, "Googlebot-Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Googlebot-Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_485_test() {
   let result = uaparser.parse_user_agent("Googlebot-News")
-  should.equal(result.family, "Googlebot-News")
-  should.equal(result.version, None)
+  assert result.family == "Googlebot-News"
+  assert result.version == None
 }
 
 pub fn ua_parse_486_test() {
   let result = uaparser.parse_user_agent("Googlebot-Video/1.0")
-  should.equal(result.family, "Googlebot-Video")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Googlebot-Video"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_487_test() {
   let result = uaparser.parse_user_agent("Googlebot-richsnippets")
-  should.equal(result.family, "Googlebot-richsnippets")
-  should.equal(result.version, None)
+  assert result.family == "Googlebot-richsnippets"
+  assert result.version == None
 }
 
 pub fn ua_parse_488_test() {
   let result = uaparser.parse_user_agent("Google Web Preview")
-  should.equal(result.family, "Other")
-  should.equal(result.version, None)
+  assert result.family == "Other"
+  assert result.version == None
 }
 
 pub fn ua_parse_489_test() {
@@ -5478,11 +4635,9 @@ pub fn ua_parse_489_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Google-InspectionTool/1.0;)",
     )
-  should.equal(result.family, "Google-InspectionTool")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Google-InspectionTool"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_490_test() {
@@ -5490,11 +4645,9 @@ pub fn ua_parse_490_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.6367.201 Mobile Safari/537.36 (compatible; Google-InspectionTool/1.0;)",
     )
-  should.equal(result.family, "Google-InspectionTool")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Google-InspectionTool"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_491_test() {
@@ -5502,11 +4655,9 @@ pub fn ua_parse_491_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.78 Safari/537.36",
     )
-  should.equal(result.family, "Chrome")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "60", minor: Some("0"), patch: Some("3112"))),
-  )
+  assert result.family == "Chrome"
+  assert result.version
+    == Some(uaparser.Version(major: "60", minor: Some("0"), patch: Some("3112")))
 }
 
 pub fn ua_parse_492_test() {
@@ -5514,11 +4665,9 @@ pub fn ua_parse_492_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112 Safari/537.36",
     )
-  should.equal(result.family, "Chrome")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "60", minor: Some("0"), patch: Some("3112"))),
-  )
+  assert result.family == "Chrome"
+  assert result.version
+    == Some(uaparser.Version(major: "60", minor: Some("0"), patch: Some("3112")))
 }
 
 pub fn ua_parse_493_test() {
@@ -5526,11 +4675,9 @@ pub fn ua_parse_493_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko; Google Web Preview) Chrome/27.0 .1453 Safari/537.36.",
     )
-  should.equal(result.family, "Chrome")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "27", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Chrome"
+  assert result.version
+    == Some(uaparser.Version(major: "27", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_494_test() {
@@ -5538,8 +4685,8 @@ pub fn ua_parse_494_test() {
     uaparser.parse_user_agent(
       "HiddenMarket-1.0-beta (www.hiddenmarket.net/crawler.php)",
     )
-  should.equal(result.family, "HiddenMarket")
-  should.equal(result.version, None)
+  assert result.family == "HiddenMarket"
+  assert result.version == None
 }
 
 pub fn ua_parse_495_test() {
@@ -5547,11 +4694,9 @@ pub fn ua_parse_495_test() {
     uaparser.parse_user_agent(
       "HooWWWer/2.1.0 ( http://cosco.hiit.fi/search/hoowwwer/ | mailto:crawler-info<at>hiit.fi)",
     )
-  should.equal(result.family, "HooWWWer")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("1"), patch: Some("0"))),
-  )
+  assert result.family == "HooWWWer"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("1"), patch: Some("0")))
 }
 
 pub fn ua_parse_496_test() {
@@ -5559,8 +4704,8 @@ pub fn ua_parse_496_test() {
     uaparser.parse_user_agent(
       "ICC-Crawler(Mozilla-compatible; http://kc.nict.go.jp/icc/crawl.html; icc-crawl(at)ml(dot)nict(dot)go(dot)jp)",
     )
-  should.equal(result.family, "ICC-Crawler")
-  should.equal(result.version, None)
+  assert result.family == "ICC-Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_497_test() {
@@ -5568,11 +4713,9 @@ pub fn ua_parse_497_test() {
     uaparser.parse_user_agent(
       "ICC-Crawler/2.0 (Mozilla-compatible; ; http://kc.nict.go.jp/project1/crawl.html)",
     )
-  should.equal(result.family, "ICC-Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "ICC-Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_498_test() {
@@ -5580,11 +4723,9 @@ pub fn ua_parse_498_test() {
     uaparser.parse_user_agent(
       "IconSurf/2.0 favicon finder (see http://iconsurf.com/robot.html)",
     )
-  should.equal(result.family, "IconSurf")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IconSurf"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_499_test() {
@@ -5592,11 +4733,9 @@ pub fn ua_parse_499_test() {
     uaparser.parse_user_agent(
       "IlTrovatore/1.2 (IlTrovatore; http://www.iltrovatore.it/bot.html; bot@iltrovatore.it)",
     )
-  should.equal(result.family, "IlTrovatore")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "IlTrovatore"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_500_test() {
@@ -5604,8 +4743,8 @@ pub fn ua_parse_500_test() {
     uaparser.parse_user_agent(
       "IlTrovatore-Setaccio ( http://www.iltrovatore.it)",
     )
-  should.equal(result.family, "IlTrovatore-Setaccio")
-  should.equal(result.version, None)
+  assert result.family == "IlTrovatore-Setaccio"
+  assert result.version == None
 }
 
 pub fn ua_parse_501_test() {
@@ -5613,17 +4752,15 @@ pub fn ua_parse_501_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; InfuzApp/1.0; +http://www.infuz.com/bot.html)",
     )
-  should.equal(result.family, "InfuzApp")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "InfuzApp"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_502_test() {
   let result = uaparser.parse_user_agent("InternetArchive-1.0")
-  should.equal(result.family, "InternetArchive")
-  should.equal(result.version, None)
+  assert result.family == "InternetArchive"
+  assert result.version == None
 }
 
 pub fn ua_parse_503_test() {
@@ -5631,11 +4768,9 @@ pub fn ua_parse_503_test() {
     uaparser.parse_user_agent(
       "InternetArchive/0.8-dev (Nutch; http://lucene.apache.org/nutch/bot.html; nutch-agent@lucene.apache.org)",
     )
-  should.equal(result.family, "InternetArchive")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("8"), patch: None)),
-  )
+  assert result.family == "InternetArchive"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("8"), patch: None))
 }
 
 pub fn ua_parse_504_test() {
@@ -5643,11 +4778,9 @@ pub fn ua_parse_504_test() {
     uaparser.parse_user_agent(
       "KDDI-CA34 UP.Browser/6.2.0.10.2.2(GUI)MMP/2.0 (compatible; KDDI-Googlebot-Mobile/2.1; http://www.google.com/bot.html)",
     )
-  should.equal(result.family, "KDDI-Googlebot-Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "KDDI-Googlebot-Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_505_test() {
@@ -5655,8 +4788,8 @@ pub fn ua_parse_505_test() {
     uaparser.parse_user_agent(
       "kalooga/KaloogaBot (Kalooga; http://www.kalooga.com/info.html?page=crawler)",
     )
-  should.equal(result.family, "KaloogaBot")
-  should.equal(result.version, None)
+  assert result.family == "KaloogaBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_506_test() {
@@ -5664,11 +4797,9 @@ pub fn ua_parse_506_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Kraken/0.1; http://linkfluence.net/; bot@linkfluence.net)",
     )
-  should.equal(result.family, "Kraken")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Kraken"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_507_test() {
@@ -5676,11 +4807,9 @@ pub fn ua_parse_507_test() {
     uaparser.parse_user_agent(
       "Kurzor/1.0 (Kurzor; http://adcenter.hu/docs/en/bot.html; cursor@easymail.hu)",
     )
-  should.equal(result.family, "Kurzor")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Kurzor"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_508_test() {
@@ -5688,11 +4817,9 @@ pub fn ua_parse_508_test() {
     uaparser.parse_user_agent(
       "LEIA/3.01pr (LEIAcrawler; leia@gseek.com; http://www.gseek.com)",
     )
-  should.equal(result.family, "LEIA")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("01"), patch: None)),
-  )
+  assert result.family == "LEIA"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("01"), patch: None))
 }
 
 pub fn ua_parse_509_test() {
@@ -5700,27 +4827,27 @@ pub fn ua_parse_509_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 6.0; Windows compatible LesnikBot)",
     )
-  should.equal(result.family, "LesnikBot")
-  should.equal(result.version, None)
+  assert result.family == "LesnikBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_510_test() {
   let result = uaparser.parse_user_agent("Linguee Bot (bot@linguee.com)")
-  should.equal(result.family, "Linguee Bot")
-  should.equal(result.version, None)
+  assert result.family == "Linguee Bot"
+  assert result.version == None
 }
 
 pub fn ua_parse_511_test() {
   let result =
     uaparser.parse_user_agent("LinkAider (http://linkaider.com/crawler/)")
-  should.equal(result.family, "LinkAider")
-  should.equal(result.version, None)
+  assert result.family == "LinkAider"
+  assert result.version == None
 }
 
 pub fn ua_parse_512_test() {
   let result = uaparser.parse_user_agent("Lite Bot0316B")
-  should.equal(result.family, "Lite Bot")
-  should.equal(result.version, None)
+  assert result.family == "Lite Bot"
+  assert result.version == None
 }
 
 pub fn ua_parse_513_test() {
@@ -5728,11 +4855,9 @@ pub fn ua_parse_513_test() {
     uaparser.parse_user_agent(
       "Llaut/1.0 (http://mnm.uib.es/~gallir/llaut/bot.html)",
     )
-  should.equal(result.family, "Llaut")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Llaut"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_514_test() {
@@ -5740,8 +4865,8 @@ pub fn ua_parse_514_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/Fast/2.0; +http://go.mail.ru/help/robots)",
     )
-  should.equal(result.family, "Mail.RU_Bot")
-  should.equal(result.version, None)
+  assert result.family == "Mail.RU_Bot"
+  assert result.version == None
 }
 
 pub fn ua_parse_515_test() {
@@ -5749,17 +4874,15 @@ pub fn ua_parse_515_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Linux x86_64; Mail.RU_Bot/2.0; +http://go.mail.ru/help/robots)",
     )
-  should.equal(result.family, "Mail.RU_Bot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Mail.RU_Bot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_516_test() {
   let result = uaparser.parse_user_agent("Mediapartners-Google")
-  should.equal(result.family, "Mediapartners-Google")
-  should.equal(result.version, None)
+  assert result.family == "Mediapartners-Google"
+  assert result.version == None
 }
 
 pub fn ua_parse_517_test() {
@@ -5767,18 +4890,16 @@ pub fn ua_parse_517_test() {
     uaparser.parse_user_agent(
       "DoCoMo/2.0 SH905i(c100;TB;W24H16) (compatible; Mediapartners-Google/2.1; +http://www.google.com/bot.html)",
     )
-  should.equal(result.family, "Mediapartners-Google")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Mediapartners-Google"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_518_test() {
   let result =
     uaparser.parse_user_agent("Microsoft Bing Mobile SocialStreams Bot")
-  should.equal(result.family, "Microsoft Bing Mobile SocialStreams Bot")
-  should.equal(result.version, None)
+  assert result.family == "Microsoft Bing Mobile SocialStreams Bot"
+  assert result.version == None
 }
 
 pub fn ua_parse_519_test() {
@@ -5786,42 +4907,36 @@ pub fn ua_parse_519_test() {
     uaparser.parse_user_agent(
       "Microsoft MSN SocialStreams Bot,gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "Microsoft MSN SocialStreams Bot")
-  should.equal(result.version, None)
+  assert result.family == "Microsoft MSN SocialStreams Bot"
+  assert result.version == None
 }
 
 pub fn ua_parse_520_test() {
   let result = uaparser.parse_user_agent("NING/1.0")
-  should.equal(result.family, "NING")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "NING"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_521_test() {
   let result = uaparser.parse_user_agent("Netvibes (http://www.netvibes.com)")
-  should.equal(result.family, "Netvibes")
-  should.equal(result.version, None)
+  assert result.family == "Netvibes"
+  assert result.version == None
 }
 
 pub fn ua_parse_522_test() {
   let result =
     uaparser.parse_user_agent("NewsGator/2.0 Bot (http://www.newsgator.com)")
-  should.equal(result.family, "NewsGator")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "NewsGator"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_523_test() {
   let result = uaparser.parse_user_agent("NewsGator/3.0,gzip(gfe),gzip(gfe)")
-  should.equal(result.family, "NewsGator")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "NewsGator"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_524_test() {
@@ -5829,21 +4944,17 @@ pub fn ua_parse_524_test() {
     uaparser.parse_user_agent(
       "NewsGator FetchLinks extension/0.2.0 (http://graemef.com)",
     )
-  should.equal(result.family, "NewsGator FetchLinks extension")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("2"), patch: Some("0"))),
-  )
+  assert result.family == "NewsGator FetchLinks extension"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("2"), patch: Some("0")))
 }
 
 pub fn ua_parse_525_test() {
   let result =
     uaparser.parse_user_agent("NewsGatorOnline/2.0 (http://www.newsgator.com)")
-  should.equal(result.family, "NewsGatorOnline")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "NewsGatorOnline"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_526_test() {
@@ -5851,8 +4962,8 @@ pub fn ua_parse_526_test() {
     uaparser.parse_user_agent(
       "SapphireWebCrawler/1.0 (Sapphire Web Crawler using Nutch; http://boston.lti.cs.cmu.edu/crawler/; mhoy@cs.cmu.edu)",
     )
-  should.equal(result.family, "Nutch; http:")
-  should.equal(result.version, None)
+  assert result.family == "Nutch; http:"
+  assert result.version == None
 }
 
 pub fn ua_parse_527_test() {
@@ -5860,11 +4971,9 @@ pub fn ua_parse_527_test() {
     uaparser.parse_user_agent(
       "NutchCVS/0.06-dev (Nutch running at UW; http://www.nutch.org/docs/en/bot.html; sycrawl@cs.washington.edu)",
     )
-  should.equal(result.family, "NutchCVS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("06"), patch: None)),
-  )
+  assert result.family == "NutchCVS"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("06"), patch: None))
 }
 
 pub fn ua_parse_528_test() {
@@ -5872,11 +4981,9 @@ pub fn ua_parse_528_test() {
     uaparser.parse_user_agent(
       "NutchOSUOSL/0.05-dev (Nutch; http://www.nutch.org/docs/en/bot.html; nutch-agent@lists.sourceforge.net)",
     )
-  should.equal(result.family, "NutchOSUOSL")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("05"), patch: None)),
-  )
+  assert result.family == "NutchOSUOSL"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("05"), patch: None))
 }
 
 pub fn ua_parse_529_test() {
@@ -5884,11 +4991,9 @@ pub fn ua_parse_529_test() {
     uaparser.parse_user_agent(
       "NutchOrg/0.03-dev (Nutch; http://www.nutch.org/docs/bot.html; nutch-agent@lists.sourceforge.net)",
     )
-  should.equal(result.family, "NutchOrg")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("03"), patch: None)),
-  )
+  assert result.family == "NutchOrg"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("03"), patch: None))
 }
 
 pub fn ua_parse_530_test() {
@@ -5896,24 +5001,22 @@ pub fn ua_parse_530_test() {
     uaparser.parse_user_agent(
       "ObjectsSearch/0.2 (ObjectsSearch; http://www.ObjectsSearch.com/bot.html; support@thesoftwareobjects.com)",
     )
-  should.equal(result.family, "ObjectsSearch")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "ObjectsSearch"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_531_test() {
   let result =
     uaparser.parse_user_agent("Orbiter ( http://www.dailyorbit.com/bot.htm)")
-  should.equal(result.family, "Orbiter")
-  should.equal(result.version, None)
+  assert result.family == "Orbiter"
+  assert result.version == None
 }
 
 pub fn ua_parse_532_test() {
   let result = uaparser.parse_user_agent("PagePeeker.com")
-  should.equal(result.family, "PagePeeker")
-  should.equal(result.version, None)
+  assert result.family == "PagePeeker"
+  assert result.version == None
 }
 
 pub fn ua_parse_533_test() {
@@ -5921,8 +5024,8 @@ pub fn ua_parse_533_test() {
     uaparser.parse_user_agent(
       "PagesInventory (robot +http://www.pagesinventory.com)",
     )
-  should.equal(result.family, "PagesInventory")
-  should.equal(result.version, None)
+  assert result.family == "PagesInventory"
+  assert result.version == None
 }
 
 pub fn ua_parse_534_test() {
@@ -5930,11 +5033,9 @@ pub fn ua_parse_534_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; PaxleFramework/0.1.1;  http://www.paxle.net/en/bot)",
     )
-  should.equal(result.family, "PaxleFramework")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: Some("1"))),
-  )
+  assert result.family == "PaxleFramework"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: Some("1")))
 }
 
 pub fn ua_parse_535_test() {
@@ -5942,27 +5043,23 @@ pub fn ua_parse_535_test() {
     uaparser.parse_user_agent(
       "Peeplo Screenshot Bot/0.20 ( abuse at peeplo dot_com )",
     )
-  should.equal(result.family, "Peeplo Screenshot Bot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("20"), patch: None)),
-  )
+  assert result.family == "Peeplo Screenshot Bot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("20"), patch: None))
 }
 
 pub fn ua_parse_536_test() {
   let result =
     uaparser.parse_user_agent("PlantyNet_WebRobot_V1.9 babo@plantynet.com")
-  should.equal(result.family, "PlantyNet_WebRobot")
-  should.equal(result.version, None)
+  assert result.family == "PlantyNet_WebRobot"
+  assert result.version == None
 }
 
 pub fn ua_parse_537_test() {
   let result = uaparser.parse_user_agent("Pompos/1.2 http://pompos.iliad.fr")
-  should.equal(result.family, "Pompos")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Pompos"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_538_test() {
@@ -5970,21 +5067,17 @@ pub fn ua_parse_538_test() {
     uaparser.parse_user_agent(
       "Reaper/1.3.6 (Linux; U; Android 4.3; de-DE; GT-I9300 Build/JSS15J)",
     )
-  should.equal(result.family, "Reaper")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("6"))),
-  )
+  assert result.family == "Reaper"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("6")))
 }
 
 pub fn ua_parse_539_test() {
   let result =
     uaparser.parse_user_agent("Reaper/2.07 ( http://www.sitesearch.ca/reaper)")
-  should.equal(result.family, "Reaper")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("07"), patch: None)),
-  )
+  assert result.family == "Reaper"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("07"), patch: None))
 }
 
 pub fn ua_parse_540_test() {
@@ -5992,46 +5085,38 @@ pub fn ua_parse_540_test() {
     uaparser.parse_user_agent(
       "RedCarpet/1.0 (http://www.redcarpet-inc.com/robots.html)",
     )
-  should.equal(result.family, "RedCarpet")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "RedCarpet"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_541_test() {
   let result =
     uaparser.parse_user_agent("RedCarpet/2.1 CFNetwork/672.0.2 Darwin/14.0.0")
-  should.equal(result.family, "RedCarpet")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "RedCarpet"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_542_test() {
   let result =
     uaparser.parse_user_agent("Riddler (http://riddler.io/about.html)")
-  should.equal(result.family, "Riddler")
-  should.equal(result.version, None)
+  assert result.family == "Riddler"
+  assert result.version == None
 }
 
 pub fn ua_parse_543_test() {
   let result = uaparser.parse_user_agent("Scrapy/0.16.4 (+http://scrapy.org)")
-  should.equal(result.family, "Scrapy")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("16"), patch: Some("4"))),
-  )
+  assert result.family == "Scrapy"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("16"), patch: Some("4")))
 }
 
 pub fn ua_parse_544_test() {
   let result = uaparser.parse_user_agent("Scrapy/0.22.2 (+http://scrapy.org)")
-  should.equal(result.family, "Scrapy")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("22"), patch: Some("2"))),
-  )
+  assert result.family == "Scrapy"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("22"), patch: Some("2")))
 }
 
 pub fn ua_parse_545_test() {
@@ -6039,11 +5124,9 @@ pub fn ua_parse_545_test() {
     uaparser.parse_user_agent(
       "Simpy/1.1 (Simpy; http://www.simpy.com/?ref=bot; feedback at simpy dot com)",
     )
-  should.equal(result.family, "Simpy")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Simpy"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_546_test() {
@@ -6051,17 +5134,15 @@ pub fn ua_parse_546_test() {
     uaparser.parse_user_agent(
       "Mozilla/3.0 (Slurp.so/1.0; slurp@inktomi.com; http://www.inktomi.com/slurp.html)",
     )
-  should.equal(result.family, "Slurp")
-  should.equal(result.version, None)
+  assert result.family == "Slurp"
+  assert result.version == None
 }
 
 pub fn ua_parse_547_test() {
   let result = uaparser.parse_user_agent("Slurp/2.0")
-  should.equal(result.family, "Slurp")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Slurp"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_548_test() {
@@ -6069,11 +5150,9 @@ pub fn ua_parse_548_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Yahoo!; U; Slurp/3.0; http://help.yahoo.com/help/us/ysearch/slurp) Mozilla/5.0 ()",
     )
-  should.equal(result.family, "Slurp")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Slurp"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_549_test() {
@@ -6081,24 +5160,22 @@ pub fn ua_parse_549_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Speedy Spider; http://www.entireweb.com/about/search_tech/speedy_spider/)",
     )
-  should.equal(result.family, "Speedy Spider")
-  should.equal(result.version, None)
+  assert result.family == "Speedy Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_550_test() {
   let result = uaparser.parse_user_agent("Squrl Java/1.6.0_22")
-  should.equal(result.family, "Squrl Java")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("0"))),
-  )
+  assert result.family == "Squrl Java"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("0")))
 }
 
 pub fn ua_parse_551_test() {
   let result =
     uaparser.parse_user_agent("TheUsefulbot_2.3.62 (bot@theusefulnet.com)")
-  should.equal(result.family, "TheUsefulbot")
-  should.equal(result.version, None)
+  assert result.family == "TheUsefulbot"
+  assert result.version == None
 }
 
 pub fn ua_parse_552_test() {
@@ -6106,8 +5183,8 @@ pub fn ua_parse_552_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; U; Linux x86_64; de-DE; rv:1.9.0.19) Gecko/2010091808 ThumbShotsBot (KFSW 3.0.6-3)",
     )
-  should.equal(result.family, "ThumbShotsBot")
-  should.equal(result.version, None)
+  assert result.family == "ThumbShotsBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_553_test() {
@@ -6115,8 +5192,8 @@ pub fn ua_parse_553_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Thumbshots.ru; +http://thumbshots.ru/bot) Firefox/3",
     )
-  should.equal(result.family, "Thumbshots.ru")
-  should.equal(result.version, None)
+  assert result.family == "Thumbshots.ru"
+  assert result.version == None
 }
 
 pub fn ua_parse_554_test() {
@@ -6124,8 +5201,8 @@ pub fn ua_parse_554_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Vagabondo/Wapspider; webcrawler at wise-guys dot nl; http://webagent.wise-guys.nl/)",
     )
-  should.equal(result.family, "Vagabondo")
-  should.equal(result.version, None)
+  assert result.family == "Vagabondo"
+  assert result.version == None
 }
 
 pub fn ua_parse_555_test() {
@@ -6133,11 +5210,9 @@ pub fn ua_parse_555_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Vagabondo/2.1; webcrawler at wise-guys dot nl; http://webagent.wise-guys.nl/)",
     )
-  should.equal(result.family, "Vagabondo")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Vagabondo"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_556_test() {
@@ -6145,11 +5220,9 @@ pub fn ua_parse_556_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible;  Vagabondo/2.2; webcrawler at wise-guys dot nl; http://webagent.wise-guys.nl/)",
     )
-  should.equal(result.family, "Vagabondo")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Vagabondo"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_557_test() {
@@ -6157,11 +5230,9 @@ pub fn ua_parse_557_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible;  Vagabondo/2.3; webcrawler at wise-guys dot nl; http://webagent.wise-guys.nl/)",
     )
-  should.equal(result.family, "Vagabondo")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "Vagabondo"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_558_test() {
@@ -6169,11 +5240,9 @@ pub fn ua_parse_558_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible;  Vagabondo/4.0Beta; webcrawler at wise-guys dot nl; http://webagent.wise-guys.nl/)",
     )
-  should.equal(result.family, "Vagabondo")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Vagabondo"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_559_test() {
@@ -6181,8 +5250,8 @@ pub fn ua_parse_559_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 5.0; Windows 95) VoilaBot BETA 1.2 (http://www.voila.com/)",
     )
-  should.equal(result.family, "VoilaBot")
-  should.equal(result.version, None)
+  assert result.family == "VoilaBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_560_test() {
@@ -6190,11 +5259,9 @@ pub fn ua_parse_560_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Votay bot/4.0;  http://www.votay.com/arts/comics/)",
     )
-  should.equal(result.family, "Votay bot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Votay bot"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_561_test() {
@@ -6202,8 +5269,8 @@ pub fn ua_parse_561_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; WASALive Bot ; http://blog.wasalive.com/wasalive-bots/)",
     )
-  should.equal(result.family, "WASALive Bot")
-  should.equal(result.version, None)
+  assert result.family == "WASALive Bot"
+  assert result.version == None
 }
 
 pub fn ua_parse_562_test() {
@@ -6211,8 +5278,8 @@ pub fn ua_parse_562_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPad; U; CPU iPhone OS 7_0 like Mac OS X; de-DE) WIRED/3.2.3.11.87970",
     )
-  should.equal(result.family, "WIRE")
-  should.equal(result.version, None)
+  assert result.family == "WIRE"
+  assert result.version == None
 }
 
 pub fn ua_parse_563_test() {
@@ -6220,21 +5287,17 @@ pub fn ua_parse_563_test() {
     uaparser.parse_user_agent(
       "WIRE/0.11 (Linux; i686; Robot,Spider,Crawler,aromano@cli.di.unipi.it)",
     )
-  should.equal(result.family, "WIRE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("11"), patch: None)),
-  )
+  assert result.family == "WIRE"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("11"), patch: None))
 }
 
 pub fn ua_parse_564_test() {
   let result =
     uaparser.parse_user_agent("WIRE/1.0 (Linux;i686;Bot,Robot,Spider,Crawler)")
-  should.equal(result.family, "WIRE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "WIRE"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_565_test() {
@@ -6242,11 +5305,9 @@ pub fn ua_parse_565_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; Windows NT 6.1; WOW64; rv:2.0b8pre; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; MS-RTC LM 8; OfficeLiveConnector.1.4; OfficeLivePatch.1.3; SLCC1; SLCC2; Media Center PC 6.0; GTB6.4; InfoPath.2; en-US; FunWebProducts; Zango 10.1.181.0; SV1; PRTG Network Monitor (www.paessler.com)) Gecko/20101114 Firefox/4.0b8pre QuickTime/7.6.2 Songbird/1.1.2 Web-sniffer/1.0.36 lftp/3.7.4 libwww-perl/5.820 GSiteCrawler/v1.12 rev. 260 Snoopy v1.2",
     )
-  should.equal(result.family, "Web-sniffer")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("36"))),
-  )
+  assert result.family == "Web-sniffer"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("36")))
 }
 
 pub fn ua_parse_566_test() {
@@ -6254,8 +5315,8 @@ pub fn ua_parse_566_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; WebThumbnail/2.2; Website Thumbnail Generator; +http://webthumbnail.org)",
     )
-  should.equal(result.family, "WebThumb")
-  should.equal(result.version, None)
+  assert result.family == "WebThumb"
+  assert result.version == None
 }
 
 pub fn ua_parse_567_test() {
@@ -6263,35 +5324,29 @@ pub fn ua_parse_567_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; U; Linux i686 (x86_64); en-US; rv:1.9.0.17) Gecko WebThumb/1.0",
     )
-  should.equal(result.family, "WebThumb")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "WebThumb"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_568_test() {
   let result = uaparser.parse_user_agent("WhatWeb/0.4.8")
-  should.equal(result.family, "WhatWeb")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("4"), patch: Some("8"))),
-  )
+  assert result.family == "WhatWeb"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("4"), patch: Some("8")))
 }
 
 pub fn ua_parse_569_test() {
   let result = uaparser.parse_user_agent("Jetpack by WordPress.com")
-  should.equal(result.family, "WordPress")
-  should.equal(result.version, None)
+  assert result.family == "WordPress"
+  assert result.version == None
 }
 
 pub fn ua_parse_570_test() {
   let result = uaparser.parse_user_agent("WordPress/1.2.1 PHP/4.3.9-1")
-  should.equal(result.family, "WordPress")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: Some("1"))),
-  )
+  assert result.family == "WordPress"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: Some("1")))
 }
 
 pub fn ua_parse_571_test() {
@@ -6299,11 +5354,9 @@ pub fn ua_parse_571_test() {
     uaparser.parse_user_agent(
       "Pachacutec/0.5 (qpImageBuilders.com); WordPress/3.1; http://contacto-latino.com/news",
     )
-  should.equal(result.family, "WordPress")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "WordPress"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_572_test() {
@@ -6311,48 +5364,38 @@ pub fn ua_parse_572_test() {
     uaparser.parse_user_agent(
       "Wotbox/0.7-alpha (bot@wotbox.com; http://www.wotbox.com)",
     )
-  should.equal(result.family, "Wotbox")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("7"), patch: None)),
-  )
+  assert result.family == "Wotbox"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("7"), patch: None))
 }
 
 pub fn ua_parse_573_test() {
   let result =
     uaparser.parse_user_agent("Wotbox/2.01 ( http://www.wotbox.com/bot/)")
-  should.equal(result.family, "Wotbox")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("01"), patch: None)),
-  )
+  assert result.family == "Wotbox"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("01"), patch: None))
 }
 
 pub fn ua_parse_574_test() {
   let result = uaparser.parse_user_agent("Xenu Link Sleuth 1.1f")
-  should.equal(result.family, "Xenu Link Sleuth")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Xenu Link Sleuth"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_575_test() {
   let result = uaparser.parse_user_agent("Xenu's Link Sleuth 1.0p")
-  should.equal(result.family, "Xenu's Link Sleuth")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Xenu's Link Sleuth"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_576_test() {
   let result = uaparser.parse_user_agent("Xerka WebBot v1.0.0 [AIDO_CREA_ab]")
-  should.equal(result.family, "Xerka WebBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Xerka WebBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_577_test() {
@@ -6360,8 +5403,8 @@ pub fn ua_parse_577_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Yahoo! Slurp China; http://misc.yahoo.com.cn/help.html)",
     )
-  should.equal(result.family, "Yahoo! Slurp")
-  should.equal(result.version, None)
+  assert result.family == "Yahoo! Slurp"
+  assert result.version == None
 }
 
 pub fn ua_parse_578_test() {
@@ -6369,11 +5412,9 @@ pub fn ua_parse_578_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Yahoo! Slurp/3.0 ; http://help.yahoo.com/help/us/ysearch/slurp)",
     )
-  should.equal(result.family, "Yahoo! Slurp")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Yahoo! Slurp"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_579_test() {
@@ -6381,8 +5422,8 @@ pub fn ua_parse_579_test() {
     uaparser.parse_user_agent(
       "LG-C1500 UP.Browser/6.2.3 (GUI) MMP/1.0 (compatible;YahooSeeker/M1A1-R2D2; http://help.yahoo.com/help/us/ysearch/crawling/crawling-01.html)",
     )
-  should.equal(result.family, "YahooSeeker")
-  should.equal(result.version, None)
+  assert result.family == "YahooSeeker"
+  assert result.version == None
 }
 
 pub fn ua_parse_580_test() {
@@ -6390,11 +5431,9 @@ pub fn ua_parse_580_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots),gzip(gfe) AppEngine-Google; (+http://code.google.com/appengine; appid: twitter-mirror),gzip(gfe),gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "YandexBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "YandexBot"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_581_test() {
@@ -6402,8 +5441,8 @@ pub fn ua_parse_581_test() {
     uaparser.parse_user_agent(
       "Yeti-FeedItemCrawler/1.0 (NHN Corp.;+http://help.naver.com/robots/)",
     )
-  should.equal(result.family, "Yeti")
-  should.equal(result.version, None)
+  assert result.family == "Yeti"
+  assert result.version == None
 }
 
 pub fn ua_parse_582_test() {
@@ -6411,11 +5450,9 @@ pub fn ua_parse_582_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; YodaoBot/1.0; http://www.yodao.com/help/webmaster/spider/; )",
     )
-  should.equal(result.family, "YodaoBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "YodaoBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_583_test() {
@@ -6423,11 +5460,9 @@ pub fn ua_parse_583_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible;YodaoBot-Image/1.0;http://www.youdao.com/help/webmaster/spider/;)",
     )
-  should.equal(result.family, "YodaoBot-Image")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "YodaoBot-Image"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_584_test() {
@@ -6435,36 +5470,34 @@ pub fn ua_parse_584_test() {
     uaparser.parse_user_agent(
       "YowedoBot/Yowedo 1.0 (Search Engine crawler for yowedo.com; http://yowedo.com/en/partners.html; crawler@yowedo.com)",
     )
-  should.equal(result.family, "Yowedo")
-  should.equal(result.version, None)
+  assert result.family == "Yowedo"
+  assert result.version == None
 }
 
 pub fn ua_parse_585_test() {
   let result = uaparser.parse_user_agent("Zao-Crawler")
-  should.equal(result.family, "Zao")
-  should.equal(result.version, None)
+  assert result.family == "Zao"
+  assert result.version == None
 }
 
 pub fn ua_parse_586_test() {
   let result = uaparser.parse_user_agent("ZeBot_www.ze.bz (ze.bz@hotmail.com)")
-  should.equal(result.family, "ZeBot_www.ze.bz")
-  should.equal(result.version, None)
+  assert result.family == "ZeBot_www.ze.bz"
+  assert result.version == None
 }
 
 pub fn ua_parse_587_test() {
   let result = uaparser.parse_user_agent("ZooShot 0.42")
-  should.equal(result.family, "ZooShot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("42"), patch: None)),
-  )
+  assert result.family == "ZooShot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("42"), patch: None))
 }
 
 pub fn ua_parse_588_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/4.0 (compatible; MSIE; ZyBorg; Win32)")
-  should.equal(result.family, "ZyBorg")
-  should.equal(result.version, None)
+  assert result.family == "ZyBorg"
+  assert result.version == None
 }
 
 pub fn ua_parse_589_test() {
@@ -6472,11 +5505,9 @@ pub fn ua_parse_589_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 compatible ZyBorg/1.0 (ZyBorg@WISEnutbot.com; http://www.WISEnutbot.com)",
     )
-  should.equal(result.family, "ZyBorg")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "ZyBorg"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_590_test() {
@@ -6484,8 +5515,8 @@ pub fn ua_parse_590_test() {
     uaparser.parse_user_agent(
       "AltaVista Intranet V2.0 Compaq Altavista Eval sveand@altavista.net",
     )
-  should.equal(result.family, "altavista")
-  should.equal(result.version, None)
+  assert result.family == "altavista"
+  assert result.version == None
 }
 
 pub fn ua_parse_591_test() {
@@ -6493,8 +5524,8 @@ pub fn ua_parse_591_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; archive.bibalex.org_bot; +http://www.test.com)",
     )
-  should.equal(result.family, "archive.bibalex.org_bot")
-  should.equal(result.version, None)
+  assert result.family == "archive.bibalex.org_bot"
+  assert result.version == None
 }
 
 pub fn ua_parse_592_test() {
@@ -6502,8 +5533,8 @@ pub fn ua_parse_592_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; archive.org_bot/heritrix-1.15.1-x  http://pandora.nla.gov.au/crawl.html)",
     )
-  should.equal(result.family, "archive.org_bot")
-  should.equal(result.version, None)
+  assert result.family == "archive.org_bot"
+  assert result.version == None
 }
 
 pub fn ua_parse_593_test() {
@@ -6511,11 +5542,9 @@ pub fn ua_parse_593_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; special_archiver/3.2.0 +http://www.loc.gov/webarchiving/notice_to_webmasters.html)",
     )
-  should.equal(result.family, "archiver")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("2"), patch: Some("0"))),
-  )
+  assert result.family == "archiver"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("2"), patch: Some("0")))
 }
 
 pub fn ua_parse_594_test() {
@@ -6523,20 +5552,20 @@ pub fn ua_parse_594_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.1.4322; .NET CLR 2.0.50215; baiduspider)",
     )
-  should.equal(result.family, "baiduspider")
-  should.equal(result.version, None)
+  assert result.family == "baiduspider"
+  assert result.version == None
 }
 
 pub fn ua_parse_595_test() {
   let result = uaparser.parse_user_agent("baiduspider-mobile-gate")
-  should.equal(result.family, "baiduspider-mobile-gate")
-  should.equal(result.version, None)
+  assert result.family == "baiduspider-mobile-gate"
+  assert result.version == None
 }
 
 pub fn ua_parse_596_test() {
   let result = uaparser.parse_user_agent("bingbot")
-  should.equal(result.family, "bingbot")
-  should.equal(result.version, None)
+  assert result.family == "bingbot"
+  assert result.version == None
 }
 
 pub fn ua_parse_597_test() {
@@ -6544,11 +5573,9 @@ pub fn ua_parse_597_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; bingbot/2.0  http://www.bing.com/bingbot.htm)",
     )
-  should.equal(result.family, "bingbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "bingbot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_598_test() {
@@ -6556,11 +5583,9 @@ pub fn ua_parse_598_test() {
     uaparser.parse_user_agent(
       "boitho.com-dc/0.4 ( http://www.boitho.com/dcbot.html )",
     )
-  should.equal(result.family, "boitho.com-dc")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("4"), patch: None)),
-  )
+  assert result.family == "boitho.com-dc"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("4"), patch: None))
 }
 
 pub fn ua_parse_599_test() {
@@ -6568,11 +5593,9 @@ pub fn ua_parse_599_test() {
     uaparser.parse_user_agent(
       "boitho.com-dc/0.86 ( http://www.boitho.com/dcbot.html )",
     )
-  should.equal(result.family, "boitho.com-dc")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("86"), patch: None)),
-  )
+  assert result.family == "boitho.com-dc"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("86"), patch: None))
 }
 
 pub fn ua_parse_600_test() {
@@ -6580,8 +5603,8 @@ pub fn ua_parse_600_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; clumboot; +http://localhost/clumpit/bot.php)",
     )
-  should.equal(result.family, "clumboot")
-  should.equal(result.version, None)
+  assert result.family == "clumboot"
+  assert result.version == None
 }
 
 pub fn ua_parse_601_test() {
@@ -6589,11 +5612,9 @@ pub fn ua_parse_601_test() {
     uaparser.parse_user_agent(
       "findlinks/2.6 ( http://wortschatz.uni-leipzig.de/findlinks/)",
     )
-  should.equal(result.family, "findlinks")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("6"), patch: None)),
-  )
+  assert result.family == "findlinks"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("6"), patch: None))
 }
 
 pub fn ua_parse_602_test() {
@@ -6601,15 +5622,15 @@ pub fn ua_parse_602_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 compatible FurlBot/Furl Search 2.0 (FurlBot; http://www.furl.net; wn.furlbot@looksmart.net)",
     )
-  should.equal(result.family, "furlbot")
-  should.equal(result.version, None)
+  assert result.family == "furlbot"
+  assert result.version == None
 }
 
 pub fn ua_parse_603_test() {
   let result =
     uaparser.parse_user_agent("gonzo1[D] mailto:crawleradmin.t-info@telekom.de")
-  should.equal(result.family, "gonzo1")
-  should.equal(result.version, None)
+  assert result.family == "gonzo1"
+  assert result.version == None
 }
 
 pub fn ua_parse_604_test() {
@@ -6617,14 +5638,14 @@ pub fn ua_parse_604_test() {
     uaparser.parse_user_agent(
       "grub-client-1.5.3; (grub-client-1.5.3; Crawl your own stuff with http://grub.org)",
     )
-  should.equal(result.family, "grub-client")
-  should.equal(result.version, None)
+  assert result.family == "grub-client"
+  assert result.version == None
 }
 
 pub fn ua_parse_605_test() {
   let result = uaparser.parse_user_agent("gsa-crawler")
-  should.equal(result.family, "gsa-crawler")
-  should.equal(result.version, None)
+  assert result.family == "gsa-crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_606_test() {
@@ -6632,11 +5653,9 @@ pub fn ua_parse_606_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; cdlwas_bot; heritrix/1.14.1 +http://webarchives.cdlib.org/p/webmasters)",
     )
-  should.equal(result.family, "heritrix")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("14"), patch: Some("1"))),
-  )
+  assert result.family == "heritrix"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("14"), patch: Some("1")))
 }
 
 pub fn ua_parse_607_test() {
@@ -6644,58 +5663,46 @@ pub fn ua_parse_607_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; heritrix/3.2.0 +http://suki.ling.helsinki.fi/eng/project.html)",
     )
-  should.equal(result.family, "heritrix")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("2"), patch: Some("0"))),
-  )
+  assert result.family == "heritrix"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("2"), patch: Some("0")))
 }
 
 pub fn ua_parse_608_test() {
   let result = uaparser.parse_user_agent("holmes/2.3")
-  should.equal(result.family, "holmes")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "holmes"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_609_test() {
   let result =
     uaparser.parse_user_agent("holmes/3.12.4 (http://morfeo.centrum.cz/bot)")
-  should.equal(result.family, "holmes")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("12"), patch: Some("4"))),
-  )
+  assert result.family == "holmes"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("12"), patch: Some("4")))
 }
 
 pub fn ua_parse_610_test() {
   let result =
     uaparser.parse_user_agent("htdig/3.1.6 (romieu@bastide-medical.fr)")
-  should.equal(result.family, "htdig")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("1"), patch: Some("6"))),
-  )
+  assert result.family == "htdig"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("1"), patch: Some("6")))
 }
 
 pub fn ua_parse_611_test() {
   let result = uaparser.parse_user_agent("ia_archiver/8.7 (Windows NT 5.0; )")
-  should.equal(result.family, "ia_archiver")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("7"), patch: None)),
-  )
+  assert result.family == "ia_archiver"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("7"), patch: None))
 }
 
 pub fn ua_parse_612_test() {
   let result = uaparser.parse_user_agent("ichiro/1.0 (ichiro@nttr.co.jp)")
-  should.equal(result.family, "ichiro")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "ichiro"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_613_test() {
@@ -6703,11 +5710,9 @@ pub fn ua_parse_613_test() {
     uaparser.parse_user_agent(
       "ichiro/5.0 (http://help.goo.ne.jp/door/crawler.html)",
     )
-  should.equal(result.family, "ichiro")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "ichiro"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_614_test() {
@@ -6715,15 +5720,15 @@ pub fn ua_parse_614_test() {
     uaparser.parse_user_agent(
       "DoCoMo/2.0 P900i(c100;TB;W24H11)(compatible; ichiro/mobile goo;  http://help.goo.ne.jp/door/crawler.html)",
     )
-  should.equal(result.family, "ichiro/mobile")
-  should.equal(result.version, None)
+  assert result.family == "ichiro/mobile"
+  assert result.version == None
 }
 
 pub fn ua_parse_615_test() {
   let result =
     uaparser.parse_user_agent("08_800w_web1 (larbin2.6.3@unspecified.mail)")
-  should.equal(result.family, "larbin")
-  should.equal(result.version, None)
+  assert result.family == "larbin"
+  assert result.version == None
 }
 
 pub fn ua_parse_616_test() {
@@ -6731,15 +5736,15 @@ pub fn ua_parse_616_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; LYCOSA;+http://lycosa.se)",
     )
-  should.equal(result.family, "lycos")
-  should.equal(result.version, None)
+  assert result.family == "lycos"
+  assert result.version == None
 }
 
 pub fn ua_parse_617_test() {
   let result =
     uaparser.parse_user_agent("masidani_bot_v0.3 (info@masidani.com)")
-  should.equal(result.family, "masidani_bot")
-  should.equal(result.version, None)
+  assert result.family == "masidani_bot"
+  assert result.version == None
 }
 
 pub fn ua_parse_618_test() {
@@ -6747,21 +5752,17 @@ pub fn ua_parse_618_test() {
     uaparser.parse_user_agent(
       "mozDex/0.05-dev (mozDex; http://www.mozdex.com/bot.html; spider@mozdex.com)",
     )
-  should.equal(result.family, "mozDex")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("05"), patch: None)),
-  )
+  assert result.family == "mozDex"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("05"), patch: None))
 }
 
 pub fn ua_parse_619_test() {
   let result =
     uaparser.parse_user_agent("msnbot/2.0 (+http://search.msn.com/msnbot.htm)")
-  should.equal(result.family, "msnbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "msnbot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_620_test() {
@@ -6769,11 +5770,9 @@ pub fn ua_parse_620_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.13) Gecko/20101203 Firefox/3.6.13 (.NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; msnbot/2.1) Jakarta Commons-HttpClient/3.0-rc3 PHPCrawl GStreamer souphttpsrc libsoup/2.27.4 PycURL/7.19.0 XML-RPC for PHP 2.2.1 GoogleFriendConnect/1.0 HTMLParser/1.6 gPodder/0.15.2 ( http://gpodder.org/) anw webtool LoadControl/1.3 WinHttp urlgrabber/3.1.0",
     )
-  should.equal(result.family, "msnbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "msnbot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_621_test() {
@@ -6781,11 +5780,9 @@ pub fn ua_parse_621_test() {
     uaparser.parse_user_agent(
       "msnbot-media/1.0 ( http://search.msn.com/msnbot.htm)",
     )
-  should.equal(result.family, "msnbot-media")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "msnbot-media"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_622_test() {
@@ -6793,11 +5790,9 @@ pub fn ua_parse_622_test() {
     uaparser.parse_user_agent(
       "msnbot-media/2.0b (+http://search.msn.com/msnbot.htm)",
     )
-  should.equal(result.family, "msnbot-media")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "msnbot-media"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_623_test() {
@@ -6805,8 +5800,8 @@ pub fn ua_parse_623_test() {
     uaparser.parse_user_agent(
       "MSRBOT (http://research.microsoft.com/research/sv/msrbot)",
     )
-  should.equal(result.family, "msrbot")
-  should.equal(result.version, None)
+  assert result.family == "msrbot"
+  assert result.version == None
 }
 
 pub fn ua_parse_624_test() {
@@ -6814,15 +5809,15 @@ pub fn ua_parse_624_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; scooter; .NET CLR 1.0.3705)",
     )
-  should.equal(result.family, "scooter")
-  should.equal(result.version, None)
+  assert result.family == "scooter"
+  assert result.version == None
 }
 
 pub fn ua_parse_625_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/4.0 (compatible; focuseekbot)")
-  should.equal(result.family, "seekbot")
-  should.equal(result.version, None)
+  assert result.family == "seekbot"
+  assert result.version == None
 }
 
 pub fn ua_parse_626_test() {
@@ -6830,11 +5825,9 @@ pub fn ua_parse_626_test() {
     uaparser.parse_user_agent(
       "semanticdiscovery/0.2(http://www.semanticdiscovery.com/sd/robot.html)",
     )
-  should.equal(result.family, "semanticdiscovery")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "semanticdiscovery"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_627_test() {
@@ -6842,20 +5835,16 @@ pub fn ua_parse_627_test() {
     uaparser.parse_user_agent(
       "semanticdiscovery/2.0(http://www.semanticdiscovery.com/robot.html)",
     )
-  should.equal(result.family, "semanticdiscovery")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "semanticdiscovery"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_628_test() {
   let result = uaparser.parse_user_agent("voyager/1.0")
-  should.equal(result.family, "voyager")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "voyager"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_629_test() {
@@ -6863,18 +5852,16 @@ pub fn ua_parse_629_test() {
     uaparser.parse_user_agent(
       "voyager/2.0 (http://www.kosmix.com/crawler.html)",
     )
-  should.equal(result.family, "voyager")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "voyager"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_630_test() {
   let result =
     uaparser.parse_user_agent("http://www.almaden.ibm.com/cs/crawler")
-  should.equal(result.family, "www.almaden.ibm.com")
-  should.equal(result.version, None)
+  assert result.family == "www.almaden.ibm.com"
+  assert result.version == None
 }
 
 pub fn ua_parse_631_test() {
@@ -6882,11 +5869,9 @@ pub fn ua_parse_631_test() {
     uaparser.parse_user_agent(
       "449 Overture-WebCrawler/3.8/Fresh (atw-crawler at fast dot no; http://fast.no/support/crawler.asp",
     )
-  should.equal(result.family, "449 Overture-WebCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("8"), patch: None)),
-  )
+  assert result.family == "449 Overture-WebCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("8"), patch: None))
 }
 
 pub fn ua_parse_632_test() {
@@ -6894,11 +5879,9 @@ pub fn ua_parse_632_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; 80bot/0.71; http://www.80legs.com/spider.html;) Gecko/2008032620",
     )
-  should.equal(result.family, "80bot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("71"), patch: None)),
-  )
+  assert result.family == "80bot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("71"), patch: None))
 }
 
 pub fn ua_parse_633_test() {
@@ -6906,31 +5889,25 @@ pub fn ua_parse_633_test() {
     uaparser.parse_user_agent(
       "A6-Indexer/1.0 (http://www.a6corp.com/a6-web-scraping-policy/)",
     )
-  should.equal(result.family, "A6-Indexer")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "A6-Indexer"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_634_test() {
   let result =
     uaparser.parse_user_agent("AcquiloSpider/1.0,gzip(gfe),gzip(gfe)")
-  should.equal(result.family, "AcquiloSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "AcquiloSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_635_test() {
   let result =
     uaparser.parse_user_agent("Aleksika Spider/1.0 ( http://www.aleksika.com/)")
-  should.equal(result.family, "Aleksika Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Aleksika Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_636_test() {
@@ -6938,11 +5915,9 @@ pub fn ua_parse_636_test() {
     uaparser.parse_user_agent(
       "AmorankSpider/0.1; +http://amorank.com/webcrawler.html",
     )
-  should.equal(result.family, "AmorankSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "AmorankSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_637_test() {
@@ -6950,11 +5925,9 @@ pub fn ua_parse_637_test() {
     uaparser.parse_user_agent(
       "AnomaliesBot/0.06-dev (The Anomalies Network Search Spider; http://www.anomalies.net; info@anomalies.net)",
     )
-  should.equal(result.family, "AnomaliesBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("06"), patch: None)),
-  )
+  assert result.family == "AnomaliesBot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("06"), patch: None))
 }
 
 pub fn ua_parse_638_test() {
@@ -6962,11 +5935,9 @@ pub fn ua_parse_638_test() {
     uaparser.parse_user_agent(
       "Automattic Analytics Crawler/0.1; http://wordpress.com/crawler/",
     )
-  should.equal(result.family, "Automattic Analytics Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Automattic Analytics Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_639_test() {
@@ -6974,11 +5945,9 @@ pub fn ua_parse_639_test() {
     uaparser.parse_user_agent(
       "Automattic Analytics Crawler/0.2;+http://wordpress.com/crawler/",
     )
-  should.equal(result.family, "Automattic Analytics Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Automattic Analytics Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_640_test() {
@@ -6986,11 +5955,9 @@ pub fn ua_parse_640_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; BLEXBot/1.0; +http://webmeup.com/crawler.html)",
     )
-  should.equal(result.family, "BLEXBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "BLEXBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_641_test() {
@@ -6998,11 +5965,9 @@ pub fn ua_parse_641_test() {
     uaparser.parse_user_agent(
       "BabalooSpider/1.2 (BabalooSpider; http://www.babaloo.si; spider@babaloo.si)",
     )
-  should.equal(result.family, "BabalooSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "BabalooSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_642_test() {
@@ -7010,11 +5975,9 @@ pub fn ua_parse_642_test() {
     uaparser.parse_user_agent(
       "BabalooSpider/1.3 (BabalooSpider; http://www.babaloo.si; spider@babaloo.si)",
     )
-  should.equal(result.family, "BabalooSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "BabalooSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_643_test() {
@@ -7022,11 +5985,9 @@ pub fn ua_parse_643_test() {
     uaparser.parse_user_agent(
       "BebopBot/2.5.1 (compatible; media crawler V1;  http://www.apassion4jazz.net/bebopbot.html;)",
     )
-  should.equal(result.family, "BebopBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("5"), patch: Some("1"))),
-  )
+  assert result.family == "BebopBot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("5"), patch: Some("1")))
 }
 
 pub fn ua_parse_644_test() {
@@ -7034,29 +5995,23 @@ pub fn ua_parse_644_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; BlinkaCrawler/1.0;  http://www.blinka.jp/crawler/)",
     )
-  should.equal(result.family, "BlinkaCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "BlinkaCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_645_test() {
   let result = uaparser.parse_user_agent("BlogRangerCrawler/1.0")
-  should.equal(result.family, "BlogRangerCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "BlogRangerCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_646_test() {
   let result = uaparser.parse_user_agent("Brekiri crawler/1.0")
-  should.equal(result.family, "Brekiri crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Brekiri crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_647_test() {
@@ -7064,11 +6019,9 @@ pub fn ua_parse_647_test() {
     uaparser.parse_user_agent(
       "BurstFindCrawler/1.1 (crawler.burstfind.com; http://crawler.burstfind.com; crawler@burstfind.com)",
     )
-  should.equal(result.family, "BurstFindCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "BurstFindCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_648_test() {
@@ -7076,21 +6029,17 @@ pub fn ua_parse_648_test() {
     uaparser.parse_user_agent(
       "CCBot/1.0 ( http://www.commoncrawl.org/bot.html)",
     )
-  should.equal(result.family, "CCBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "CCBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_649_test() {
   let result =
     uaparser.parse_user_agent("CCBot/2.0 (http://commoncrawl.org/faq/)")
-  should.equal(result.family, "CCBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "CCBot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_650_test() {
@@ -7098,11 +6047,9 @@ pub fn ua_parse_650_test() {
     uaparser.parse_user_agent(
       "CamontSpider/1.0  http://epweb2.ph.bham.ac.uk/user/slater/camont/info.html",
     )
-  should.equal(result.family, "CamontSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "CamontSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_651_test() {
@@ -7110,11 +6057,9 @@ pub fn ua_parse_651_test() {
     uaparser.parse_user_agent(
       "CazoodleBot/0.1 (CazoodleBot Crawler; http://www.cazoodle.com; mqbot@cazoodle.com)",
     )
-  should.equal(result.family, "CazoodleBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "CazoodleBot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_652_test() {
@@ -7122,11 +6067,9 @@ pub fn ua_parse_652_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; CloudServerMarketSpider/1.0; +http://www.cloudservermarket.com/spider.html)",
     )
-  should.equal(result.family, "CloudServerMarketSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "CloudServerMarketSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_653_test() {
@@ -7134,11 +6077,9 @@ pub fn ua_parse_653_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; CompSpyBot/1.0; +http://www.compspy.com/spider.html)",
     )
-  should.equal(result.family, "CompSpyBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "CompSpyBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_654_test() {
@@ -7146,39 +6087,31 @@ pub fn ua_parse_654_test() {
     uaparser.parse_user_agent(
       "ConveraMultiMediaCrawler/0.1 ( http://www.authoritativeweb.com/crawl)",
     )
-  should.equal(result.family, "ConveraMultiMediaCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "ConveraMultiMediaCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_655_test() {
   let result = uaparser.parse_user_agent("CosmixCrawler/0.1")
-  should.equal(result.family, "CosmixCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "CosmixCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_656_test() {
   let result = uaparser.parse_user_agent("Crawl/0.1 langcrawl/0.1")
-  should.equal(result.family, "Crawl")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Crawl"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_657_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/5.0 (compatible; CrawlBot/1.0.0)")
-  should.equal(result.family, "CrawlBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "CrawlBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_658_test() {
@@ -7186,11 +6119,9 @@ pub fn ua_parse_658_test() {
     uaparser.parse_user_agent(
       "Crawllybot/0.1/0.1 (Crawllybot/0.1; http://www.crawlly.com; crawler@crawlly.com)",
     )
-  should.equal(result.family, "Crawllybot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Crawllybot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_659_test() {
@@ -7198,11 +6129,9 @@ pub fn ua_parse_659_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Crawly/1.9;  http://92.51.162.40/crawler.html)",
     )
-  should.equal(result.family, "Crawly")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("9"), patch: None)),
-  )
+  assert result.family == "Crawly"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("9"), patch: None))
 }
 
 pub fn ua_parse_660_test() {
@@ -7210,11 +6139,9 @@ pub fn ua_parse_660_test() {
     uaparser.parse_user_agent(
       "Crawlzilla/1.0 (Crawlzilla; http://www.crawlzilla.com; crawler@crawlzilla.com)",
     )
-  should.equal(result.family, "Crawlzilla")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Crawlzilla"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_661_test() {
@@ -7222,11 +6149,9 @@ pub fn ua_parse_661_test() {
     uaparser.parse_user_agent(
       "CydralSpider/3.2 (Cydral Image Search; http://www.cydral.com)",
     )
-  should.equal(result.family, "CydralSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "CydralSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_662_test() {
@@ -7234,30 +6159,24 @@ pub fn ua_parse_662_test() {
     uaparser.parse_user_agent(
       "DealGates Bot/1.1 by Luc Michalski (http://spider.dealgates.com/bot.html)",
     )
-  should.equal(result.family, "DealGates Bot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "DealGates Bot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_663_test() {
   let result =
     uaparser.parse_user_agent("Denodo IECrawler/4.5,gzip(gfe),gzip(gfe)")
-  should.equal(result.family, "Denodo IECrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("5"), patch: None)),
-  )
+  assert result.family == "Denodo IECrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("5"), patch: None))
 }
 
 pub fn ua_parse_664_test() {
   let result = uaparser.parse_user_agent("Diffbot/0.1")
-  should.equal(result.family, "Diffbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Diffbot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_665_test() {
@@ -7265,11 +6184,9 @@ pub fn ua_parse_665_test() {
     uaparser.parse_user_agent(
       "DomainCrawler/2.0 (info@domaincrawler.com; http://www.domaincrawler.com/bot",
     )
-  should.equal(result.family, "DomainCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "DomainCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_666_test() {
@@ -7277,11 +6194,9 @@ pub fn ua_parse_666_test() {
     uaparser.parse_user_agent(
       "DotBot/1.0.1 (http://www.dotnetdotcom.org/, crawler@dotnetdotcom.org)",
     )
-  should.equal(result.family, "DotBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "DotBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_667_test() {
@@ -7289,11 +6204,9 @@ pub fn ua_parse_667_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; DotBot/1.1; http://www.dotnetdotcom.org/, crawler@dotnetdotcom.org)",
     )
-  should.equal(result.family, "DotBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "DotBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_668_test() {
@@ -7301,20 +6214,16 @@ pub fn ua_parse_668_test() {
     uaparser.parse_user_agent(
       "DotSpotsBot/0.2 (crawler; support at dotspots.com)",
     )
-  should.equal(result.family, "DotSpotsBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "DotSpotsBot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_669_test() {
   let result = uaparser.parse_user_agent("ERACrawler/1.0")
-  should.equal(result.family, "ERACrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "ERACrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_670_test() {
@@ -7322,11 +6231,9 @@ pub fn ua_parse_670_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; EventGuruBot/1.0; +http://www.eventguru.com/spider.html)",
     )
-  should.equal(result.family, "EventGuruBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "EventGuruBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_671_test() {
@@ -7334,48 +6241,38 @@ pub fn ua_parse_671_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Ex-Crawler/0.1.5a; powered by ex-crawler; +http://www.ex-crawler.de/) Java/1.6.0_20,gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "Ex-Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: Some("5"))),
-  )
+  assert result.family == "Ex-Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: Some("5")))
 }
 
 pub fn ua_parse_672_test() {
   let result = uaparser.parse_user_agent("ExactSeek Crawler/0.1")
-  should.equal(result.family, "ExactSeek Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "ExactSeek Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_673_test() {
   let result = uaparser.parse_user_agent("ExactSeekCrawler/1.0")
-  should.equal(result.family, "ExactSeekCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "ExactSeekCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_674_test() {
   let result = uaparser.parse_user_agent("FANGCrawl/0.01")
-  should.equal(result.family, "FANGCrawl")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("01"), patch: None)),
-  )
+  assert result.family == "FANGCrawl"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("01"), patch: None))
 }
 
 pub fn ua_parse_675_test() {
   let result =
     uaparser.parse_user_agent("FAST Enterprise Crawler/6 (www.fastsearch.com)")
-  should.equal(result.family, "FAST Enterprise Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: None, patch: None)),
-  )
+  assert result.family == "FAST Enterprise Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: None, patch: None))
 }
 
 pub fn ua_parse_676_test() {
@@ -7383,11 +6280,9 @@ pub fn ua_parse_676_test() {
     uaparser.parse_user_agent(
       "FAST-WebCrawler/2.2.11 (crawler@fast.no; http://www.fast.no/faq/faqfastwebsearch/faqfastwebcrawler.html)",
     )
-  should.equal(result.family, "FAST-WebCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("2"), patch: Some("11"))),
-  )
+  assert result.family == "FAST-WebCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("2"), patch: Some("11")))
 }
 
 pub fn ua_parse_677_test() {
@@ -7395,11 +6290,9 @@ pub fn ua_parse_677_test() {
     uaparser.parse_user_agent(
       "FAST-WebCrawler/3.7 (atw-crawler at fast dot no; http://fast.no/support/crawler.asp)",
     )
-  should.equal(result.family, "FAST-WebCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("7"), patch: None)),
-  )
+  assert result.family == "FAST-WebCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("7"), patch: None))
 }
 
 pub fn ua_parse_678_test() {
@@ -7407,20 +6300,16 @@ pub fn ua_parse_678_test() {
     uaparser.parse_user_agent(
       "NokiaN70/. FASTMobileCrawl/6.6 Profile/MIDP-2.0 Configuration/CLDC-1.1",
     )
-  should.equal(result.family, "FASTMobileCrawl")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("6"), patch: None)),
-  )
+  assert result.family == "FASTMobileCrawl"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("6"), patch: None))
 }
 
 pub fn ua_parse_679_test() {
   let result = uaparser.parse_user_agent("FlaxCrawler/1.0,gzip(gfe),gzip(gfe)")
-  should.equal(result.family, "FlaxCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "FlaxCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_680_test() {
@@ -7428,21 +6317,17 @@ pub fn ua_parse_680_test() {
     uaparser.parse_user_agent(
       "FyberSpider/1.3 (http://www.fybersearch.com/fyberspider.php)",
     )
-  should.equal(result.family, "FyberSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "FyberSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_681_test() {
   let result =
     uaparser.parse_user_agent("GarlikCrawler/1.2 (http://garlik.com/")
-  should.equal(result.family, "GarlikCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "GarlikCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_682_test() {
@@ -7450,21 +6335,17 @@ pub fn ua_parse_682_test() {
     uaparser.parse_user_agent(
       "GematchCrawler/2.1 (http://www.gematch.com/crawler.html)",
     )
-  should.equal(result.family, "GematchCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "GematchCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_683_test() {
   let result =
     uaparser.parse_user_agent("Gigabot/2.0/gigablast.com/spider.html")
-  should.equal(result.family, "Gigabot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Gigabot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_684_test() {
@@ -7472,11 +6353,9 @@ pub fn ua_parse_684_test() {
     uaparser.parse_user_agent(
       "Gigabot/3.0 (http://www.gigablast.com/spider.html)",
     )
-  should.equal(result.family, "Gigabot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Gigabot"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_685_test() {
@@ -7484,11 +6363,9 @@ pub fn ua_parse_685_test() {
     uaparser.parse_user_agent(
       "GingerCrawler/1.0 (Language Assistant for Dyslexics; www.gingersoftware.com/crawler_agent.htm; support at ginger software dot com)",
     )
-  should.equal(result.family, "GingerCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "GingerCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_686_test() {
@@ -7496,11 +6373,9 @@ pub fn ua_parse_686_test() {
     uaparser.parse_user_agent(
       "GoGuidesBot/0.0.1 (GoGuides Indexing Spider; http://www.goguides.org/spider.html)",
     )
-  should.equal(result.family, "GoGuidesBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "GoGuidesBot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_687_test() {
@@ -7508,11 +6383,9 @@ pub fn ua_parse_687_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; GrapeshotCrawler/2.0; +http://www.grapeshot.co.uk/crawler.php)",
     )
-  should.equal(result.family, "GrapeshotCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "GrapeshotCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_688_test() {
@@ -7520,11 +6393,9 @@ pub fn ua_parse_688_test() {
     uaparser.parse_user_agent(
       "HPI FeedCrawler/0.1 (+http://www.hpi.uni-potsdam.de/meinel/bross/feedcrawler)",
     )
-  should.equal(result.family, "HPI FeedCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "HPI FeedCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_689_test() {
@@ -7532,11 +6403,9 @@ pub fn ua_parse_689_test() {
     uaparser.parse_user_agent(
       "HRCrawler/2.0 (XF86; MacOS x86_64) AppleWebKit/537.31 (KHTML, like Gecko)",
     )
-  should.equal(result.family, "HRCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "HRCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_690_test() {
@@ -7544,20 +6413,16 @@ pub fn ua_parse_690_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Hailoobot/1.2;  http://www.hailoo.com/spider.html)",
     )
-  should.equal(result.family, "Hailoobot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Hailoobot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_691_test() {
   let result = uaparser.parse_user_agent("Hatena::Crawler/0.01")
-  should.equal(result.family, "Hatena::Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("01"), patch: None)),
-  )
+  assert result.family == "Hatena::Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("01"), patch: None))
 }
 
 pub fn ua_parse_692_test() {
@@ -7565,11 +6430,9 @@ pub fn ua_parse_692_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; HiveCrawler/1.2 http://www.businessinsider.com)",
     )
-  should.equal(result.family, "HiveCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "HiveCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_693_test() {
@@ -7577,20 +6440,16 @@ pub fn ua_parse_693_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Host-Spy Crawler/1.2; +http://www.host-spy.com/)",
     )
-  should.equal(result.family, "Host-Spy Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Host-Spy Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_694_test() {
   let result = uaparser.parse_user_agent("HttpSpider/0.91")
-  should.equal(result.family, "HttpSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("91"), patch: None)),
-  )
+  assert result.family == "HttpSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("91"), patch: None))
 }
 
 pub fn ua_parse_695_test() {
@@ -7598,21 +6457,17 @@ pub fn ua_parse_695_test() {
     uaparser.parse_user_agent(
       "HuaweiSymantecSpider/1.0 DSE-support@huaweisymantec.com (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR ; http://www.huaweisymantec.com/cn/IRL/spider)",
     )
-  should.equal(result.family, "HuaweiSymantecSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "HuaweiSymantecSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_696_test() {
   let result =
     uaparser.parse_user_agent("IRLbot/1.0 ( http://irl.cs.tamu.edu/crawler)")
-  should.equal(result.family, "IRLbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IRLbot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_697_test() {
@@ -7620,21 +6475,17 @@ pub fn ua_parse_697_test() {
     uaparser.parse_user_agent(
       "IRLbot/3.0 (compatible; MSIE 6.0; http://irl.cs.tamu.edu/crawler)",
     )
-  should.equal(result.family, "IRLbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IRLbot"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_698_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/4.0 (compatible; Iplexx Spider/1.1)")
-  should.equal(result.family, "Iplexx Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Iplexx Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_699_test() {
@@ -7642,11 +6493,9 @@ pub fn ua_parse_699_test() {
     uaparser.parse_user_agent(
       "Jambot/0.1.1 (Jambot; http://www.jambot.com/blog; crawler@jambot.com)",
     )
-  should.equal(result.family, "Jambot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: Some("1"))),
-  )
+  assert result.family == "Jambot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: Some("1")))
 }
 
 pub fn ua_parse_700_test() {
@@ -7654,20 +6503,16 @@ pub fn ua_parse_700_test() {
     uaparser.parse_user_agent(
       "Jomjaibot/1.0 Crawl (+http://www.jomjaibot.com/)",
     )
-  should.equal(result.family, "Jomjaibot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Jomjaibot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_701_test() {
   let result = uaparser.parse_user_agent("KIT webcrawler/0.2.4")
-  should.equal(result.family, "KIT webcrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("2"), patch: Some("4"))),
-  )
+  assert result.family == "KIT webcrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("2"), patch: Some("4")))
 }
 
 pub fn ua_parse_702_test() {
@@ -7675,30 +6520,24 @@ pub fn ua_parse_702_test() {
     uaparser.parse_user_agent(
       "Kyoto-Crawler/2.0 (Mozilla-compatible; kyoto-crawler-contact(at)nlp(dot)kuee(dot)kyoto-u(dot)ac(dot)jp; http://nlp.ist.i.kyoto-u.ac.jp/)",
     )
-  should.equal(result.family, "Kyoto-Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Kyoto-Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_703_test() {
   let result = uaparser.parse_user_agent("LB-Crawler/1.0")
-  should.equal(result.family, "LB-Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "LB-Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_704_test() {
   let result =
     uaparser.parse_user_agent("LSSRocketCrawler/1.0 LightspeedSystems")
-  should.equal(result.family, "LSSRocketCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "LSSRocketCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_705_test() {
@@ -7706,11 +6545,9 @@ pub fn ua_parse_705_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7) Gecko/20040707 Lightningspider/0.9.2",
     )
-  should.equal(result.family, "Lightningspider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("2"))),
-  )
+  assert result.family == "Lightningspider"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("2")))
 }
 
 pub fn ua_parse_706_test() {
@@ -7718,11 +6555,9 @@ pub fn ua_parse_706_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; LikaholixCrawler/1.0; +http://mylikes.com/about/crawler)",
     )
-  should.equal(result.family, "LikaholixCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "LikaholixCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_707_test() {
@@ -7730,11 +6565,9 @@ pub fn ua_parse_707_test() {
     uaparser.parse_user_agent(
       "Logict IPv6 Crawler/1.0 (http://ipv6search.logict.net),gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "Logict IPv6 Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Logict IPv6 Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_708_test() {
@@ -7742,11 +6575,9 @@ pub fn ua_parse_708_test() {
     uaparser.parse_user_agent(
       "MPICrawler/0.1 +http://kermit.news.cs.nyu.edu/crawler.html,gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "MPICrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "MPICrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_709_test() {
@@ -7754,11 +6585,9 @@ pub fn ua_parse_709_test() {
     uaparser.parse_user_agent(
       "Opera/8.01 (J2ME/MIDP; MXit WebBot/1.8.3.119) Opera Mini/3.1",
     )
-  should.equal(result.family, "MXit WebBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("8"), patch: Some("3"))),
-  )
+  assert result.family == "MXit WebBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("8"), patch: Some("3")))
 }
 
 pub fn ua_parse_710_test() {
@@ -7766,11 +6595,9 @@ pub fn ua_parse_710_test() {
     uaparser.parse_user_agent(
       "MetaGeneratorCrawler/1.3.8 (www.metagenerator.info)",
     )
-  should.equal(result.family, "MetaGeneratorCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("8"))),
-  )
+  assert result.family == "MetaGeneratorCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("8")))
 }
 
 pub fn ua_parse_711_test() {
@@ -7778,11 +6605,9 @@ pub fn ua_parse_711_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; MetamojiCrawler/1.0; +http://www.metamoji.com/jp/crawler.html",
     )
-  should.equal(result.family, "MetamojiCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "MetamojiCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_712_test() {
@@ -7790,11 +6615,9 @@ pub fn ua_parse_712_test() {
     uaparser.parse_user_agent(
       "MonkeyCrawl/0.05 (MonkeyCrawl; http://www.monkeymethods.org;  )",
     )
-  should.equal(result.family, "MonkeyCrawl")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("05"), patch: None)),
-  )
+  assert result.family == "MonkeyCrawl"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("05"), patch: None))
 }
 
 pub fn ua_parse_713_test() {
@@ -7802,11 +6625,9 @@ pub fn ua_parse_713_test() {
     uaparser.parse_user_agent(
       "Mozilla crawl/5.0 (compatible; fairshare.cc +http://fairshare.cc)",
     )
-  should.equal(result.family, "Mozilla crawl")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Mozilla crawl"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_714_test() {
@@ -7814,20 +6635,16 @@ pub fn ua_parse_714_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; NLCrawler/2.0.15; Linux 2.6.3-7; i686; en_US)KHTML/3.4.89 (like Gecko)",
     )
-  should.equal(result.family, "NLCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("15"))),
-  )
+  assert result.family == "NLCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("15")))
 }
 
 pub fn ua_parse_715_test() {
   let result = uaparser.parse_user_agent("NMG Spider/0.3 (szukanko.com)")
-  should.equal(result.family, "NMG Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "NMG Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_716_test() {
@@ -7835,20 +6652,16 @@ pub fn ua_parse_716_test() {
     uaparser.parse_user_agent(
       "NalezenCzBot/1.0 (http://www.nalezen.cz/about-crawler)",
     )
-  should.equal(result.family, "NalezenCzBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "NalezenCzBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_717_test() {
   let result = uaparser.parse_user_agent("NationalDirectory-WebSpider/1.3")
-  should.equal(result.family, "NationalDirectory-WebSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "NationalDirectory-WebSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_718_test() {
@@ -7856,11 +6669,9 @@ pub fn ua_parse_718_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; NetSeer crawler/2.0; +http://www.netseer.com/crawler.html; crawler@netseer.com)",
     )
-  should.equal(result.family, "NetSeer crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "NetSeer crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_719_test() {
@@ -7868,11 +6679,9 @@ pub fn ua_parse_719_test() {
     uaparser.parse_user_agent(
       "NetWhatCrawler/0.06-dev (NetWhatCrawler from NetWhat.com; http://www.netwhat.com; support@netwhat.com)",
     )
-  should.equal(result.family, "NetWhatCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("06"), patch: None)),
-  )
+  assert result.family == "NetWhatCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("06"), patch: None))
 }
 
 pub fn ua_parse_720_test() {
@@ -7880,11 +6689,9 @@ pub fn ua_parse_720_test() {
     uaparser.parse_user_agent(
       "compatible; Netseer crawler/2.0; +http://www.netseer.com/crawler.html; crawler@netseer.com",
     )
-  should.equal(result.family, "Netseer crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Netseer crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_721_test() {
@@ -7892,11 +6699,9 @@ pub fn ua_parse_721_test() {
     uaparser.parse_user_agent(
       "New-Sogou-Spider/1.0 (compatible; MSIE 5.5; Windows 98)",
     )
-  should.equal(result.family, "New-Sogou-Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "New-Sogou-Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_722_test() {
@@ -7904,20 +6709,16 @@ pub fn ua_parse_722_test() {
     uaparser.parse_user_agent(
       "NewzCrawler/1.9 (compatible; MSIE 6.00; Newz Crawler 1.9; http://www.newzcrawler.com/ )",
     )
-  should.equal(result.family, "NewzCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("9"), patch: None)),
-  )
+  assert result.family == "NewzCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("9"), patch: None))
 }
 
 pub fn ua_parse_723_test() {
   let result = uaparser.parse_user_agent("NodejsSpider/1.0")
-  should.equal(result.family, "NodejsSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "NodejsSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_724_test() {
@@ -7925,11 +6726,9 @@ pub fn ua_parse_724_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; .None-Crawler/0.1 +http://domains.ericbinek.None/)",
     )
-  should.equal(result.family, "None-Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "None-Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_725_test() {
@@ -7937,11 +6736,9 @@ pub fn ua_parse_725_test() {
     uaparser.parse_user_agent(
       "OmniExplorer_Bot/6.70 ( http://www.omni-explorer.com) WorldIndexer",
     )
-  should.equal(result.family, "OmniExplorer_Bot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("70"), patch: None)),
-  )
+  assert result.family == "OmniExplorer_Bot"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("70"), patch: None))
 }
 
 pub fn ua_parse_726_test() {
@@ -7949,11 +6746,9 @@ pub fn ua_parse_726_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; OpenCrawler/0.1.6.6; http://code.google.com/p/opencrawler/),gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "OpenCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: Some("6"))),
-  )
+  assert result.family == "OpenCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: Some("6")))
 }
 
 pub fn ua_parse_727_test() {
@@ -7961,11 +6756,9 @@ pub fn ua_parse_727_test() {
     uaparser.parse_user_agent(
       "OpenWebSpider/0.6 (http://www.openwebspider.org)",
     )
-  should.equal(result.family, "OpenWebSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("6"), patch: None)),
-  )
+  assert result.family == "OpenWebSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("6"), patch: None))
 }
 
 pub fn ua_parse_728_test() {
@@ -7973,39 +6766,31 @@ pub fn ua_parse_728_test() {
     uaparser.parse_user_agent(
       "Overture-WebCrawler/3.8/Fresh (atw-crawler at fast dot no; http://fast.no/support/crawler.asp)",
     )
-  should.equal(result.family, "Overture-WebCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("8"), patch: None)),
-  )
+  assert result.family == "Overture-WebCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("8"), patch: None))
 }
 
 pub fn ua_parse_729_test() {
   let result = uaparser.parse_user_agent("PArchiveCrawler/1.0")
-  should.equal(result.family, "PArchiveCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "PArchiveCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_730_test() {
   let result =
     uaparser.parse_user_agent("PercolateCrawler/4 (ops@percolate.com)")
-  should.equal(result.family, "PercolateCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: None, patch: None)),
-  )
+  assert result.family == "PercolateCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: None, patch: None))
 }
 
 pub fn ua_parse_731_test() {
   let result = uaparser.parse_user_agent("Pete-Spider/1.1")
-  should.equal(result.family, "Pete-Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Pete-Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_732_test() {
@@ -8013,11 +6798,9 @@ pub fn ua_parse_732_test() {
     uaparser.parse_user_agent(
       "PicSpider/1.1 (spider@217-20-118-26.internetserviceteam.com; http://www.bildkiste.de)",
     )
-  should.equal(result.family, "PicSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "PicSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_733_test() {
@@ -8025,11 +6808,9 @@ pub fn ua_parse_733_test() {
     uaparser.parse_user_agent(
       "PluckItCrawler/1.0 (compatible; Mozilla 4.0; MSIE 5.5; http://www.pluck.com;)",
     )
-  should.equal(result.family, "PluckItCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "PluckItCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_734_test() {
@@ -8037,21 +6818,17 @@ pub fn ua_parse_734_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; PornSpider/1.0; +http://www.pornspider.net)",
     )
-  should.equal(result.family, "PornSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "PornSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_735_test() {
   let result =
     uaparser.parse_user_agent("PortalBSpider/2.0 (spider@portalb.com)")
-  should.equal(result.family, "PortalBSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "PortalBSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_736_test() {
@@ -8059,30 +6836,24 @@ pub fn ua_parse_736_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; ProCogBot/1.0; +http://www.procog.com/spider.html)",
     )
-  should.equal(result.family, "ProCogBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "ProCogBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_737_test() {
   let result =
     uaparser.parse_user_agent("ProloCrawler/1.0 (http://www.prolo.com)")
-  should.equal(result.family, "ProloCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "ProloCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_738_test() {
   let result = uaparser.parse_user_agent("PsSpider/0.7 (spider@bildkiste.de)")
-  should.equal(result.family, "PsSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("7"), patch: None)),
-  )
+  assert result.family == "PsSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("7"), patch: None))
 }
 
 pub fn ua_parse_739_test() {
@@ -8090,11 +6861,9 @@ pub fn ua_parse_739_test() {
     uaparser.parse_user_agent(
       "RSSIncludeBot/1.0 (http://www.rssinclude.com/spider)",
     )
-  should.equal(result.family, "RSSIncludeBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "RSSIncludeBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_740_test() {
@@ -8102,20 +6871,16 @@ pub fn ua_parse_740_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1) ;  Embedded Web Browser from: http://bsalsa.com/; RSScrawler/4.0 (compatible; MSIE 6.0; Windows NT 5.0); .NET CLR 2.0.50727",
     )
-  should.equal(result.family, "RSScrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "RSScrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_741_test() {
   let result = uaparser.parse_user_agent("RSpider/1.0")
-  should.equal(result.family, "RSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "RSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_742_test() {
@@ -8123,21 +6888,17 @@ pub fn ua_parse_742_test() {
     uaparser.parse_user_agent(
       "RyzeCrawler/1.1.0 (+http://www.ryze.nl/crawler/)",
     )
-  should.equal(result.family, "RyzeCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("0"))),
-  )
+  assert result.family == "RyzeCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("0")))
 }
 
 pub fn ua_parse_743_test() {
   let result =
     uaparser.parse_user_agent("SMXCrawler/1.0 (www.socialmetrix.com)")
-  should.equal(result.family, "SMXCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "SMXCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_744_test() {
@@ -8145,11 +6906,9 @@ pub fn ua_parse_744_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; SRCCN!Spider/1.1; +http://site.srccn.com/spider.html)",
     )
-  should.equal(result.family, "SRCCN!Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "SRCCN!Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_745_test() {
@@ -8157,20 +6916,16 @@ pub fn ua_parse_745_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; SWEBot/1.0; +http://swebot-crawler.net)",
     )
-  should.equal(result.family, "SWEBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "SWEBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_746_test() {
   let result = uaparser.parse_user_agent("Sangfor Spider/0.7")
-  should.equal(result.family, "Sangfor Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("7"), patch: None)),
-  )
+  assert result.family == "Sangfor Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("7"), patch: None))
 }
 
 pub fn ua_parse_747_test() {
@@ -8178,11 +6933,9 @@ pub fn ua_parse_747_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Sailfish 3.0; Mobile; rv:45.0) Gecko/45.0 Firefox/45.0 SailfishBrowser/1.0",
     )
-  should.equal(result.family, "Sailfish Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Sailfish Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_748_test() {
@@ -8190,11 +6943,9 @@ pub fn ua_parse_748_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Sailfish 3.0; Mobile; rv:45.0) Gecko/45.0 Firefox/45.0 SailfishBrowser/1.2.3",
     )
-  should.equal(result.family, "Sailfish Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: Some("3"))),
-  )
+  assert result.family == "Sailfish Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: Some("3")))
 }
 
 pub fn ua_parse_749_test() {
@@ -8202,11 +6953,9 @@ pub fn ua_parse_749_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 5.0.1; SAMSUNG GT-I9506-ORANGE Build/LRX22C) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/2.1 Chrome/34.0.1847.76 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Samsung Internet")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Samsung Internet"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_750_test() {
@@ -8214,11 +6963,9 @@ pub fn ua_parse_750_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 5.0.2; SAMSUNG SM-T800 Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/3.0 Chrome/38.0.2125.102 Safari/537.36",
     )
-  should.equal(result.family, "Samsung Internet")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Samsung Internet"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_751_test() {
@@ -8226,11 +6973,9 @@ pub fn ua_parse_751_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 5.1.1; SAMSUNG SM-G920F Build/LMY47X) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/3.2 Chrome/38.0.2125.102 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Samsung Internet")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Samsung Internet"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_752_test() {
@@ -8238,20 +6983,16 @@ pub fn ua_parse_752_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 5.0.2; SAMSUNG SM-T710 Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/3.5 Chrome/38.0.2125.102 Safari/537.36",
     )
-  should.equal(result.family, "Samsung Internet")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("5"), patch: None)),
-  )
+  assert result.family == "Samsung Internet"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("5"), patch: None))
 }
 
 pub fn ua_parse_753_test() {
   let result = uaparser.parse_user_agent("ScSpider/0.2")
-  should.equal(result.family, "ScSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "ScSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_754_test() {
@@ -8259,38 +7000,30 @@ pub fn ua_parse_754_test() {
     uaparser.parse_user_agent(
       "ScollSpider/2.0 ( http://www.webwobot.com/ScollSpider.php)",
     )
-  should.equal(result.family, "ScollSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "ScollSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_755_test() {
   let result = uaparser.parse_user_agent("Screaming Frog SEO Spider/1.10")
-  should.equal(result.family, "Screaming Frog SEO Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("10"), patch: None)),
-  )
+  assert result.family == "Screaming Frog SEO Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("10"), patch: None))
 }
 
 pub fn ua_parse_756_test() {
   let result = uaparser.parse_user_agent("Screaming Frog SEO Spider/2,01")
-  should.equal(result.family, "Screaming Frog SEO Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: None, patch: None)),
-  )
+  assert result.family == "Screaming Frog SEO Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: None, patch: None))
 }
 
 pub fn ua_parse_757_test() {
   let result = uaparser.parse_user_agent("SearchSpider/1.2.10")
-  should.equal(result.family, "SearchSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: Some("10"))),
-  )
+  assert result.family == "SearchSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: Some("10")))
 }
 
 pub fn ua_parse_758_test() {
@@ -8298,20 +7031,16 @@ pub fn ua_parse_758_test() {
     uaparser.parse_user_agent(
       "Searchspider/1.2 (SearchSpider; http://www.searchspider.com; webmaster@searchspider.com)",
     )
-  should.equal(result.family, "Searchspider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Searchspider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_759_test() {
   let result = uaparser.parse_user_agent("SimpleCrawler/0.1")
-  should.equal(result.family, "SimpleCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "SimpleCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_760_test() {
@@ -8319,11 +7048,9 @@ pub fn ua_parse_760_test() {
     uaparser.parse_user_agent(
       "SlugBug Spider/0.1 beta (SlugBug.com search engine; http://www.slugbug.com)",
     )
-  should.equal(result.family, "SlugBug Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "SlugBug Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_761_test() {
@@ -8331,11 +7058,9 @@ pub fn ua_parse_761_test() {
     uaparser.parse_user_agent(
       "SmartAndSimpleWebCrawler/1.3 (https://crawler.dev.java.net),gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "SmartAndSimpleWebCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "SmartAndSimpleWebCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_762_test() {
@@ -8343,11 +7068,9 @@ pub fn ua_parse_762_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Linux; Socialradarbot/2.0; en-US; crawler@infegy.com)",
     )
-  should.equal(result.family, "Socialradarbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Socialradarbot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_763_test() {
@@ -8355,11 +7078,9 @@ pub fn ua_parse_763_test() {
     uaparser.parse_user_agent(
       "Sogou Orion spider/4.0( http://www.sogou.com/docs/help/webmasters.htm#07)",
     )
-  should.equal(result.family, "Sogou Orion spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Sogou Orion spider"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_764_test() {
@@ -8367,11 +7088,9 @@ pub fn ua_parse_764_test() {
     uaparser.parse_user_agent(
       "Sogou Pic Spider/3.0( http://www.sogou.com/docs/help/webmasters.htm#07)",
     )
-  should.equal(result.family, "Sogou Pic Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Sogou Pic Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_765_test() {
@@ -8379,11 +7098,9 @@ pub fn ua_parse_765_test() {
     uaparser.parse_user_agent(
       "Sogou Push Spider/3.0( http://www.sogou.com/docs/help/webmasters.htm#07)",
     )
-  should.equal(result.family, "Sogou Push Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Sogou Push Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_766_test() {
@@ -8391,11 +7108,9 @@ pub fn ua_parse_766_test() {
     uaparser.parse_user_agent(
       "Sogou develop spider/4.0( http://www.sogou.com/docs/help/webmasters.htm#07)",
     )
-  should.equal(result.family, "Sogou develop spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Sogou develop spider"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_767_test() {
@@ -8403,11 +7118,9 @@ pub fn ua_parse_767_test() {
     uaparser.parse_user_agent(
       "Sogou head spider/3.0( http://www.sogou.com/docs/help/webmasters.htm#07)",
     )
-  should.equal(result.family, "Sogou head spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Sogou head spider"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_768_test() {
@@ -8415,11 +7128,9 @@ pub fn ua_parse_768_test() {
     uaparser.parse_user_agent(
       "Sogou web spider/3.0( http://www.sogou.com/docs/help/webmasters.htm#07)",
     )
-  should.equal(result.family, "Sogou web spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Sogou web spider"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_769_test() {
@@ -8427,11 +7138,9 @@ pub fn ua_parse_769_test() {
     uaparser.parse_user_agent(
       "Sogou-Test-Spider/4.0 (compatible; MSIE 5.5; Windows 98)",
     )
-  should.equal(result.family, "Sogou-Test-Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Sogou-Test-Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_770_test() {
@@ -8439,11 +7148,9 @@ pub fn ua_parse_770_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Sosoimagespider/2.0; +http://help.soso.com/soso-image-spider.htm)",
     )
-  should.equal(result.family, "Sosoimagespider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Sosoimagespider"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_771_test() {
@@ -8451,20 +7158,16 @@ pub fn ua_parse_771_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Sosospider/2.0; +http://help.soso.com/webspider.htm)",
     )
-  should.equal(result.family, "Sosospider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Sosospider"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_772_test() {
   let result = uaparser.parse_user_agent("Spider/5.0")
-  should.equal(result.family, "Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_773_test() {
@@ -8472,21 +7175,17 @@ pub fn ua_parse_773_test() {
     uaparser.parse_user_agent(
       "SpokeSpider/1.0 (http://support.spoke.com/webspider/) Mozilla/5.0 (not really)",
     )
-  should.equal(result.family, "SpokeSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "SpokeSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_774_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/5.0 (compatible; StoneSunSpider/1.1)")
-  should.equal(result.family, "StoneSunSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "StoneSunSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_775_test() {
@@ -8494,11 +7193,9 @@ pub fn ua_parse_775_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; StreamScraper/1.0; +http://code.google.com/p/streamscraper/)",
     )
-  should.equal(result.family, "StreamScraper")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "StreamScraper"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_776_test() {
@@ -8506,38 +7203,30 @@ pub fn ua_parse_776_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 5.5; SuperSpider/139; Windows 98; Win 9x 4.90)",
     )
-  should.equal(result.family, "SuperSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "139", minor: None, patch: None)),
-  )
+  assert result.family == "SuperSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "139", minor: None, patch: None))
 }
 
 pub fn ua_parse_777_test() {
   let result = uaparser.parse_user_agent("T3census-Crawler/1.0")
-  should.equal(result.family, "T3census-Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "T3census-Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_778_test() {
   let result = uaparser.parse_user_agent("TECOMAC-Crawler/0.3")
-  should.equal(result.family, "TECOMAC-Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "TECOMAC-Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_779_test() {
   let result = uaparser.parse_user_agent("Tasapspider/0.9")
-  should.equal(result.family, "Tasapspider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: None)),
-  )
+  assert result.family == "Tasapspider"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: None))
 }
 
 pub fn ua_parse_780_test() {
@@ -8545,11 +7234,9 @@ pub fn ua_parse_780_test() {
     uaparser.parse_user_agent(
       "TinEye-bot/0.02 (see http://www.tineye.com/crawler.html)",
     )
-  should.equal(result.family, "TinEye-bot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("02"), patch: None)),
-  )
+  assert result.family == "TinEye-bot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("02"), patch: None))
 }
 
 pub fn ua_parse_781_test() {
@@ -8557,30 +7244,24 @@ pub fn ua_parse_781_test() {
     uaparser.parse_user_agent(
       "Top10Ranking Spider/3.1 ( http://www.top10Ranking.nl/, Top10ranking.nl heeft op een aantal woorden uw posities in Google gecheckt)",
     )
-  should.equal(result.family, "Top10Ranking Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Top10Ranking Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_782_test() {
   let result = uaparser.parse_user_agent("TouTrix crawler/1.0")
-  should.equal(result.family, "TouTrix crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "TouTrix crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_783_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/5.0 (compatible; TridentSpider/3.1)")
-  should.equal(result.family, "TridentSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "TridentSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_784_test() {
@@ -8588,11 +7269,9 @@ pub fn ua_parse_784_test() {
     uaparser.parse_user_agent(
       "TurnitinBot/1.5 (http://www.turnitin.com/robot/crawlerinfo.html)",
     )
-  should.equal(result.family, "TurnitinBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("5"), patch: None)),
-  )
+  assert result.family == "TurnitinBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("5"), patch: None))
 }
 
 pub fn ua_parse_785_test() {
@@ -8600,11 +7279,9 @@ pub fn ua_parse_785_test() {
     uaparser.parse_user_agent(
       "TurnitinBot/3.0 (http://www.turnitin.com/robot/crawlerinfo.html)",
     )
-  should.equal(result.family, "TurnitinBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "TurnitinBot"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_786_test() {
@@ -8612,30 +7289,24 @@ pub fn ua_parse_786_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Linux i686; en-US; URLfilterDB-crawler/1.0) ufdb/1.0",
     )
-  should.equal(result.family, "URLfilterDB-crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "URLfilterDB-crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_787_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/5.0 (URLfilterDB-crawler/1.1) ufdb/1.0")
-  should.equal(result.family, "URLfilterDB-crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "URLfilterDB-crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_788_test() {
   let result = uaparser.parse_user_agent("VinjaVideoSpider/1.1")
-  should.equal(result.family, "VinjaVideoSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "VinjaVideoSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_789_test() {
@@ -8643,11 +7314,9 @@ pub fn ua_parse_789_test() {
     uaparser.parse_user_agent(
       "VisBot/2.0 (Visvo.com Crawler; http://www.visvo.com/bot.html; bot@visvo.com)",
     )
-  should.equal(result.family, "VisBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "VisBot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_790_test() {
@@ -8655,21 +7324,17 @@ pub fn ua_parse_790_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; VodpodCrawler/1.0; +http://vodpod.com/site/help)",
     )
-  should.equal(result.family, "VodpodCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "VodpodCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_791_test() {
   let result =
     uaparser.parse_user_agent("WSDLSpider/1.0 (http://www.wsdlworld.com)")
-  should.equal(result.family, "WSDLSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "WSDLSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_792_test() {
@@ -8677,11 +7342,9 @@ pub fn ua_parse_792_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; WangIDSpider/1.0; +http://www.wangid.com/spider.html)",
     )
-  should.equal(result.family, "WangIDSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "WangIDSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_793_test() {
@@ -8689,11 +7352,9 @@ pub fn ua_parse_793_test() {
     uaparser.parse_user_agent(
       "Web-Robot/5.0 (en-US; web-robot.com/policy.html) Web-Robot Crawler/2.0.3",
     )
-  should.equal(result.family, "Web-Robot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Web-Robot"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_794_test() {
@@ -8701,11 +7362,9 @@ pub fn ua_parse_794_test() {
     uaparser.parse_user_agent(
       "WebAlta Crawler/1.3.18 (http://www.webalta.net/ru/about_webmaster.html) (Windows; U; Windows NT 5.1; ru-RU)",
     )
-  should.equal(result.family, "WebAlta Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("18"))),
-  )
+  assert result.family == "WebAlta Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("18")))
 }
 
 pub fn ua_parse_795_test() {
@@ -8713,11 +7372,9 @@ pub fn ua_parse_795_test() {
     uaparser.parse_user_agent(
       "WebAlta Crawler/2.0 (http://www.webalta.net/ru/about_webmaster.html) (Windows; U; Windows NT 5.1; ru-RU)",
     )
-  should.equal(result.family, "WebAlta Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "WebAlta Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_796_test() {
@@ -8725,11 +7382,9 @@ pub fn ua_parse_796_test() {
     uaparser.parse_user_agent(
       "WebIndexer/1-dev (Web Indexer; mailto://webindexerv1@yahoo.com; webindexerv1@yahoo.com)",
     )
-  should.equal(result.family, "WebIndexer")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: None, patch: None)),
-  )
+  assert result.family == "WebIndexer"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: None, patch: None))
 }
 
 pub fn ua_parse_797_test() {
@@ -8737,20 +7392,16 @@ pub fn ua_parse_797_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Webbot/0.1; http://www.webbot.ru/bot.html)",
     )
-  should.equal(result.family, "Webbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Webbot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_798_test() {
   let result = uaparser.parse_user_agent("Webspider/1.0 (web spider;  )")
-  should.equal(result.family, "Webspider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Webspider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_799_test() {
@@ -8758,11 +7409,9 @@ pub fn ua_parse_799_test() {
     uaparser.parse_user_agent(
       "WinWebBot/1.0; (Balaena Ltd, UK); http://www.balaena.com/winwebbot.html; winwebbot@balaena.com;)",
     )
-  should.equal(result.family, "WinWebBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "WinWebBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_800_test() {
@@ -8770,11 +7419,9 @@ pub fn ua_parse_800_test() {
     uaparser.parse_user_agent(
       "WinkBot/0.06 (Wink.com search engine web crawler; http://www.wink.com/Wink:WinkBot; winkbot@wink.com)",
     )
-  should.equal(result.family, "WinkBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("06"), patch: None)),
-  )
+  assert result.family == "WinkBot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("06"), patch: None))
 }
 
 pub fn ua_parse_801_test() {
@@ -8782,11 +7429,9 @@ pub fn ua_parse_801_test() {
     uaparser.parse_user_agent(
       "Yahoo-MMCrawler/3.x (mm dash crawler at trd dot overture dot com)",
     )
-  should.equal(result.family, "Yahoo-MMCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: None, patch: None)),
-  )
+  assert result.family == "Yahoo-MMCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: None, patch: None))
 }
 
 pub fn ua_parse_802_test() {
@@ -8794,11 +7439,9 @@ pub fn ua_parse_802_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Yahoo-MMCrawler/4.0; mailto:vertical-crawl-support@yahoo-inc.com)",
     )
-  should.equal(result.family, "Yahoo-MMCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Yahoo-MMCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_803_test() {
@@ -8806,11 +7449,9 @@ pub fn ua_parse_803_test() {
     uaparser.parse_user_agent(
       "Yahoo-Newscrawler/3.9 (news-search-crawler at yahoo-inc dot com)",
     )
-  should.equal(result.family, "Yahoo-Newscrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("9"), patch: None)),
-  )
+  assert result.family == "Yahoo-Newscrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("9"), patch: None))
 }
 
 pub fn ua_parse_804_test() {
@@ -8818,20 +7459,16 @@ pub fn ua_parse_804_test() {
     uaparser.parse_user_agent(
       "Yahoo-VerticalCrawler-FormerWebCrawler/3.9 crawler at trd dot overture dot com; http://www.alltheweb.com/help/webmaster/crawler",
     )
-  should.equal(result.family, "Yahoo-VerticalCrawler-FormerWebCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("9"), patch: None)),
-  )
+  assert result.family == "Yahoo-VerticalCrawler-FormerWebCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("9"), patch: None))
 }
 
 pub fn ua_parse_805_test() {
   let result = uaparser.parse_user_agent("YoonoCrawler/1.0 (crawler@yoono.com)")
-  should.equal(result.family, "YoonoCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "YoonoCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_806_test() {
@@ -8839,11 +7476,9 @@ pub fn ua_parse_806_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; YoudaoBot/1.0; http://www.youdao.com/help/webmaster/spider/; )",
     )
-  should.equal(result.family, "YoudaoBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "YoudaoBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_807_test() {
@@ -8851,11 +7486,9 @@ pub fn ua_parse_807_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; ZemlyaCrawl/1.0; +http://zemlyaozer.com/bot)",
     )
-  should.equal(result.family, "ZemlyaCrawl")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "ZemlyaCrawl"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_808_test() {
@@ -8863,11 +7496,9 @@ pub fn ua_parse_808_test() {
     uaparser.parse_user_agent(
       "Zeusbot/0.8.1 (Ulysseek's web-crawling robot; http://www.zeusbot.com; agent@zeusbot.com)",
     )
-  should.equal(result.family, "Zeusbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("8"), patch: Some("1"))),
-  )
+  assert result.family == "Zeusbot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("8"), patch: Some("1")))
 }
 
 pub fn ua_parse_809_test() {
@@ -8875,11 +7506,9 @@ pub fn ua_parse_809_test() {
     uaparser.parse_user_agent(
       "agbot/1.0 (AgHaven.com search engine crawler; http://search.aghaven.com; bot@aghaven.com)",
     )
-  should.equal(result.family, "agbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "agbot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_810_test() {
@@ -8887,11 +7516,9 @@ pub fn ua_parse_810_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; archive_crawler/3.0.0-SNAPSHOT-20091205.013431  http://www.archive.org/details/archive_crawler)",
     )
-  should.equal(result.family, "archive_crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "archive_crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_811_test() {
@@ -8899,48 +7526,38 @@ pub fn ua_parse_811_test() {
     uaparser.parse_user_agent(
       "audioCrawlerBot/1.0 (http://www.audiocrawler.com/)",
     )
-  should.equal(result.family, "audioCrawlerBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "audioCrawlerBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_812_test() {
   let result = uaparser.parse_user_agent("awesomebar_scraper/1.0")
-  should.equal(result.family, "awesomebar_scraper")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "awesomebar_scraper"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_813_test() {
   let result = uaparser.parse_user_agent("blog_crawler/1.0")
-  should.equal(result.family, "blog_crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "blog_crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_814_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/5.0 (compatible; ca-crawler/1.0)")
-  should.equal(result.family, "ca-crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "ca-crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_815_test() {
   let result = uaparser.parse_user_agent("crawl/0.4 langcrawl/0.1")
-  should.equal(result.family, "crawl")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("4"), patch: None)),
-  )
+  assert result.family == "crawl"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("4"), patch: None))
 }
 
 pub fn ua_parse_816_test() {
@@ -8948,20 +7565,16 @@ pub fn ua_parse_816_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; crawler/3.0.0 +http://www.notconfigured.com/)",
     )
-  should.equal(result.family, "crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_817_test() {
   let result = uaparser.parse_user_agent("dCrawlBot/1.0.1120")
-  should.equal(result.family, "dCrawlBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("1120"))),
-  )
+  assert result.family == "dCrawlBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("1120")))
 }
 
 pub fn ua_parse_818_test() {
@@ -8969,11 +7582,9 @@ pub fn ua_parse_818_test() {
     uaparser.parse_user_agent(
       "deepcrawler/3.1 (http://www.queusearch.com/whatis_deepcrawler.php),gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "deepcrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "deepcrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_819_test() {
@@ -8981,20 +7592,16 @@ pub fn ua_parse_819_test() {
     uaparser.parse_user_agent(
       "envolk[ITS]spider/1.6 ( http://www.envolk.com/envolkspider.html)",
     )
-  should.equal(result.family, "envolk[ITS]spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("6"), patch: None)),
-  )
+  assert result.family == "envolk[ITS]spider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("6"), patch: None))
 }
 
 pub fn ua_parse_820_test() {
   let result = uaparser.parse_user_agent("fastlwspider/1.0")
-  should.equal(result.family, "fastlwspider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "fastlwspider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_821_test() {
@@ -9002,11 +7609,9 @@ pub fn ua_parse_821_test() {
     uaparser.parse_user_agent(
       "i1searchbot/2.0 (i1search web crawler; http://www.i1search.com; crawler@i1search.com)",
     )
-  should.equal(result.family, "i1searchbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "i1searchbot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_822_test() {
@@ -9014,11 +7619,9 @@ pub fn ua_parse_822_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; iaskspider/1.0; MSIE 6.0)",
     )
-  should.equal(result.family, "iaskspider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "iaskspider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_823_test() {
@@ -9026,11 +7629,9 @@ pub fn ua_parse_823_test() {
     uaparser.parse_user_agent(
       "iaskspider/2.0( http://iask.com/help/help_index.html)",
     )
-  should.equal(result.family, "iaskspider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "iaskspider"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_824_test() {
@@ -9038,11 +7639,9 @@ pub fn ua_parse_824_test() {
     uaparser.parse_user_agent(
       "Liquida.it-Crawler/1.0 ( crawler@liquida.it +http://www.liquida.it )",
     )
-  should.equal(result.family, "it-Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "it-Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_825_test() {
@@ -9050,20 +7649,16 @@ pub fn ua_parse_825_test() {
     uaparser.parse_user_agent(
       "it2media-domain-crawler/1.0 on crawler-prod.it2media.de",
     )
-  should.equal(result.family, "it2media-domain-crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "it2media-domain-crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_826_test() {
   let result = uaparser.parse_user_agent("jrCrawler/1.0b")
-  should.equal(result.family, "jrCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "jrCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_827_test() {
@@ -9071,11 +7666,9 @@ pub fn ua_parse_827_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; loc-crawl/1.10.1 +http://www.google.com)",
     )
-  should.equal(result.family, "loc-crawl")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("10"), patch: Some("1"))),
-  )
+  assert result.family == "loc-crawl"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("10"), patch: Some("1")))
 }
 
 pub fn ua_parse_828_test() {
@@ -9083,11 +7676,9 @@ pub fn ua_parse_828_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; loc-crawler/0.11.0 +http://loc.gov),gzip(gfe),gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "loc-crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("11"), patch: Some("0"))),
-  )
+  assert result.family == "loc-crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("11"), patch: Some("0")))
 }
 
 pub fn ua_parse_829_test() {
@@ -9095,11 +7686,9 @@ pub fn ua_parse_829_test() {
     uaparser.parse_user_agent(
       "DoCoMo/2.0 P904i( m65bot/0.1; c; http://m65.jp/bot.html )",
     )
-  should.equal(result.family, "m65bot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "m65bot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_830_test() {
@@ -9107,20 +7696,16 @@ pub fn ua_parse_830_test() {
     uaparser.parse_user_agent(
       "magpie-crawler/1.1 (U; Linux amd64; en-GB;  http://www.brandwatch.net)",
     )
-  should.equal(result.family, "magpie-crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "magpie-crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_831_test() {
   let result = uaparser.parse_user_agent("noxtrumbot/1.0 (crawler@noxtrum.com)")
-  should.equal(result.family, "noxtrumbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "noxtrumbot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_832_test() {
@@ -9128,11 +7713,9 @@ pub fn ua_parse_832_test() {
     uaparser.parse_user_agent(
       "nyobot/1.1 (Noyb.com search engine crawler; http://www.noyb.com; bot@noyb.com),gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "nyobot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "nyobot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_833_test() {
@@ -9140,11 +7723,9 @@ pub fn ua_parse_833_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; oBot/2.3.1; +http://filterdb.iss.net/crawler/)",
     )
-  should.equal(result.family, "oBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("3"), patch: Some("1"))),
-  )
+  assert result.family == "oBot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("3"), patch: Some("1")))
 }
 
 pub fn ua_parse_834_test() {
@@ -9152,11 +7733,9 @@ pub fn ua_parse_834_test() {
     uaparser.parse_user_agent(
       "omgilibot/0.3 +http://www.omgili.com/Crawler.html",
     )
-  should.equal(result.family, "omgilibot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "omgilibot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_835_test() {
@@ -9164,11 +7743,9 @@ pub fn ua_parse_835_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; rogerBot/1.0; UrlCrawler; http://www.seomoz.org/dp/rogerbot)",
     )
-  should.equal(result.family, "rogerBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "rogerBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_836_test() {
@@ -9176,20 +7753,16 @@ pub fn ua_parse_836_test() {
     uaparser.parse_user_agent(
       "rogerbot/1.1 (http://moz.com/help/pro/what-is-rogerbot-, rogerbot-crawler+pr1-crawler-14@moz.com)",
     )
-  should.equal(result.family, "rogerbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "rogerbot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_837_test() {
   let result = uaparser.parse_user_agent("semantics webbot/1.0")
-  should.equal(result.family, "semantics webbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "semantics webbot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_838_test() {
@@ -9197,39 +7770,31 @@ pub fn ua_parse_838_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; socialbm_bot/1.0; +http://spider.socialbm.net)",
     )
-  should.equal(result.family, "socialbm_bot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "socialbm_bot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_839_test() {
   let result =
     uaparser.parse_user_agent("tCrawler/0.1,gzip(gfe),gzip(gfe),gzip(gfe)")
-  should.equal(result.family, "tCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "tCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_840_test() {
   let result = uaparser.parse_user_agent("tivraSpider/1.0 (crawler@tivra.com)")
-  should.equal(result.family, "tivraSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "tivraSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_841_test() {
   let result = uaparser.parse_user_agent("webscraper/1.0")
-  should.equal(result.family, "webscraper")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "webscraper"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_842_test() {
@@ -9237,11 +7802,9 @@ pub fn ua_parse_842_test() {
     uaparser.parse_user_agent(
       "wume_crawler/1.1 (http://wume.cse.lehigh.edu/~xiq204/crawler/)",
     )
-  should.equal(result.family, "wume_crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "wume_crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_843_test() {
@@ -9249,30 +7812,24 @@ pub fn ua_parse_843_test() {
     uaparser.parse_user_agent(
       "Abrave Spider v5.3 Robot 2 (http://robot.abrave.com)",
     )
-  should.equal(result.family, "3 Robot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: None, patch: None)),
-  )
+  assert result.family == "3 Robot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: None, patch: None))
 }
 
 pub fn ua_parse_844_test() {
   let result = uaparser.parse_user_agent("Apexoo Spider 1.1")
-  should.equal(result.family, "Apexoo Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Apexoo Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_845_test() {
   let result =
     uaparser.parse_user_agent("BT Crawler 1.0,gzip(gfe),gzip(gfe),gzip(gfe)")
-  should.equal(result.family, "BT Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "BT Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_846_test() {
@@ -9280,48 +7837,38 @@ pub fn ua_parse_846_test() {
     uaparser.parse_user_agent(
       "Bot Blocker Crawler 1.0 (btw, IncrediBILL says \"HI!\")",
     )
-  should.equal(result.family, "Bot Blocker Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Bot Blocker Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_847_test() {
   let result =
     uaparser.parse_user_agent("BurstFind Crawler 1.1 - www.burstfind.com")
-  should.equal(result.family, "BurstFind Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "BurstFind Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_848_test() {
   let result = uaparser.parse_user_agent("Comodo Spider 1.1")
-  should.equal(result.family, "Comodo Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Comodo Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_849_test() {
   let result = uaparser.parse_user_agent("Comodo Spider 1.2")
-  should.equal(result.family, "Comodo Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Comodo Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_850_test() {
   let result = uaparser.parse_user_agent("Crawler 0.1,gzip(gfe),gzip(gfe)")
-  should.equal(result.family, "Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_851_test() {
@@ -9329,30 +7876,24 @@ pub fn ua_parse_851_test() {
     uaparser.parse_user_agent(
       "ExB Language Crawler 2.1.5 (+http://www.exb.de/crawler)",
     )
-  should.equal(result.family, "ExB Language Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("1"), patch: Some("5"))),
-  )
+  assert result.family == "ExB Language Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("1"), patch: Some("5")))
 }
 
 pub fn ua_parse_852_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/5.0 (compatible; FAST Crawler 6.3)")
-  should.equal(result.family, "FAST Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "FAST Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_853_test() {
   let result = uaparser.parse_user_agent("FAST EnterpriseCrawler 6")
-  should.equal(result.family, "FAST EnterpriseCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: None, patch: None)),
-  )
+  assert result.family == "FAST EnterpriseCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: None, patch: None))
 }
 
 pub fn ua_parse_854_test() {
@@ -9360,11 +7901,9 @@ pub fn ua_parse_854_test() {
     uaparser.parse_user_agent(
       "schibstedsokbot (compatible; Mozilla/5.0; MSIE 5.0; FAST FreshCrawler 6; Contact: webcrawl@schibstedsok.no;)",
     )
-  should.equal(result.family, "FAST FreshCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: None, patch: None)),
-  )
+  assert result.family == "FAST FreshCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: None, patch: None))
 }
 
 pub fn ua_parse_855_test() {
@@ -9372,30 +7911,24 @@ pub fn ua_parse_855_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; FatBot 2.0; http://www.thefind.com/crawler)",
     )
-  should.equal(result.family, "FatBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "FatBot"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_856_test() {
   let result = uaparser.parse_user_agent("Feedjit Favicon Crawler 1.0")
-  should.equal(result.family, "Feedjit Favicon Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Feedjit Favicon Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_857_test() {
   let result =
     uaparser.parse_user_agent("HubSpot Crawler 1.0 http://www.hubspot.com/")
-  should.equal(result.family, "HubSpot Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "HubSpot Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_858_test() {
@@ -9403,57 +7936,45 @@ pub fn ua_parse_858_test() {
     uaparser.parse_user_agent(
       "Jaxified Crawler 1.0a (+http://www.jaxified.com/),gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "Jaxified Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Jaxified Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_859_test() {
   let result = uaparser.parse_user_agent("LinksCrawler 0.1beta")
-  should.equal(result.family, "LinksCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "LinksCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_860_test() {
   let result =
     uaparser.parse_user_agent("Liquida Spider 1.0 +http://liquida.com/")
-  should.equal(result.family, "Liquida Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Liquida Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_861_test() {
   let result = uaparser.parse_user_agent("My Spider 1.0,gzip(gfe),gzip(gfe)")
-  should.equal(result.family, "My Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "My Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_862_test() {
   let result = uaparser.parse_user_agent("NWSpider 0.9")
-  should.equal(result.family, "NWSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: None)),
-  )
+  assert result.family == "NWSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: None))
 }
 
 pub fn ua_parse_863_test() {
   let result = uaparser.parse_user_agent("Netchart Adv Crawler 1.0")
-  should.equal(result.family, "Netchart Adv Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Netchart Adv Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_864_test() {
@@ -9461,11 +7982,9 @@ pub fn ua_parse_864_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (NimbleCrawler 0.1) obeys NimbleCrawler directive contact jpump@looksmart.net",
     )
-  should.equal(result.family, "NimbleCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "NimbleCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_865_test() {
@@ -9473,20 +7992,16 @@ pub fn ua_parse_865_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows;) NimbleCrawler 2.0.1 obeys UserAgent NimbleCrawler For problems contact: crawler@healthline.com",
     )
-  should.equal(result.family, "NimbleCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "NimbleCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_866_test() {
   let result = uaparser.parse_user_agent("OMGCrawler 1.0")
-  should.equal(result.family, "OMGCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "OMGCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_867_test() {
@@ -9494,29 +8009,23 @@ pub fn ua_parse_867_test() {
     uaparser.parse_user_agent(
       "SeekOn Spider 1.9(+http://www.seekon.com/spider.html)",
     )
-  should.equal(result.family, "SeekOn Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("9"), patch: None)),
-  )
+  assert result.family == "SeekOn Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("9"), patch: None))
 }
 
 pub fn ua_parse_868_test() {
   let result = uaparser.parse_user_agent("Toms Spider 0.3")
-  should.equal(result.family, "Toms Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "Toms Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_869_test() {
   let result = uaparser.parse_user_agent("Tutorial Crawler 1.4")
-  should.equal(result.family, "Tutorial Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("4"), patch: None)),
-  )
+  assert result.family == "Tutorial Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("4"), patch: None))
 }
 
 pub fn ua_parse_870_test() {
@@ -9524,11 +8033,9 @@ pub fn ua_parse_870_test() {
     uaparser.parse_user_agent(
       "RB2B-bot v0.1 (Using Fast Enterprise Crawler 6 search@reedbusiness.com)",
     )
-  should.equal(result.family, "Using Fast Enterprise Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: None, patch: None)),
-  )
+  assert result.family == "Using Fast Enterprise Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: None, patch: None))
 }
 
 pub fn ua_parse_871_test() {
@@ -9536,11 +8043,9 @@ pub fn ua_parse_871_test() {
     uaparser.parse_user_agent(
       "WocBot/Mozilla/5.0 (Wocodi Web Crawler 1.0; http://www.wocodi.com/crawler; crawler@wocodi.com)",
     )
-  should.equal(result.family, "Wocodi Web Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Wocodi Web Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_872_test() {
@@ -9548,21 +8053,17 @@ pub fn ua_parse_872_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; WordSurfer Spider 2.2;))",
     )
-  should.equal(result.family, "WordSurfer Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "WordSurfer Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_873_test() {
   let result =
     uaparser.parse_user_agent("XSpider 0.01;http://uncool.oicp.net/spider.html")
-  should.equal(result.family, "XSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("01"), patch: None)),
-  )
+  assert result.family == "XSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("01"), patch: None))
 }
 
 pub fn ua_parse_874_test() {
@@ -9570,39 +8071,31 @@ pub fn ua_parse_874_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 7.0) XSpider 7",
     )
-  should.equal(result.family, "XSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: None, patch: None)),
-  )
+  assert result.family == "XSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: None, patch: None))
 }
 
 pub fn ua_parse_875_test() {
   let result = uaparser.parse_user_agent("Xaldon WebSpider 2.7.b6")
-  should.equal(result.family, "Xaldon WebSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("7"), patch: None)),
-  )
+  assert result.family == "Xaldon WebSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("7"), patch: None))
 }
 
 pub fn ua_parse_876_test() {
   let result = uaparser.parse_user_agent("echocrawl 2.0")
-  should.equal(result.family, "echocrawl")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "echocrawl"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_877_test() {
   let result =
     uaparser.parse_user_agent("enicura crawler 1.0,gzip(gfe),gzip(gfe)")
-  should.equal(result.family, "enicura crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "enicura crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_878_test() {
@@ -9610,21 +8103,17 @@ pub fn ua_parse_878_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; lworld spider 1.0; Windows NT 5.1)",
     )
-  should.equal(result.family, "lworld spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "lworld spider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_879_test() {
   let result =
     uaparser.parse_user_agent("FAST-mSEARCH Crawler 0.1 (bergum@fast.no)")
-  should.equal(result.family, "FAST-mSEARCH Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "FAST-mSEARCH Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_880_test() {
@@ -9632,14 +8121,14 @@ pub fn ua_parse_880_test() {
     uaparser.parse_user_agent(
       "123metaspider-Bot (Version: 1.04, powered by www.123metaspider.com)",
     )
-  should.equal(result.family, "123metaspider-Bot")
-  should.equal(result.version, None)
+  assert result.family == "123metaspider-Bot"
+  assert result.version == None
 }
 
 pub fn ua_parse_881_test() {
   let result = uaparser.parse_user_agent("360Spider")
-  should.equal(result.family, "360Spider")
-  should.equal(result.version, None)
+  assert result.family == "360Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_882_test() {
@@ -9647,14 +8136,14 @@ pub fn ua_parse_882_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; U; Win98; en-US; rv:1.8webcrawler) http://skateboarddirectory.com",
     )
-  should.equal(result.family, "8webcrawler")
-  should.equal(result.version, None)
+  assert result.family == "8webcrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_883_test() {
   let result = uaparser.parse_user_agent("AESOP_com_SpiderMan")
-  should.equal(result.family, "AESOP_com_SpiderMan")
-  should.equal(result.version, None)
+  assert result.family == "AESOP_com_SpiderMan"
+  assert result.version == None
 }
 
 pub fn ua_parse_884_test() {
@@ -9662,8 +8151,8 @@ pub fn ua_parse_884_test() {
     uaparser.parse_user_agent(
       "AISearchBot (Email: aisearchbot@gmail.com; If your web site doesn't want to be crawled, please send us a email.)",
     )
-  should.equal(result.family, "AISearchBot")
-  should.equal(result.version, None)
+  assert result.family == "AISearchBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_885_test() {
@@ -9671,21 +8160,21 @@ pub fn ua_parse_885_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; DAWINCI ANTIPLAG SPIDER)",
     )
-  should.equal(result.family, "ANTIPLAG SPIDER")
-  should.equal(result.version, None)
+  assert result.family == "ANTIPLAG SPIDER"
+  assert result.version == None
 }
 
 pub fn ua_parse_886_test() {
   let result = uaparser.parse_user_agent("AcquiaCrawler,gzip(gfe),gzip(gfe)")
-  should.equal(result.family, "AcquiaCrawler")
-  should.equal(result.version, None)
+  assert result.family == "AcquiaCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_887_test() {
   let result =
     uaparser.parse_user_agent("Adaxas Spider (http://www.adaxas.net/)")
-  should.equal(result.family, "Adaxas Spider")
-  should.equal(result.version, None)
+  assert result.family == "Adaxas Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_888_test() {
@@ -9693,14 +8182,14 @@ pub fn ua_parse_888_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0) AddSugarSpiderBot www.idealobserver.com",
     )
-  should.equal(result.family, "AddSugarSpiderBot")
-  should.equal(result.version, None)
+  assert result.family == "AddSugarSpiderBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_889_test() {
   let result = uaparser.parse_user_agent("AdnormCrawler www.adnorm.com/crawler")
-  should.equal(result.family, "AdnormCrawler")
-  should.equal(result.version, None)
+  assert result.family == "AdnormCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_890_test() {
@@ -9708,15 +8197,15 @@ pub fn ua_parse_890_test() {
     uaparser.parse_user_agent(
       "www.website-analyzer.net Website Analyzer Crawler",
     )
-  should.equal(result.family, "Analyzer Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Analyzer Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_891_test() {
   let result =
     uaparser.parse_user_agent("Apexoo Spider (http://www.apexoo.com/spider/)")
-  should.equal(result.family, "Apexoo Spider")
-  should.equal(result.version, None)
+  assert result.family == "Apexoo Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_892_test() {
@@ -9724,20 +8213,20 @@ pub fn ua_parse_892_test() {
     uaparser.parse_user_agent(
       "AppCodes crawler - looking for iOS app mentions. More info: support@appcodes.com. Robots.txt id: AppCodesCrawler",
     )
-  should.equal(result.family, "AppCodes crawler")
-  should.equal(result.version, None)
+  assert result.family == "AppCodes crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_893_test() {
   let result = uaparser.parse_user_agent("ArchitextSpider")
-  should.equal(result.family, "ArchitextSpider")
-  should.equal(result.version, None)
+  assert result.family == "ArchitextSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_894_test() {
   let result = uaparser.parse_user_agent("Arikus_Spider")
-  should.equal(result.family, "Arikus_Spider")
-  should.equal(result.version, None)
+  assert result.family == "Arikus_Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_895_test() {
@@ -9745,11 +8234,9 @@ pub fn ua_parse_895_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 6.0 compatible; Asterias Crawler v4;  http://www.singingfish.com/help/spider.html; webmaster@singingfish.com); SpiderThread  Revision: 3.0",
     )
-  should.equal(result.family, "Asterias Crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: None, patch: None)),
-  )
+  assert result.family == "Asterias Crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: None, patch: None))
 }
 
 pub fn ua_parse_896_test() {
@@ -9757,14 +8244,14 @@ pub fn ua_parse_896_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible: AstraSpider V.2.1 : astrafind.com)",
     )
-  should.equal(result.family, "AstraSpider")
-  should.equal(result.version, None)
+  assert result.family == "AstraSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_897_test() {
   let result = uaparser.parse_user_agent("Autonomy Spider")
-  should.equal(result.family, "Autonomy Spider")
-  should.equal(result.version, None)
+  assert result.family == "Autonomy Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_898_test() {
@@ -9772,8 +8259,8 @@ pub fn ua_parse_898_test() {
     uaparser.parse_user_agent(
       "axadine/  (Axadine Crawler; http://www.axada.de/;  )",
     )
-  should.equal(result.family, "Axadine Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Axadine Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_899_test() {
@@ -9781,8 +8268,8 @@ pub fn ua_parse_899_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; BIXOCRAWLER; +http://wiki.github.com/bixo/bixo/bixocrawler; bixo-dev@yahoogroups.com)",
     )
-  should.equal(result.family, "BIXOCRAWLER")
-  should.equal(result.version, None)
+  assert result.family == "BIXOCRAWLER"
+  assert result.version == None
 }
 
 pub fn ua_parse_900_test() {
@@ -9790,8 +8277,8 @@ pub fn ua_parse_900_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; BOTW Spider;  http://botw.org)",
     )
-  should.equal(result.family, "BOTW Spider")
-  should.equal(result.version, None)
+  assert result.family == "BOTW Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_901_test() {
@@ -9799,8 +8286,8 @@ pub fn ua_parse_901_test() {
     uaparser.parse_user_agent(
       "BacklinkCrawler (http://www.backlinktest.com/crawler.html)",
     )
-  should.equal(result.family, "BacklinkCrawler")
-  should.equal(result.version, None)
+  assert result.family == "BacklinkCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_902_test() {
@@ -9808,27 +8295,27 @@ pub fn ua_parse_902_test() {
     uaparser.parse_user_agent(
       "BaiduImagespider ( http://help.baidu.jp/system/05.html)",
     )
-  should.equal(result.family, "BaiduImagespider")
-  should.equal(result.version, None)
+  assert result.family == "BaiduImagespider"
+  assert result.version == None
 }
 
 pub fn ua_parse_903_test() {
   let result =
     uaparser.parse_user_agent("BarraHomeCrawler (albertof@barrahome.org)")
-  should.equal(result.family, "BarraHomeCrawler")
-  should.equal(result.version, None)
+  assert result.family == "BarraHomeCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_904_test() {
   let result = uaparser.parse_user_agent("ZoomInfo::Beehive Crawler")
-  should.equal(result.family, "Beehive Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Beehive Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_905_test() {
   let result = uaparser.parse_user_agent("BeijingCrawler")
-  should.equal(result.family, "BeijingCrawler")
-  should.equal(result.version, None)
+  assert result.family == "BeijingCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_906_test() {
@@ -9836,14 +8323,14 @@ pub fn ua_parse_906_test() {
     uaparser.parse_user_agent(
       "BejiBot Crawler (BNL Services; http://www.bejjan.net/crawler/)",
     )
-  should.equal(result.family, "BejiBot")
-  should.equal(result.version, None)
+  assert result.family == "BejiBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_907_test() {
   let result = uaparser.parse_user_agent("BravoBrian SpiderEngine MarcoPolo")
-  should.equal(result.family, "BravoBrian SpiderEngine")
-  should.equal(result.version, None)
+  assert result.family == "BravoBrian SpiderEngine"
+  assert result.version == None
 }
 
 pub fn ua_parse_908_test() {
@@ -9851,8 +8338,8 @@ pub fn ua_parse_908_test() {
     uaparser.parse_user_agent(
       "BrightCrawler (http://www.brightcloud.com/brightcrawler.asp)",
     )
-  should.equal(result.family, "BrightCrawler")
-  should.equal(result.version, None)
+  assert result.family == "BrightCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_909_test() {
@@ -9860,21 +8347,21 @@ pub fn ua_parse_909_test() {
     uaparser.parse_user_agent(
       "BuildCMS crawler (http://www.buildcms.com/crawler)",
     )
-  should.equal(result.family, "BuildCMS crawler")
-  should.equal(result.version, None)
+  assert result.family == "BuildCMS crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_910_test() {
   let result =
     uaparser.parse_user_agent("ByWebSite-Search-Spider,gzip(gfe),gzip(gfe)")
-  should.equal(result.family, "ByWebSite-Search-Spider")
-  should.equal(result.version, None)
+  assert result.family == "ByWebSite-Search-Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_911_test() {
   let result = uaparser.parse_user_agent("CFG_SPIDER_USER_AGENT")
-  should.equal(result.family, "CFG_SPIDER_USER_AGENT")
-  should.equal(result.version, None)
+  assert result.family == "CFG_SPIDER_USER_AGENT"
+  assert result.version == None
 }
 
 pub fn ua_parse_912_test() {
@@ -9882,15 +8369,15 @@ pub fn ua_parse_912_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (CMS Crawler: http://www.cmscrawler.com)",
     )
-  should.equal(result.family, "CMS Crawler")
-  should.equal(result.version, None)
+  assert result.family == "CMS Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_913_test() {
   let result =
     uaparser.parse_user_agent("CMS crawler ( http://buytaert.net/crawler/)")
-  should.equal(result.family, "CMS crawler")
-  should.equal(result.version, None)
+  assert result.family == "CMS crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_914_test() {
@@ -9898,17 +8385,15 @@ pub fn ua_parse_914_test() {
     uaparser.parse_user_agent(
       "CRAZYWEBCRAWLER 0.9.0, http://www.crazywebcrawler.com",
     )
-  should.equal(result.family, "CRAZYWEBCRAWLER")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("0"))),
-  )
+  assert result.family == "CRAZYWEBCRAWLER"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("0")))
 }
 
 pub fn ua_parse_915_test() {
   let result = uaparser.parse_user_agent("CSimpleSpider Robot")
-  should.equal(result.family, "CSimpleSpider")
-  should.equal(result.version, None)
+  assert result.family == "CSimpleSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_916_test() {
@@ -9916,8 +8401,8 @@ pub fn ua_parse_916_test() {
     uaparser.parse_user_agent(
       "Cityreview Robot (+http://www.cityreview.org/crawler/)",
     )
-  should.equal(result.family, "Cityreview Robot")
-  should.equal(result.version, None)
+  assert result.family == "Cityreview Robot"
+  assert result.version == None
 }
 
 pub fn ua_parse_917_test() {
@@ -9925,14 +8410,14 @@ pub fn ua_parse_917_test() {
     uaparser.parse_user_agent(
       "Exalead Cloudview Crawler,gzip(gfe),gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "Cloudview Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Cloudview Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_918_test() {
   let result = uaparser.parse_user_agent("Comodo-Certificates-Spider")
-  should.equal(result.family, "Comodo-Certificates-Spider")
-  should.equal(result.version, None)
+  assert result.family == "Comodo-Certificates-Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_919_test() {
@@ -9940,11 +8425,8 @@ pub fn ua_parse_919_test() {
     uaparser.parse_user_agent(
       "Computer_and_Automation_Research_Institute_Crawler (crawler@info.ilab.sztaki.hu)",
     )
-  should.equal(
-    result.family,
-    "Computer_and_Automation_Research_Institute_Crawler",
-  )
-  should.equal(result.version, None)
+  assert result.family == "Computer_and_Automation_Research_Institute_Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_920_test() {
@@ -9952,14 +8434,14 @@ pub fn ua_parse_920_test() {
     uaparser.parse_user_agent(
       "Http Connector Spider, contact Alcatel-Lucent IDOL Search",
     )
-  should.equal(result.family, "Connector Spider")
-  should.equal(result.version, None)
+  assert result.family == "Connector Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_921_test() {
   let result = uaparser.parse_user_agent("Content Crawler")
-  should.equal(result.family, "Content Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Content Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_922_test() {
@@ -9967,8 +8449,8 @@ pub fn ua_parse_922_test() {
     uaparser.parse_user_agent(
       "CowCrawler/CowCrawler-dev (+http://beta.cow.com),gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "CowCrawler")
-  should.equal(result.version, None)
+  assert result.family == "CowCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_923_test() {
@@ -9976,11 +8458,9 @@ pub fn ua_parse_923_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; CrawlDaddy v0.3.0 abot v1.1.1.0 http://code.google.com/p/abot)",
     )
-  should.equal(result.family, "CrawlDaddy")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("3"), patch: Some("0"))),
-  )
+  assert result.family == "CrawlDaddy"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("3"), patch: Some("0")))
 }
 
 pub fn ua_parse_924_test() {
@@ -9988,8 +8468,8 @@ pub fn ua_parse_924_test() {
     uaparser.parse_user_agent(
       "CrawlFire - you can disable this Robot: http://pastebin.de/25277",
     )
-  should.equal(result.family, "CrawlFire")
-  should.equal(result.version, None)
+  assert result.family == "CrawlFire"
+  assert result.version == None
 }
 
 pub fn ua_parse_925_test() {
@@ -9997,17 +8477,15 @@ pub fn ua_parse_925_test() {
     uaparser.parse_user_agent(
       "CrawlWave/1.2 (crawlwave[at]circular.gr http://www.spiderwave.aueb.gr/",
     )
-  should.equal(result.family, "CrawlWave")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "CrawlWave"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_926_test() {
   let result = uaparser.parse_user_agent("CrawlerBoy Pinpoint.com")
-  should.equal(result.family, "CrawlerBoy")
-  should.equal(result.version, None)
+  assert result.family == "CrawlerBoy"
+  assert result.version == None
 }
 
 pub fn ua_parse_927_test() {
@@ -10015,8 +8493,8 @@ pub fn ua_parse_927_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 5.0; Windows 98; DigExt; Crayon Crawler)",
     )
-  should.equal(result.family, "Crayon Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Crayon Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_928_test() {
@@ -10024,8 +8502,8 @@ pub fn ua_parse_928_test() {
     uaparser.parse_user_agent(
       "DRKSpider - Website link validator - http://www.drk.com.ar/spider/,gzip(gfe),gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "DRKSpider")
-  should.equal(result.version, None)
+  assert result.family == "DRKSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_929_test() {
@@ -10033,53 +8511,51 @@ pub fn ua_parse_929_test() {
     uaparser.parse_user_agent(
       "DefaultCrawlTest/0.6 (Ram Crawl Test; devarajaswami at yahoo dot com)",
     )
-  should.equal(result.family, "DefaultCrawlTest")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("6"), patch: None)),
-  )
+  assert result.family == "DefaultCrawlTest"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("6"), patch: None))
 }
 
 pub fn ua_parse_930_test() {
   let result = uaparser.parse_user_agent("FFC Trap Door Spider")
-  should.equal(result.family, "Door Spider")
-  should.equal(result.version, None)
+  assert result.family == "Door Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_931_test() {
   let result = uaparser.parse_user_agent("DoubleVerify Crawler")
-  should.equal(result.family, "DoubleVerify Crawler")
-  should.equal(result.version, None)
+  assert result.family == "DoubleVerify Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_932_test() {
   let result = uaparser.parse_user_agent("EasouSpider")
-  should.equal(result.family, "EasouSpider")
-  should.equal(result.version, None)
+  assert result.family == "EasouSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_933_test() {
   let result = uaparser.parse_user_agent("EcoGrader Crawler: Beta")
-  should.equal(result.family, "EcoGrader Crawler")
-  should.equal(result.version, None)
+  assert result.family == "EcoGrader Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_934_test() {
   let result = uaparser.parse_user_agent("Adknowledge Engage Crawler")
-  should.equal(result.family, "Engage Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Engage Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_935_test() {
   let result = uaparser.parse_user_agent("ByWebSite Search Engine Spider")
-  should.equal(result.family, "Engine Spider")
-  should.equal(result.version, None)
+  assert result.family == "Engine Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_936_test() {
   let result = uaparser.parse_user_agent("EverbeeCrawler")
-  should.equal(result.family, "EverbeeCrawler")
-  should.equal(result.version, None)
+  assert result.family == "EverbeeCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_937_test() {
@@ -10087,14 +8563,14 @@ pub fn ua_parse_937_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Ex-Crawler/v0.1.5ALPHA SVN rev58; powered by ex-crawler; +http://www.ex-crawler.de/) Java/1.6.0_20,gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "Ex-Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Ex-Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_938_test() {
   let result = uaparser.parse_user_agent("ExactSeek_Spider")
-  should.equal(result.family, "ExactSeek_Spider")
-  should.equal(result.version, None)
+  assert result.family == "ExactSeek_Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_939_test() {
@@ -10102,8 +8578,8 @@ pub fn ua_parse_939_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; FastCrawler3, support-fastcrawler3@fast.no)",
     )
-  should.equal(result.family, "FastCrawler3")
-  should.equal(result.version, None)
+  assert result.family == "FastCrawler3"
+  assert result.version == None
 }
 
 pub fn ua_parse_940_test() {
@@ -10111,8 +8587,8 @@ pub fn ua_parse_940_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Finderbots finder bot; +http://wiki.github.com/bixo/bixo/bixocrawler; bixo-dev@yahoogroups.com)",
     )
-  should.equal(result.family, "Finderbots")
-  should.equal(result.version, None)
+  assert result.family == "Finderbots"
+  assert result.version == None
 }
 
 pub fn ua_parse_941_test() {
@@ -10120,8 +8596,8 @@ pub fn ua_parse_941_test() {
     uaparser.parse_user_agent(
       "Findexa Crawler (http://www.findexa.no/gulesider/article26548.ece)",
     )
-  should.equal(result.family, "Findexa Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Findexa Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_942_test() {
@@ -10129,8 +8605,8 @@ pub fn ua_parse_942_test() {
     uaparser.parse_user_agent(
       "Mozilla/3.0 (compatible; Fluffy the spider; http://www.searchhippo.com/; info@searchhippo.com)",
     )
-  should.equal(result.family, "Fluffy the spider")
-  should.equal(result.version, None)
+  assert result.family == "Fluffy the spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_943_test() {
@@ -10138,21 +8614,21 @@ pub fn ua_parse_943_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0) (Atsameip FreeCrawl!)",
     )
-  should.equal(result.family, "FreeCrawl")
-  should.equal(result.version, None)
+  assert result.family == "FreeCrawl"
+  assert result.version == None
 }
 
 pub fn ua_parse_944_test() {
   let result = uaparser.parse_user_agent("Fujiko Spider (fujiko@inelegant.org)")
-  should.equal(result.family, "Fujiko Spider")
-  should.equal(result.version, None)
+  assert result.family == "Fujiko Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_945_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/5.0 (compatible; FunkyCrawler; )")
-  should.equal(result.family, "FunkyCrawler")
-  should.equal(result.version, None)
+  assert result.family == "FunkyCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_946_test() {
@@ -10160,8 +8636,8 @@ pub fn ua_parse_946_test() {
     uaparser.parse_user_agent(
       "GSiteCrawler/v1.12 rev. 260 (http://gsitecrawler.com/)",
     )
-  should.equal(result.family, "GSiteCrawler")
-  should.equal(result.version, None)
+  assert result.family == "GSiteCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_947_test() {
@@ -10169,8 +8645,8 @@ pub fn ua_parse_947_test() {
     uaparser.parse_user_agent(
       "GeekTools Crawler - http://domains.geek-tools.org",
     )
-  should.equal(result.family, "GeekTools Crawler")
-  should.equal(result.version, None)
+  assert result.family == "GeekTools Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_948_test() {
@@ -10178,14 +8654,14 @@ pub fn ua_parse_948_test() {
     uaparser.parse_user_agent(
       "Mozilla 4.0 - GetMeLinked Spider www.GetMeLinked.com Web Directory",
     )
-  should.equal(result.family, "GetMeLinked Spider")
-  should.equal(result.version, None)
+  assert result.family == "GetMeLinked Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_949_test() {
   let result = uaparser.parse_user_agent("Gnam Gnam Spider")
-  should.equal(result.family, "Gnam Spider")
-  should.equal(result.version, None)
+  assert result.family == "Gnam Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_950_test() {
@@ -10193,14 +8669,14 @@ pub fn ua_parse_950_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; GoGuidesBot; http://www.goguides.org/spider.html)",
     )
-  should.equal(result.family, "GoGuidesBot")
-  should.equal(result.version, None)
+  assert result.family == "GoGuidesBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_951_test() {
   let result = uaparser.parse_user_agent("GoScraper")
-  should.equal(result.family, "GoScraper")
-  should.equal(result.version, None)
+  assert result.family == "GoScraper"
+  assert result.version == None
 }
 
 pub fn ua_parse_952_test() {
@@ -10208,8 +8684,8 @@ pub fn ua_parse_952_test() {
     uaparser.parse_user_agent(
       "GrowerIdeas Crawler/GrowerIdeas-nutch-1.6 (Crawls URLs for indexing content for our new search startup which aims to provide simple and smart search across curated content. For more info please contact helloworld@growerideas.com. If you think",
     )
-  should.equal(result.family, "GrowerIdeas Crawler")
-  should.equal(result.version, None)
+  assert result.family == "GrowerIdeas Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_953_test() {
@@ -10217,33 +8693,33 @@ pub fn ua_parse_953_test() {
     uaparser.parse_user_agent(
       "Huaweisymantecspider (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727),gzip(gfe)",
     )
-  should.equal(result.family, "Huaweisymantecspider")
-  should.equal(result.version, None)
+  assert result.family == "Huaweisymantecspider"
+  assert result.version == None
 }
 
 pub fn ua_parse_954_test() {
   let result = uaparser.parse_user_agent("BlogPulse (ISSpider-3.0)")
-  should.equal(result.family, "ISSpider")
-  should.equal(result.version, None)
+  assert result.family == "ISSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_955_test() {
   let result = uaparser.parse_user_agent("IWE Spider v.01 - www.pavka.com.au")
-  should.equal(result.family, "IWE Spider")
-  should.equal(result.version, None)
+  assert result.family == "IWE Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_956_test() {
   let result = uaparser.parse_user_agent("IXE Crawler")
-  should.equal(result.family, "IXE Crawler")
-  should.equal(result.version, None)
+  assert result.family == "IXE Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_957_test() {
   let result =
     uaparser.parse_user_agent("Imperia-LinkSpider,gzip(gfe),gzip(gfe)")
-  should.equal(result.family, "Imperia-LinkSpider")
-  should.equal(result.version, None)
+  assert result.family == "Imperia-LinkSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_958_test() {
@@ -10251,14 +8727,14 @@ pub fn ua_parse_958_test() {
     uaparser.parse_user_agent(
       "netEstate Impressumscrawler (+http://www.netestate.de/De/Loesungen/Impressumscrawler)",
     )
-  should.equal(result.family, "Impressumscrawler")
-  should.equal(result.version, None)
+  assert result.family == "Impressumscrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_959_test() {
   let result = uaparser.parse_user_agent("Inar_spider2 (tspyyp@tom.com)")
-  should.equal(result.family, "Inar_spider2")
-  should.equal(result.version, None)
+  assert result.family == "Inar_spider2"
+  assert result.version == None
 }
 
 pub fn ua_parse_960_test() {
@@ -10266,8 +8742,8 @@ pub fn ua_parse_960_test() {
     uaparser.parse_user_agent(
       "IOI/2.0 (ISC Open Index crawler; http://index.isc.org/; bot@index.isc.org)",
     )
-  should.equal(result.family, "Index crawler")
-  should.equal(result.version, None)
+  assert result.family == "Index crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_961_test() {
@@ -10275,8 +8751,8 @@ pub fn ua_parse_961_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 5.5; Windows 98; Infocrawler; Alexa Toolbar)",
     )
-  should.equal(result.family, "Infocrawler")
-  should.equal(result.version, None)
+  assert result.family == "Infocrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_962_test() {
@@ -10284,15 +8760,15 @@ pub fn ua_parse_962_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; Inspyder-Crawler; http://www.inspyder.com)",
     )
-  should.equal(result.family, "Inspyder-Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Inspyder-Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_963_test() {
   let result =
     uaparser.parse_user_agent("Willow Internet Crawler by Twotrees V2.1")
-  should.equal(result.family, "Internet Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Internet Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_964_test() {
@@ -10300,17 +8776,15 @@ pub fn ua_parse_964_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (SKIZZLE! Distributed Internet Spider v1.0 - www.SKIZZLE.com)",
     )
-  should.equal(result.family, "Internet Spider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Internet Spider"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_965_test() {
   let result = uaparser.parse_user_agent("IssueCrawler")
-  should.equal(result.family, "IssueCrawler")
-  should.equal(result.version, None)
+  assert result.family == "IssueCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_966_test() {
@@ -10318,21 +8792,21 @@ pub fn ua_parse_966_test() {
     uaparser.parse_user_agent(
       "JUST-CRAWLER( http://www.justsystems.com/jp/tech/crawler/)",
     )
-  should.equal(result.family, "JUST-CRAWLER")
-  should.equal(result.version, None)
+  assert result.family == "JUST-CRAWLER"
+  assert result.version == None
 }
 
 pub fn ua_parse_967_test() {
   let result = uaparser.parse_user_agent("Jayde Crawler. http://www.jayde.com")
-  should.equal(result.family, "Jayde Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Jayde Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_968_test() {
   let result =
     uaparser.parse_user_agent("JikeSpider; +http://shoulu.jike.com/spider.html")
-  should.equal(result.family, "JikeSpider")
-  should.equal(result.version, None)
+  assert result.family == "JikeSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_969_test() {
@@ -10340,17 +8814,15 @@ pub fn ua_parse_969_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible;WI Job Roboter Spider Version 3;+http://www.webintegration.at)",
     )
-  should.equal(result.family, "Job Roboter")
-  should.equal(result.version, None)
+  assert result.family == "Job Roboter"
+  assert result.version == None
 }
 
 pub fn ua_parse_970_test() {
   let result = uaparser.parse_user_agent("JobSpider_BA/1.1")
-  should.equal(result.family, "JobSpider_BA")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "JobSpider_BA"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_971_test() {
@@ -10358,8 +8830,8 @@ pub fn ua_parse_971_test() {
     uaparser.parse_user_agent(
       "KiwiStatus (NZS.com)/0.2 (NZS.com KiwiStatus Spider,  Local Search New Zealand; http://www.nzs.com; bot-at-nzs dot com)",
     )
-  should.equal(result.family, "KiwiStatus Spider")
-  should.equal(result.version, None)
+  assert result.family == "KiwiStatus Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_972_test() {
@@ -10367,8 +8839,8 @@ pub fn ua_parse_972_test() {
     uaparser.parse_user_agent(
       "Kotoss Crawler http://hitokoto.kotoss.com,gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "Kotoss Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Kotoss Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_973_test() {
@@ -10376,27 +8848,27 @@ pub fn ua_parse_973_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Kyluka crawl; crawl@kyluka.com; http://www.kyluka.com/static/crawl.html)",
     )
-  should.equal(result.family, "Kyluka crawl")
-  should.equal(result.version, None)
+  assert result.family == "Kyluka crawl"
+  assert result.version == None
 }
 
 pub fn ua_parse_974_test() {
   let result = uaparser.parse_user_agent("LNSpiderguy")
-  should.equal(result.family, "LNSpiderguy")
-  should.equal(result.version, None)
+  assert result.family == "LNSpiderguy"
+  assert result.version == None
 }
 
 pub fn ua_parse_975_test() {
   let result =
     uaparser.parse_user_agent("LarbinWebCrawler (internet@bredband.net)")
-  should.equal(result.family, "LarbinWebCrawler")
-  should.equal(result.version, None)
+  assert result.family == "LarbinWebCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_976_test() {
   let result = uaparser.parse_user_agent("LargeSmall Crawler")
-  should.equal(result.family, "LargeSmall Crawler")
-  should.equal(result.version, None)
+  assert result.family == "LargeSmall Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_977_test() {
@@ -10404,15 +8876,15 @@ pub fn ua_parse_977_test() {
     uaparser.parse_user_agent(
       "Lijit Crawler (+http://www.lijit.com/robot/crawler)",
     )
-  should.equal(result.family, "Lijit Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Lijit Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_978_test() {
   let result =
     uaparser.parse_user_agent("DocWeb Link Crawler (http://doc.php.net)")
-  should.equal(result.family, "Link Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Link Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_979_test() {
@@ -10420,21 +8892,21 @@ pub fn ua_parse_979_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Lipperhey Spider; http://www.lipperhey.com/)",
     )
-  should.equal(result.family, "Lipperhey Spider")
-  should.equal(result.version, None)
+  assert result.family == "Lipperhey Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_980_test() {
   let result =
     uaparser.parse_user_agent("LookUpCrawler - lookupcanada.ca [ZSEBOT]")
-  should.equal(result.family, "LookUpCrawler")
-  should.equal(result.version, None)
+  assert result.family == "LookUpCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_981_test() {
   let result = uaparser.parse_user_agent("Lycos_Spider_(modspider)")
-  should.equal(result.family, "Lycos_Spider_")
-  should.equal(result.version, None)
+  assert result.family == "Lycos_Spider_"
+  assert result.version == None
 }
 
 pub fn ua_parse_982_test() {
@@ -10442,36 +8914,34 @@ pub fn ua_parse_982_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0) METASpider",
     )
-  should.equal(result.family, "METASpider")
-  should.equal(result.version, None)
+  assert result.family == "METASpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_983_test() {
   let result =
     uaparser.parse_user_agent("MQbot http://metaquerier.cs.uiuc.edu/crawler")
-  should.equal(result.family, "MQbot")
-  should.equal(result.version, None)
+  assert result.family == "MQbot"
+  assert result.version == None
 }
 
 pub fn ua_parse_984_test() {
   let result = uaparser.parse_user_agent("MSIndianWebcrawl")
-  should.equal(result.family, "MSIndianWebcrawl")
-  should.equal(result.version, None)
+  assert result.family == "MSIndianWebcrawl"
+  assert result.version == None
 }
 
 pub fn ua_parse_985_test() {
   let result = uaparser.parse_user_agent("MSR-ISRCCrawler")
-  should.equal(result.family, "MSR-ISRCCrawler")
-  should.equal(result.version, None)
+  assert result.family == "MSR-ISRCCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_986_test() {
   let result = uaparser.parse_user_agent("MedSpider v0.0.1")
-  should.equal(result.family, "MedSpider")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "MedSpider"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_987_test() {
@@ -10479,8 +8949,8 @@ pub fn ua_parse_987_test() {
     uaparser.parse_user_agent(
       "Social Media Crawler using your Home URL on Twitter,Facebook,Myspace,Linkedin by ProfileCapture - contact profilecapture@gmail.com to report any problems with my crawling. http://profilecapture.com",
     )
-  should.equal(result.family, "Media Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Media Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_988_test() {
@@ -10488,8 +8958,8 @@ pub fn ua_parse_988_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible); MSIE 5.0; Medialab Spider",
     )
-  should.equal(result.family, "Medialab Spider")
-  should.equal(result.version, None)
+  assert result.family == "Medialab Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_989_test() {
@@ -10497,8 +8967,8 @@ pub fn ua_parse_989_test() {
     uaparser.parse_user_agent(
       "DomainsDB.net MetaCrawler v.0.9.7b (http://domainsdb.net/)",
     )
-  should.equal(result.family, "MetaCrawler")
-  should.equal(result.version, None)
+  assert result.family == "MetaCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_990_test() {
@@ -10506,8 +8976,8 @@ pub fn ua_parse_990_test() {
     uaparser.parse_user_agent(
       "FAST MetaWeb Crawler (helpdesk at fastsearch dot com)",
     )
-  should.equal(result.family, "MetaWeb Crawler")
-  should.equal(result.version, None)
+  assert result.family == "MetaWeb Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_991_test() {
@@ -10515,8 +8985,8 @@ pub fn ua_parse_991_test() {
     uaparser.parse_user_agent(
       "CC Metadata Scaper http://wiki.creativecommons.org/Metadata_Scraper",
     )
-  should.equal(result.family, "Metadata_Scraper")
-  should.equal(result.version, None)
+  assert result.family == "Metadata_Scraper"
+  assert result.version == None
 }
 
 pub fn ua_parse_992_test() {
@@ -10524,8 +8994,8 @@ pub fn ua_parse_992_test() {
     uaparser.parse_user_agent(
       "MicrosoftPrototypeCrawler (How's my crawling? mailto:newbiecrawler@hotmail.com)",
     )
-  should.equal(result.family, "MicrosoftPrototypeCrawler")
-  should.equal(result.version, None)
+  assert result.family == "MicrosoftPrototypeCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_993_test() {
@@ -10533,21 +9003,21 @@ pub fn ua_parse_993_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; MixrankBot; crawler@mixrank.com)",
     )
-  should.equal(result.family, "MixrankBot")
-  should.equal(result.version, None)
+  assert result.family == "MixrankBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_994_test() {
   let result =
     uaparser.parse_user_agent("Sogou Mobile Spider1.0 (http://wap.sogou.com)")
-  should.equal(result.family, "Mobile Spider1")
-  should.equal(result.version, None)
+  assert result.family == "Mobile Spider1"
+  assert result.version == None
 }
 
 pub fn ua_parse_995_test() {
   let result = uaparser.parse_user_agent("Mozilla-Firefox-Spider(Wenanry)")
-  should.equal(result.family, "Mozilla-Firefox-Spider")
-  should.equal(result.version, None)
+  assert result.family == "Mozilla-Firefox-Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_996_test() {
@@ -10555,8 +9025,8 @@ pub fn ua_parse_996_test() {
     uaparser.parse_user_agent(
       "MultiCrawler, http://sw.deri.org/2006/04/multicrawler/robots.html",
     )
-  should.equal(result.family, "MultiCrawler")
-  should.equal(result.version, None)
+  assert result.family == "MultiCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_997_test() {
@@ -10564,27 +9034,27 @@ pub fn ua_parse_997_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; U; Windows NT 6.1; en; rv:1.9.1.3; MySpaceScraper) Gecko/20090824 Firefox/3.5.3 (.NET CLR 3.5.30729)",
     )
-  should.equal(result.family, "MySpaceScraper")
-  should.equal(result.version, None)
+  assert result.family == "MySpaceScraper"
+  assert result.version == None
 }
 
 pub fn ua_parse_998_test() {
   let result = uaparser.parse_user_agent("Norbert the Spider(Burf.com)")
-  should.equal(result.family, "Norbert the Spider")
-  should.equal(result.version, None)
+  assert result.family == "Norbert the Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_999_test() {
   let result = uaparser.parse_user_agent("NuSearch Spider www.nusearch.com")
-  should.equal(result.family, "NuSearch Spider")
-  should.equal(result.version, None)
+  assert result.family == "NuSearch Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1000_test() {
   let result =
     uaparser.parse_user_agent("Nusearch Spider (compatible; MSIE 6.0)")
-  should.equal(result.family, "Nusearch Spider")
-  should.equal(result.version, None)
+  assert result.family == "Nusearch Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1001_test() {
@@ -10592,8 +9062,8 @@ pub fn ua_parse_1001_test() {
     uaparser.parse_user_agent(
       "OpenWebSpider (link collector; http://links.port30.se/cia.html) v (http://www.openwebspider.org/)",
     )
-  should.equal(result.family, "OpenWebSpider")
-  should.equal(result.version, None)
+  assert result.family == "OpenWebSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1002_test() {
@@ -10601,8 +9071,8 @@ pub fn ua_parse_1002_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; OpenX Spider; http://www.openx.org)",
     )
-  should.equal(result.family, "OpenX Spider")
-  should.equal(result.version, None)
+  assert result.family == "OpenX Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1003_test() {
@@ -10610,8 +9080,8 @@ pub fn ua_parse_1003_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; OpenindexSpider; +http://www.openindex.io/en/webmasters/spider.html)",
     )
-  should.equal(result.family, "OpenindexSpider")
-  should.equal(result.version, None)
+  assert result.family == "OpenindexSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1004_test() {
@@ -10619,14 +9089,14 @@ pub fn ua_parse_1004_test() {
     uaparser.parse_user_agent(
       "Orgbybot/OrgbyBot v1.2 (Spidering the net for Orgby; http://www.orgby.com/  ; Orgby.com Search Engine)",
     )
-  should.equal(result.family, "Orgbybot")
-  should.equal(result.version, None)
+  assert result.family == "Orgbybot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1005_test() {
   let result = uaparser.parse_user_agent("PDFBot (crawler@pdfind.com)")
-  should.equal(result.family, "PDFBot")
-  should.equal(result.version, None)
+  assert result.family == "PDFBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1006_test() {
@@ -10634,14 +9104,14 @@ pub fn ua_parse_1006_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; SLCC1; .NET CLR 2.0.50727; .NET CLR 1.1.4322; InfoPath.2; .NET CLR 3.5.21022; .NET CLR 3.5.30729; MS-RTC LM 8; OfficeLiveConnector.1.4; OfficeLivePatch.1.3; .NET CLR 3.0.30729) Jakarta Commons-HttpClient/3.0-rc3 PHPCrawl GStreamer souphttpsrc libsoup/2.27.4 PycURL/7.19.0 XML-RPC for PHP 2.2.1 GoogleFriendConnect/1.0 HTMLParser/1.6 gPodder/0.15.2 ( http://gpodder.org/) anw webtool LoadControl/1.3 WinHttp urlgrabber/3.1.0",
     )
-  should.equal(result.family, "PHPCrawl")
-  should.equal(result.version, None)
+  assert result.family == "PHPCrawl"
+  assert result.version == None
 }
 
 pub fn ua_parse_1007_test() {
   let result = uaparser.parse_user_agent("Fast PartnerSite Crawler")
-  should.equal(result.family, "PartnerSite Crawler")
-  should.equal(result.version, None)
+  assert result.family == "PartnerSite Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1008_test() {
@@ -10649,20 +9119,20 @@ pub fn ua_parse_1008_test() {
     uaparser.parse_user_agent(
       "Patwebbot (http://www.herz-power.de/technik.html)",
     )
-  should.equal(result.family, "Patwebbot")
-  should.equal(result.version, None)
+  assert result.family == "Patwebbot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1009_test() {
   let result = uaparser.parse_user_agent("PeerFactor Crawler")
-  should.equal(result.family, "PeerFactor Crawler")
-  should.equal(result.version, None)
+  assert result.family == "PeerFactor Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1010_test() {
   let result = uaparser.parse_user_agent("PhoenixWebBot Beta")
-  should.equal(result.family, "PhoenixWebBot")
-  should.equal(result.version, None)
+  assert result.family == "PhoenixWebBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1011_test() {
@@ -10670,20 +9140,20 @@ pub fn ua_parse_1011_test() {
     uaparser.parse_user_agent(
       "pipeLiner/0.10 (PipeLine Spider; http://www.pipeline-search.com/webmaster.html)",
     )
-  should.equal(result.family, "PipeLine Spider")
-  should.equal(result.version, None)
+  assert result.family == "PipeLine Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1012_test() {
   let result = uaparser.parse_user_agent("ProjectWF-java-test-crawler")
-  should.equal(result.family, "ProjectWF-java-test-crawler")
-  should.equal(result.version, None)
+  assert result.family == "ProjectWF-java-test-crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1013_test() {
   let result = uaparser.parse_user_agent("Punk Spider/PunkSPIDER-v0.1")
-  should.equal(result.family, "Punk Spider")
-  should.equal(result.version, None)
+  assert result.family == "Punk Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1014_test() {
@@ -10691,20 +9161,20 @@ pub fn ua_parse_1014_test() {
     uaparser.parse_user_agent(
       "QuerySeekerSpider ( http://queryseeker.com/bot.html )",
     )
-  should.equal(result.family, "QuerySeekerSpider")
-  should.equal(result.version, None)
+  assert result.family == "QuerySeekerSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1015_test() {
   let result = uaparser.parse_user_agent("QuickFinder Crawler")
-  should.equal(result.family, "QuickFinder Crawler")
-  should.equal(result.version, None)
+  assert result.family == "QuickFinder Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1016_test() {
   let result = uaparser.parse_user_agent("OpenLink Virtuoso RDF crawler")
-  should.equal(result.family, "RDF crawler")
-  should.equal(result.version, None)
+  assert result.family == "RDF crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1017_test() {
@@ -10712,8 +9182,8 @@ pub fn ua_parse_1017_test() {
     uaparser.parse_user_agent(
       "Jaxified Public RSS Crawler ( http://www.jaxified.com/)",
     )
-  should.equal(result.family, "RSS Crawler")
-  should.equal(result.version, None)
+  assert result.family == "RSS Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1018_test() {
@@ -10721,20 +9191,20 @@ pub fn ua_parse_1018_test() {
     uaparser.parse_user_agent(
       "RSS-SPIDER (RSS Feed Seeker http://www.MyNewFavoriteThing.com/fsb.php)",
     )
-  should.equal(result.family, "RSS-SPIDER")
-  should.equal(result.version, None)
+  assert result.family == "RSS-SPIDER"
+  assert result.version == None
 }
 
 pub fn ua_parse_1019_test() {
   let result = uaparser.parse_user_agent("RavenCrawler")
-  should.equal(result.family, "RavenCrawler")
-  should.equal(result.version, None)
+  assert result.family == "RavenCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1020_test() {
   let result = uaparser.parse_user_agent("ReadPath_Spider")
-  should.equal(result.family, "ReadPath_Spider")
-  should.equal(result.version, None)
+  assert result.family == "ReadPath_Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1021_test() {
@@ -10742,20 +9212,20 @@ pub fn ua_parse_1021_test() {
     uaparser.parse_user_agent(
       "LinkStar Research Crawler (http://linkstar.com/),gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "Research Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Research Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1022_test() {
   let result = uaparser.parse_user_agent("Research spider - ak1835@albany.edu")
-  should.equal(result.family, "Research spider")
-  should.equal(result.version, None)
+  assert result.family == "Research spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1023_test() {
   let result = uaparser.parse_user_agent("RoboCrawl (www.canadiancontent.net)")
-  should.equal(result.family, "RoboCrawl")
-  should.equal(result.version, None)
+  assert result.family == "RoboCrawl"
+  assert result.version == None
 }
 
 pub fn ua_parse_1024_test() {
@@ -10763,14 +9233,14 @@ pub fn ua_parse_1024_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.2; WOW64) Runet-Research-Crawler (itrack.ru/research/cmsrate; rating@itrack.ru)",
     )
-  should.equal(result.family, "Runet-Research-Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Runet-Research-Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1025_test() {
   let result = uaparser.parse_user_agent("Teragram/SAS Crawler")
-  should.equal(result.family, "SAS Crawler")
-  should.equal(result.version, None)
+  assert result.family == "SAS Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1026_test() {
@@ -10778,8 +9248,8 @@ pub fn ua_parse_1026_test() {
     uaparser.parse_user_agent(
       "SCrawlTest/CR1 (CWD; http://sproose.com; crawl@sproose.com)",
     )
-  should.equal(result.family, "SCrawlTest")
-  should.equal(result.version, None)
+  assert result.family == "SCrawlTest"
+  assert result.version == None
 }
 
 pub fn ua_parse_1027_test() {
@@ -10787,8 +9257,8 @@ pub fn ua_parse_1027_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; SISTRIX Crawler; http://crawler.sistrix.net/)",
     )
-  should.equal(result.family, "SISTRIX Crawler")
-  should.equal(result.version, None)
+  assert result.family == "SISTRIX Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1028_test() {
@@ -10796,8 +9266,8 @@ pub fn ua_parse_1028_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.101 Safari/537.36; SSL-Crawler: http://crawler.dcsec.uni-hannover.de",
     )
-  should.equal(result.family, "SSL-Crawler")
-  should.equal(result.version, None)
+  assert result.family == "SSL-Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1029_test() {
@@ -10805,20 +9275,20 @@ pub fn ua_parse_1029_test() {
     uaparser.parse_user_agent(
       "SWAT Crawler. AGH University project. In case of problem contact: opal@tempus.metal.agh.edu.pl. Thanks.",
     )
-  should.equal(result.family, "SWAT Crawler")
-  should.equal(result.version, None)
+  assert result.family == "SWAT Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1030_test() {
   let result = uaparser.parse_user_agent("SandCrawler - Compatibility Testing")
-  should.equal(result.family, "SandCrawler")
-  should.equal(result.version, None)
+  assert result.family == "SandCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1031_test() {
   let result = uaparser.parse_user_agent("Sangfor Spider")
-  should.equal(result.family, "Sangfor Spider")
-  should.equal(result.version, None)
+  assert result.family == "Sangfor Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1032_test() {
@@ -10826,8 +9296,8 @@ pub fn ua_parse_1032_test() {
     uaparser.parse_user_agent(
       "Mozilla/3.0 (compatible; ScollSpider; http://www.webwobot.com)",
     )
-  should.equal(result.family, "ScollSpider")
-  should.equal(result.version, None)
+  assert result.family == "ScollSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1033_test() {
@@ -10835,33 +9305,33 @@ pub fn ua_parse_1033_test() {
     uaparser.parse_user_agent(
       "ScreenerBot Crawler Beta 2.0 (+http://www.ScreenerBot.com)",
     )
-  should.equal(result.family, "ScreenerBot")
-  should.equal(result.version, None)
+  assert result.family == "ScreenerBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1034_test() {
   let result = uaparser.parse_user_agent("SearchSpider.com/1.1")
-  should.equal(result.family, "SearchSpider")
-  should.equal(result.version, None)
+  assert result.family == "SearchSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1035_test() {
   let result = uaparser.parse_user_agent("ownCloud Server Crawler")
-  should.equal(result.family, "Server Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Server Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1036_test() {
   let result = uaparser.parse_user_agent("Shim-Crawler")
-  should.equal(result.family, "Shim-Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Shim-Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1037_test() {
   let result =
     uaparser.parse_user_agent("ShowyouBot (http://showyou.com/crawler)")
-  should.equal(result.family, "crawler")
-  should.equal(result.version, None)
+  assert result.family == "crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1038_test() {
@@ -10869,14 +9339,14 @@ pub fn ua_parse_1038_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.0) SiteCheck-sitecrawl by Siteimprove.com",
     )
-  should.equal(result.family, "SiteCheck-sitecrawl")
-  should.equal(result.version, None)
+  assert result.family == "SiteCheck-sitecrawl"
+  assert result.version == None
 }
 
 pub fn ua_parse_1039_test() {
   let result = uaparser.parse_user_agent("SiteCrawler,gzip(gfe),gzip(gfe)")
-  should.equal(result.family, "SiteCrawler")
-  should.equal(result.version, None)
+  assert result.family == "SiteCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1040_test() {
@@ -10884,14 +9354,14 @@ pub fn ua_parse_1040_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.5 (compatible; MSIE 5.5; Windows NT 5.1) Sitespider+ b432.1",
     )
-  should.equal(result.family, "Sitespider")
-  should.equal(result.version, None)
+  assert result.family == "Sitespider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1041_test() {
   let result = uaparser.parse_user_agent("SocialSpider-Finder/0.2")
-  should.equal(result.family, "SocialSpider")
-  should.equal(result.version, None)
+  assert result.family == "SocialSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1042_test() {
@@ -10899,8 +9369,8 @@ pub fn ua_parse_1042_test() {
     uaparser.parse_user_agent(
       "Sosoblogspider+(+http://help.soso.com/soso-blog-spider.htm)",
     )
-  should.equal(result.family, "Sosoblogspider")
-  should.equal(result.version, None)
+  assert result.family == "Sosoblogspider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1043_test() {
@@ -10908,15 +9378,15 @@ pub fn ua_parse_1043_test() {
     uaparser.parse_user_agent(
       "Sosoimagespider ( http://help.soso.com/soso-image-spider.htm)",
     )
-  should.equal(result.family, "Sosoimagespider")
-  should.equal(result.version, None)
+  assert result.family == "Sosoimagespider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1044_test() {
   let result =
     uaparser.parse_user_agent("Sosospider+(+help.soso.com/webspider.htm)")
-  should.equal(result.family, "Sosospider")
-  should.equal(result.version, None)
+  assert result.family == "Sosospider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1045_test() {
@@ -10924,17 +9394,15 @@ pub fn ua_parse_1045_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; SpeedySpider; www.entireweb.com)",
     )
-  should.equal(result.family, "SpeedySpider")
-  should.equal(result.version, None)
+  assert result.family == "SpeedySpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1046_test() {
   let result = uaparser.parse_user_agent("SpiderKU/0.9")
-  should.equal(result.family, "SpiderKU")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: None)),
-  )
+  assert result.family == "SpiderKU"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: None))
 }
 
 pub fn ua_parse_1047_test() {
@@ -10942,28 +9410,24 @@ pub fn ua_parse_1047_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; SpiderLing (a SPIDER for LINGustic research); +http://nlp.fi.muni.cz/projects/biwec/)",
     )
-  should.equal(result.family, "SpiderLing")
-  should.equal(result.version, None)
+  assert result.family == "SpiderLing"
+  assert result.version == None
 }
 
 pub fn ua_parse_1048_test() {
   let result =
     uaparser.parse_user_agent("SpiderMan 3.0.1-2-11-111 (CP/M;8-bit)")
-  should.equal(result.family, "SpiderMan")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "SpiderMan"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_1049_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/4.0 (compatible; SpiderView 1.0;unix)")
-  should.equal(result.family, "SpiderView")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "SpiderView"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1050_test() {
@@ -10971,11 +9435,9 @@ pub fn ua_parse_1050_test() {
     uaparser.parse_user_agent(
       "Spider_Monkey/7.06 (SpiderMonkey.ca info at http://SpiderMonkey.ca /sm.shtml)",
     )
-  should.equal(result.family, "Spider_Monkey")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("06"), patch: None)),
-  )
+  assert result.family == "Spider_Monkey"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("06"), patch: None))
 }
 
 pub fn ua_parse_1051_test() {
@@ -10983,24 +9445,22 @@ pub fn ua_parse_1051_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Spiderlytics/1.0; +spider@spiderlytics.com)",
     )
-  should.equal(result.family, "Spiderlytics")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Spiderlytics"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1052_test() {
   let result = uaparser.parse_user_agent("PKU Student Spider")
-  should.equal(result.family, "Student Spider")
-  should.equal(result.version, None)
+  assert result.family == "Student Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1053_test() {
   let result =
     uaparser.parse_user_agent("Symfony Spider (http://symfony.com/spider)")
-  should.equal(result.family, "Symfony Spider")
-  should.equal(result.version, None)
+  assert result.family == "Symfony Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1054_test() {
@@ -11008,39 +9468,35 @@ pub fn ua_parse_1054_test() {
     uaparser.parse_user_agent(
       "Synthesio Crawler release MonaLisa (contact at synthesio dot fr)",
     )
-  should.equal(result.family, "Synthesio Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Synthesio Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1055_test() {
   let result = uaparser.parse_user_agent("TAMU_CS_IRL_CRAWLER/1.0")
-  should.equal(result.family, "TAMU_CS_IRL_CRAWLER")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "TAMU_CS_IRL_CRAWLER"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1056_test() {
   let result = uaparser.parse_user_agent("TTop-Crawler,gzip(gfe),gzip(gfe)")
-  should.equal(result.family, "TTop-Crawler")
-  should.equal(result.version, None)
+  assert result.family == "TTop-Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1057_test() {
   let result =
     uaparser.parse_user_agent("TayaCrawler (Beta; v0.1; tayadev@nexdegree.com)")
-  should.equal(result.family, "TayaCrawler")
-  should.equal(result.version, None)
+  assert result.family == "TayaCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1058_test() {
   let result = uaparser.parse_user_agent("TelemetrySpider2/0.1 linux")
-  should.equal(result.family, "TelemetrySpider2")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "TelemetrySpider2"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_1059_test() {
@@ -11048,14 +9504,14 @@ pub fn ua_parse_1059_test() {
     uaparser.parse_user_agent(
       "Theme Spider ( http://www.themespider.com/spider.html)",
     )
-  should.equal(result.family, "Theme Spider")
-  should.equal(result.version, None)
+  assert result.family == "Theme Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1060_test() {
   let result = uaparser.parse_user_agent("Thesis_php_crawler")
-  should.equal(result.family, "Thesis_php_crawler")
-  should.equal(result.version, None)
+  assert result.family == "Thesis_php_crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1061_test() {
@@ -11063,47 +9519,47 @@ pub fn ua_parse_1061_test() {
     uaparser.parse_user_agent(
       "Trends Crawler, Real time trends bot (info@trendscrawler.com)",
     )
-  should.equal(result.family, "Trends Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Trends Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1062_test() {
   let result = uaparser.parse_user_agent("TwitSpider")
-  should.equal(result.family, "TwitSpider")
-  should.equal(result.version, None)
+  assert result.family == "TwitSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1063_test() {
   let result =
     uaparser.parse_user_agent("Twitmunin Crawler http://www.twitmunin.com")
-  should.equal(result.family, "Twitmunin Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Twitmunin Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1064_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/5.0 (compatible; TwitterCrawler)")
-  should.equal(result.family, "TwitterCrawler")
-  should.equal(result.version, None)
+  assert result.family == "TwitterCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1065_test() {
   let result = uaparser.parse_user_agent("UCMore Crawler App")
-  should.equal(result.family, "UCMore Crawler")
-  should.equal(result.version, None)
+  assert result.family == "UCMore Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1066_test() {
   let result = uaparser.parse_user_agent("UOLCrawler (soscrawler@uol.com.br)")
-  should.equal(result.family, "UOLCrawler")
-  should.equal(result.version, None)
+  assert result.family == "UOLCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1067_test() {
   let result =
     uaparser.parse_user_agent("Links4US-Crawler, ( http://links4us.com/)")
-  should.equal(result.family, "US-Crawler")
-  should.equal(result.version, None)
+  assert result.family == "US-Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1068_test() {
@@ -11111,8 +9567,8 @@ pub fn ua_parse_1068_test() {
     uaparser.parse_user_agent(
       "USyd-NLP-Spider (http://www.it.usyd.edu.au/~vinci/bot.html)",
     )
-  should.equal(result.family, "USyd-NLP-Spider")
-  should.equal(result.version, None)
+  assert result.family == "USyd-NLP-Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1069_test() {
@@ -11120,8 +9576,8 @@ pub fn ua_parse_1069_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; UnisterBot; crawler@unister.de)",
     )
-  should.equal(result.family, "UnisterBot")
-  should.equal(result.version, None)
+  assert result.family == "UnisterBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1070_test() {
@@ -11129,8 +9585,8 @@ pub fn ua_parse_1070_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0, VM-Crawler/cs version info  ofni noisrev sc",
     )
-  should.equal(result.family, "VM-Crawler")
-  should.equal(result.version, None)
+  assert result.family == "VM-Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1071_test() {
@@ -11138,42 +9594,40 @@ pub fn ua_parse_1071_test() {
     uaparser.parse_user_agent(
       "WEBB Crawler - see: http://badcheese.com/robots.html",
     )
-  should.equal(result.family, "WEBB Crawler")
-  should.equal(result.version, None)
+  assert result.family == "WEBB Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1072_test() {
   let result = uaparser.parse_user_agent("WSDL Crawler")
-  should.equal(result.family, "WSDL Crawler")
-  should.equal(result.version, None)
+  assert result.family == "WSDL Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1073_test() {
   let result = uaparser.parse_user_agent("EmeraldShield.com WebBot")
-  should.equal(result.family, "com WebBot")
-  should.equal(result.version, None)
+  assert result.family == "com WebBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1074_test() {
   let result = uaparser.parse_user_agent("WebCompanyCrawler")
-  should.equal(result.family, "WebCompanyCrawler")
-  should.equal(result.version, None)
+  assert result.family == "WebCompanyCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1075_test() {
   let result = uaparser.parse_user_agent("WebCrawler v1.3")
-  should.equal(result.family, "WebCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "WebCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_1076_test() {
   let result =
     uaparser.parse_user_agent("WebVulnCrawl.blogspot.com/1.0 libwww-perl/5.803")
-  should.equal(result.family, "WebVulnCrawl")
-  should.equal(result.version, None)
+  assert result.family == "WebVulnCrawl"
+  assert result.version == None
 }
 
 pub fn ua_parse_1077_test() {
@@ -11181,27 +9635,27 @@ pub fn ua_parse_1077_test() {
     uaparser.parse_user_agent(
       "CyberPatrol SiteCat Webbot (http://www.cyberpatrol.com/cyberpatrolcrawler.asp)",
     )
-  should.equal(result.family, "SiteCat Webbot")
-  should.equal(result.version, None)
+  assert result.family == "SiteCat Webbot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1078_test() {
   let result =
     uaparser.parse_user_agent("EricssonR320/R1A (Fast Wireless Crawler)")
-  should.equal(result.family, "Wireless Crawler")
-  should.equal(result.version, None)
+  assert result.family == "Wireless Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1079_test() {
   let result = uaparser.parse_user_agent("X-Crawler")
-  should.equal(result.family, "X-Crawler")
-  should.equal(result.version, None)
+  assert result.family == "X-Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1080_test() {
   let result = uaparser.parse_user_agent("XYZ Spider")
-  should.equal(result.family, "XYZ Spider")
-  should.equal(result.version, None)
+  assert result.family == "XYZ Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1081_test() {
@@ -11209,8 +9663,8 @@ pub fn ua_parse_1081_test() {
     uaparser.parse_user_agent(
       "Y!J-BRJ/YATS crawler (http://help.yahoo.co.jp/help/jp/search/indexing/indexing-15.html)",
     )
-  should.equal(result.family, "YATS crawler")
-  should.equal(result.version, None)
+  assert result.family == "YATS crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1082_test() {
@@ -11218,14 +9672,14 @@ pub fn ua_parse_1082_test() {
     uaparser.parse_user_agent(
       "Y!J-BRO/YFSJ crawler (compatible; Mozilla 4.0; MSIE 5.5; http://help.yahoo.co.jp/help/jp/search/indexing/indexing-15.html; YahooFeedSeekerJp/2.0)",
     )
-  should.equal(result.family, "YFSJ crawler")
-  should.equal(result.version, None)
+  assert result.family == "YFSJ crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1083_test() {
   let result = uaparser.parse_user_agent("YRL_ODP_CRAWLER")
-  should.equal(result.family, "YRL_ODP_CRAWLER")
-  should.equal(result.version, None)
+  assert result.family == "YRL_ODP_CRAWLER"
+  assert result.version == None
 }
 
 pub fn ua_parse_1084_test() {
@@ -11233,8 +9687,8 @@ pub fn ua_parse_1084_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Android 3.0; YRSpider; +http://www.yunrang.com/yrspider.html)",
     )
-  should.equal(result.family, "YRSpider")
-  should.equal(result.version, None)
+  assert result.family == "YRSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1085_test() {
@@ -11242,27 +9696,27 @@ pub fn ua_parse_1085_test() {
     uaparser.parse_user_agent(
       "YebolBot (Email: yebolbot@gmail.com; If the web crawling affects your web service, or you don't like to be crawled by us, please email us. We'll stop crawling immediately.)",
     )
-  should.equal(result.family, "YebolBot")
-  should.equal(result.version, None)
+  assert result.family == "YebolBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1086_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/4.0 (compatible; Yet-Another-Spider; )")
-  should.equal(result.family, "Yet-Another-Spider")
-  should.equal(result.version, None)
+  assert result.family == "Yet-Another-Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1087_test() {
   let result = uaparser.parse_user_agent("YisouSpider")
-  should.equal(result.family, "YisouSpider")
-  should.equal(result.version, None)
+  assert result.family == "YisouSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1088_test() {
   let result = uaparser.parse_user_agent("NL-Crawler")
-  should.equal(result.family, "NL-Crawler")
-  should.equal(result.version, None)
+  assert result.family == "NL-Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1089_test() {
@@ -11270,27 +9724,27 @@ pub fn ua_parse_1089_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; YoudaoBot-rts/1.0; http://www.youdao.com/help/webmaster/spider/; )",
     )
-  should.equal(result.family, "YoudaoBot")
-  should.equal(result.version, None)
+  assert result.family == "YoudaoBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1090_test() {
   let result =
     uaparser.parse_user_agent("ZIBB Crawler (email address / WWW address)")
-  should.equal(result.family, "ZIBB Crawler")
-  should.equal(result.version, None)
+  assert result.family == "ZIBB Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1091_test() {
   let result = uaparser.parse_user_agent("ZillaCrawler")
-  should.equal(result.family, "ZillaCrawler")
-  should.equal(result.version, None)
+  assert result.family == "ZillaCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1092_test() {
   let result = uaparser.parse_user_agent("ZoomSpider - wrensoft.com")
-  should.equal(result.family, "ZoomSpider")
-  should.equal(result.version, None)
+  assert result.family == "ZoomSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1093_test() {
@@ -11298,8 +9752,8 @@ pub fn ua_parse_1093_test() {
     uaparser.parse_user_agent(
       "Zspider (+http://www.zhanzhangsou.com/index.htm)",
     )
-  should.equal(result.family, "Zspider")
-  should.equal(result.version, None)
+  assert result.family == "Zspider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1094_test() {
@@ -11307,8 +9761,8 @@ pub fn ua_parse_1094_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 7.0; acedo crawler extension)",
     )
-  should.equal(result.family, "acedo crawler")
-  should.equal(result.version, None)
+  assert result.family == "acedo crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1095_test() {
@@ -11316,8 +9770,8 @@ pub fn ua_parse_1095_test() {
     uaparser.parse_user_agent(
       "acquia-crawler (detected bad behaviour? please tell us at it@acquia.com),gzip(gfe),gzip(gfe)",
     )
-  should.equal(result.family, "acquia-crawler")
-  should.equal(result.version, None)
+  assert result.family == "acquia-crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1096_test() {
@@ -11325,15 +9779,15 @@ pub fn ua_parse_1096_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.21 (KHTML, like Gecko) adspider Safari/537.21",
     )
-  should.equal(result.family, "adspider")
-  should.equal(result.version, None)
+  assert result.family == "adspider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1097_test() {
   let result =
     uaparser.parse_user_agent("amphetameme crawler (crawler@amphetameme.com)")
-  should.equal(result.family, "amphetameme crawler")
-  should.equal(result.version, None)
+  assert result.family == "amphetameme crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1098_test() {
@@ -11341,8 +9795,8 @@ pub fn ua_parse_1098_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; ayna-crawler  http://www.ayna.com)",
     )
-  should.equal(result.family, "ayna-crawler")
-  should.equal(result.version, None)
+  assert result.family == "ayna-crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1099_test() {
@@ -11350,23 +9804,21 @@ pub fn ua_parse_1099_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Bender; http://sites.google.com/site/bendercrawler)",
     )
-  should.equal(result.family, "bendercrawler")
-  should.equal(result.version, None)
+  assert result.family == "bendercrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1100_test() {
   let result = uaparser.parse_user_agent("snap.com beta crawler v0")
-  should.equal(result.family, "beta crawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: None, patch: None)),
-  )
+  assert result.family == "beta crawler"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: None, patch: None))
 }
 
 pub fn ua_parse_1101_test() {
   let result = uaparser.parse_user_agent("blackspider")
-  should.equal(result.family, "blackspider")
-  should.equal(result.version, None)
+  assert result.family == "blackspider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1102_test() {
@@ -11374,20 +9826,20 @@ pub fn ua_parse_1102_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; bmdspider; windows 5.1)",
     )
-  should.equal(result.family, "bmdspider")
-  should.equal(result.version, None)
+  assert result.family == "bmdspider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1103_test() {
   let result = uaparser.parse_user_agent("boitho crawler")
-  should.equal(result.family, "boitho crawler")
-  should.equal(result.version, None)
+  assert result.family == "boitho crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1104_test() {
   let result = uaparser.parse_user_agent("cis455crawler")
-  should.equal(result.family, "cis455crawler")
-  should.equal(result.version, None)
+  assert result.family == "cis455crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1105_test() {
@@ -11395,21 +9847,21 @@ pub fn ua_parse_1105_test() {
     uaparser.parse_user_agent(
       "http://www.Syntryx.com/ ANT Chassis 9.27; Mozilla/4.0 compatible crawler",
     )
-  should.equal(result.family, "compatible crawler")
-  should.equal(result.version, None)
+  assert result.family == "compatible crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1106_test() {
   let result =
     uaparser.parse_user_agent("crawler4j (http://code.google.com/p/crawler4j/)")
-  should.equal(result.family, "crawler4j")
-  should.equal(result.version, None)
+  assert result.family == "crawler4j"
+  assert result.version == None
 }
 
 pub fn ua_parse_1107_test() {
   let result = uaparser.parse_user_agent("dtSearchSpider")
-  should.equal(result.family, "dtSearchSpider")
-  should.equal(result.version, None)
+  assert result.family == "dtSearchSpider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1108_test() {
@@ -11417,22 +9869,22 @@ pub fn ua_parse_1108_test() {
     uaparser.parse_user_agent(
       "Enterprise_Search/1.0 110 (http://www.innerprise.net/es-spider.asp)",
     )
-  should.equal(result.family, "es-spider")
-  should.equal(result.version, None)
+  assert result.family == "es-spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1109_test() {
   let result =
     uaparser.parse_user_agent("eseek-crawler.0.5 (crawler@exactseek.com)")
-  should.equal(result.family, "eseek-crawler")
-  should.equal(result.version, None)
+  assert result.family == "eseek-crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1110_test() {
   let result =
     uaparser.parse_user_agent("exooba/exooba crawler (exooba; exooba)")
-  should.equal(result.family, "exooba crawler")
-  should.equal(result.version, None)
+  assert result.family == "exooba crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1111_test() {
@@ -11440,44 +9892,44 @@ pub fn ua_parse_1111_test() {
     uaparser.parse_user_agent(
       "flatlandbot/allspark (Flatland Industries Web Spider; http://www.flatlandindustries.com/flatlandbot; jason@flatlandindustries.com)",
     )
-  should.equal(result.family, "flatlandbot")
-  should.equal(result.version, None)
+  assert result.family == "flatlandbot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1112_test() {
   let result = uaparser.parse_user_agent("haupia-crawler")
-  should.equal(result.family, "haupia-crawler")
-  should.equal(result.version, None)
+  assert result.family == "haupia-crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1113_test() {
   let result = uaparser.parse_user_agent("hitcrawler_0.1 (ringken@gmail.com)")
-  should.equal(result.family, "hitcrawler_0")
-  should.equal(result.version, None)
+  assert result.family == "hitcrawler_0"
+  assert result.version == None
 }
 
 pub fn ua_parse_1114_test() {
   let result = uaparser.parse_user_agent("iaskspider2 (iask@staff.sina.com.cn)")
-  should.equal(result.family, "iaskspider2")
-  should.equal(result.version, None)
+  assert result.family == "iaskspider2"
+  assert result.version == None
 }
 
 pub fn ua_parse_1115_test() {
   let result = uaparser.parse_user_agent("visaduhoc.info Crawler")
-  should.equal(result.family, "info Crawler")
-  should.equal(result.version, None)
+  assert result.family == "info Crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1116_test() {
   let result = uaparser.parse_user_agent("ip-web-crawler.com")
-  should.equal(result.family, "ip-web-crawler")
-  should.equal(result.version, None)
+  assert result.family == "ip-web-crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1117_test() {
   let result = uaparser.parse_user_agent("jikespider \"Mozilla/5.0")
-  should.equal(result.family, "jikespider")
-  should.equal(result.version, None)
+  assert result.family == "jikespider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1118_test() {
@@ -11485,14 +9937,14 @@ pub fn ua_parse_1118_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 5.5; Windows NT 5.0) compatible; kototoi-crawl@yl.is.s.u-tokyo.ac.jp",
     )
-  should.equal(result.family, "kototoi-crawl")
-  should.equal(result.version, None)
+  assert result.family == "kototoi-crawl"
+  assert result.version == None
 }
 
 pub fn ua_parse_1119_test() {
   let result = uaparser.parse_user_agent("lb-spider")
-  should.equal(result.family, "lb-spider")
-  should.equal(result.version, None)
+  assert result.family == "lb-spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1120_test() {
@@ -11500,8 +9952,8 @@ pub fn ua_parse_1120_test() {
     uaparser.parse_user_agent(
       "ldspider (BTC 2011 crawl, harth@kit.edu, http://code.google.com/p/ldspider/wiki/Robots)",
     )
-  should.equal(result.family, "ldspider")
-  should.equal(result.version, None)
+  assert result.family == "ldspider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1121_test() {
@@ -11509,39 +9961,39 @@ pub fn ua_parse_1121_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; lemurwebcrawler admin@lemurproject.org; +http://boston.lti.cs.cmu.edu/crawler_12/)",
     )
-  should.equal(result.family, "lemurwebcrawler")
-  should.equal(result.version, None)
+  assert result.family == "lemurwebcrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1122_test() {
   let result = uaparser.parse_user_agent("lmspider (lmspider@scansoft.com)")
-  should.equal(result.family, "lmspider")
-  should.equal(result.version, None)
+  assert result.family == "lmspider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1123_test() {
   let result = uaparser.parse_user_agent("lworldspider")
-  should.equal(result.family, "lworldspider")
-  should.equal(result.version, None)
+  assert result.family == "lworldspider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1124_test() {
   let result = uaparser.parse_user_agent("trunk.ly spider contact@trunk.ly")
-  should.equal(result.family, "ly spider")
-  should.equal(result.version, None)
+  assert result.family == "ly spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1125_test() {
   let result = uaparser.parse_user_agent("Vodafone mCrawler (bergum@fast.no)")
-  should.equal(result.family, "mCrawler")
-  should.equal(result.version, None)
+  assert result.family == "mCrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1126_test() {
   let result =
     uaparser.parse_user_agent("media-percbotspider <ops@percolate.com>")
-  should.equal(result.family, "media-percbotspider")
-  should.equal(result.version, None)
+  assert result.family == "media-percbotspider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1127_test() {
@@ -11549,8 +10001,8 @@ pub fn ua_parse_1127_test() {
     uaparser.parse_user_agent(
       "DoCoMo/2.0 N902iS(c100;TB;W24H12)(compatible; moba-crawler; http://crawler.dena.jp/)",
     )
-  should.equal(result.family, "moba-crawler")
-  should.equal(result.version, None)
+  assert result.family == "moba-crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1128_test() {
@@ -11558,21 +10010,21 @@ pub fn ua_parse_1128_test() {
     uaparser.parse_user_agent(
       "Nokia6680/1.0 ((4.04.07) SymbianOS/8.0 Series60/2.6 Profile/MIDP-2.0 Configuration/CLDC-1.1 (for mobile crawler) )",
     )
-  should.equal(result.family, "mobile crawler")
-  should.equal(result.version, None)
+  assert result.family == "mobile crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1129_test() {
   let result = uaparser.parse_user_agent("n4p_bot (crawler@n4p.com)")
-  should.equal(result.family, "n4p_bot")
-  should.equal(result.version, None)
+  assert result.family == "n4p_bot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1130_test() {
   let result =
     uaparser.parse_user_agent("na-Webcrawler (helpdesk@newsaktuell.de)")
-  should.equal(result.family, "na-Webcrawler")
-  should.equal(result.version, None)
+  assert result.family == "na-Webcrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1131_test() {
@@ -11580,8 +10032,8 @@ pub fn ua_parse_1131_test() {
     uaparser.parse_user_agent(
       "nuSearch Spider <a href='http://www.nusearch.com'>www.nusearch.com</a> (compatible; MSIE 4.01; Windows NT)",
     )
-  should.equal(result.family, "nuSearch Spider")
-  should.equal(result.version, None)
+  assert result.family == "nuSearch Spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1132_test() {
@@ -11589,14 +10041,14 @@ pub fn ua_parse_1132_test() {
     uaparser.parse_user_agent(
       "parallelContextFocusCrawler1.1parallelContextFocusCrawler1.1",
     )
-  should.equal(result.family, "parallelContextFocusCrawler1")
-  should.equal(result.version, None)
+  assert result.family == "parallelContextFocusCrawler1"
+  assert result.version == None
 }
 
 pub fn ua_parse_1133_test() {
   let result = uaparser.parse_user_agent("persomm-spider/v1.0")
-  should.equal(result.family, "persomm-spider")
-  should.equal(result.version, None)
+  assert result.family == "persomm-spider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1134_test() {
@@ -11604,8 +10056,8 @@ pub fn ua_parse_1134_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; http://www.pregnancycrawler.com)",
     )
-  should.equal(result.family, "pregnancycrawler")
-  should.equal(result.version, None)
+  assert result.family == "pregnancycrawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1135_test() {
@@ -11613,8 +10065,8 @@ pub fn ua_parse_1135_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; ptd-crawler;  http://bixolabs.com/crawler/ptd/; crawler@bixolabs.com)",
     )
-  should.equal(result.family, "ptd-crawler")
-  should.equal(result.version, None)
+  assert result.family == "ptd-crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1136_test() {
@@ -11622,15 +10074,15 @@ pub fn ua_parse_1136_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; pub-crawler; +http://wiki.github.com/bixo/bixo/bixocrawler; bixo-dev@yahoogroups.com)",
     )
-  should.equal(result.family, "pub-crawler")
-  should.equal(result.version, None)
+  assert result.family == "pub-crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1137_test() {
   let result =
     uaparser.parse_user_agent("pythonic-crawler (suzuki@tkl.iis.u-tokyo.ac.jp)")
-  should.equal(result.family, "pythonic-crawler")
-  should.equal(result.version, None)
+  assert result.family == "pythonic-crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1138_test() {
@@ -11638,8 +10090,8 @@ pub fn ua_parse_1138_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.2; WOW64) Russian CMS rating crawler (itrack.ru/cmsrate, avlasov@itrack.ru)",
     )
-  should.equal(result.family, "rating crawler")
-  should.equal(result.version, None)
+  assert result.family == "rating crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1139_test() {
@@ -11647,8 +10099,8 @@ pub fn ua_parse_1139_test() {
     uaparser.parse_user_agent(
       "camoca/camoca-n.1.2 (super-agent; search crawler; info at does not exist dot com)",
     )
-  should.equal(result.family, "search crawler")
-  should.equal(result.version, None)
+  assert result.family == "search crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1140_test() {
@@ -11656,20 +10108,16 @@ pub fn ua_parse_1140_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; sgbot v0.01a, sgcrawlerbot@gmail.com)",
     )
-  should.equal(result.family, "sgbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("01"), patch: None)),
-  )
+  assert result.family == "sgbot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("01"), patch: None))
 }
 
 pub fn ua_parse_1141_test() {
   let result = uaparser.parse_user_agent("spiderpig/0.1,gzip(gfe),gzip(gfe)")
-  should.equal(result.family, "spiderpig")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "spiderpig"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_1142_test() {
@@ -11677,8 +10125,8 @@ pub fn ua_parse_1142_test() {
     uaparser.parse_user_agent(
       "ssearch_bot (sSearch Crawler; http://www.semantissimo.de)",
     )
-  should.equal(result.family, "ssearch_bot")
-  should.equal(result.version, None)
+  assert result.family == "ssearch_bot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1143_test() {
@@ -11686,11 +10134,9 @@ pub fn ua_parse_1143_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; suggybot v0.01a, http://blog.suggy.com/was-ist-suggy/suggy-webcrawler/)",
     )
-  should.equal(result.family, "suggybot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("01"), patch: None)),
-  )
+  assert result.family == "suggybot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("01"), patch: None))
 }
 
 pub fn ua_parse_1144_test() {
@@ -11698,8 +10144,8 @@ pub fn ua_parse_1144_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; uMBot-FC/1.0; mailto: crawling@ubermetrics-technologies.com)",
     )
-  should.equal(result.family, "uMBot")
-  should.equal(result.version, None)
+  assert result.family == "uMBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1145_test() {
@@ -11707,8 +10153,8 @@ pub fn ua_parse_1145_test() {
     uaparser.parse_user_agent(
       "unchaos_crawler_2.0.2 (search.engine@unchaos.com)",
     )
-  should.equal(result.family, "unchaos_crawler_2")
-  should.equal(result.version, None)
+  assert result.family == "unchaos_crawler_2"
+  assert result.version == None
 }
 
 pub fn ua_parse_1146_test() {
@@ -11716,8 +10162,8 @@ pub fn ua_parse_1146_test() {
     uaparser.parse_user_agent(
       "updated/0.1-alpha (updated crawler; http://www.updated.com; crawler@updated.com)",
     )
-  should.equal(result.family, "updated crawler")
-  should.equal(result.version, None)
+  assert result.family == "updated crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1147_test() {
@@ -11725,14 +10171,14 @@ pub fn ua_parse_1147_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Yahoo-Test/4.0 mailto:vertical-crawl-support@yahoo-inc.com)",
     )
-  should.equal(result.family, "vertical-crawl")
-  should.equal(result.version, None)
+  assert result.family == "vertical-crawl"
+  assert result.version == None
 }
 
 pub fn ua_parse_1148_test() {
   let result = uaparser.parse_user_agent("yp-crawl@attinteractive.com")
-  should.equal(result.family, "yp-crawl")
-  should.equal(result.version, None)
+  assert result.family == "yp-crawl"
+  assert result.version == None
 }
 
 pub fn ua_parse_1149_test() {
@@ -11740,8 +10186,8 @@ pub fn ua_parse_1149_test() {
     uaparser.parse_user_agent(
       "yrspider (Mozilla/5.0 (compatible; YRSpider;  http://www.yunrang.com/yrspider.html))",
     )
-  should.equal(result.family, "yrspider")
-  should.equal(result.version, None)
+  assert result.family == "yrspider"
+  assert result.version == None
 }
 
 pub fn ua_parse_1150_test() {
@@ -11749,8 +10195,8 @@ pub fn ua_parse_1150_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Yahoo-Test/4.0 ysm-keystone-crawl-support@yahoo-inc.com)",
     )
-  should.equal(result.family, "ysm-keystone-crawl")
-  should.equal(result.version, None)
+  assert result.family == "ysm-keystone-crawl"
+  assert result.version == None
 }
 
 pub fn ua_parse_1151_test() {
@@ -11758,8 +10204,8 @@ pub fn ua_parse_1151_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; zyklop; +http://www.seoratio.de/zyklop-crawler/)",
     )
-  should.equal(result.family, "zyklop-crawler")
-  should.equal(result.version, None)
+  assert result.family == "zyklop-crawler"
+  assert result.version == None
 }
 
 pub fn ua_parse_1152_test() {
@@ -11767,11 +10213,9 @@ pub fn ua_parse_1152_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 4.2.1; en-gb; CUBOT ONE Build/JOP40D) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30",
     )
-  should.equal(result.family, "Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("2"), patch: Some("1"))),
-  )
+  assert result.family == "Android"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("2"), patch: Some("1")))
 }
 
 pub fn ua_parse_1153_test() {
@@ -11779,8 +10223,8 @@ pub fn ua_parse_1153_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9) AppleWebKit/537.71 (KHTML, like Gecko) Version/7.0 Safari/537.71 (Rival IQ, rivaliq.com)",
     )
-  should.equal(result.family, "Rival IQ")
-  should.equal(result.version, None)
+  assert result.family == "Rival IQ"
+  assert result.version == None
 }
 
 pub fn ua_parse_1154_test() {
@@ -11788,11 +10232,9 @@ pub fn ua_parse_1154_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; en-gb) AppleWebKit/418.9.1 (KHTML, like Gecko) SiteCon/8.10.9",
     )
-  should.equal(result.family, "SiteCon")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("10"), patch: Some("9"))),
-  )
+  assert result.family == "SiteCon"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("10"), patch: Some("9")))
 }
 
 pub fn ua_parse_1155_test() {
@@ -11800,11 +10242,9 @@ pub fn ua_parse_1155_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 8_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) FxiOS/1.0 Mobile/12F69 Safari/600.1.4",
     )
-  should.equal(result.family, "Firefox iOS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Firefox iOS"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1156_test() {
@@ -11812,11 +10252,9 @@ pub fn ua_parse_1156_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPad; CPU iPhone OS 8_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) FxiOS/1.0 Mobile/12F69 Safari/600.1.4",
     )
-  should.equal(result.family, "Firefox iOS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Firefox iOS"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1157_test() {
@@ -11824,11 +10262,9 @@ pub fn ua_parse_1157_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_4) AppleWebKit/537.36 (KHTML, like Gecko) Spotify/1.0.9.133 Safari/537.36",
     )
-  should.equal(result.family, "Spotify")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("9"))),
-  )
+  assert result.family == "Spotify"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("9")))
 }
 
 pub fn ua_parse_1158_test() {
@@ -11836,11 +10272,9 @@ pub fn ua_parse_1158_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Spotify/1.0.9.133 Safari/537.36",
     )
-  should.equal(result.family, "Spotify")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("9"))),
-  )
+  assert result.family == "Spotify"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("9")))
 }
 
 pub fn ua_parse_1159_test() {
@@ -11848,11 +10282,9 @@ pub fn ua_parse_1159_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/537.36 (KHTML, like Gecko) Spotify/1.0.4.90 Safari/537.36",
     )
-  should.equal(result.family, "Spotify")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("4"))),
-  )
+  assert result.family == "Spotify"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("4")))
 }
 
 pub fn ua_parse_1160_test() {
@@ -11860,11 +10292,9 @@ pub fn ua_parse_1160_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Spotify/1.0.3.101 Safari/537.36",
     )
-  should.equal(result.family, "Spotify")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("3"))),
-  )
+  assert result.family == "Spotify"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("3")))
 }
 
 pub fn ua_parse_1161_test() {
@@ -11872,11 +10302,9 @@ pub fn ua_parse_1161_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.36 (KHTML, like Gecko) Spotify/1.0.8.59 Safari/537.36",
     )
-  should.equal(result.family, "Spotify")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("8"))),
-  )
+  assert result.family == "Spotify"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("8")))
 }
 
 pub fn ua_parse_1162_test() {
@@ -11884,11 +10312,9 @@ pub fn ua_parse_1162_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Android 5.0; Tablet; rv:41.0) Gecko/41.0 Firefox/41.0",
     )
-  should.equal(result.family, "Firefox Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "41", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Firefox Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "41", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1163_test() {
@@ -11896,11 +10322,9 @@ pub fn ua_parse_1163_test() {
     uaparser.parse_user_agent(
       "[FBAN/FB4A;FBAV/3.4;FBBV/258875;FBDM/{density=0.75,width=240,height=320};FBLC/tr_TR;FBCR/o2 - de;FBPN/com.facebook.katana;FBDV/LG-E400;FBSV/2.3.6;]",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("4"), patch: None)),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("4"), patch: None))
 }
 
 pub fn ua_parse_1164_test() {
@@ -11908,11 +10332,9 @@ pub fn ua_parse_1164_test() {
     uaparser.parse_user_agent(
       "[FBAN/FB4A;FBAV/2.3;FBBV/149649;FBDM/{density=1.5,width=480,height=800};FBLC/es_ES;FBCR/;FBPN/com.facebook.katana;FBDV/LG-P920;FBSV/2.2.2;]",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_1165_test() {
@@ -11920,11 +10342,9 @@ pub fn ua_parse_1165_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 2.3.4; en-us; SCH-R720 Build/GINGERBREAD) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1 [FBAN/FB4A;FBAV/1.8.1;FBPN/com.facebook.katana;FBDV/SCH-R720;FBSV/2.3.4;FBDM/{density=1.0,width=320,height=",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("8"), patch: Some("1"))),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("8"), patch: Some("1")))
 }
 
 pub fn ua_parse_1166_test() {
@@ -11932,11 +10352,9 @@ pub fn ua_parse_1166_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 4.2.2; de-de; 706_v92_jbla_fhd Build/JDQ39) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30 [FB_IAB/FB4A;FBAV/24.0.0.30.15;]",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "24", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "24", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1167_test() {
@@ -11944,11 +10362,9 @@ pub fn ua_parse_1167_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 6_1_3 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10B329 [FBAN/FBIOS;FBAV/6.5.1;FBBV/377040;FBDV/iPhone4,1;FBMD/iPhone;FBSN/iPhone OS;FBSV/6.1.3;FBSS/2; FBCR/Telekom.de;FBID/phone;FBLC/de_DE;",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("5"), patch: Some("1"))),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("5"), patch: Some("1")))
 }
 
 pub fn ua_parse_1168_test() {
@@ -11956,11 +10372,9 @@ pub fn ua_parse_1168_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 6_1_3 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10B329 [FBAN/FBIOS;FBAV/6.2;FBBV/228172;FBDV/iPhone5,1;FBMD/iPhone;FBSN/iPhone OS;FBSV/6.1.3;FBSS/2; FBCR/o2-de;FBID/phone;FBLC/pt_BR;FBOP/1]",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_1169_test() {
@@ -11968,11 +10382,9 @@ pub fn ua_parse_1169_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Mobile/9A334 [FBAN/FBIOS;FBAV/6.5.1;FBBV/377040;FBDV/iPad2,1;FBMD/iPad;FBSN/iPhone OS;FBSV/5.0;FBSS/1; FBCR/;FBID/tablet;FBLC/de_DE;FBOP/1]",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("5"), patch: Some("1"))),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("5"), patch: Some("1")))
 }
 
 pub fn ua_parse_1170_test() {
@@ -11980,11 +10392,9 @@ pub fn ua_parse_1170_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPad; U; CPU iPhone OS 4_3_2 like Mac OS X; de_DE) AppleWebKit (KHTML, like Gecko) Mobile [FBAN/FBForIPhone;FBAV/4.0.2;FBBV/4020.0;FBDV/iPad1,1;FBMD/iPad;FBSN/iPhone OS;FBSV/4.3.2;FBSS/1; FBCR/;FBID/tablet;FBLC/de_DE;FBSF/1.0]",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("2"))),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("2")))
 }
 
 pub fn ua_parse_1171_test() {
@@ -11992,11 +10402,9 @@ pub fn ua_parse_1171_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPad; U; CPU iPhone OS 4_3_5 like Mac OS X; de_DE) AppleWebKit (KHTML, like Gecko) Mobile [FBAN/FBForIPhone;FBAV/4.0.3;FBBV/4030.0;FBDV/iPad2,2;FBMD/iPad;FBSN/iPhone OS;FBSV/4.3.5;FBSS/1; FBCR/Telekom.de;FBID/tablet;FBLC/de_DE;FBS",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("3"))),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("3")))
 }
 
 pub fn ua_parse_1172_test() {
@@ -12004,11 +10412,9 @@ pub fn ua_parse_1172_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 5_1_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Mobile/9B206 [FBAN/FBIOS;FBAV/6.1;FBBV/201075;FBDV/iPhone3,1;FBMD/iPhone;FBSN/iPhone OS;FBSV/5.1.1;FBSS/2; FBCR/Vodafone.de;FBID/phone;FBLC/en_US;FBOP/1]",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_1173_test() {
@@ -12016,11 +10422,9 @@ pub fn ua_parse_1173_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 8_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12D508 [FBAN/GroupsForiOS;FBAV/9.0;FBBV/7752968;FBDV/iPhone7,2;FBMD/iPhone;FBSN/iPhone OS;FBSV/8.2;FBSS/2; FBCR/Telekom.de;FBID/phone;FBLC/de_",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1174_test() {
@@ -12028,11 +10432,9 @@ pub fn ua_parse_1174_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_1 like Mac OS X; fr_FR) AppleWebKit (KHTML, like Gecko) Mobile [FBAN/FBForIPhone;FBAV/4.0;FBBV/4000.0;FBDV/iPhone1,2;FBMD/iPhone;FBSN/iPhone OS;FBSV/4.1;FBSS/1; FBCR/Carrier;FBID/phone;FBLC/fr_FR;FBSF/1.",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1175_test() {
@@ -12040,11 +10442,9 @@ pub fn ua_parse_1175_test() {
     uaparser.parse_user_agent(
       "Dalvik/1.2.0 (Linux; U; Android 2.2.2; HTC Desire Build/FRG83G) [FBAN/Orca-Android;FBAV/2.6.1-release;FBLC/de_DE;FBBV/288543;FBCR/o2 - de;FBMF/HTC;FBBD/htc_wwe;FBDV/HTC Desire;FBSV/2.2.2]",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("6"), patch: Some("1"))),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("6"), patch: Some("1")))
 }
 
 pub fn ua_parse_1176_test() {
@@ -12052,11 +10452,9 @@ pub fn ua_parse_1176_test() {
     uaparser.parse_user_agent(
       "[FBAN/FB4A;FBAV/3.6;FBBV/330148;FBDM/{density=0.75,width=240,height=320};FBLC/de_DE;FBCR/o2 - de;FBPN/com.facebook.katana;FBDV/GT-S5570;FBSV/2.2.1;FBCA/armeabi:unknown;]",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("6"), patch: None)),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("6"), patch: None))
 }
 
 pub fn ua_parse_1177_test() {
@@ -12064,11 +10462,9 @@ pub fn ua_parse_1177_test() {
     uaparser.parse_user_agent(
       "[FBAN/PAAA;FBAV/1.7;FBDM/{density=2.0,width=720,height=1280};FBLC/es_ES;FB_FW/2;FBSN/Android;FBCR/FONIC;FBDV/GT-I9300;FBSV/4.1.2;]",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("7"), patch: None)),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("7"), patch: None))
 }
 
 pub fn ua_parse_1178_test() {
@@ -12076,11 +10472,9 @@ pub fn ua_parse_1178_test() {
     uaparser.parse_user_agent(
       "[FBAN/PAAA;FBAV/1.9;FBDM/{density=2.0,width=720,height=1280};FBLC/de_DE;FB_FW/2;FBSN/Android;FBCR/o2 - de;FBDV/GT-I9300;FBSV/4.3;]",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("9"), patch: None)),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("9"), patch: None))
 }
 
 pub fn ua_parse_1179_test() {
@@ -12088,11 +10482,9 @@ pub fn ua_parse_1179_test() {
     uaparser.parse_user_agent(
       "[FBAN/FB4A;FBAV/130.0.321;FBBV/149649;FBDM/{density=1.5,width=480,height=800};FBLC/es_ES;FBCR/;FBPN/com.facebook.katana;FBDV/LG-P920;FBSV/2.2.2;]",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "130", minor: Some("0"), patch: Some("321"))),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "130", minor: Some("0"), patch: Some("321")))
 }
 
 pub fn ua_parse_1180_test() {
@@ -12100,8 +10492,8 @@ pub fn ua_parse_1180_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 11_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15G77 [FBAN/FBIOS;FBDV/iPhone10,4;FBMD/iPhone;FBSN/iOS;FBSV/11.4.1;FBSS/2;FBCR/A1;FBID/phone;FBLC/de_DE;FBOP/5;FBRV/122166081]",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(result.version, None)
+  assert result.family == "Facebook"
+  assert result.version == None
 }
 
 pub fn ua_parse_1181_test() {
@@ -12109,11 +10501,9 @@ pub fn ua_parse_1181_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 10_2_1 like Mac OS X) AppleWebKit/602.4.6 (KHTML, like Gecko) Mobile/14D27 [FBAN/MessengerForiOS;FBAV/124.0.0.50.70;FBBV/63293619;FBDV/iPhone7,1;FBMD/iPhone;FBSN/iOS;FBSV/10.2.1;FBSS/3;FBCR/Viettel;FBID/phone;FBLC/vi_VN;FBOP/5;FBRV/0]",
     )
-  should.equal(result.family, "Facebook Messenger")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "124", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Facebook Messenger"
+  assert result.version
+    == Some(uaparser.Version(major: "124", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1182_test() {
@@ -12121,11 +10511,9 @@ pub fn ua_parse_1182_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 6.0.1; SM-A910F Build/MMB29M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/58.0.3029.83 Mobile Safari/537.36 [FB_IAB/MESSENGER;FBAV/120.0.0.14.84;]",
     )
-  should.equal(result.family, "Facebook Messenger")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "120", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Facebook Messenger"
+  assert result.version
+    == Some(uaparser.Version(major: "120", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1183_test() {
@@ -12133,11 +10521,9 @@ pub fn ua_parse_1183_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 11_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15G77 [FBAN/FBIOS;FBAV/194.0.0.38.99;FBBV/127868476;FBDV/iPhone7,2;FBMD/iPhone;FBSN/iOS;FBSV/11.4.1;FBSS/2;FBCR/OrangeBotswana;FBID/phone;FBLC/en_GB;FBOP/5;FBRV/128807018]",
     )
-  should.equal(result.family, "Facebook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "194", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Facebook"
+  assert result.version
+    == Some(uaparser.Version(major: "194", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1184_test() {
@@ -12145,8 +10531,8 @@ pub fn ua_parse_1184_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 6_1_4 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10B350 [Pinterest/iOS]",
     )
-  should.equal(result.family, "Pinterest")
-  should.equal(result.version, None)
+  assert result.family == "Pinterest"
+  assert result.version == None
 }
 
 pub fn ua_parse_1185_test() {
@@ -12154,8 +10540,8 @@ pub fn ua_parse_1185_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 4.4.2; A3-A11 Build/KOT49H) AppleWebKit/537.36 (KHTML like Gecko) Version/4.0 Chrome/30.0.0.0 Safari/537.36 [Pinterest/Android]",
     )
-  should.equal(result.family, "Pinterest")
-  should.equal(result.version, None)
+  assert result.family == "Pinterest"
+  assert result.version == None
 }
 
 pub fn ua_parse_1186_test() {
@@ -12163,8 +10549,8 @@ pub fn ua_parse_1186_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A525 [Pinterest/iOS]",
     )
-  should.equal(result.family, "Pinterest")
-  should.equal(result.version, None)
+  assert result.family == "Pinterest"
+  assert result.version == None
 }
 
 pub fn ua_parse_1187_test() {
@@ -12172,11 +10558,9 @@ pub fn ua_parse_1187_test() {
     uaparser.parse_user_agent(
       "Pinterest for Android Tablet/1.8.4 (SGP321; 4.3)",
     )
-  should.equal(result.family, "Pinterest")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("8"), patch: Some("4"))),
-  )
+  assert result.family == "Pinterest"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("8"), patch: Some("4")))
 }
 
 pub fn ua_parse_1188_test() {
@@ -12184,90 +10568,72 @@ pub fn ua_parse_1188_test() {
     uaparser.parse_user_agent(
       "Pinterest for Android Tablet/4.3.1 (A7600-H; 4.4.2)",
     )
-  should.equal(result.family, "Pinterest")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("3"), patch: Some("1"))),
-  )
+  assert result.family == "Pinterest"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("3"), patch: Some("1")))
 }
 
 pub fn ua_parse_1189_test() {
   let result =
     uaparser.parse_user_agent("Pinterest for Android/1.1.1 (endeavoru; 4.1.1)")
-  should.equal(result.family, "Pinterest")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("1"))),
-  )
+  assert result.family == "Pinterest"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("1")))
 }
 
 pub fn ua_parse_1190_test() {
   let result =
     uaparser.parse_user_agent("Pinterest for Android/3.6.2 (klte; 4.4.2)")
-  should.equal(result.family, "Pinterest")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("6"), patch: Some("2"))),
-  )
+  assert result.family == "Pinterest"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("6"), patch: Some("2")))
 }
 
 pub fn ua_parse_1191_test() {
   let result = uaparser.parse_user_agent("Pinterest/0.1")
-  should.equal(result.family, "Pinterest")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Pinterest"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_1192_test() {
   let result =
     uaparser.parse_user_agent("Pinterest/0.2 (+http://www.pinterest.com/)")
-  should.equal(result.family, "Pinterest")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Pinterest"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_1193_test() {
   let result =
     uaparser.parse_user_agent("Pinterest for Android/1.1.12 (endeavoru; 4.1.1)")
-  should.equal(result.family, "Pinterest")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("12"))),
-  )
+  assert result.family == "Pinterest"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: Some("12")))
 }
 
 pub fn ua_parse_1194_test() {
   let result =
     uaparser.parse_user_agent("Pinterest/3.2 CFNetwork/672.0.8 Darwin/14.0.0")
-  should.equal(result.family, "Pinterest")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Pinterest"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_1195_test() {
   let result =
     uaparser.parse_user_agent("Pinterest/3.3.3 CFNetwork/609.1.4 Darwin/13.0.0")
-  should.equal(result.family, "Pinterest")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("3"), patch: Some("3"))),
-  )
+  assert result.family == "Pinterest"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("3"), patch: Some("3")))
 }
 
 pub fn ua_parse_1196_test() {
   let result =
     uaparser.parse_user_agent("Pinterest/3356 CFNetwork/711.0.6 Darwin/14.0.0")
-  should.equal(result.family, "Pinterest")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3356", minor: None, patch: None)),
-  )
+  assert result.family == "Pinterest"
+  assert result.version
+    == Some(uaparser.Version(major: "3356", minor: None, patch: None))
 }
 
 pub fn ua_parse_1197_test() {
@@ -12275,11 +10641,9 @@ pub fn ua_parse_1197_test() {
     uaparser.parse_user_agent(
       "Pinterest/4.1.3 CFNetwork/672.1.14 Darwin/14.0.0",
     )
-  should.equal(result.family, "Pinterest")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("1"), patch: Some("3"))),
-  )
+  assert result.family == "Pinterest"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("1"), patch: Some("3")))
 }
 
 pub fn ua_parse_1198_test() {
@@ -12287,11 +10651,9 @@ pub fn ua_parse_1198_test() {
     uaparser.parse_user_agent(
       "Pinterest/0.2 (+https://www.pinterest.com/bot.html)",
     )
-  should.equal(result.family, "Pinterestbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Pinterestbot"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_1199_test() {
@@ -12299,11 +10661,9 @@ pub fn ua_parse_1199_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Pinterestbot/1.0; +https://www.pinterest.com/bot.html)",
     )
-  should.equal(result.family, "Pinterestbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Pinterestbot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1200_test() {
@@ -12311,11 +10671,9 @@ pub fn ua_parse_1200_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.96 Mobile Safari/537.36 (compatible; Pinterestbot/1.0; +https://www.pinterest.com/bot.html)",
     )
-  should.equal(result.family, "Pinterestbot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Pinterestbot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1201_test() {
@@ -12323,11 +10681,9 @@ pub fn ua_parse_1201_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko) qutebrowser/0.2.1 Safari/538.1",
     )
-  should.equal(result.family, "qutebrowser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("2"), patch: Some("1"))),
-  )
+  assert result.family == "qutebrowser"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("2"), patch: Some("1")))
 }
 
 pub fn ua_parse_1202_test() {
@@ -12335,11 +10691,9 @@ pub fn ua_parse_1202_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) pagedraw/0.1.0 Chrome/49.0.2623.75 Electron/0.37.8 Safari/537.36",
     )
-  should.equal(result.family, "Electron")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("37"), patch: Some("8"))),
-  )
+  assert result.family == "Electron"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("37"), patch: Some("8")))
 }
 
 pub fn ua_parse_1203_test() {
@@ -12347,8 +10701,8 @@ pub fn ua_parse_1203_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPad; U; CPU OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Mobile",
     )
-  should.equal(result.family, "Mobile Safari UI/WKWebView")
-  should.equal(result.version, None)
+  assert result.family == "Mobile Safari UI/WKWebView"
+  assert result.version == None
 }
 
 pub fn ua_parse_1204_test() {
@@ -12356,11 +10710,9 @@ pub fn ua_parse_1204_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPad; U; CPU OS 4_3_2 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8H7 Safari",
     )
-  should.equal(result.family, "Mobile Safari")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("0"), patch: Some("2"))),
-  )
+  assert result.family == "Mobile Safari"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("0"), patch: Some("2")))
 }
 
 pub fn ua_parse_1205_test() {
@@ -12368,11 +10720,9 @@ pub fn ua_parse_1205_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/538.1 (KHTML, like Gecko) QupZilla/1.6.3 Safari/538.1",
     )
-  should.equal(result.family, "QupZilla")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("3"))),
-  )
+  assert result.family == "QupZilla"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("3")))
 }
 
 pub fn ua_parse_1206_test() {
@@ -12380,11 +10730,9 @@ pub fn ua_parse_1206_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (OS/2 Warp 4.5) AppleWebKit/537.21 (KHTML, like Gecko) QupZilla/1.6.4 Safari/537.21",
     )
-  should.equal(result.family, "QupZilla")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("4"))),
-  )
+  assert result.family == "QupZilla"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("4")))
 }
 
 pub fn ua_parse_1207_test() {
@@ -12392,11 +10740,9 @@ pub fn ua_parse_1207_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Unknown; UNIX BSD/SYSV system) AppleWebKit/534.34 (KHTML, like Gecko) QupZilla/1.7.0 Safari/534.34",
     )
-  should.equal(result.family, "QupZilla")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("7"), patch: Some("0"))),
-  )
+  assert result.family == "QupZilla"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("7"), patch: Some("0")))
 }
 
 pub fn ua_parse_1208_test() {
@@ -12404,11 +10750,9 @@ pub fn ua_parse_1208_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.21 (KHTML, like Gecko) QupZilla/1.6.1 Safari/537.21",
     )
-  should.equal(result.family, "QupZilla")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("1"))),
-  )
+  assert result.family == "QupZilla"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("1")))
 }
 
 pub fn ua_parse_1209_test() {
@@ -12416,11 +10760,9 @@ pub fn ua_parse_1209_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/538.1 (KHTML, like Gecko) Otter/0.9.03 beta 3 Safari/538.1",
     )
-  should.equal(result.family, "Otter")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("03"))),
-  )
+  assert result.family == "Otter"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("03")))
 }
 
 pub fn ua_parse_1210_test() {
@@ -12428,11 +10770,9 @@ pub fn ua_parse_1210_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/538.1 (KHTML, like Gecko) Otter/0.9.04",
     )
-  should.equal(result.family, "Otter")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("04"))),
-  )
+  assert result.family == "Otter"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("04")))
 }
 
 pub fn ua_parse_1211_test() {
@@ -12440,11 +10780,9 @@ pub fn ua_parse_1211_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.21 (KHTML, like Gecko) Otter/0.9.04-dev",
     )
-  should.equal(result.family, "Otter")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("04"))),
-  )
+  assert result.family == "Otter"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("04")))
 }
 
 pub fn ua_parse_1212_test() {
@@ -12452,11 +10790,9 @@ pub fn ua_parse_1212_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko) Otter/0.3.01-dev Safari/538.1",
     )
-  should.equal(result.family, "Otter")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("3"), patch: Some("01"))),
-  )
+  assert result.family == "Otter"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("3"), patch: Some("01")))
 }
 
 pub fn ua_parse_1213_test() {
@@ -12464,11 +10800,9 @@ pub fn ua_parse_1213_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko) Otter/0.9.03 beta 3 Safari/538.1",
     )
-  should.equal(result.family, "Otter")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("03"))),
-  )
+  assert result.family == "Otter"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("03")))
 }
 
 pub fn ua_parse_1214_test() {
@@ -12476,11 +10810,9 @@ pub fn ua_parse_1214_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko) Otter/0.9.05",
     )
-  should.equal(result.family, "Otter")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("05"))),
-  )
+  assert result.family == "Otter"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("05")))
 }
 
 pub fn ua_parse_1215_test() {
@@ -12488,11 +10820,9 @@ pub fn ua_parse_1215_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows Phone 10.0; Android 4.2.1; NOKIA; Lumia 930) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Mobile Safari/537.36 Edge/12.0",
     )
-  should.equal(result.family, "Edge Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "12", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Edge Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "12", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1216_test() {
@@ -12500,11 +10830,9 @@ pub fn ua_parse_1216_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 12_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.1 EdgiOS/44.5.0.10 Mobile/15E148 Safari/604.1",
     )
-  should.equal(result.family, "Edge Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "44", minor: Some("5"), patch: Some("0"))),
-  )
+  assert result.family == "Edge Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "44", minor: Some("5"), patch: Some("0")))
 }
 
 pub fn ua_parse_1217_test() {
@@ -12512,11 +10840,9 @@ pub fn ua_parse_1217_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPad; CPU OS 12_5_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 EdgiOS/46.3.26 Mobile/15E148 Safari/605.1.15",
     )
-  should.equal(result.family, "Edge Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "46", minor: Some("3"), patch: Some("26"))),
-  )
+  assert result.family == "Edge Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "46", minor: Some("3"), patch: Some("26")))
 }
 
 pub fn ua_parse_1218_test() {
@@ -12524,11 +10850,9 @@ pub fn ua_parse_1218_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 8.1.0; Pixel Build/OPM4.171019.021.D1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.109 Mobile Safari/537.36 EdgA/42.0.0.2057",
     )
-  should.equal(result.family, "Edge Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "42", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Edge Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "42", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1219_test() {
@@ -12536,11 +10860,9 @@ pub fn ua_parse_1219_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/537.36 (KHTML, like Gecko) brave/0.7.11 Chrome/47.0.2526.110 Brave/0.36.5 Safari/537.36",
     )
-  should.equal(result.family, "Brave")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("7"), patch: Some("11"))),
-  )
+  assert result.family == "Brave"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("7"), patch: Some("11")))
 }
 
 pub fn ua_parse_1220_test() {
@@ -12548,11 +10870,9 @@ pub fn ua_parse_1220_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) brave/0.7.12 Chrome/47.0.2526.110 Brave/0.36.7 Safari/537.36",
     )
-  should.equal(result.family, "Brave")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("7"), patch: Some("12"))),
-  )
+  assert result.family == "Brave"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("7"), patch: Some("12")))
 }
 
 pub fn ua_parse_1221_test() {
@@ -12560,11 +10880,9 @@ pub fn ua_parse_1221_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Brave Chrome/80.0.3987.87 Safari/537.36",
     )
-  should.equal(result.family, "Brave")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "80", minor: Some("0"), patch: Some("3987"))),
-  )
+  assert result.family == "Brave"
+  assert result.version
+    == Some(uaparser.Version(major: "80", minor: Some("0"), patch: Some("3987")))
 }
 
 pub fn ua_parse_1222_test() {
@@ -12572,11 +10890,13 @@ pub fn ua_parse_1222_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 12; SM-G991B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.4577.63 Brave/117.1.4577.63 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Brave")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "117", minor: Some("1"), patch: Some("4577"))),
-  )
+  assert result.family == "Brave"
+  assert result.version
+    == Some(uaparser.Version(
+      major: "117",
+      minor: Some("1"),
+      patch: Some("4577"),
+    ))
 }
 
 pub fn ua_parse_1223_test() {
@@ -12584,11 +10904,9 @@ pub fn ua_parse_1223_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_3_2 like Mac OS X) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Safari/537.36 Brave/101",
     )
-  should.equal(result.family, "Brave")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "101", minor: None, patch: None)),
-  )
+  assert result.family == "Brave"
+  assert result.version
+    == Some(uaparser.Version(major: "101", minor: None, patch: None))
 }
 
 pub fn ua_parse_1224_test() {
@@ -12596,11 +10914,9 @@ pub fn ua_parse_1224_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Brave/537.36",
     )
-  should.equal(result.family, "Brave")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "537", minor: Some("36"), patch: None)),
-  )
+  assert result.family == "Brave"
+  assert result.version
+    == Some(uaparser.Version(major: "537", minor: Some("36"), patch: None))
 }
 
 pub fn ua_parse_1225_test() {
@@ -12608,11 +10924,9 @@ pub fn ua_parse_1225_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Mobile Safari/537.36 Brave/1.40.128",
     )
-  should.equal(result.family, "Brave")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("40"), patch: Some("128"))),
-  )
+  assert result.family == "Brave"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("40"), patch: Some("128")))
 }
 
 pub fn ua_parse_1226_test() {
@@ -12620,11 +10934,9 @@ pub fn ua_parse_1226_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.4472.124 Safari/537.3 brave/5035",
     )
-  should.equal(result.family, "Brave")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5035", minor: None, patch: None)),
-  )
+  assert result.family == "Brave"
+  assert result.version
+    == Some(uaparser.Version(major: "5035", minor: None, patch: None))
 }
 
 pub fn ua_parse_1227_test() {
@@ -12632,8 +10944,8 @@ pub fn ua_parse_1227_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1 Brave",
     )
-  should.equal(result.family, "Brave")
-  should.equal(result.version, None)
+  assert result.family == "Brave"
+  assert result.version == None
 }
 
 pub fn ua_parse_1228_test() {
@@ -12641,8 +10953,8 @@ pub fn ua_parse_1228_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1 (Brave)",
     )
-  should.equal(result.family, "Brave")
-  should.equal(result.version, None)
+  assert result.family == "Brave"
+  assert result.version == None
 }
 
 pub fn ua_parse_1229_test() {
@@ -12650,8 +10962,8 @@ pub fn ua_parse_1229_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome Safari/537.36",
     )
-  should.equal(result.family, "HeadlessChrome")
-  should.equal(result.version, None)
+  assert result.family == "HeadlessChrome"
+  assert result.version == None
 }
 
 pub fn ua_parse_1230_test() {
@@ -12659,11 +10971,9 @@ pub fn ua_parse_1230_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/62.0.3202.89 Safari/537.36",
     )
-  should.equal(result.family, "HeadlessChrome")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "62", minor: Some("0"), patch: Some("3202"))),
-  )
+  assert result.family == "HeadlessChrome"
+  assert result.version
+    == Some(uaparser.Version(major: "62", minor: Some("0"), patch: Some("3202")))
 }
 
 pub fn ua_parse_1231_test() {
@@ -12671,38 +10981,30 @@ pub fn ua_parse_1231_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/59.0.3071.109 HeadlessChrome/59.0.3071.109 Safari/537.36",
     )
-  should.equal(result.family, "HeadlessChrome")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "59", minor: Some("0"), patch: Some("3071"))),
-  )
+  assert result.family == "HeadlessChrome"
+  assert result.version
+    == Some(uaparser.Version(major: "59", minor: Some("0"), patch: Some("3071")))
 }
 
 pub fn ua_parse_1232_test() {
   let result = uaparser.parse_user_agent("Roku/DVP-6.2 (096.02E06005A)")
-  should.equal(result.family, "Roku")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Roku"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_1233_test() {
   let result = uaparser.parse_user_agent("Roku/DVP-5.0 (025.00E08043A)")
-  should.equal(result.family, "Roku")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Roku"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1234_test() {
   let result = uaparser.parse_user_agent("Roku/DVP-5.1 (025.01E01195A)")
-  should.equal(result.family, "Roku")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Roku"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_1235_test() {
@@ -12710,11 +11012,9 @@ pub fn ua_parse_1235_test() {
     uaparser.parse_user_agent(
       "Microsoft Office/12.0 (Windows NT 6.1; Microsoft Office Outlook 12.0.6739; Pro)",
     )
-  should.equal(result.family, "Outlook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2007", minor: None, patch: None)),
-  )
+  assert result.family == "Outlook"
+  assert result.version
+    == Some(uaparser.Version(major: "2007", minor: None, patch: None))
 }
 
 pub fn ua_parse_1236_test() {
@@ -12722,11 +11022,9 @@ pub fn ua_parse_1236_test() {
     uaparser.parse_user_agent(
       "Microsoft Office/14.0 (Windows NT 6.1; Microsoft Outlook 14.0.5128; Pro)",
     )
-  should.equal(result.family, "Outlook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2010", minor: None, patch: None)),
-  )
+  assert result.family == "Outlook"
+  assert result.version
+    == Some(uaparser.Version(major: "2010", minor: None, patch: None))
 }
 
 pub fn ua_parse_1237_test() {
@@ -12734,11 +11032,9 @@ pub fn ua_parse_1237_test() {
     uaparser.parse_user_agent(
       "Microsoft Office/16.0 (Microsoft Outlook Mail 16.0.6525; Pro)",
     )
-  should.equal(result.family, "Outlook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2016", minor: None, patch: None)),
-  )
+  assert result.family == "Outlook"
+  assert result.version
+    == Some(uaparser.Version(major: "2016", minor: None, patch: None))
 }
 
 pub fn ua_parse_1238_test() {
@@ -12746,11 +11042,9 @@ pub fn ua_parse_1238_test() {
     uaparser.parse_user_agent(
       "Microsoft Office/16.0 (Windows NT 10.0; Microsoft Outlook 16.0.6326; Pro)",
     )
-  should.equal(result.family, "Outlook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2016", minor: None, patch: None)),
-  )
+  assert result.family == "Outlook"
+  assert result.version
+    == Some(uaparser.Version(major: "2016", minor: None, patch: None))
 }
 
 pub fn ua_parse_1239_test() {
@@ -12758,11 +11052,9 @@ pub fn ua_parse_1239_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/8.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729; Microsoft Outlook 16.0.6366; ms-office; MSOffice 16)",
     )
-  should.equal(result.family, "Outlook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2016", minor: None, patch: None)),
-  )
+  assert result.family == "Outlook"
+  assert result.version
+    == Some(uaparser.Version(major: "2016", minor: None, patch: None))
 }
 
 pub fn ua_parse_1240_test() {
@@ -12770,11 +11062,9 @@ pub fn ua_parse_1240_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; ms-office; MSOffice 16)",
     )
-  should.equal(result.family, "Outlook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2016", minor: None, patch: None)),
-  )
+  assert result.family == "Outlook"
+  assert result.version
+    == Some(uaparser.Version(major: "2016", minor: None, patch: None))
 }
 
 pub fn ua_parse_1241_test() {
@@ -12782,8 +11072,8 @@ pub fn ua_parse_1241_test() {
     uaparser.parse_user_agent(
       "Outlook-Express/7.0 (MSIE 7.0; Windows NT 6.1; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; TmstmpExt)",
     )
-  should.equal(result.family, "Windows Live Mail")
-  should.equal(result.version, None)
+  assert result.family == "Windows Live Mail"
+  assert result.version == None
 }
 
 pub fn ua_parse_1242_test() {
@@ -12791,8 +11081,8 @@ pub fn ua_parse_1242_test() {
     uaparser.parse_user_agent(
       "Outlook-Express/7.0 (MSIE 7.0; Windows NT 5.1; Trident/4.0; AskTB5.6; TmstmpExt)",
     )
-  should.equal(result.family, "Windows Live Mail")
-  should.equal(result.version, None)
+  assert result.family == "Windows Live Mail"
+  assert result.version == None
 }
 
 pub fn ua_parse_1243_test() {
@@ -12800,8 +11090,8 @@ pub fn ua_parse_1243_test() {
     uaparser.parse_user_agent(
       "Outlook-Express/7.0 (MSIE 7.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; Media Center PC 6.0; OfficeLiveConnector.1.4; OfficeLivePatch.1.3; InfoPath.3; FDM; TmstmpExt)",
     )
-  should.equal(result.family, "Windows Live Mail")
-  should.equal(result.version, None)
+  assert result.family == "Windows Live Mail"
+  assert result.version == None
 }
 
 pub fn ua_parse_1244_test() {
@@ -12809,8 +11099,8 @@ pub fn ua_parse_1244_test() {
     uaparser.parse_user_agent(
       "Outlook-Express/7.0 (MSIE 6.0; Windows NT 5.1; SV1; GTB6.3; .NET CLR 2.0.50727; .NET CLR 3.0.04506.30; InfoPath.2; .NET CLR 3.0.04506.648; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; OfficeLiveConnector.1.3; OfficeLivePatch.0.0; TmstmpExt)",
     )
-  should.equal(result.family, "Windows Live Mail")
-  should.equal(result.version, None)
+  assert result.family == "Windows Live Mail"
+  assert result.version == None
 }
 
 pub fn ua_parse_1245_test() {
@@ -12818,8 +11108,8 @@ pub fn ua_parse_1245_test() {
     uaparser.parse_user_agent(
       "Outlook-Express/7.0 (MSIE 8; Windows NT 5.1; Trident/4.0; GTB7.0; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; TmstmpExt)",
     )
-  should.equal(result.family, "Windows Live Mail")
-  should.equal(result.version, None)
+  assert result.family == "Windows Live Mail"
+  assert result.version == None
 }
 
 pub fn ua_parse_1246_test() {
@@ -12827,8 +11117,8 @@ pub fn ua_parse_1246_test() {
     uaparser.parse_user_agent(
       "Outlook-Express/7.0 (MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; InfoPath.1; TmstmpExt)",
     )
-  should.equal(result.family, "Windows Live Mail")
-  should.equal(result.version, None)
+  assert result.family == "Windows Live Mail"
+  assert result.version == None
 }
 
 pub fn ua_parse_1247_test() {
@@ -12836,8 +11126,8 @@ pub fn ua_parse_1247_test() {
     uaparser.parse_user_agent(
       "Outlook-Express/7.0 (MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; HPDTDF; .NET4.0C; BRI/2; AskTbLOL/5.12.5.17640; TmstmpExt)",
     )
-  should.equal(result.family, "Windows Live Mail")
-  should.equal(result.version, None)
+  assert result.family == "Windows Live Mail"
+  assert result.version == None
 }
 
 pub fn ua_parse_1248_test() {
@@ -12845,11 +11135,9 @@ pub fn ua_parse_1248_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 4.4.2; SM-G800F Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.135 MobileIron/1.6.0 Mobile Safari/537.36",
     )
-  should.equal(result.family, "MobileIron")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("0"))),
-  )
+  assert result.family == "MobileIron"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("0")))
 }
 
 pub fn ua_parse_1249_test() {
@@ -12857,11 +11145,9 @@ pub fn ua_parse_1249_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 4.4.4; GT-I9195I Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Crosswalk/14.43.343.17 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Crosswalk")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "14", minor: Some("43"), patch: Some("343"))),
-  )
+  assert result.family == "Crosswalk"
+  assert result.version
+    == Some(uaparser.Version(major: "14", minor: Some("43"), patch: Some("343")))
 }
 
 pub fn ua_parse_1250_test() {
@@ -12869,11 +11155,13 @@ pub fn ua_parse_1250_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 6.0.1; Z831 Build/MMB29M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.94 Mobile Crosswalk/11.45.2454.20160425 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Crosswalk")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "11", minor: Some("45"), patch: Some("2454"))),
-  )
+  assert result.family == "Crosswalk"
+  assert result.version
+    == Some(uaparser.Version(
+      major: "11",
+      minor: Some("45"),
+      patch: Some("2454"),
+    ))
 }
 
 pub fn ua_parse_1251_test() {
@@ -12881,11 +11169,9 @@ pub fn ua_parse_1251_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Mobile/15A372 Safari Line/7.12.0",
     )
-  should.equal(result.family, "LINE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("12"), patch: Some("0"))),
-  )
+  assert result.family == "LINE"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("12"), patch: Some("0")))
 }
 
 pub fn ua_parse_1252_test() {
@@ -12893,11 +11179,9 @@ pub fn ua_parse_1252_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 5.1; FTJ152B Build/LMY47D; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/51.0.2704.81 Mobile Safari/537.36 Line/6.4.1",
     )
-  should.equal(result.family, "LINE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("4"), patch: Some("1"))),
-  )
+  assert result.family == "LINE"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("4"), patch: Some("1")))
 }
 
 pub fn ua_parse_1253_test() {
@@ -12905,11 +11189,9 @@ pub fn ua_parse_1253_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 4.1.2; GT-S7710 Build/JZO54K) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile",
     )
-  should.equal(result.family, "Chrome Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "18", minor: Some("0"), patch: Some("1025"))),
-  )
+  assert result.family == "Chrome Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "18", minor: Some("0"), patch: Some("1025")))
 }
 
 pub fn ua_parse_1254_test() {
@@ -12917,11 +11199,9 @@ pub fn ua_parse_1254_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPad; U; CPU OS 5_1_1 like Mac OS X; en-us) AppleWebKit/534.46.0 (KHTML, like Gecko) Chrome/19.0.1084.60 Mobile/9B206 Safari/7534.48.3",
     )
-  should.equal(result.family, "Chrome Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "19", minor: Some("0"), patch: Some("1084"))),
-  )
+  assert result.family == "Chrome Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "19", minor: Some("0"), patch: Some("1084")))
 }
 
 pub fn ua_parse_1255_test() {
@@ -12929,11 +11209,9 @@ pub fn ua_parse_1255_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 4.4.4; de-de; SM-G850F Build/KTU84P) AppleWebKit/537.16 (KHTML, like Gecko) Version/4.0 Mobile Safari/537.16 Chrome/33.0.0.0",
     )
-  should.equal(result.family, "Chrome Mobile WebView")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "33", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Chrome Mobile WebView"
+  assert result.version
+    == Some(uaparser.Version(major: "33", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1256_test() {
@@ -12941,11 +11219,9 @@ pub fn ua_parse_1256_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 6.0.1; ru-ru; Redmi 4 Build/MMB29M) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/61.0.3163.128 Mobile Safari/537.36 XiaoMi/MiuiBrowser/10.3.6-g",
     )
-  should.equal(result.family, "MiuiBrowser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("3"), patch: Some("6"))),
-  )
+  assert result.family == "MiuiBrowser"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("3"), patch: Some("6")))
 }
 
 pub fn ua_parse_1257_test() {
@@ -12953,11 +11229,9 @@ pub fn ua_parse_1257_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 7.1.2; ru-ru; Redmi 4A Build/N2G47H) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/61.0.3163.128 Mobile Safari/537.36 XiaoMi/Mint Browser/1.3.3",
     )
-  should.equal(result.family, "Mint Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("3"))),
-  )
+  assert result.family == "Mint Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("3")))
 }
 
 pub fn ua_parse_1258_test() {
@@ -12965,8 +11239,8 @@ pub fn ua_parse_1258_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Web0S; Linux/SmartTV) AppleWebKit/537.41 (KHTML, like Gecko) Large Screen WebAppManager Safari/537.41",
     )
-  should.equal(result.family, "Safari")
-  should.equal(result.version, None)
+  assert result.family == "Safari"
+  assert result.version == None
 }
 
 pub fn ua_parse_1259_test() {
@@ -12974,11 +11248,9 @@ pub fn ua_parse_1259_test() {
     uaparser.parse_user_agent(
       "MacOutlook/15.27.0.161010 (Intelx64 Mac OS X Version 10.11.6 (Build 15G1108))",
     )
-  should.equal(result.family, "MacOutlook")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "15", minor: Some("27"), patch: Some("0"))),
-  )
+  assert result.family == "MacOutlook"
+  assert result.version
+    == Some(uaparser.Version(major: "15", minor: Some("27"), patch: Some("0")))
 }
 
 pub fn ua_parse_1260_test() {
@@ -12986,11 +11258,9 @@ pub fn ua_parse_1260_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/601.7.8 (KHTML, like Gecko) Slack_SSB/2.0.3",
     )
-  should.equal(result.family, "Slack Desktop Client")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("3"))),
-  )
+  assert result.family == "Slack Desktop Client"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("3")))
 }
 
 pub fn ua_parse_1261_test() {
@@ -12998,11 +11268,9 @@ pub fn ua_parse_1261_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) AtomShell/2.6.0 Chrome/56.0.2924.87 Electron/1.6.3 Safari/537.36 MacAppStore/16.5.0 Slack_SSB/2.6.0",
     )
-  should.equal(result.family, "Slack Desktop Client")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("6"), patch: Some("0"))),
-  )
+  assert result.family == "Slack Desktop Client"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("6"), patch: Some("0")))
 }
 
 pub fn ua_parse_1262_test() {
@@ -13010,11 +11278,9 @@ pub fn ua_parse_1262_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Slack/2.6.0-beta18998559 Chrome/56.0.2924.87 AtomShell/1.6.3 Safari/537.36 Slack_SSB/2.6.0",
     )
-  should.equal(result.family, "Slack Desktop Client")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("6"), patch: Some("0"))),
-  )
+  assert result.family == "Slack Desktop Client"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("6"), patch: Some("0")))
 }
 
 pub fn ua_parse_1263_test() {
@@ -13022,11 +11288,9 @@ pub fn ua_parse_1263_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/603.1.30 (KHTML, like Gecko) HipChat/732 (modern)",
     )
-  should.equal(result.family, "HipChat Desktop Client")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "732", minor: None, patch: None)),
-  )
+  assert result.family == "HipChat Desktop Client"
+  assert result.version
+    == Some(uaparser.Version(major: "732", minor: None, patch: None))
 }
 
 pub fn ua_parse_1264_test() {
@@ -13034,17 +11298,15 @@ pub fn ua_parse_1264_test() {
     uaparser.parse_user_agent(
       "HipChat Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) QtWebEngine/5.7.0 Chrome/49.0.2623.111 Safari/537.36",
     )
-  should.equal(result.family, "HipChat Desktop Client")
-  should.equal(result.version, None)
+  assert result.family == "HipChat Desktop Client"
+  assert result.version == None
 }
 
 pub fn ua_parse_1265_test() {
   let result = uaparser.parse_user_agent("Microsoft-CryptoAPI/6.1")
-  should.equal(result.family, "Microsoft-CryptoAPI")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Microsoft-CryptoAPI"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_1266_test() {
@@ -13052,21 +11314,21 @@ pub fn ua_parse_1266_test() {
     uaparser.parse_user_agent(
       "Microsoft SkyDriveSync 17.3.6517.0809 ship; Windows NT 6.1 Service Pack 1 (7601)",
     )
-  should.equal(result.family, "Microsoft SkyDriveSync")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "17", minor: Some("3"), patch: Some("6517"))),
-  )
+  assert result.family == "Microsoft SkyDriveSync"
+  assert result.version
+    == Some(uaparser.Version(major: "17", minor: Some("3"), patch: Some("6517")))
 }
 
 pub fn ua_parse_1267_test() {
   let result =
     uaparser.parse_user_agent("ExchangeServicesClient/14.02.0051.000")
-  should.equal(result.family, "ExchangeServicesClient")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "14", minor: Some("02"), patch: Some("0051"))),
-  )
+  assert result.family == "ExchangeServicesClient"
+  assert result.version
+    == Some(uaparser.Version(
+      major: "14",
+      minor: Some("02"),
+      patch: Some("0051"),
+    ))
 }
 
 pub fn ua_parse_1268_test() {
@@ -13074,11 +11336,9 @@ pub fn ua_parse_1268_test() {
     uaparser.parse_user_agent(
       "Mac OS X/10.11.6 (15G1004); ExchangeWebServices/6.0 (243); Mail/9.3 (3124)",
     )
-  should.equal(result.family, "ExchangeWebServices")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "ExchangeWebServices"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1269_test() {
@@ -13086,11 +11346,9 @@ pub fn ua_parse_1269_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0+(iPhone;+CPU+iPhone+OS+9_3_1+like+Mac+OS+X)+AppleWebKit/601.1.46+(KHTML,+like+Gecko)+Version/9.0+Mobile/13E238+Safari/601.1",
     )
-  should.equal(result.family, "Mobile Safari")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Mobile Safari"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1270_test() {
@@ -13098,11 +11356,9 @@ pub fn ua_parse_1270_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0+(iPad;+CPU+OS+9_3_1+like+Mac+OS+X)+AppleWebKit/601.1.46+(KHTML,+like+Gecko)+Version/9.0+Mobile/13E238+Safari/601.1",
     )
-  should.equal(result.family, "Mobile Safari")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Mobile Safari"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1271_test() {
@@ -13110,11 +11366,9 @@ pub fn ua_parse_1271_test() {
     uaparser.parse_user_agent(
       "Slackbot-LinkExpanding 1.0 (+https://api.slack.com/robots)",
     )
-  should.equal(result.family, "Slackbot-LinkExpanding")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Slackbot-LinkExpanding"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1272_test() {
@@ -13122,20 +11376,16 @@ pub fn ua_parse_1272_test() {
     uaparser.parse_user_agent(
       "Slack-ImgProxy 1.136 (+https://api.slack.com/robots)",
     )
-  should.equal(result.family, "Slack-ImgProxy")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("136"), patch: None)),
-  )
+  assert result.family == "Slack-ImgProxy"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("136"), patch: None))
 }
 
 pub fn ua_parse_1273_test() {
   let result = uaparser.parse_user_agent("okhttp/3.4.2")
-  should.equal(result.family, "okhttp")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("4"), patch: Some("2"))),
-  )
+  assert result.family == "okhttp"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("4"), patch: Some("2")))
 }
 
 pub fn ua_parse_1274_test() {
@@ -13143,11 +11393,9 @@ pub fn ua_parse_1274_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_0) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1300.0 Iron/23.0.1300.0 Safari/537.11",
     )
-  should.equal(result.family, "Iron")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "23", minor: Some("0"), patch: Some("1300"))),
-  )
+  assert result.family == "Iron"
+  assert result.version
+    == Some(uaparser.Version(major: "23", minor: Some("0"), patch: Some("1300")))
 }
 
 pub fn ua_parse_1275_test() {
@@ -13155,11 +11403,9 @@ pub fn ua_parse_1275_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; U; Linux x86_64; en-US) AppleWebKit/534.13 (KHTML, like Gecko) Iron/9.0.600.2 Chrome/9.0.600.2 Safari/534.13",
     )
-  should.equal(result.family, "Iron")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("0"), patch: Some("600"))),
-  )
+  assert result.family == "Iron"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("0"), patch: Some("600")))
 }
 
 pub fn ua_parse_1276_test() {
@@ -13167,11 +11413,9 @@ pub fn ua_parse_1276_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2750.0 Iron Safari/537.36",
     )
-  should.equal(result.family, "Iron")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "52", minor: Some("0"), patch: Some("2750"))),
-  )
+  assert result.family == "Iron"
+  assert result.version
+    == Some(uaparser.Version(major: "52", minor: Some("0"), patch: Some("2750")))
 }
 
 pub fn ua_parse_1277_test() {
@@ -13179,11 +11423,9 @@ pub fn ua_parse_1277_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Android; U; en-US) AppleWebKit/533.19.4 (KHTML, like Gecko) AdobeAIR/23.0",
     )
-  should.equal(result.family, "AdobeAIR")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "23", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "AdobeAIR"
+  assert result.version
+    == Some(uaparser.Version(major: "23", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1278_test() {
@@ -13191,11 +11433,9 @@ pub fn ua_parse_1278_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en-US) AppleWebKit/533.19.4 (KHTML, like Gecko) AdobeAIR/19.0",
     )
-  should.equal(result.family, "AdobeAIR")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "19", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "AdobeAIR"
+  assert result.version
+    == Some(uaparser.Version(major: "19", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1279_test() {
@@ -13203,11 +11443,9 @@ pub fn ua_parse_1279_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iOS; U; en-US) AppleWebKit/533.19.4 (KHTML, like Gecko) AdobeAIR/19.0",
     )
-  should.equal(result.family, "AdobeAIR")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "19", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "AdobeAIR"
+  assert result.version
+    == Some(uaparser.Version(major: "19", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1280_test() {
@@ -13215,11 +11453,9 @@ pub fn ua_parse_1280_test() {
     uaparser.parse_user_agent(
       "Kurio/3.0.8 Build 65303(Android Kitkat 4.4.4; Phone)",
     )
-  should.equal(result.family, "Kurio App")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("8"))),
-  )
+  assert result.family == "Kurio App"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("8")))
 }
 
 pub fn ua_parse_1281_test() {
@@ -13227,11 +11463,9 @@ pub fn ua_parse_1281_test() {
     uaparser.parse_user_agent(
       "BacaBerita App/5.5.0 (Linux; U; Android 4.4.4; en-us) Mobile Safari",
     )
-  should.equal(result.family, "BacaBerita App")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("5"), patch: Some("0"))),
-  )
+  assert result.family == "BacaBerita App"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("5"), patch: Some("0")))
 }
 
 pub fn ua_parse_1282_test() {
@@ -13239,11 +11473,9 @@ pub fn ua_parse_1282_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) MxBrowser/4.5.2.2000 Chrome/30.0.1551.0 Safari/537.36",
     )
-  should.equal(result.family, "Maxthon")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("5"), patch: Some("2"))),
-  )
+  assert result.family == "Maxthon"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("5"), patch: Some("2")))
 }
 
 pub fn ua_parse_1283_test() {
@@ -13251,11 +11483,9 @@ pub fn ua_parse_1283_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Maxthon/4.4.5.1000 Chrome/30.0.1599.101 Safari/537.36",
     )
-  should.equal(result.family, "Maxthon")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("4"), patch: Some("5"))),
-  )
+  assert result.family == "Maxthon"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("4"), patch: Some("5")))
 }
 
 pub fn ua_parse_1284_test() {
@@ -13263,11 +11493,9 @@ pub fn ua_parse_1284_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 7.0; SM-G930P Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/58.0.3029.83 Mobile Safari/537.36 MxBrowser/4.5.10.7000",
     )
-  should.equal(result.family, "Maxthon")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("5"), patch: Some("10"))),
-  )
+  assert result.family == "Maxthon"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("5"), patch: Some("10")))
 }
 
 pub fn ua_parse_1285_test() {
@@ -13275,11 +11503,9 @@ pub fn ua_parse_1285_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.6 (KHTML, like Gecko) Chrome/18.0.1025.133 Safari/537.6 Midori/0.5",
     )
-  should.equal(result.family, "Midori")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("5"), patch: None)),
-  )
+  assert result.family == "Midori"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("5"), patch: None))
 }
 
 pub fn ua_parse_1286_test() {
@@ -13287,77 +11513,63 @@ pub fn ua_parse_1286_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPad; U; CPU like Mac OS X; FIT_LANG_REPLACE) AppleWebKit/532+ (KHTML, like Gecko) Version/3.0 Mobile/1A538b Safari/419.3 Midori/0.4",
     )
-  should.equal(result.family, "Midori")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("4"), patch: None)),
-  )
+  assert result.family == "Midori"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("4"), patch: None))
 }
 
 pub fn ua_parse_1287_test() {
   let result = uaparser.parse_user_agent("curl/7.29.0")
-  should.equal(result.family, "curl")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("29"), patch: Some("0"))),
-  )
+  assert result.family == "curl"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("29"), patch: Some("0")))
 }
 
 pub fn ua_parse_1288_test() {
   let result = uaparser.parse_user_agent("Debian APT-HTTP/1.3 (1.0.1ubuntu2)")
-  should.equal(result.family, "Debian APT-HTTP")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "Debian APT-HTTP"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_1289_test() {
   let result = uaparser.parse_user_agent("jupdate")
-  should.equal(result.family, "jupdate")
-  should.equal(result.version, None)
+  assert result.family == "jupdate"
+  assert result.version == None
 }
 
 pub fn ua_parse_1290_test() {
   let result = uaparser.parse_user_agent("libcurl-agent/1.0")
-  should.equal(result.family, "libcurl-agent")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "libcurl-agent"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1291_test() {
   let result = uaparser.parse_user_agent("libwww-perl/6.05")
-  should.equal(result.family, "libwww-perl")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("05"), patch: None)),
-  )
+  assert result.family == "libwww-perl"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("05"), patch: None))
 }
 
 pub fn ua_parse_1292_test() {
   let result = uaparser.parse_user_agent("Microsoft-CryptoAPI/6.3")
-  should.equal(result.family, "Microsoft-CryptoAPI")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "Microsoft-CryptoAPI"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_1293_test() {
   let result = uaparser.parse_user_agent("OpenBSD ftp")
-  should.equal(result.family, "OpenBSD ftp")
-  should.equal(result.version, None)
+  assert result.family == "OpenBSD ftp"
+  assert result.version == None
 }
 
 pub fn ua_parse_1294_test() {
   let result = uaparser.parse_user_agent("SophosAgent/1.0 (type= spa )")
-  should.equal(result.family, "SophosAgent")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "SophosAgent"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1295_test() {
@@ -13365,57 +11577,45 @@ pub fn ua_parse_1295_test() {
     uaparser.parse_user_agent(
       "SophosUpdateManager/1.5.7.50 SDDS/2.0 (u= EO2ANA123G c= 6342da15-f351-4ab7-9656-3f5f2d50885d )",
     )
-  should.equal(result.family, "SophosUpdateManager")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("5"), patch: Some("7"))),
-  )
+  assert result.family == "SophosUpdateManager"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("5"), patch: Some("7")))
 }
 
 pub fn ua_parse_1296_test() {
   let result =
     uaparser.parse_user_agent("Ubuntu APT-HTTP/1.3 (0.7.20.2ubuntu6)")
-  should.equal(result.family, "Ubuntu APT-HTTP")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "Ubuntu APT-HTTP"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_1297_test() {
   let result = uaparser.parse_user_agent("urlgrabber/3.10 yum/3.4.3")
-  should.equal(result.family, "urlgrabber")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("10"), patch: None)),
-  )
+  assert result.family == "urlgrabber"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("10"), patch: None))
 }
 
 pub fn ua_parse_1298_test() {
   let result = uaparser.parse_user_agent("urlgrabber/3.9.1 yum/3.2.29")
-  should.equal(result.family, "urlgrabber")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("9"), patch: Some("1"))),
-  )
+  assert result.family == "urlgrabber"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("9"), patch: Some("1")))
 }
 
 pub fn ua_parse_1299_test() {
   let result = uaparser.parse_user_agent("Wget/1.14 (linux-gnu)")
-  should.equal(result.family, "Wget")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("14"), patch: None)),
-  )
+  assert result.family == "Wget"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("14"), patch: None))
 }
 
 pub fn ua_parse_1300_test() {
   let result = uaparser.parse_user_agent("wget2/1.99.2")
-  should.equal(result.family, "wget2")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("99"), patch: Some("2"))),
-  )
+  assert result.family == "wget2"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("99"), patch: Some("2")))
 }
 
 pub fn ua_parse_1301_test() {
@@ -13423,11 +11623,9 @@ pub fn ua_parse_1301_test() {
     uaparser.parse_user_agent(
       "Windows-Update-Agent/7.9.9600.17729 Client-Protocol/1.21",
     )
-  should.equal(result.family, "Windows-Update-Agent")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("9"), patch: Some("9600"))),
-  )
+  assert result.family == "Windows-Update-Agent"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("9"), patch: Some("9600")))
 }
 
 pub fn ua_parse_1302_test() {
@@ -13435,11 +11633,9 @@ pub fn ua_parse_1302_test() {
     uaparser.parse_user_agent(
       "Windows-Update-Agent/7.9.9600.18094 Client-Protocol/1.21",
     )
-  should.equal(result.family, "Windows-Update-Agent")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("9"), patch: Some("9600"))),
-  )
+  assert result.family == "Windows-Update-Agent"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("9"), patch: Some("9600")))
 }
 
 pub fn ua_parse_1303_test() {
@@ -13447,11 +11643,9 @@ pub fn ua_parse_1303_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 5.1.1; MI NOTE Pro Build/LMY47V; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/48.0.2564.116 Mobile Safari/537.36 baidubrowser/7.7.13.0 (Baidu; P1 5.1.1)",
     )
-  should.equal(result.family, "Baidu Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("7"), patch: Some("13"))),
-  )
+  assert result.family == "Baidu Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("7"), patch: Some("13")))
 }
 
 pub fn ua_parse_1304_test() {
@@ -13459,11 +11653,9 @@ pub fn ua_parse_1304_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Dragon/36.1.1.21 Chrome/36.0.1985.97 Safari/537.36",
     )
-  should.equal(result.family, "Dragon")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "36", minor: Some("1"), patch: Some("1"))),
-  )
+  assert result.family == "Dragon"
+  assert result.version
+    == Some(uaparser.Version(major: "36", minor: Some("1"), patch: Some("1")))
 }
 
 pub fn ua_parse_1305_test() {
@@ -13471,11 +11663,9 @@ pub fn ua_parse_1305_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; U; Windows CE 5.1; rv:1.8.1a3) Gecko/20060610 Minimo/0.016",
     )
-  should.equal(result.family, "Minimo")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("016"), patch: None)),
-  )
+  assert result.family == "Minimo"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("016"), patch: None))
 }
 
 pub fn ua_parse_1306_test() {
@@ -13483,11 +11673,9 @@ pub fn ua_parse_1306_test() {
     uaparser.parse_user_agent(
       "Opera/9.80 (MAUI Runtime; Opera Mini/4.4.39008/37.9178; U; en) Presto/2.12.423 Version/12.16",
     )
-  should.equal(result.family, "Opera Mini")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("4"), patch: Some("39008"))),
-  )
+  assert result.family == "Opera Mini"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("4"), patch: Some("39008")))
 }
 
 pub fn ua_parse_1307_test() {
@@ -13495,11 +11683,9 @@ pub fn ua_parse_1307_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; 008/0.83; http://www.80legs.com/spider.html) Gecko/2008032620",
     )
-  should.equal(result.family, "008")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("83"), patch: None)),
-  )
+  assert result.family == "008"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("83"), patch: None))
 }
 
 pub fn ua_parse_1308_test() {
@@ -13507,11 +11693,9 @@ pub fn ua_parse_1308_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 9_3_4 like Mac OS X) AppleWebKit/601.1 (KHTML, like Gecko) Outlook-iOS-Android/1.0 Mobile/13G35 Safari/601.1.46\")",
     )
-  should.equal(result.family, "Outlook-iOS-Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Outlook-iOS-Android"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1309_test() {
@@ -13519,11 +11703,9 @@ pub fn ua_parse_1309_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.21 Safari/537.36 MMS/1.0.2459.0",
     )
-  should.equal(result.family, "Opera Neon")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("2459"))),
-  )
+  assert result.family == "Opera Neon"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("2459")))
 }
 
 pub fn ua_parse_1310_test() {
@@ -13531,11 +11713,9 @@ pub fn ua_parse_1310_test() {
     uaparser.parse_user_agent(
       "PANTECH-EUROPA-U4000-orange/1.0 Obigo/Q04C MMS/1.2.0 profile/MIDP-2.0 configuration/CLDC-1.1",
     )
-  should.equal(result.family, "Obigo")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "04", minor: None, patch: None)),
-  )
+  assert result.family == "Obigo"
+  assert result.version
+    == Some(uaparser.Version(major: "04", minor: None, patch: None))
 }
 
 pub fn ua_parse_1311_test() {
@@ -13543,11 +11723,9 @@ pub fn ua_parse_1311_test() {
     uaparser.parse_user_agent(
       "masscan/1.0 (https://github.com/robertdavidgraham/masscan)",
     )
-  should.equal(result.family, "masscan")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "masscan"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1312_test() {
@@ -13555,11 +11733,9 @@ pub fn ua_parse_1312_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 SznProhlizec/4.3.0-251281",
     )
-  should.equal(result.family, "Seznam prohlížeč")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("3"), patch: Some("0"))),
-  )
+  assert result.family == "Seznam prohlížeč"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("3"), patch: Some("0")))
 }
 
 pub fn ua_parse_1313_test() {
@@ -13567,11 +11743,9 @@ pub fn ua_parse_1313_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 7.1.2; Redmi 4X Build/N2G47H) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/64.0.3282.137 Mobile Safari/537.36 SznProhlizec/5.2.1a",
     )
-  should.equal(result.family, "Seznam prohlížeč")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("2"), patch: Some("1"))),
-  )
+  assert result.family == "Seznam prohlížeč"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("2"), patch: Some("1")))
 }
 
 pub fn ua_parse_1314_test() {
@@ -13579,11 +11753,9 @@ pub fn ua_parse_1314_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36 SznProhlizec/3.8.4 NWjs/0.19.6",
     )
-  should.equal(result.family, "Seznam prohlížeč")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("8"), patch: Some("4"))),
-  )
+  assert result.family == "Seznam prohlížeč"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("8"), patch: Some("4")))
 }
 
 pub fn ua_parse_1315_test() {
@@ -13591,11 +11763,9 @@ pub fn ua_parse_1315_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 10_2_1 like Mac OS X) AppleWebKit/602.4.6 (KHTML, like Gecko) Mobile/14D27 SznProhlizec/4.4i",
     )
-  should.equal(result.family, "Seznam prohlížeč")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("4"), patch: None)),
-  )
+  assert result.family == "Seznam prohlížeč"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("4"), patch: None))
 }
 
 pub fn ua_parse_1316_test() {
@@ -13603,11 +11773,9 @@ pub fn ua_parse_1316_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/42.0 CoRom/36.0.1985.144 Chrome/36.0.1985.144 Safari/537.36",
     )
-  should.equal(result.family, "Coc Coc")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "42", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Coc Coc"
+  assert result.version
+    == Some(uaparser.Version(major: "42", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1317_test() {
@@ -13615,11 +11783,9 @@ pub fn ua_parse_1317_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/49.0 Chrome/43.0.2357.138 Safari/537.36",
     )
-  should.equal(result.family, "Coc Coc")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "49", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Coc Coc"
+  assert result.version
+    == Some(uaparser.Version(major: "49", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1318_test() {
@@ -13627,11 +11793,9 @@ pub fn ua_parse_1318_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) coc_coc_browser/50.0.125 Chrome/44.0.2403.125 Safari/537.36",
     )
-  should.equal(result.family, "Coc Coc")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "50", minor: Some("0"), patch: Some("125"))),
-  )
+  assert result.family == "Coc Coc"
+  assert result.version
+    == Some(uaparser.Version(major: "50", minor: Some("0"), patch: Some("125")))
 }
 
 pub fn ua_parse_1319_test() {
@@ -13639,11 +11803,9 @@ pub fn ua_parse_1319_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Qwantify/2.4w; +https://www.qwant.com/)/2.4w",
     )
-  should.equal(result.family, "Qwantify")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("4"), patch: None)),
-  )
+  assert result.family == "Qwantify"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("4"), patch: None))
 }
 
 pub fn ua_parse_1320_test() {
@@ -13651,11 +11813,9 @@ pub fn ua_parse_1320_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12",
     )
-  should.equal(result.family, "Edge")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "12", minor: None, patch: None)),
-  )
+  assert result.family == "Edge"
+  assert result.version
+    == Some(uaparser.Version(major: "12", minor: None, patch: None))
 }
 
 pub fn ua_parse_1321_test() {
@@ -13663,59 +11823,51 @@ pub fn ua_parse_1321_test() {
     uaparser.parse_user_agent(
       "Bloglovin/1.0 (http://www.bloglovin.com; 1000 subscribers)",
     )
-  should.equal(result.family, "Bloglovin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Bloglovin"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1322_test() {
   let result =
     uaparser.parse_user_agent("Feedbin feed-id:1033517 - 1000 subscribers")
-  should.equal(result.family, "Feedbin")
-  should.equal(result.version, None)
+  assert result.family == "Feedbin"
+  assert result.version == None
 }
 
 pub fn ua_parse_1323_test() {
   let result =
     uaparser.parse_user_agent("Tiny Tiny RSS/16.3 (http://tt-rss.org/)")
-  should.equal(result.family, "Tiny Tiny RSS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "16", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "Tiny Tiny RSS"
+  assert result.version
+    == Some(uaparser.Version(major: "16", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_1324_test() {
   let result = uaparser.parse_user_agent("Mtps Feed Aggregation System")
-  should.equal(result.family, "Mtps Feed Aggregation System")
-  should.equal(result.version, None)
+  assert result.family == "Mtps Feed Aggregation System"
+  assert result.version == None
 }
 
 pub fn ua_parse_1325_test() {
   let result = uaparser.parse_user_agent("Stringer")
-  should.equal(result.family, "Stringer")
-  should.equal(result.version, None)
+  assert result.family == "Stringer"
+  assert result.version == None
 }
 
 pub fn ua_parse_1326_test() {
   let result =
     uaparser.parse_user_agent("Box Sync/4.0.7848;Darwin/10.13;i386/64bit")
-  should.equal(result.family, "Box Sync")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("7848"))),
-  )
+  assert result.family == "Box Sync"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("7848")))
 }
 
 pub fn ua_parse_1327_test() {
   let result = uaparser.parse_user_agent("Box/1.2.93;Darwin/10.13;i386/64bit")
-  should.equal(result.family, "Box")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: Some("93"))),
-  )
+  assert result.family == "Box"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: Some("93")))
 }
 
 pub fn ua_parse_1328_test() {
@@ -13723,11 +11875,9 @@ pub fn ua_parse_1328_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_0) AppleWebKit/537.36 (KHTML, like Gecko) BoxNotes/1.3.0 Chrome/56.0.2924.87 Electron/1.6.8 Safari/537.36",
     )
-  should.equal(result.family, "BoxNotes")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("0"))),
-  )
+  assert result.family == "BoxNotes"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("0")))
 }
 
 pub fn ua_parse_1329_test() {
@@ -13735,11 +11885,9 @@ pub fn ua_parse_1329_test() {
     uaparser.parse_user_agent(
       "Box Sync/4.0.7848;Windows/8.1;x86 Family 6 Model 158 Stepping 9, GenuineIntel/32bit",
     )
-  should.equal(result.family, "Box Sync")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("7848"))),
-  )
+  assert result.family == "Box Sync"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("7848")))
 }
 
 pub fn ua_parse_1330_test() {
@@ -13747,11 +11895,9 @@ pub fn ua_parse_1330_test() {
     uaparser.parse_user_agent(
       "Box Sync/4.0.7848;Windows/10;Intel64 Family 6 Model 158 Stepping 9, GenuineIntel/64bit",
     )
-  should.equal(result.family, "Box Sync")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("7848"))),
-  )
+  assert result.family == "Box Sync"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: Some("7848")))
 }
 
 pub fn ua_parse_1331_test() {
@@ -13759,11 +11905,9 @@ pub fn ua_parse_1331_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) BoxNotes/1.3.0 Chrome/56.0.2924.87 Electron/1.6.8 Safari/537.36",
     )
-  should.equal(result.family, "BoxNotes")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("0"))),
-  )
+  assert result.family == "BoxNotes"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("0")))
 }
 
 pub fn ua_parse_1332_test() {
@@ -13771,11 +11915,9 @@ pub fn ua_parse_1332_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) BoxNotes/1.3.0 Chrome/56.0.2924.87 Electron/1.6.8 Safari/537.36",
     )
-  should.equal(result.family, "BoxNotes")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("0"))),
-  )
+  assert result.family == "BoxNotes"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("0")))
 }
 
 pub fn ua_parse_1333_test() {
@@ -13783,38 +11925,30 @@ pub fn ua_parse_1333_test() {
     uaparser.parse_user_agent(
       "Box/1.2.93;Windows/10;Intel64 Family 6 Model 158 Stepping 9, GenuineIntel/64bit",
     )
-  should.equal(result.family, "Box")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: Some("93"))),
-  )
+  assert result.family == "Box"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: Some("93")))
 }
 
 pub fn ua_parse_1334_test() {
   let result = uaparser.parse_user_agent("Evolution/3.26.2.1")
-  should.equal(result.family, "Evolution")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("26"), patch: Some("2.1"))),
-  )
+  assert result.family == "Evolution"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("26"), patch: Some("2.1")))
 }
 
 pub fn ua_parse_1335_test() {
   let result = uaparser.parse_user_agent("RCM CardDAV plugin/2.0.4")
-  should.equal(result.family, "RCM CardDAV plugin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("4"))),
-  )
+  assert result.family == "RCM CardDAV plugin"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("4")))
 }
 
 pub fn ua_parse_1336_test() {
   let result = uaparser.parse_user_agent("RCM CardDAV plugin/0.9.2-dev")
-  should.equal(result.family, "RCM CardDAV plugin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("2-dev"))),
-  )
+  assert result.family == "RCM CardDAV plugin"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("2-dev")))
 }
 
 pub fn ua_parse_1337_test() {
@@ -13822,11 +11956,9 @@ pub fn ua_parse_1337_test() {
     uaparser.parse_user_agent(
       "DAVdroid/1.9.2-gplay (2017/11/04; dav4android; okhttp3) Android/7.1.2",
     )
-  should.equal(result.family, "DAVdroid")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("9"), patch: Some("2"))),
-  )
+  assert result.family == "DAVdroid"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("9"), patch: Some("2")))
 }
 
 pub fn ua_parse_1338_test() {
@@ -13834,11 +11966,9 @@ pub fn ua_parse_1338_test() {
     uaparser.parse_user_agent(
       "DAVdroid/1.9-ose (2017/10/19; dav4android; okhttp3) Android/7.1.2",
     )
-  should.equal(result.family, "DAVdroid")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("9"), patch: None)),
-  )
+  assert result.family == "DAVdroid"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("9"), patch: None))
 }
 
 pub fn ua_parse_1339_test() {
@@ -13846,25 +11976,23 @@ pub fn ua_parse_1339_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows) mirall/2.3.2 (build 1) (Nextcloud)",
     )
-  should.equal(result.family, "Nextcloud")
-  should.equal(result.version, None)
+  assert result.family == "Nextcloud"
+  assert result.version == None
 }
 
 pub fn ua_parse_1340_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/5.0 (Linux) mirall/2.3.2 (Nextcloud)")
-  should.equal(result.family, "Nextcloud")
-  should.equal(result.version, None)
+  assert result.family == "Nextcloud"
+  assert result.version == None
 }
 
 pub fn ua_parse_1341_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/5.0 (Android) ownCloud-android/2.0.0")
-  should.equal(result.family, "Owncloud")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Owncloud"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1342_test() {
@@ -13872,11 +12000,9 @@ pub fn ua_parse_1342_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 10_0_2 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) AppleNews/608.0.1 Version/2.0.1",
     )
-  should.equal(result.family, "Mobile Safari UI/WKWebView")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "Mobile Safari UI/WKWebView"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_1343_test() {
@@ -13884,11 +12010,9 @@ pub fn ua_parse_1343_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.3; WOW64; Trident/7.0; .NET4.0E; .NET4.0C; InfoPath.3)",
     )
-  should.equal(result.family, "IE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "11", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE"
+  assert result.version
+    == Some(uaparser.Version(major: "11", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1344_test() {
@@ -13896,11 +12020,9 @@ pub fn ua_parse_1344_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.2; Trident/6.0; .NET4.0E; .NET4.0C; .NET CLR 3.5.30729; .NET CLR 2.0.50727; .NET CLR 3.0.30729)",
     )
-  should.equal(result.family, "IE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1345_test() {
@@ -13908,20 +12030,16 @@ pub fn ua_parse_1345_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.1; Trident/5.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; InfoPath.2)",
     )
-  should.equal(result.family, "IE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1346_test() {
   let result = uaparser.parse_user_agent("Tableau/1.0 (1025794)")
-  should.equal(result.family, "Tableau")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Tableau"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1347_test() {
@@ -13929,18 +12047,16 @@ pub fn ua_parse_1347_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 11_2_5 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/11.2.5 Mobile/9B179 Safari/7534.48.3 OktaMobile/5.10.2",
     )
-  should.equal(result.family, "OktaMobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("10"), patch: Some("2"))),
-  )
+  assert result.family == "OktaMobile"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("10"), patch: Some("2")))
 }
 
 pub fn ua_parse_1348_test() {
   let result =
     uaparser.parse_user_agent("BUbiNG (+http://law.di.unimi.it/BUbiNG.html)")
-  should.equal(result.family, "BUbiNG")
-  should.equal(result.version, None)
+  assert result.family == "BUbiNG"
+  assert result.version == None
 }
 
 pub fn ua_parse_1349_test() {
@@ -13948,21 +12064,17 @@ pub fn ua_parse_1349_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; SemrushBot/1.2~bl; +http://www.semrush.com/bot.html)",
     )
-  should.equal(result.family, "SemrushBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "SemrushBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_1350_test() {
   let result =
     uaparser.parse_user_agent("Outlook-iOS/665.29827.prod.iphone (2.63.0)")
-  should.equal(result.family, "Outlook-iOS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("63"), patch: Some("0"))),
-  )
+  assert result.family == "Outlook-iOS"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("63"), patch: Some("0")))
 }
 
 pub fn ua_parse_1351_test() {
@@ -13970,11 +12082,9 @@ pub fn ua_parse_1351_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 7.0; LG-TP260 Build/NRD90U; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/64.0.3282.137 Mobile Safari/537.36 Instagram 33.0.0.11.92 Android (24/7.0; 320dpi; 720x1193; LGE/lge; LG-TP260; lv517; lv517; en_US; 93117667)",
     )
-  should.equal(result.family, "Instagram")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "33", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Instagram"
+  assert result.version
+    == Some(uaparser.Version(major: "33", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1352_test() {
@@ -13982,11 +12092,9 @@ pub fn ua_parse_1352_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 11_2_5 like Mac OS X) AppleWebKit/604.5.6 (KHTML, like Gecko) Mobile/15D60 Instagram 33.0.0.11.96 (iPhone9,3; iOS 11_2_5; en_AU; en-AU; scale=2.00; gamut=wide; 750x1334)",
     )
-  should.equal(result.family, "Instagram")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "33", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Instagram"
+  assert result.version
+    == Some(uaparser.Version(major: "33", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1353_test() {
@@ -13994,11 +12102,9 @@ pub fn ua_parse_1353_test() {
     uaparser.parse_user_agent(
       "Instagram 415.0.0.36.76 Android (33/13; 320dpi; 720x1600; samsung; SM-A032M; a3core; m168; pt_BR; 874816631)",
     )
-  should.equal(result.family, "Instagram")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "415", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Instagram"
+  assert result.version
+    == Some(uaparser.Version(major: "415", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1354_test() {
@@ -14006,11 +12112,9 @@ pub fn ua_parse_1354_test() {
     uaparser.parse_user_agent(
       "Instagram 416.0.0.47.66 Android (36/16; 306dpi; 1008x2244; Google/google; Pixel 9 Pro XL; komodo; komodo; en_US; 879745420)",
     )
-  should.equal(result.family, "Instagram")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "416", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Instagram"
+  assert result.version
+    == Some(uaparser.Version(major: "416", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1355_test() {
@@ -14018,11 +12122,9 @@ pub fn ua_parse_1355_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 9; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.7204.180 Safari/537.36 Telegram-Android/12.3.1 (Xiaomi 2304FPN6DG; Android 9; SDK 28; AVERAGE)",
     )
-  should.equal(result.family, "Telegram")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "12", minor: Some("3"), patch: Some("1"))),
-  )
+  assert result.family == "Telegram"
+  assert result.version
+    == Some(uaparser.Version(major: "12", minor: Some("3"), patch: Some("1")))
 }
 
 pub fn ua_parse_1356_test() {
@@ -14030,11 +12132,9 @@ pub fn ua_parse_1356_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 16; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.7559.109 Safari/537.36 Telegram-Android/12.3.1 (Samsung SM-X115; Android 16; SDK 36; AVERAGE)",
     )
-  should.equal(result.family, "Telegram")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "12", minor: Some("3"), patch: Some("1"))),
-  )
+  assert result.family == "Telegram"
+  assert result.version
+    == Some(uaparser.Version(major: "12", minor: Some("3"), patch: Some("1")))
 }
 
 pub fn ua_parse_1357_test() {
@@ -14042,11 +12142,9 @@ pub fn ua_parse_1357_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 15; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.7559.132 Safari/537.36 Telegram-Android/12.4.1 (Xiaomi 2405CRPFDG; Android 15; SDK 35; HIGH)",
     )
-  should.equal(result.family, "Telegram")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "12", minor: Some("4"), patch: Some("1"))),
-  )
+  assert result.family == "Telegram"
+  assert result.version
+    == Some(uaparser.Version(major: "12", minor: Some("4"), patch: Some("1")))
 }
 
 pub fn ua_parse_1358_test() {
@@ -14054,11 +12152,9 @@ pub fn ua_parse_1358_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 17_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.3.1 Mobile/15E148 Safari/604.1 musical_ly_34.3.1 JsSdk/2.0 NetType/4G Channel/App Store ByteLocale/en Region/US isDarkMode/1 WKWebView/1 RevealType/Dialog",
     )
-  should.equal(result.family, "TikTok")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "34", minor: Some("3"), patch: Some("1"))),
-  )
+  assert result.family == "TikTok"
+  assert result.version
+    == Some(uaparser.Version(major: "34", minor: Some("3"), patch: Some("1")))
 }
 
 pub fn ua_parse_1359_test() {
@@ -14066,11 +12162,9 @@ pub fn ua_parse_1359_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 10; moto g(7) Build/QP6_S30.52-23-13-4; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/108.0.5359.128 Mobile Safari/537.36 musical_ly_2022704050 JsSdk/1.0 NetType/WIFI Channel/googleplay AppName/musical_ly app_version/27.4.5 ByteLocale/en ByteFullLocale/en Region/US Spark/1.2.4-alpha.5 AppVersion/27.4.5 PIA/1.5.10 BytedanceWebview/d8a21c6",
     )
-  should.equal(result.family, "TikTok")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "27", minor: Some("4"), patch: Some("5"))),
-  )
+  assert result.family == "TikTok"
+  assert result.version
+    == Some(uaparser.Version(major: "27", minor: Some("4"), patch: Some("5")))
 }
 
 pub fn ua_parse_1360_test() {
@@ -14078,8 +12172,8 @@ pub fn ua_parse_1360_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 BytedanceWebview/d8a21c6 trill_34.9.0 JsSdk/2.0 NetType/4G Channel/App Store ByteLocale/en Region/MY FalconTag/31CFA6E0-CAE5-4ECF-A13A-ADFCAFC2428F",
     )
-  should.equal(result.family, "TikTok")
-  should.equal(result.version, None)
+  assert result.family == "TikTok"
+  assert result.version == None
 }
 
 pub fn ua_parse_1361_test() {
@@ -14087,11 +12181,9 @@ pub fn ua_parse_1361_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1 KAKAOTALK/11.3.1 (INAPP)",
     )
-  should.equal(result.family, "KakaoTalk")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "11", minor: Some("3"), patch: Some("1"))),
-  )
+  assert result.family == "KakaoTalk"
+  assert result.version
+    == Some(uaparser.Version(major: "11", minor: Some("3"), patch: Some("1")))
 }
 
 pub fn ua_parse_1362_test() {
@@ -14099,11 +12191,9 @@ pub fn ua_parse_1362_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/604.1 KAKAOTALK/11.3.1 (PFINAPP)",
     )
-  should.equal(result.family, "KakaoTalk")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "11", minor: Some("3"), patch: Some("1"))),
-  )
+  assert result.family == "KakaoTalk"
+  assert result.version
+    == Some(uaparser.Version(major: "11", minor: Some("3"), patch: Some("1")))
 }
 
 pub fn ua_parse_1363_test() {
@@ -14111,11 +12201,9 @@ pub fn ua_parse_1363_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/131.0.0.0 Mobile Safari/537.36 KAKAOTALK/10.2.3 (INAPP)",
     )
-  should.equal(result.family, "KakaoTalk")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("2"), patch: Some("3"))),
-  )
+  assert result.family == "KakaoTalk"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("2"), patch: Some("3")))
 }
 
 pub fn ua_parse_1364_test() {
@@ -14123,11 +12211,9 @@ pub fn ua_parse_1364_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 11_2_6 like Mac OS X) AppleWebKit/604.5.6 (KHTML, like Gecko) Mobile/15D100 Flipboard/4.2.2",
     )
-  should.equal(result.family, "Flipboard")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("2"), patch: Some("2"))),
-  )
+  assert result.family == "Flipboard"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("2"), patch: Some("2")))
 }
 
 pub fn ua_parse_1365_test() {
@@ -14135,11 +12221,9 @@ pub fn ua_parse_1365_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 7.0; SM-G610F Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/63.0.3239.111 Mobile Safari/537.36 Flipboard/4.1.9/4323,4.1.9.4323",
     )
-  should.equal(result.family, "Flipboard")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("1"), patch: Some("9"))),
-  )
+  assert result.family == "Flipboard"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("1"), patch: Some("9")))
 }
 
 pub fn ua_parse_1366_test() {
@@ -14147,11 +12231,9 @@ pub fn ua_parse_1366_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 7.0; SM-G930F Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/64.0.3282.137 Mobile Safari/537.36 Onefootball/Android/9.10.6",
     )
-  should.equal(result.family, "Onefootball")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("10"), patch: Some("6"))),
-  )
+  assert result.family == "Onefootball"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("10"), patch: Some("6")))
 }
 
 pub fn ua_parse_1367_test() {
@@ -14159,11 +12241,9 @@ pub fn ua_parse_1367_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 7.0; SM-A520F Build/NRD90M; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/58.0.3029.83 Mobile Safari/537.36 Flipboard-Briefing/2.7.28",
     )
-  should.equal(result.family, "Flipboard-Briefing")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("7"), patch: Some("28"))),
-  )
+  assert result.family == "Flipboard-Briefing"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("7"), patch: Some("28")))
 }
 
 pub fn ua_parse_1368_test() {
@@ -14171,11 +12251,9 @@ pub fn ua_parse_1368_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Phantom/ios/22.06.08.44",
     )
-  should.equal(result.family, "Phantom")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "22", minor: Some("06"), patch: Some("08"))),
-  )
+  assert result.family == "Phantom"
+  assert result.version
+    == Some(uaparser.Version(major: "22", minor: Some("06"), patch: Some("08")))
 }
 
 pub fn ua_parse_1369_test() {
@@ -14183,11 +12261,9 @@ pub fn ua_parse_1369_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 12; SM-G991B Build/SP1A.210812.016; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/102.0.5005.125 Mobile Safari/537.36 Phantom/android/22.06.08.47",
     )
-  should.equal(result.family, "Phantom")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "22", minor: Some("06"), patch: Some("08"))),
-  )
+  assert result.family == "Phantom"
+  assert result.version
+    == Some(uaparser.Version(major: "22", minor: Some("06"), patch: Some("08")))
 }
 
 pub fn ua_parse_1370_test() {
@@ -14195,11 +12271,9 @@ pub fn ua_parse_1370_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/8.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)",
     )
-  should.equal(result.family, "IE")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "11", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "IE"
+  assert result.version
+    == Some(uaparser.Version(major: "11", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1371_test() {
@@ -14207,11 +12281,9 @@ pub fn ua_parse_1371_test() {
     uaparser.parse_user_agent(
       "ESPN Radio/3.2.113 CFNetwork/485.12.30 Darwin/10.4.0",
     )
-  should.equal(result.family, "ESPN")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("2"), patch: Some("113"))),
-  )
+  assert result.family == "ESPN"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("2"), patch: Some("113")))
 }
 
 pub fn ua_parse_1372_test() {
@@ -14219,11 +12291,9 @@ pub fn ua_parse_1372_test() {
     uaparser.parse_user_agent(
       "ESPN Radio 4.7.4 rv:1032 (iPhone; iPhone OS 9.2.1; en_US)",
     )
-  should.equal(result.family, "ESPN")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("7"), patch: Some("4"))),
-  )
+  assert result.family == "ESPN"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("7"), patch: Some("4")))
 }
 
 pub fn ua_parse_1373_test() {
@@ -14231,21 +12301,17 @@ pub fn ua_parse_1373_test() {
     uaparser.parse_user_agent(
       "ESPN Radio 4.5.1 (iPhone; iPhone OS 5.1.1; en_US)",
     )
-  should.equal(result.family, "ESPN")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("5"), patch: Some("1"))),
-  )
+  assert result.family == "ESPN"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("5"), patch: Some("1")))
 }
 
 pub fn ua_parse_1374_test() {
   let result =
     uaparser.parse_user_agent("ESPN Radio 4.0 (iPhone; iPhone OS 7.1.2; en_AU)")
-  should.equal(result.family, "ESPN")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "ESPN"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1375_test() {
@@ -14253,11 +12319,9 @@ pub fn ua_parse_1375_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64; rv:55.0) Gecko/20100101 Firefox/55.2.2 Waterfox/55.2.2",
     )
-  should.equal(result.family, "Waterfox")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "55", minor: Some("2"), patch: Some("2"))),
-  )
+  assert result.family == "Waterfox"
+  assert result.version
+    == Some(uaparser.Version(major: "55", minor: Some("2"), patch: Some("2")))
 }
 
 pub fn ua_parse_1376_test() {
@@ -14265,103 +12329,83 @@ pub fn ua_parse_1376_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64; rv:55.0) Gecko/20100101 Goanna/4.0 Firefox/55.0 Basilisk/20171113",
     )
-  should.equal(result.family, "Basilisk")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(
+  assert result.family == "Basilisk"
+  assert result.version
+    == Some(uaparser.Version(
       major: "55",
       minor: Some("0"),
       patch: Some("20171113"),
-    )),
-  )
+    ))
 }
 
 pub fn ua_parse_1377_test() {
   let result = uaparser.parse_user_agent("Go-http-client/1.1")
-  should.equal(result.family, "Go-http-client")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Go-http-client"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_1378_test() {
   let result = uaparser.parse_user_agent("scalaj-http/1.0")
-  should.equal(result.family, "scalaj-http")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "scalaj-http"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1379_test() {
   let result = uaparser.parse_user_agent("reqwest/0.8.1")
-  should.equal(result.family, "reqwest")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("8"), patch: Some("1"))),
-  )
+  assert result.family == "reqwest"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("8"), patch: Some("1")))
 }
 
 pub fn ua_parse_1380_test() {
   let result = uaparser.parse_user_agent("akka-http/10.0.10")
-  should.equal(result.family, "akka-http")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("0"), patch: Some("10"))),
-  )
+  assert result.family == "akka-http"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("0"), patch: Some("10")))
 }
 
 pub fn ua_parse_1381_test() {
   let result = uaparser.parse_user_agent("Python/3.6 aiohttp/3.5.4")
-  should.equal(result.family, "Python aiohttp")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("5"), patch: Some("4"))),
-  )
+  assert result.family == "Python aiohttp"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("5"), patch: Some("4")))
 }
 
 pub fn ua_parse_1382_test() {
   let result = uaparser.parse_user_agent("unirest-java/1.3.11")
-  should.equal(result.family, "unirest-java")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("11"))),
-  )
+  assert result.family == "unirest-java"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("11")))
 }
 
 pub fn ua_parse_1383_test() {
   let result = uaparser.parse_user_agent("axios/0.18.0")
-  should.equal(result.family, "axios")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("18"), patch: Some("0"))),
-  )
+  assert result.family == "axios"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("18"), patch: Some("0")))
 }
 
 pub fn ua_parse_1384_test() {
   let result =
     uaparser.parse_user_agent("got/9.6.0 (https://github.com/sindresorhus/got)")
-  should.equal(result.family, "got")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("6"), patch: Some("0"))),
-  )
+  assert result.family == "got"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("6"), patch: Some("0")))
 }
 
 pub fn ua_parse_1385_test() {
   let result = uaparser.parse_user_agent("S3Gof3r")
-  should.equal(result.family, "S3Gof3r")
-  should.equal(result.version, None)
+  assert result.family == "S3Gof3r"
+  assert result.version == None
 }
 
 pub fn ua_parse_1386_test() {
   let result = uaparser.parse_user_agent("rusoto/0.36.0 rust/1.35.0 linux")
-  should.equal(result.family, "rusoto")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("36"), patch: Some("0"))),
-  )
+  assert result.family == "rusoto"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("36"), patch: Some("0")))
 }
 
 pub fn ua_parse_1387_test() {
@@ -14369,11 +12413,9 @@ pub fn ua_parse_1387_test() {
     uaparser.parse_user_agent(
       "ibm-cos-sdk-java/2.3.0 Linux/4.9.0-8-amd64 Java_HotSpot(TM)_64-Bit_Server_VM/9.0.4+11/9.0.4",
     )
-  should.equal(result.family, "ibm-cos-sdk-java")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("3"), patch: Some("0"))),
-  )
+  assert result.family == "ibm-cos-sdk-java"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("3"), patch: Some("0")))
 }
 
 pub fn ua_parse_1388_test() {
@@ -14381,11 +12423,9 @@ pub fn ua_parse_1388_test() {
     uaparser.parse_user_agent(
       "aws-sdk-dotnet-45/3.3.11.0 aws-sdk-dotnet-core/3.3.17.10 .NET_Runtime/4.0 .NET_Framework/4.0 OS/Microsoft_Windows_NT_6.2.9200.0 ClientSync",
     )
-  should.equal(result.family, "aws-sdk-dotnet-45")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("3"), patch: Some("11"))),
-  )
+  assert result.family == "aws-sdk-dotnet-45"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("3"), patch: Some("11")))
 }
 
 pub fn ua_parse_1389_test() {
@@ -14393,11 +12433,9 @@ pub fn ua_parse_1389_test() {
     uaparser.parse_user_agent(
       "Boto/2.48.0 Python/2.7.14 Linux/4.2.0-41-generic",
     )
-  should.equal(result.family, "Boto")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("48"), patch: Some("0"))),
-  )
+  assert result.family == "Boto"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("48"), patch: Some("0")))
 }
 
 pub fn ua_parse_1390_test() {
@@ -14405,11 +12443,9 @@ pub fn ua_parse_1390_test() {
     uaparser.parse_user_agent(
       "aws-cli/1.14.9 Python/2.7.12 Linux/4.9.76-3.78.amzn1.x86_64 botocore/1.8.13",
     )
-  should.equal(result.family, "aws-cli")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("14"), patch: Some("9"))),
-  )
+  assert result.family == "aws-cli"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("14"), patch: Some("9")))
 }
 
 pub fn ua_parse_1391_test() {
@@ -14417,11 +12453,9 @@ pub fn ua_parse_1391_test() {
     uaparser.parse_user_agent(
       "Boto3/1.6.2 Python/3.4.3 Linux/4.4.35-33.55.amzn1.x86_64 Botocore/1.9.2 Resource",
     )
-  should.equal(result.family, "Boto3")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("2"))),
-  )
+  assert result.family == "Boto3"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("2")))
 }
 
 pub fn ua_parse_1392_test() {
@@ -14429,11 +12463,9 @@ pub fn ua_parse_1392_test() {
     uaparser.parse_user_agent(
       "ElasticMapReduce/1.0.0 emrfs/s3n {}, aws-sdk-java/1.11.129 Linux/4.4.35-33.55.amzn1.x86_64 OpenJDK_64-Bit_Server_VM/25.141-b16/1.8.0_141 scala/2.11.8",
     )
-  should.equal(result.family, "aws-sdk-java")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("11"), patch: Some("129"))),
-  )
+  assert result.family == "aws-sdk-java"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("11"), patch: Some("129")))
 }
 
 pub fn ua_parse_1393_test() {
@@ -14441,11 +12473,9 @@ pub fn ua_parse_1393_test() {
     uaparser.parse_user_agent(
       "Hadoop 2.6.0-cdh5.14.0, aws-sdk-java/1.11.134 Linux/4.4.0-1052-aws OpenJDK_64-Bit_Server_VM/25.151-b12/1.8.0_151",
     )
-  should.equal(result.family, "aws-sdk-java")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("11"), patch: Some("134"))),
-  )
+  assert result.family == "aws-sdk-java"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("11"), patch: Some("134")))
 }
 
 pub fn ua_parse_1394_test() {
@@ -14453,11 +12483,9 @@ pub fn ua_parse_1394_test() {
     uaparser.parse_user_agent(
       "Hadoop 2.8.3-amzn-0, aws-sdk-java/1.11.267 Linux/4.9.77-31.58.amzn1.x86_64 OpenJDK_64-Bit_Server_VM/25.161-b14 java/1.8.0_161 scala/2.11.8",
     )
-  should.equal(result.family, "aws-sdk-java")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("11"), patch: Some("267"))),
-  )
+  assert result.family == "aws-sdk-java"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("11"), patch: Some("267")))
 }
 
 pub fn ua_parse_1395_test() {
@@ -14465,21 +12493,17 @@ pub fn ua_parse_1395_test() {
     uaparser.parse_user_agent(
       "aws-sdk-java/1.11.226 Mac_OS_X/10.12.6 Java_HotSpot(TM)_64-Bit_Server_VM/25.131-b11 java/1.8.0_131 scala/2.11.11",
     )
-  should.equal(result.family, "aws-sdk-java")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("11"), patch: Some("226"))),
-  )
+  assert result.family == "aws-sdk-java"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("11"), patch: Some("226")))
 }
 
 pub fn ua_parse_1396_test() {
   let result =
     uaparser.parse_user_agent("aws-sdk-ruby2/2.2.18 ruby/2.1.5 x86_64-linux")
-  should.equal(result.family, "aws-sdk-ruby2")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("2"), patch: Some("18"))),
-  )
+  assert result.family == "aws-sdk-ruby2"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("2"), patch: Some("18")))
 }
 
 pub fn ua_parse_1397_test() {
@@ -14487,11 +12511,9 @@ pub fn ua_parse_1397_test() {
     uaparser.parse_user_agent(
       "aws-sdk-cpp/1.0.64 Linux/4.4.0-66-generic x86_64",
     )
-  should.equal(result.family, "aws-sdk-cpp")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("64"))),
-  )
+  assert result.family == "aws-sdk-cpp"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("64")))
 }
 
 pub fn ua_parse_1398_test() {
@@ -14499,11 +12521,9 @@ pub fn ua_parse_1398_test() {
     uaparser.parse_user_agent(
       "aws-sdk-go/1.4.12 (go1.6; linux; amd64) S3Manager",
     )
-  should.equal(result.family, "aws-sdk-go")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("4"), patch: Some("12"))),
-  )
+  assert result.family == "aws-sdk-go"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("4"), patch: Some("12")))
 }
 
 pub fn ua_parse_1399_test() {
@@ -14511,20 +12531,16 @@ pub fn ua_parse_1399_test() {
     uaparser.parse_user_agent(
       "aws-sdk-go-v2/1.24.1 os/linux lang/go#1.20.4 md/GOOS#linux md/GOARCH#arm64 api/sts#1.26.7",
     )
-  should.equal(result.family, "aws-sdk-go-v2")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("24"), patch: Some("1"))),
-  )
+  assert result.family == "aws-sdk-go-v2"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("24"), patch: Some("1")))
 }
 
 pub fn ua_parse_1400_test() {
   let result = uaparser.parse_user_agent("aws-sdk-nodejs/2.141.0 win32/v8.4.0")
-  should.equal(result.family, "aws-sdk-nodejs")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("141"), patch: Some("0"))),
-  )
+  assert result.family == "aws-sdk-nodejs"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("141"), patch: Some("0")))
 }
 
 pub fn ua_parse_1401_test() {
@@ -14532,60 +12548,48 @@ pub fn ua_parse_1401_test() {
     uaparser.parse_user_agent(
       "JetS3t/0.9.0 (Linux/4.4.0-1044-aws; amd64; en; JVM 1.8.0_131)",
     )
-  should.equal(result.family, "JetS3t")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("0"))),
-  )
+  assert result.family == "JetS3t"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("0")))
 }
 
 pub fn ua_parse_1402_test() {
   let result =
     uaparser.parse_user_agent("s3fs/1.80 (commit hash 6be3236; OpenSSL)")
-  should.equal(result.family, "s3fs")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("80"), patch: None)),
-  )
+  assert result.family == "s3fs"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("80"), patch: None))
 }
 
 pub fn ua_parse_1403_test() {
   let result =
     uaparser.parse_user_agent("Cyberduck/6.3.0.27105 (Windows 10/10.0) (x86)")
-  should.equal(result.family, "Cyberduck")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("3"), patch: Some("0"))),
-  )
+  assert result.family == "Cyberduck"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("3"), patch: Some("0")))
 }
 
 pub fn ua_parse_1404_test() {
   let result =
     uaparser.parse_user_agent("S3 Browser 7-4-5 https://s3browser.com")
-  should.equal(result.family, "S3 Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("4"), patch: Some("5"))),
-  )
+  assert result.family == "S3 Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("4"), patch: Some("5")))
 }
 
 pub fn ua_parse_1405_test() {
   let result =
     uaparser.parse_user_agent("S3 Browser 8.6.7 https://s3browser.com")
-  should.equal(result.family, "S3 Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("6"), patch: Some("7"))),
-  )
+  assert result.family == "S3 Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("6"), patch: Some("7")))
 }
 
 pub fn ua_parse_1406_test() {
   let result = uaparser.parse_user_agent("rclone/v1.34")
-  should.equal(result.family, "rclone")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("34"), patch: None)),
-  )
+  assert result.family == "rclone"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("34"), patch: None))
 }
 
 pub fn ua_parse_1407_test() {
@@ -14593,38 +12597,30 @@ pub fn ua_parse_1407_test() {
     uaparser.parse_user_agent(
       "PycURL/7.43.0 libcurl/7.38.0 OpenSSL/1.0.1t zlib/1.2.8 libidn/1.29 libssh2/1.4.3 librtmp/2.3",
     )
-  should.equal(result.family, "PycURL")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("43"), patch: Some("0"))),
-  )
+  assert result.family == "PycURL"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("43"), patch: Some("0")))
 }
 
 pub fn ua_parse_1408_test() {
   let result = uaparser.parse_user_agent("Axel 2.4 (Linux)")
-  should.equal(result.family, "Axel")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("4"), patch: None)),
-  )
+  assert result.family == "Axel"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("4"), patch: None))
 }
 
 pub fn ua_parse_1409_test() {
   let result = uaparser.parse_user_agent("lftp/4.7.7")
-  should.equal(result.family, "lftp")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("7"), patch: Some("7"))),
-  )
+  assert result.family == "lftp"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("7"), patch: Some("7")))
 }
 
 pub fn ua_parse_1410_test() {
   let result = uaparser.parse_user_agent("aria2/1.19.0")
-  should.equal(result.family, "aria2")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("19"), patch: Some("0"))),
-  )
+  assert result.family == "aria2"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("19"), patch: Some("0")))
 }
 
 pub fn ua_parse_1411_test() {
@@ -14632,20 +12628,16 @@ pub fn ua_parse_1411_test() {
     uaparser.parse_user_agent(
       "SalesforceMobileSDK/5.3.0 android mobile/7.1.1 (XT1635-02) Salesforce1/15.2 Native uid_bef1747905d064c6 ftr_ Cordova/6.2.3",
     )
-  should.equal(result.family, "Salesforce")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "15", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "Salesforce"
+  assert result.version
+    == Some(uaparser.Version(major: "15", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_1412_test() {
   let result = uaparser.parse_user_agent("AnyConnect/4.1.1234")
-  should.equal(result.family, "AnyConnect")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("1"), patch: Some("1234"))),
-  )
+  assert result.family == "AnyConnect"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("1"), patch: Some("1234")))
 }
 
 pub fn ua_parse_1413_test() {
@@ -14653,8 +12645,8 @@ pub fn ua_parse_1413_test() {
     uaparser.parse_user_agent(
       "YahooMailProxy; https://help.yahoo.com/kb/yahoo-mail-proxy-SLN28749.html",
     )
-  should.equal(result.family, "YahooMailProxy")
-  should.equal(result.version, None)
+  assert result.family == "YahooMailProxy"
+  assert result.version == None
 }
 
 pub fn ua_parse_1414_test() {
@@ -14662,11 +12654,9 @@ pub fn ua_parse_1414_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 11_2_6 like Mac OS X) AppleWebKit/604.5.6 (KHTML, like Gecko) Snapchat/10.38.0.25 (iPhone8,1; iOS 11.2.6; gzip)",
     )
-  should.equal(result.family, "Snapchat")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("38"), patch: Some("0"))),
-  )
+  assert result.family == "Snapchat"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("38"), patch: Some("0")))
 }
 
 pub fn ua_parse_1415_test() {
@@ -14674,8 +12664,8 @@ pub fn ua_parse_1415_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPad; U; CPU OS 4_3_5 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Mobile/8L1 Twitter for iPad",
     )
-  should.equal(result.family, "Twitter")
-  should.equal(result.version, None)
+  assert result.family == "Twitter"
+  assert result.version == None
 }
 
 pub fn ua_parse_1416_test() {
@@ -14683,8 +12673,8 @@ pub fn ua_parse_1416_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 9; Nokia 2.1 Build/PKQ1.181105.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.157 Mobile Safari/537.36 TwitterAndroid",
     )
-  should.equal(result.family, "Twitter")
-  should.equal(result.version, None)
+  assert result.family == "Twitter"
+  assert result.version == None
 }
 
 pub fn ua_parse_1417_test() {
@@ -14692,11 +12682,9 @@ pub fn ua_parse_1417_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 11_2_1 like Mac OS X) AppleWebKit/604.4.7 (KHTML, like Gecko) Mobile/15C153 Twitter for iPhone/7.19",
     )
-  should.equal(result.family, "Twitter")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("19"), patch: None)),
-  )
+  assert result.family == "Twitter"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("19"), patch: None))
 }
 
 pub fn ua_parse_1418_test() {
@@ -14704,11 +12692,9 @@ pub fn ua_parse_1418_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 7_1_2 like Mac OS X) AppleWebKit/537.51.2 (KHTML, like Gecko) GSA/4.2.2.38484 Mobile/11D257 Safari/9537.53",
     )
-  should.equal(result.family, "Google")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("2"), patch: Some("2"))),
-  )
+  assert result.family == "Google"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("2"), patch: Some("2")))
 }
 
 pub fn ua_parse_1419_test() {
@@ -14716,15 +12702,13 @@ pub fn ua_parse_1419_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 11_0_2 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) GSA/36.0.169645775 Mobile/15A421 Safari/604.1",
     )
-  should.equal(result.family, "Google")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(
+  assert result.family == "Google"
+  assert result.version
+    == Some(uaparser.Version(
       major: "36",
       minor: Some("0"),
       patch: Some("169645775"),
-    )),
-  )
+    ))
 }
 
 pub fn ua_parse_1420_test() {
@@ -14732,11 +12716,9 @@ pub fn ua_parse_1420_test() {
     uaparser.parse_user_agent(
       "ViaFree-DK/3.8.3 (com.MTGx.ViaFree.dk; build:7383; iOS 12.1.0) Alamofire/4.7.0",
     )
-  should.equal(result.family, "ViaFree")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("8"), patch: Some("3"))),
-  )
+  assert result.family == "ViaFree"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("8"), patch: Some("3")))
 }
 
 pub fn ua_parse_1421_test() {
@@ -14744,21 +12726,17 @@ pub fn ua_parse_1421_test() {
     uaparser.parse_user_agent(
       "Viafree-tvOS-DK/3.7.1 (com.MTGx.ViaFree.dk; build:7341; tvOS 12.1.0) Alamofire/4.7.0",
     )
-  should.equal(result.family, "ViaFree")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("7"), patch: Some("1"))),
-  )
+  assert result.family == "ViaFree"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("7"), patch: Some("1")))
 }
 
 pub fn ua_parse_1422_test() {
   let result =
     uaparser.parse_user_agent("OC/15.0.5071.1000 (Skype for Business)")
-  should.equal(result.family, "Skype")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "15", minor: Some("0"), patch: Some("5071"))),
-  )
+  assert result.family == "Skype"
+  assert result.version
+    == Some(uaparser.Version(major: "15", minor: Some("0"), patch: Some("5071")))
 }
 
 pub fn ua_parse_1423_test() {
@@ -14766,11 +12744,9 @@ pub fn ua_parse_1423_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 8.1.0; TA-1024 Build/OPR1.170623.026; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.99 Mobile Safari/537.36 GSA/8.65.5.21.arm64",
     )
-  should.equal(result.family, "Google")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("65"), patch: Some("5"))),
-  )
+  assert result.family == "Google"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("65"), patch: Some("5")))
 }
 
 pub fn ua_parse_1424_test() {
@@ -14778,11 +12754,9 @@ pub fn ua_parse_1424_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 8.0.0; SM-G960F Build/R16NW; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.99 Mobile Safari/537.36 GSA/8.65.5.21.arm64",
     )
-  should.equal(result.family, "Google")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("65"), patch: Some("5"))),
-  )
+  assert result.family == "Google"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("65"), patch: Some("5")))
 }
 
 pub fn ua_parse_1425_test() {
@@ -14790,17 +12764,15 @@ pub fn ua_parse_1425_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 9; Pixel 3 Build/PQ1A.181205.006; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.99 Mobile Safari/537.36 GSA/8.65.5.21.arm64",
     )
-  should.equal(result.family, "Google")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("65"), patch: Some("5"))),
-  )
+  assert result.family == "Google"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("65"), patch: Some("5")))
 }
 
 pub fn ua_parse_1426_test() {
   let result = uaparser.parse_user_agent("Microsoft Office Word 2014")
-  should.equal(result.family, "Word")
-  should.equal(result.version, None)
+  assert result.family == "Word"
+  assert result.version == None
 }
 
 pub fn ua_parse_1427_test() {
@@ -14808,11 +12780,9 @@ pub fn ua_parse_1427_test() {
     uaparser.parse_user_agent(
       "Ghost/2.13.1+moya (https://github.com/TryGhost/Ghost)",
     )
-  should.equal(result.family, "Ghost")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("13"), patch: Some("1"))),
-  )
+  assert result.family == "Ghost"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("13"), patch: Some("1")))
 }
 
 pub fn ua_parse_1428_test() {
@@ -14820,11 +12790,9 @@ pub fn ua_parse_1428_test() {
     uaparser.parse_user_agent(
       "Ghost/2.10.8 (https://github.com/TryGhost/Ghost)",
     )
-  should.equal(result.family, "Ghost")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("10"), patch: Some("8"))),
-  )
+  assert result.family == "Ghost"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("10"), patch: Some("8")))
 }
 
 pub fn ua_parse_1429_test() {
@@ -14832,11 +12800,9 @@ pub fn ua_parse_1429_test() {
     uaparser.parse_user_agent(
       "PAN GlobalProtect/5.2.4 Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/602.1 (KHTML, like Gecko) PanGPUI Version/10.0 Safari/602.1",
     )
-  should.equal(result.family, "GlobalProtect")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("2"), patch: Some("4"))),
-  )
+  assert result.family == "GlobalProtect"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("2"), patch: Some("4")))
 }
 
 pub fn ua_parse_1430_test() {
@@ -14844,11 +12810,9 @@ pub fn ua_parse_1430_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3763.0 Safari/537.36 Edg/75.0.131.0",
     )
-  should.equal(result.family, "Edge")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "75", minor: Some("0"), patch: Some("131"))),
-  )
+  assert result.family == "Edge"
+  assert result.version
+    == Some(uaparser.Version(major: "75", minor: Some("0"), patch: Some("131")))
 }
 
 pub fn ua_parse_1431_test() {
@@ -14856,11 +12820,9 @@ pub fn ua_parse_1431_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPad; CPU OS 12_3_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 TopBuzz com.alex.NewsMaster/8.2.1 (iPad; iOS 12.3.1; en; WIFI)",
     )
-  should.equal(result.family, "TopBuzz")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("2"), patch: Some("1"))),
-  )
+  assert result.family == "TopBuzz"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("2"), patch: Some("1")))
 }
 
 pub fn ua_parse_1432_test() {
@@ -14868,11 +12830,9 @@ pub fn ua_parse_1432_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 9; SM-G950U Build/PPR1.180610.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/76.0.3809.111 Mobile Safari/537.36 JsSdk/2 TopBuzz/9.4.3 NetType/4G",
     )
-  should.equal(result.family, "TopBuzz")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("4"), patch: Some("3"))),
-  )
+  assert result.family == "TopBuzz"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("4"), patch: Some("3")))
 }
 
 pub fn ua_parse_1433_test() {
@@ -14880,11 +12840,9 @@ pub fn ua_parse_1433_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 9; SM-J737A Build/PPR1.180610.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/75.0.3770.143 Mobile Safari/537.36 JsSdk/2 TopBuzz/9.1.4 NetType/4G",
     )
-  should.equal(result.family, "TopBuzz")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("1"), patch: Some("4"))),
-  )
+  assert result.family == "TopBuzz"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("1"), patch: Some("4")))
 }
 
 pub fn ua_parse_1434_test() {
@@ -14892,30 +12850,24 @@ pub fn ua_parse_1434_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_3 like Mac OS X) AppleWebKit/603.3.8 (KHTML, like Gecko) Mobile/14G60 TopBuzz com.topbuzz.videoen/8.2.2 (iPhone; iOS 10.3.3; en; WIFI; CTRadioAccessTechnologyLTE)",
     )
-  should.equal(result.family, "TopBuzz")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("2"), patch: Some("2"))),
-  )
+  assert result.family == "TopBuzz"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("2"), patch: Some("2")))
 }
 
 pub fn ua_parse_1435_test() {
   let result =
     uaparser.parse_user_agent("Snapchat/10.29.1.0 (iPhone10,1; iOS 11.2; gzip)")
-  should.equal(result.family, "Snapchat")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("29"), patch: Some("1"))),
-  )
+  assert result.family == "Snapchat"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("29"), patch: Some("1")))
 }
 
 pub fn ua_parse_1436_test() {
   let result = uaparser.parse_user_agent("OgScrper/1.0.0")
-  should.equal(result.family, "OgScrper")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "OgScrper"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1437_test() {
@@ -14923,11 +12875,9 @@ pub fn ua_parse_1437_test() {
     uaparser.parse_user_agent(
       "Android: Client/0.0.0-indev (Android SDK built for x86; Android 9)",
     )
-  should.equal(result.family, "Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: None, patch: None)),
-  )
+  assert result.family == "Android"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: None, patch: None))
 }
 
 pub fn ua_parse_1438_test() {
@@ -14935,11 +12885,9 @@ pub fn ua_parse_1438_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 9; zh-cn; vivo X21 Build/PKQ1.180819.001) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/66.0.3359.126 MQQBrowser/9.9 Mobile Safari/537.36",
     )
-  should.equal(result.family, "QQ Browser Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("9"), patch: None)),
-  )
+  assert result.family == "QQ Browser Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("9"), patch: None))
 }
 
 pub fn ua_parse_1439_test() {
@@ -14947,11 +12895,9 @@ pub fn ua_parse_1439_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_2 like Mac OS X) AppleWebKit/603.2.4 (KHTML, like Gecko) Mobile/14F89 Safari/603.2.4 EdgiOS/41.1.35.1",
     )
-  should.equal(result.family, "Edge Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "41", minor: Some("1"), patch: Some("35"))),
-  )
+  assert result.family == "Edge Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "41", minor: Some("1"), patch: Some("35")))
 }
 
 pub fn ua_parse_1440_test() {
@@ -14959,17 +12905,15 @@ pub fn ua_parse_1440_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 8.0; Pixel XL Build/OPP3.170518.006) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.0 Mobile Safari/537.36 EdgA/41.1.35.1",
     )
-  should.equal(result.family, "Edge Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "41", minor: Some("1"), patch: Some("35"))),
-  )
+  assert result.family == "Edge Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "41", minor: Some("1"), patch: Some("35")))
 }
 
 pub fn ua_parse_1441_test() {
   let result = uaparser.parse_user_agent("Mozilla/5.0 (compatible;AspiegelBot)")
-  should.equal(result.family, "AspiegelBot")
-  should.equal(result.version, None)
+  assert result.family == "AspiegelBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1442_test() {
@@ -14977,26 +12921,22 @@ pub fn ua_parse_1442_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 7.0;) AppleWebKit/537.36 (KHTML, like Gecko) Mobile Safari/537.36 (compatible; AspiegelBot)",
     )
-  should.equal(result.family, "AspiegelBot")
-  should.equal(result.version, None)
+  assert result.family == "AspiegelBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1443_test() {
   let result = uaparser.parse_user_agent("Mozilla/5.0 QGIS/31100")
-  should.equal(result.family, "QGIS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("11"), patch: Some("0"))),
-  )
+  assert result.family == "QGIS"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("11"), patch: Some("0")))
 }
 
 pub fn ua_parse_1444_test() {
   let result = uaparser.parse_user_agent("Mozilla/5.0 QGIS/2.18.20")
-  should.equal(result.family, "QGIS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("18"), patch: Some("20"))),
-  )
+  assert result.family == "QGIS"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("18"), patch: Some("20")))
 }
 
 pub fn ua_parse_1445_test() {
@@ -15004,11 +12944,9 @@ pub fn ua_parse_1445_test() {
     uaparser.parse_user_agent(
       "JOSM/1.5 (15492 nl) Windows 7 64-Bit Java/1.8.0_221",
     )
-  should.equal(result.family, "JOSM")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("5"), patch: None)),
-  )
+  assert result.family == "JOSM"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("5"), patch: None))
 }
 
 pub fn ua_parse_1446_test() {
@@ -15016,40 +12954,34 @@ pub fn ua_parse_1446_test() {
     uaparser.parse_user_agent(
       "FME/2018.7.34.18312  libcurl/7.57.0 WinSSL zlib/1.2.11 WinIDN libssh2/1.7.0",
     )
-  should.equal(result.family, "FME")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(
+  assert result.family == "FME"
+  assert result.version
+    == Some(uaparser.Version(
       major: "2018.7",
       minor: Some("34"),
       patch: Some("18312"),
-    )),
-  )
+    ))
 }
 
 pub fn ua_parse_1447_test() {
   let result = uaparser.parse_user_agent("GeoEvent Server 10.5.1")
-  should.equal(result.family, "GeoEvent Server")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("5"), patch: Some("1"))),
-  )
+  assert result.family == "GeoEvent Server"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("5"), patch: Some("1")))
 }
 
 pub fn ua_parse_1448_test() {
   let result =
     uaparser.parse_user_agent("ArcGIS Pro 2.4.2 (000000000) - ArcGIS Pro")
-  should.equal(result.family, "ArcGIS Pro")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("4"), patch: Some("2"))),
-  )
+  assert result.family == "ArcGIS Pro"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("4"), patch: Some("2")))
 }
 
 pub fn ua_parse_1449_test() {
   let result = uaparser.parse_user_agent("ArcGIS Client Using WinInet")
-  should.equal(result.family, "ArcMap")
-  should.equal(result.version, None)
+  assert result.family == "ArcMap"
+  assert result.version == None
 }
 
 pub fn ua_parse_1450_test() {
@@ -15057,11 +12989,9 @@ pub fn ua_parse_1450_test() {
     uaparser.parse_user_agent(
       "ArcGISRuntime-Android/10.3.0 (Android 4.4; armeabi-v7a; SAMSUNG-GT-I9195) arcgis-collector/18.0.3 (00000000-0000-0000-0000-000000000000)",
     )
-  should.equal(result.family, "Collector for ArcGIS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "18", minor: Some("0"), patch: Some("3"))),
-  )
+  assert result.family == "Collector for ArcGIS"
+  assert result.version
+    == Some(uaparser.Version(major: "18", minor: Some("0"), patch: Some("3")))
 }
 
 pub fn ua_parse_1451_test() {
@@ -15069,11 +12999,9 @@ pub fn ua_parse_1451_test() {
     uaparser.parse_user_agent(
       "ArcGISRuntime-iOS/10.3.0 (iOS 10.2.1; iPad5,4) arcgis-collector/19.0.2 (00000000-0000-0000-0000-000000000000)",
     )
-  should.equal(result.family, "Collector for ArcGIS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "19", minor: Some("0"), patch: Some("2"))),
-  )
+  assert result.family == "Collector for ArcGIS"
+  assert result.version
+    == Some(uaparser.Version(major: "19", minor: Some("0"), patch: Some("2")))
 }
 
 pub fn ua_parse_1452_test() {
@@ -15081,11 +13009,9 @@ pub fn ua_parse_1452_test() {
     uaparser.parse_user_agent(
       "ArcGISRuntime-iOS/100.4 (iOS 11.4; iPad7,6) arcgis-aurora/18.1.0 (00000000-0000-0000-0000-000000000000)",
     )
-  should.equal(result.family, "Collector for ArcGIS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "18", minor: Some("1"), patch: Some("0"))),
-  )
+  assert result.family == "Collector for ArcGIS"
+  assert result.version
+    == Some(uaparser.Version(major: "18", minor: Some("1"), patch: Some("0")))
 }
 
 pub fn ua_parse_1453_test() {
@@ -15093,11 +13019,9 @@ pub fn ua_parse_1453_test() {
     uaparser.parse_user_agent(
       "ArcGISRuntime-NET/10.3.0 (Windows 10.0.18362; x64; UAP; Windows.Desktop) arcgis-collector/18.0.2 (00000000-0000-0000-0000-000000000000)",
     )
-  should.equal(result.family, "Collector for ArcGIS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "18", minor: Some("0"), patch: Some("2"))),
-  )
+  assert result.family == "Collector for ArcGIS"
+  assert result.version
+    == Some(uaparser.Version(major: "18", minor: Some("0"), patch: Some("2")))
 }
 
 pub fn ua_parse_1454_test() {
@@ -15105,11 +13029,9 @@ pub fn ua_parse_1454_test() {
     uaparser.parse_user_agent(
       "Collector-Android-10.3.7/ArcGIS.Android-10.2.5/7.0/SAMSUNG-SM-T815",
     )
-  should.equal(result.family, "Collector for ArcGIS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("3"), patch: Some("7"))),
-  )
+  assert result.family == "Collector for ArcGIS"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("3"), patch: Some("7")))
 }
 
 pub fn ua_parse_1455_test() {
@@ -15117,11 +13039,9 @@ pub fn ua_parse_1455_test() {
     uaparser.parse_user_agent(
       "Collector-iOS-10.4.0:ArcGISiOS-10.2.4+Collector/13.1.2/iPad5,4",
     )
-  should.equal(result.family, "Collector for ArcGIS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("4"), patch: Some("0"))),
-  )
+  assert result.family == "Collector for ArcGIS"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("4"), patch: Some("0")))
 }
 
 pub fn ua_parse_1456_test() {
@@ -15129,11 +13049,9 @@ pub fn ua_parse_1456_test() {
     uaparser.parse_user_agent(
       "Collector/6212016 CFNetwork/978.0.7 Darwin/18.7.0",
     )
-  should.equal(result.family, "Collector for ArcGIS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6212016", minor: None, patch: None)),
-  )
+  assert result.family == "Collector for ArcGIS"
+  assert result.version
+    == Some(uaparser.Version(major: "6212016", minor: None, patch: None))
 }
 
 pub fn ua_parse_1457_test() {
@@ -15141,11 +13059,9 @@ pub fn ua_parse_1457_test() {
     uaparser.parse_user_agent(
       "ArcGISRuntime-Android/100.2.2 (Android 6.0; armeabi-v7a; SAMSUNG-SM-T800) arcgis-explorer/18.1.0 (00000000-0000-0000-0000-000000000000)",
     )
-  should.equal(result.family, "Explorer for ArcGIS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "18", minor: Some("1"), patch: Some("0"))),
-  )
+  assert result.family == "Explorer for ArcGIS"
+  assert result.version
+    == Some(uaparser.Version(major: "18", minor: Some("1"), patch: Some("0")))
 }
 
 pub fn ua_parse_1458_test() {
@@ -15153,21 +13069,17 @@ pub fn ua_parse_1458_test() {
     uaparser.parse_user_agent(
       "ArcGISRuntime-iOS/100.1 (iPhone OS 9.3.5; iPad2,2) arcgis-explorer/17.1.2 (00000000-0000-0000-0000-000000000000)",
     )
-  should.equal(result.family, "Explorer for ArcGIS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "17", minor: Some("1"), patch: Some("2"))),
-  )
+  assert result.family == "Explorer for ArcGIS"
+  assert result.version
+    == Some(uaparser.Version(major: "17", minor: Some("1"), patch: Some("2")))
 }
 
 pub fn ua_parse_1459_test() {
   let result =
     uaparser.parse_user_agent("Explorer/1544 CFNetwork/1107.1 Darwin/19.0.0")
-  should.equal(result.family, "Explorer for ArcGIS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1544", minor: None, patch: None)),
-  )
+  assert result.family == "Explorer for ArcGIS"
+  assert result.version
+    == Some(uaparser.Version(major: "1544", minor: None, patch: None))
 }
 
 pub fn ua_parse_1460_test() {
@@ -15175,11 +13087,9 @@ pub fn ua_parse_1460_test() {
     uaparser.parse_user_agent(
       "Explorer-Android-10.2.10/ArcGIS.Android-10.2.8/5.1.1/SAMSUNG-SM-G361F",
     )
-  should.equal(result.family, "Explorer for ArcGIS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("2"), patch: Some("10"))),
-  )
+  assert result.family == "Explorer for ArcGIS"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("2"), patch: Some("10")))
 }
 
 pub fn ua_parse_1461_test() {
@@ -15187,11 +13097,9 @@ pub fn ua_parse_1461_test() {
     uaparser.parse_user_agent(
       "Explorer-iOS-10.2.10:ArcGISiOS-10.2.4+Collector/13.1.3/iPhone9,3",
     )
-  should.equal(result.family, "Explorer for ArcGIS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("2"), patch: Some("10"))),
-  )
+  assert result.family == "Explorer for ArcGIS"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("2"), patch: Some("10")))
 }
 
 pub fn ua_parse_1462_test() {
@@ -15199,11 +13107,9 @@ pub fn ua_parse_1462_test() {
     uaparser.parse_user_agent(
       "ArcGISRuntime-Android/100.1.1 (Android 7.0; arm64-v8a; SAMSUNG-SM-G930F) arcgis-workforce/17.0.1 (00000000-0000-0000-0000-000000000000)",
     )
-  should.equal(result.family, "Workforce for ArcGIS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "17", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "Workforce for ArcGIS"
+  assert result.version
+    == Some(uaparser.Version(major: "17", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_1463_test() {
@@ -15211,11 +13117,9 @@ pub fn ua_parse_1463_test() {
     uaparser.parse_user_agent(
       "Workforce-iOS-17.0.1:ArcGISiOS-100.0.0.1529+dev/13.2/iPad6,12",
     )
-  should.equal(result.family, "Workforce for ArcGIS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "17", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "Workforce for ArcGIS"
+  assert result.version
+    == Some(uaparser.Version(major: "17", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_1464_test() {
@@ -15223,11 +13127,9 @@ pub fn ua_parse_1464_test() {
     uaparser.parse_user_agent(
       "AR/10.2.6.1704 .Net/Desktop (Win32NT/6.1.7601.65536; Win64) arcgisearth/1.5",
     )
-  should.equal(result.family, "ArcGIS Earth")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("5"), patch: None)),
-  )
+  assert result.family == "ArcGIS Earth"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("5"), patch: None))
 }
 
 pub fn ua_parse_1465_test() {
@@ -15235,20 +13137,16 @@ pub fn ua_parse_1465_test() {
     uaparser.parse_user_agent(
       "ArcGISRuntime-iOS/100.6 (iOS 12.3.1; iPad6,3) com.esri.earth.phone/1.0.0",
     )
-  should.equal(result.family, "ArcGIS Earth")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "ArcGIS Earth"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1466_test() {
   let result = uaparser.parse_user_agent("ArcGISiOS-10.2.4/12.1/iPad5,2")
-  should.equal(result.family, "ArcGIS Runtime SDK for iOS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("2"), patch: Some("4"))),
-  )
+  assert result.family == "ArcGIS Runtime SDK for iOS"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("2"), patch: Some("4")))
 }
 
 pub fn ua_parse_1467_test() {
@@ -15256,30 +13154,24 @@ pub fn ua_parse_1467_test() {
     uaparser.parse_user_agent(
       "ArcGISRuntime-iOS/100.1.1 (iOS 12.4.1; iPhone10,4)",
     )
-  should.equal(result.family, "ArcGIS Runtime SDK for iOS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "100", minor: Some("1"), patch: Some("1"))),
-  )
+  assert result.family == "ArcGIS Runtime SDK for iOS"
+  assert result.version
+    == Some(uaparser.Version(major: "100", minor: Some("1"), patch: Some("1")))
 }
 
 pub fn ua_parse_1468_test() {
   let result =
     uaparser.parse_user_agent("ArcGIS.Android-10.2.4/8.0.0/SAMSUNG-SM-A530F")
-  should.equal(result.family, "ArcGIS Runtime SDK for Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("2"), patch: Some("4"))),
-  )
+  assert result.family == "ArcGIS Runtime SDK for Android"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("2"), patch: Some("4")))
 }
 
 pub fn ua_parse_1469_test() {
   let result = uaparser.parse_user_agent("ArcGIS.Android.10.2")
-  should.equal(result.family, "ArcGIS Runtime SDK for Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "10", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "ArcGIS Runtime SDK for Android"
+  assert result.version
+    == Some(uaparser.Version(major: "10", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_1470_test() {
@@ -15287,11 +13179,9 @@ pub fn ua_parse_1470_test() {
     uaparser.parse_user_agent(
       "ArcGISRuntime-Android/100.4 (Android 10.0; arm64-v8a; ONEPLUS-HD1903)",
     )
-  should.equal(result.family, "ArcGIS Runtime SDK for Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "100", minor: Some("4"), patch: None)),
-  )
+  assert result.family == "ArcGIS Runtime SDK for Android"
+  assert result.version
+    == Some(uaparser.Version(major: "100", minor: Some("4"), patch: None))
 }
 
 pub fn ua_parse_1471_test() {
@@ -15299,11 +13189,9 @@ pub fn ua_parse_1471_test() {
     uaparser.parse_user_agent(
       "ArcGISRuntime-Qt/100.3 (Windows 10; x86_64; Qt 5.12.1; C++)",
     )
-  should.equal(result.family, "ArcGIS Runtime SDK for Qt")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "100", minor: Some("3"), patch: None)),
-  )
+  assert result.family == "ArcGIS Runtime SDK for Qt"
+  assert result.version
+    == Some(uaparser.Version(major: "100", minor: Some("3"), patch: None))
 }
 
 pub fn ua_parse_1472_test() {
@@ -15311,11 +13199,9 @@ pub fn ua_parse_1472_test() {
     uaparser.parse_user_agent(
       "ArcGISRuntime-NET/100.7 (Windows 10.0.18362; Win64; WOW64; UAP; Windows.Desktop)",
     )
-  should.equal(result.family, "ArcGIS Runtime SDK for NET")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "100", minor: Some("7"), patch: None)),
-  )
+  assert result.family == "ArcGIS Runtime SDK for NET"
+  assert result.version
+    == Some(uaparser.Version(major: "100", minor: Some("7"), patch: None))
 }
 
 pub fn ua_parse_1473_test() {
@@ -15323,11 +13209,9 @@ pub fn ua_parse_1473_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.3 Mobile/15E148 DuckDuckGo/7 Safari/605.1.15",
     )
-  should.equal(result.family, "DuckDuckGo Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: None, patch: None)),
-  )
+  assert result.family == "DuckDuckGo Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: None, patch: None))
 }
 
 pub fn ua_parse_1474_test() {
@@ -15335,11 +13219,9 @@ pub fn ua_parse_1474_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 11) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/87.0.4280.141 Mobile DuckDuckGo/5 Safari/537.36",
     )
-  should.equal(result.family, "DuckDuckGo Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: None, patch: None)),
-  )
+  assert result.family == "DuckDuckGo Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: None, patch: None))
 }
 
 pub fn ua_parse_1475_test() {
@@ -15347,11 +13229,9 @@ pub fn ua_parse_1475_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Mobile/15E148 Safari/604.1 Ddg/17.2",
     )
-  should.equal(result.family, "DuckDuckGo Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "17", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "DuckDuckGo Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "17", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_1476_test() {
@@ -15359,37 +13239,31 @@ pub fn ua_parse_1476_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Safari/605.1.15 Ddg/17.2",
     )
-  should.equal(result.family, "DuckDuckGo")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "17", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "DuckDuckGo"
+  assert result.version
+    == Some(uaparser.Version(major: "17", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_1477_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/5.0 [en] (X11, U; OpenVAS-VT 8.0.9)")
-  should.equal(result.family, "OpenVAS Scanner")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("0"), patch: Some("9"))),
-  )
+  assert result.family == "OpenVAS Scanner"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("0"), patch: Some("9")))
 }
 
 pub fn ua_parse_1478_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/5.0 [en] (X11, U; OpenVAS 7.0.10)")
-  should.equal(result.family, "OpenVAS Scanner")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("0"), patch: Some("10"))),
-  )
+  assert result.family == "OpenVAS Scanner"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("0"), patch: Some("10")))
 }
 
 pub fn ua_parse_1479_test() {
   let result = uaparser.parse_user_agent("Mozilla/4.75 [en] (X11, U; OpenVAS)")
-  should.equal(result.family, "OpenVAS Scanner")
-  should.equal(result.version, None)
+  assert result.family == "OpenVAS Scanner"
+  assert result.version == None
 }
 
 pub fn ua_parse_1480_test() {
@@ -15397,127 +13271,103 @@ pub fn ua_parse_1480_test() {
     uaparser.parse_user_agent(
       "cf/6.51.0+2acd15650.2020-04-07 (go1.13.8; amd64 linux)",
     )
-  should.equal(result.family, "CloudFoundry")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(
+  assert result.family == "CloudFoundry"
+  assert result.version
+    == Some(uaparser.Version(
       major: "6",
       minor: Some("51"),
       patch: Some("0+2acd15650.2020-04-07"),
-    )),
-  )
+    ))
 }
 
 pub fn ua_parse_1481_test() {
   let result = uaparser.parse_user_agent("RPT-HTTPClient/0.3-3E")
-  should.equal(result.family, "HTTPClient")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("3"), patch: Some("3E"))),
-  )
+  assert result.family == "HTTPClient"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("3"), patch: Some("3E")))
 }
 
 pub fn ua_parse_1482_test() {
   let result = uaparser.parse_user_agent("CloudCockpitBackend/2.8.7")
-  should.equal(result.family, "CloudCockpitBackend")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("8"), patch: Some("7"))),
-  )
+  assert result.family == "CloudCockpitBackend"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("8"), patch: Some("7")))
 }
 
 pub fn ua_parse_1483_test() {
   let result = uaparser.parse_user_agent("ReactorNetty/0.9.6.RELEASE")
-  should.equal(result.family, "ReactorNetty")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("6"))),
-  )
+  assert result.family == "ReactorNetty"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("6")))
 }
 
 pub fn ua_parse_1484_test() {
   let result = uaparser.parse_user_agent("axios/0.18.1")
-  should.equal(result.family, "axios")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("18"), patch: Some("1"))),
-  )
+  assert result.family == "axios"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("18"), patch: Some("1")))
 }
 
 pub fn ua_parse_1485_test() {
   let result =
     uaparser.parse_user_agent("Jersey/2.29.1 (HttpUrlConnection 1.8.0_252)  ")
-  should.equal(result.family, "Jersey")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("29"), patch: Some("1"))),
-  )
+  assert result.family == "Jersey"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("29"), patch: Some("1")))
 }
 
 pub fn ua_parse_1486_test() {
   let result = uaparser.parse_user_agent("Java-EurekaClient/v1.6.2")
-  should.equal(result.family, "Java-EurekaClient")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("2"))),
-  )
+  assert result.family == "Java-EurekaClient"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("6"), patch: Some("2")))
 }
 
 pub fn ua_parse_1487_test() {
   let result =
     uaparser.parse_user_agent("go-cli 6.46.0+29d6257f1.2019-07-09 / windows")
-  should.equal(result.family, "go-cli")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(
+  assert result.family == "go-cli"
+  assert result.version
+    == Some(uaparser.Version(
       major: "6",
       minor: Some("46"),
       patch: Some("0+29d6257f1.2019-07-09"),
-    )),
-  )
+    ))
 }
 
 pub fn ua_parse_1488_test() {
   let result = uaparser.parse_user_agent("Vert.x-WebClient/3.9.0")
-  should.equal(result.family, "Vert.x-WebClient")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("9"), patch: Some("0"))),
-  )
+  assert result.family == "Vert.x-WebClient"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("9"), patch: Some("0")))
 }
 
 pub fn ua_parse_1489_test() {
   let result = uaparser.parse_user_agent("Apache-CXF/3.1.14-sap-07")
-  should.equal(result.family, "Apache-CXF")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("1"), patch: Some("14"))),
-  )
+  assert result.family == "Apache-CXF"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("1"), patch: Some("14")))
 }
 
 pub fn ua_parse_1490_test() {
   let result = uaparser.parse_user_agent("Go-CF-client/1.1")
-  should.equal(result.family, "Go-CF-client")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Go-CF-client"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_1491_test() {
   let result =
     uaparser.parse_user_agent("HTTPClient/1.0 (2.8.3, ruby 2.5.5 (2019-03-15))")
-  should.equal(result.family, "HTTPClient")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "HTTPClient"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1492_test() {
   let result = uaparser.parse_user_agent("ping-service")
-  should.equal(result.family, "ping-service")
-  should.equal(result.version, None)
+  assert result.family == "ping-service"
+  assert result.version == None
 }
 
 pub fn ua_parse_1493_test() {
@@ -15525,51 +13375,43 @@ pub fn ua_parse_1493_test() {
     uaparser.parse_user_agent(
       "CloudFoundryJavaClient/unknown (Java; SAP AG/1.8.0_251) ReactorNetty/0.9.6.RELEASE (Netty/4.1.49.Final)",
     )
-  should.equal(result.family, "ReactorNetty")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("6"))),
-  )
+  assert result.family == "ReactorNetty"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("9"), patch: Some("6")))
 }
 
 pub fn ua_parse_1494_test() {
   let result =
     uaparser.parse_user_agent("lua-resty-http/0.13 (Lua) ngx_lua/10013")
-  should.equal(result.family, "lua-resty-http")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("13"), patch: None)),
-  )
+  assert result.family == "lua-resty-http"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("13"), patch: None))
 }
 
 pub fn ua_parse_1495_test() {
   let result = uaparser.parse_user_agent("AHC/1.0")
-  should.equal(result.family, "AHC")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "AHC"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1496_test() {
   let result = uaparser.parse_user_agent("sap xsuaa")
-  should.equal(result.family, "sap xsuaa")
-  should.equal(result.version, None)
+  assert result.family == "sap xsuaa"
+  assert result.version == None
 }
 
 pub fn ua_parse_1497_test() {
   let result = uaparser.parse_user_agent("sap-leonardo-iot-sdk-nodejs / 0.1.4")
-  should.equal(result.family, "sap-leonardo-iot-sdk-nodejs")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: Some("4"))),
-  )
+  assert result.family == "sap-leonardo-iot-sdk-nodejs"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: Some("4")))
 }
 
 pub fn ua_parse_1498_test() {
   let result = uaparser.parse_user_agent("Node-oauth")
-  should.equal(result.family, "Node-oauth")
-  should.equal(result.version, None)
+  assert result.family == "Node-oauth"
+  assert result.version == None
 }
 
 pub fn ua_parse_1499_test() {
@@ -15577,39 +13419,35 @@ pub fn ua_parse_1499_test() {
     uaparser.parse_user_agent(
       "go-resty/1.12.0 (https://github.com/go-resty/resty)",
     )
-  should.equal(result.family, "go-resty")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("12"), patch: Some("0"))),
-  )
+  assert result.family == "go-resty"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("12"), patch: Some("0")))
 }
 
 pub fn ua_parse_1500_test() {
   let result = uaparser.parse_user_agent("Site24x7")
-  should.equal(result.family, "Site24x7")
-  should.equal(result.version, None)
+  assert result.family == "Site24x7"
+  assert result.version == None
 }
 
 pub fn ua_parse_1501_test() {
   let result =
     uaparser.parse_user_agent("SAP NetWeaver Application Server (1.0;740)")
-  should.equal(result.family, "SAP NetWeaver Application Server")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("40"), patch: None)),
-  )
+  assert result.family == "SAP NetWeaver Application Server"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("40"), patch: None))
 }
 
 pub fn ua_parse_1502_test() {
   let result = uaparser.parse_user_agent("SAP CPI")
-  should.equal(result.family, "SAP CPI")
-  should.equal(result.version, None)
+  assert result.family == "SAP CPI"
+  assert result.version == None
 }
 
 pub fn ua_parse_1503_test() {
   let result = uaparser.parse_user_agent("JAEGER_SECURITY")
-  should.equal(result.family, "JAEGER_SECURITY")
-  should.equal(result.version, None)
+  assert result.family == "JAEGER_SECURITY"
+  assert result.version == None
 }
 
 pub fn ua_parse_1504_test() {
@@ -15617,11 +13455,9 @@ pub fn ua_parse_1504_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 8.1.0; tr; SNE-LX1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.137 Tenta/2.10.3 Mobile Safari/537.36 Mobile",
     )
-  should.equal(result.family, "Tenta Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("10"), patch: Some("3"))),
-  )
+  assert result.family == "Tenta Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("10"), patch: Some("3")))
 }
 
 pub fn ua_parse_1505_test() {
@@ -15629,8 +13465,8 @@ pub fn ua_parse_1505_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; monitis - premium monitoring service; http://www.monitis.com)",
     )
-  should.equal(result.family, "Monitis")
-  should.equal(result.version, None)
+  assert result.family == "Monitis"
+  assert result.version == None
 }
 
 pub fn ua_parse_1506_test() {
@@ -15638,11 +13474,9 @@ pub fn ua_parse_1506_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 11_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E302 Pandora/1902.1",
     )
-  should.equal(result.family, "Pandora")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1902", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Pandora"
+  assert result.version
+    == Some(uaparser.Version(major: "1902", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_1507_test() {
@@ -15650,11 +13484,9 @@ pub fn ua_parse_1507_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Pandora/1904.1.3",
     )
-  should.equal(result.family, "Pandora")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1904", minor: Some("1"), patch: Some("3"))),
-  )
+  assert result.family == "Pandora"
+  assert result.version
+    == Some(uaparser.Version(major: "1904", minor: Some("1"), patch: Some("3")))
 }
 
 pub fn ua_parse_1508_test() {
@@ -15662,21 +13494,17 @@ pub fn ua_parse_1508_test() {
     uaparser.parse_user_agent(
       "Pandora/1904.1 Android/8.0.0 heroqlteusc (ExoPlayerLib1.5.14.1)",
     )
-  should.equal(result.family, "Pandora")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1904", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "Pandora"
+  assert result.version
+    == Some(uaparser.Version(major: "1904", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_1509_test() {
   let result =
     uaparser.parse_user_agent("Pandora/2091 CFNetwork/978.0.7 Darwin/18.5.0")
-  should.equal(result.family, "Pandora")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2091", minor: None, patch: None)),
-  )
+  assert result.family == "Pandora"
+  assert result.version
+    == Some(uaparser.Version(major: "2091", minor: None, patch: None))
 }
 
 pub fn ua_parse_1510_test() {
@@ -15684,11 +13512,9 @@ pub fn ua_parse_1510_test() {
     uaparser.parse_user_agent(
       "PandoraRSSCrawler/1.0 (podcastpartnerships@pandora.com)",
     )
-  should.equal(result.family, "PandoraRSSCrawler")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "PandoraRSSCrawler"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1511_test() {
@@ -15696,11 +13522,9 @@ pub fn ua_parse_1511_test() {
     uaparser.parse_user_agent(
       "MinIO (linux; amd64) minio-go/v6.0.39 mc/2019-10-09T22:54:57Z",
     )
-  should.equal(result.family, "minio-go")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("0"), patch: Some("39"))),
-  )
+  assert result.family == "minio-go"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("0"), patch: Some("39")))
 }
 
 pub fn ua_parse_1512_test() {
@@ -15708,38 +13532,30 @@ pub fn ua_parse_1512_test() {
     uaparser.parse_user_agent(
       "MinIO (darwin; amd64) minio-go/v6.0.45 mc/2019-12-17T23:26:28Z",
     )
-  should.equal(result.family, "minio-go")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("0"), patch: Some("45"))),
-  )
+  assert result.family == "minio-go"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("0"), patch: Some("45")))
 }
 
 pub fn ua_parse_1513_test() {
   let result = uaparser.parse_user_agent("http.rb/4.1.1")
-  should.equal(result.family, "http.rb")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("1"), patch: Some("1"))),
-  )
+  assert result.family == "http.rb"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("1"), patch: Some("1")))
 }
 
 pub fn ua_parse_1514_test() {
   let result = uaparser.parse_user_agent("ureq/1.5.1")
-  should.equal(result.family, "ureq")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("5"), patch: Some("1"))),
-  )
+  assert result.family == "ureq"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("5"), patch: Some("1")))
 }
 
 pub fn ua_parse_1515_test() {
   let result = uaparser.parse_user_agent("Transmit/5.6.0")
-  should.equal(result.family, "Transmit")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("6"), patch: Some("0"))),
-  )
+  assert result.family == "Transmit"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("6"), patch: Some("0")))
 }
 
 pub fn ua_parse_1516_test() {
@@ -15747,11 +13563,9 @@ pub fn ua_parse_1516_test() {
     uaparser.parse_user_agent(
       "GuzzleHttp/6.3.3 PHP/7.1.17-1+0~20180505045738.17+stretch~1.gbpde69c6",
     )
-  should.equal(result.family, "GuzzleHttp")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("3"), patch: Some("3"))),
-  )
+  assert result.family == "GuzzleHttp"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("3"), patch: Some("3")))
 }
 
 pub fn ua_parse_1517_test() {
@@ -15759,20 +13573,16 @@ pub fn ua_parse_1517_test() {
     uaparser.parse_user_agent(
       "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)",
     )
-  should.equal(result.family, "HTTrack")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "HTTrack"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1518_test() {
   let result = uaparser.parse_user_agent("PostmanRuntime/7.20.1")
-  should.equal(result.family, "PostmanRuntime")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("20"), patch: Some("1"))),
-  )
+  assert result.family == "PostmanRuntime"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("20"), patch: Some("1")))
 }
 
 pub fn ua_parse_1519_test() {
@@ -15780,21 +13590,17 @@ pub fn ua_parse_1519_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; x86_64) LibWeb+LibJS/1.0 Ladybird/1.0",
     )
-  should.equal(result.family, "Ladybird")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Ladybird"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1520_test() {
   let result =
     uaparser.parse_user_agent("Mozilla/5.0 (Linux; x86_64) Ladybird/1.0")
-  should.equal(result.family, "Ladybird")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Ladybird"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1521_test() {
@@ -15802,20 +13608,16 @@ pub fn ua_parse_1521_test() {
     uaparser.parse_user_agent(
       "surveyon/2.7.6 Mobile (Android: 11; MODEL:CPH2127; PRODUCT:CPH2127T2; MANUFACTURER:OPPO;)",
     )
-  should.equal(result.family, "Surveyon")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("7"), patch: Some("6"))),
-  )
+  assert result.family == "Surveyon"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("7"), patch: Some("6")))
 }
 
 pub fn ua_parse_1522_test() {
   let result = uaparser.parse_user_agent("HTTPie/3.2.1")
-  should.equal(result.family, "HTTPie")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("2"), patch: Some("1"))),
-  )
+  assert result.family == "HTTPie"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("2"), patch: Some("1")))
 }
 
 pub fn ua_parse_1523_test() {
@@ -15823,11 +13625,9 @@ pub fn ua_parse_1523_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 16_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Safari/605.1.15 (Ecosia ios@8.1.3.72)",
     )
-  should.equal(result.family, "Ecosia iOS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "8", minor: Some("1"), patch: Some("3"))),
-  )
+  assert result.family == "Ecosia iOS"
+  assert result.version
+    == Some(uaparser.Version(major: "8", minor: Some("1"), patch: Some("3")))
 }
 
 pub fn ua_parse_1524_test() {
@@ -15835,11 +13635,13 @@ pub fn ua_parse_1524_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 9; Redmi 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Mobile Safari/537.36 (Ecosia android@101.0.4951.41)",
     )
-  should.equal(result.family, "Ecosia Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "101", minor: Some("0"), patch: Some("4951"))),
-  )
+  assert result.family == "Ecosia Android"
+  assert result.version
+    == Some(uaparser.Version(
+      major: "101",
+      minor: Some("0"),
+      patch: Some("4951"),
+    ))
 }
 
 pub fn ua_parse_1525_test() {
@@ -15847,11 +13649,9 @@ pub fn ua_parse_1525_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Mobile Safari/537.36 (Ecosia android@119)",
     )
-  should.equal(result.family, "Ecosia Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "119", minor: None, patch: None)),
-  )
+  assert result.family == "Ecosia Android"
+  assert result.version
+    == Some(uaparser.Version(major: "119", minor: None, patch: None))
 }
 
 pub fn ua_parse_1526_test() {
@@ -15859,11 +13659,9 @@ pub fn ua_parse_1526_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0) Gecko/20100101 MullvadBrowser/102.13.0",
     )
-  should.equal(result.family, "MullvadBrowser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "102", minor: Some("13"), patch: Some("0"))),
-  )
+  assert result.family == "MullvadBrowser"
+  assert result.version
+    == Some(uaparser.Version(major: "102", minor: Some("13"), patch: Some("0")))
 }
 
 pub fn ua_parse_1527_test() {
@@ -15871,11 +13669,9 @@ pub fn ua_parse_1527_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/605.1.15 (KHTML, like Gecko) EdgiOS/108 Version/13.0.3 Safari/605.1.15",
     )
-  should.equal(result.family, "Edge Mobile")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "108", minor: None, patch: None)),
-  )
+  assert result.family == "Edge Mobile"
+  assert result.version
+    == Some(uaparser.Version(major: "108", minor: None, patch: None))
 }
 
 pub fn ua_parse_1528_test() {
@@ -15883,11 +13679,9 @@ pub fn ua_parse_1528_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/102 Version/11.1.1 Safari/605.1.15",
     )
-  should.equal(result.family, "Chrome Mobile iOS")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "102", minor: None, patch: None)),
-  )
+  assert result.family == "Chrome Mobile iOS"
+  assert result.version
+    == Some(uaparser.Version(major: "102", minor: None, patch: None))
 }
 
 pub fn ua_parse_1529_test() {
@@ -15895,11 +13689,9 @@ pub fn ua_parse_1529_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 13; LGE-AN00; HMSCore 6.12.2.302) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.88 HuaweiBrowser/14.0.5.301 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Huawei Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "14", minor: Some("0"), patch: Some("5"))),
-  )
+  assert result.family == "Huawei Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "14", minor: Some("0"), patch: Some("5")))
 }
 
 pub fn ua_parse_1530_test() {
@@ -15907,11 +13699,9 @@ pub fn ua_parse_1530_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 AVG/121.0.0.0",
     )
-  should.equal(result.family, "AVG")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "121", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "AVG"
+  assert result.version
+    == Some(uaparser.Version(major: "121", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1531_test() {
@@ -15919,11 +13709,9 @@ pub fn ua_parse_1531_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Avast/120.0.0.0",
     )
-  should.equal(result.family, "Avast Secure Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "120", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Avast Secure Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "120", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1532_test() {
@@ -15931,11 +13719,9 @@ pub fn ua_parse_1532_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 8.1.0; B43du7I2fV; U; in) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.5563.115 Mobile AvastSecureBrowser/7.5.2 Safari/537.36",
     )
-  should.equal(result.family, "Avast Secure Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("5"), patch: Some("2"))),
-  )
+  assert result.family == "Avast Secure Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("5"), patch: Some("2")))
 }
 
 pub fn ua_parse_1533_test() {
@@ -15943,11 +13729,9 @@ pub fn ua_parse_1533_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 13; 0LpRiWjrpo; U; en) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.5938.153 Mobile Avast/7.7.5 Safari/537.36",
     )
-  should.equal(result.family, "Avast Secure Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("7"), patch: Some("5"))),
-  )
+  assert result.family == "Avast Secure Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("7"), patch: Some("5")))
 }
 
 pub fn ua_parse_1534_test() {
@@ -15955,11 +13739,9 @@ pub fn ua_parse_1534_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) AvastSecureBrowser/5.3.1 Mobile/15E148 Version/17.0 Safari/605.1.15",
     )
-  should.equal(result.family, "Avast Secure Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("3"), patch: Some("1"))),
-  )
+  assert result.family == "Avast Secure Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("3"), patch: Some("1")))
 }
 
 pub fn ua_parse_1535_test() {
@@ -15967,11 +13749,9 @@ pub fn ua_parse_1535_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 11; SM-A225M) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/85.0.4183.127 Mobile Safari/537.36 Instabridge/22",
     )
-  should.equal(result.family, "Instabridge")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "22", minor: None, patch: None)),
-  )
+  assert result.family == "Instabridge"
+  assert result.version
+    == Some(uaparser.Version(major: "22", minor: None, patch: None))
 }
 
 pub fn ua_parse_1536_test() {
@@ -15979,11 +13759,9 @@ pub fn ua_parse_1536_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 11; SM-J400F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.127 Mobile Safari/537.36 Instabridge/21.9.0",
     )
-  should.equal(result.family, "Instabridge")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "21", minor: Some("9"), patch: Some("0"))),
-  )
+  assert result.family == "Instabridge"
+  assert result.version
+    == Some(uaparser.Version(major: "21", minor: Some("9"), patch: Some("0")))
 }
 
 pub fn ua_parse_1537_test() {
@@ -15991,11 +13769,9 @@ pub fn ua_parse_1537_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Mobile Safari/537.36 AlohaBrowser/5.6.1",
     )
-  should.equal(result.family, "Aloha Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("6"), patch: Some("1"))),
-  )
+  assert result.family == "Aloha Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("6"), patch: Some("1")))
 }
 
 pub fn ua_parse_1538_test() {
@@ -16003,11 +13779,9 @@ pub fn ua_parse_1538_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 17_2_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Version/17.2.1 Safari/605.1.15 AlohaBrowser/5.4.1",
     )
-  should.equal(result.family, "Aloha Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "5", minor: Some("4"), patch: Some("1"))),
-  )
+  assert result.family == "Aloha Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "5", minor: Some("4"), patch: Some("1")))
 }
 
 pub fn ua_parse_1539_test() {
@@ -16015,11 +13789,9 @@ pub fn ua_parse_1539_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 AlohaBrowser/1.3.0.0 Safari/537.36",
     )
-  should.equal(result.family, "Aloha Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("0"))),
-  )
+  assert result.family == "Aloha Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("3"), patch: Some("0")))
 }
 
 pub fn ua_parse_1540_test() {
@@ -16027,17 +13799,15 @@ pub fn ua_parse_1540_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (compatible; Linux x86_64; python-requests/2.32.3; RecipeRadar/0.1; +https://www.reciperadar.com)",
     )
-  should.equal(result.family, "RecipeRadar")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "0", minor: Some("1"), patch: None)),
-  )
+  assert result.family == "RecipeRadar"
+  assert result.version
+    == Some(uaparser.Version(major: "0", minor: Some("1"), patch: None))
 }
 
 pub fn ua_parse_1541_test() {
   let result = uaparser.parse_user_agent("GPTBot")
-  should.equal(result.family, "GPTBot")
-  should.equal(result.version, None)
+  assert result.family == "GPTBot"
+  assert result.version == None
 }
 
 pub fn ua_parse_1542_test() {
@@ -16045,11 +13815,9 @@ pub fn ua_parse_1542_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; GPTBot/1.0; +https://openai.com/gptbot)",
     )
-  should.equal(result.family, "GPTBot")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "GPTBot"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1543_test() {
@@ -16057,11 +13825,9 @@ pub fn ua_parse_1543_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 115Browser/35.2.0.3",
     )
-  should.equal(result.family, "115 Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "35", minor: Some("2"), patch: Some("0"))),
-  )
+  assert result.family == "115 Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "35", minor: Some("2"), patch: Some("0")))
 }
 
 pub fn ua_parse_1544_test() {
@@ -16069,11 +13835,9 @@ pub fn ua_parse_1544_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Avira/131.0.0.0",
     )
-  should.equal(result.family, "Avira")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "131", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Avira"
+  assert result.version
+    == Some(uaparser.Version(major: "131", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1545_test() {
@@ -16081,11 +13845,9 @@ pub fn ua_parse_1545_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 CCleaner/131.0.0.0",
     )
-  should.equal(result.family, "CCleaner")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "131", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "CCleaner"
+  assert result.version
+    == Some(uaparser.Version(major: "131", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1546_test() {
@@ -16093,11 +13855,9 @@ pub fn ua_parse_1546_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Norton/131.0.0.0",
     )
-  should.equal(result.family, "Norton")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "131", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Norton"
+  assert result.version
+    == Some(uaparser.Version(major: "131", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1547_test() {
@@ -16105,11 +13865,9 @@ pub fn ua_parse_1547_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows; U; Windows NT 5.2;. en-US) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.6312.80 Safari/537.36 Quark/7.8.0.750",
     )
-  should.equal(result.family, "Quark")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("8"), patch: Some("0"))),
-  )
+  assert result.family == "Quark"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("8"), patch: Some("0")))
 }
 
 pub fn ua_parse_1548_test() {
@@ -16117,11 +13875,9 @@ pub fn ua_parse_1548_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 QuarkPC/2.0.7.222",
     )
-  should.equal(result.family, "Quark PC")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("7"))),
-  )
+  assert result.family == "Quark PC"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: Some("7")))
 }
 
 pub fn ua_parse_1549_test() {
@@ -16129,11 +13885,9 @@ pub fn ua_parse_1549_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 SLBrowser/9.0.5.12181 SLBChan/105 SLBVPV/64-bit",
     )
-  should.equal(result.family, "Smart Lenovo Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("0"), patch: Some("5"))),
-  )
+  assert result.family == "Smart Lenovo Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("0"), patch: Some("5")))
 }
 
 pub fn ua_parse_1550_test() {
@@ -16141,11 +13895,9 @@ pub fn ua_parse_1550_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 SLBrowser/9.0.5.12181 SLBChan/ SLBVPV/64-bit",
     )
-  should.equal(result.family, "Smart Lenovo Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("0"), patch: Some("5"))),
-  )
+  assert result.family == "Smart Lenovo Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("0"), patch: Some("5")))
 }
 
 pub fn ua_parse_1551_test() {
@@ -16153,11 +13905,9 @@ pub fn ua_parse_1551_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36 SLBrowser/7.0.0.6241 SLBChan/",
     )
-  should.equal(result.family, "Smart Lenovo Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Smart Lenovo Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1552_test() {
@@ -16165,11 +13915,9 @@ pub fn ua_parse_1552_test() {
     uaparser.parse_user_agent(
       "Chesscom-Android/4.9.21-googleplay (Android/15; SM-A165F; ru_RU; contact #android in Slack)",
     )
-  should.equal(result.family, "Chesscom-Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("9"), patch: Some("21"))),
-  )
+  assert result.family == "Chesscom-Android"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("9"), patch: Some("21")))
 }
 
 pub fn ua_parse_1553_test() {
@@ -16177,11 +13925,9 @@ pub fn ua_parse_1553_test() {
     uaparser.parse_user_agent(
       "Chesscom-Android/4.9.7-huawei (Android/12; STG-LX2; ru_RU; contact #android in Slack)",
     )
-  should.equal(result.family, "Chesscom-Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("9"), patch: Some("7"))),
-  )
+  assert result.family == "Chesscom-Android"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("9"), patch: Some("7")))
 }
 
 pub fn ua_parse_1554_test() {
@@ -16189,11 +13935,9 @@ pub fn ua_parse_1554_test() {
     uaparser.parse_user_agent(
       "Chesscom-Android/4.9.24-googleplay (Android/15; motorola edge 50 fusion; en_IN; contact #android in Slack)",
     )
-  should.equal(result.family, "Chesscom-Android")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("9"), patch: Some("24"))),
-  )
+  assert result.family == "Chesscom-Android"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("9"), patch: Some("24")))
 }
 
 pub fn ua_parse_1555_test() {
@@ -16201,11 +13945,9 @@ pub fn ua_parse_1555_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (4096MB; 1280x720; 200x200; 1024x576; OnePlus CPH2413; 13) AppleWebKit/537.36 (KHTML, like Gecko) ROBLOX Android App 2.706.750 Tablet Hybrid() GooglePlayStore RobloxApp/2.706.750 (GlobalDist; GooglePlayStore)",
     )
-  should.equal(result.family, "Roblox App")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("706"), patch: Some("750"))),
-  )
+  assert result.family == "Roblox App"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("706"), patch: Some("750")))
 }
 
 pub fn ua_parse_1556_test() {
@@ -16213,11 +13955,9 @@ pub fn ua_parse_1556_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (1897MB; 576x1158; 215x215; 384x772; ZTE Z2466; 14) AppleWebKit/537.36 (KHTML, like Gecko) ROBLOX Android App 2.708.880 Phone Hybrid() GooglePlayStore RobloxApp/2.708.880 (GlobalDist; GooglePlayStore)",
     )
-  should.equal(result.family, "Roblox App")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("708"), patch: Some("880"))),
-  )
+  assert result.family == "Roblox App"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("708"), patch: Some("880")))
 }
 
 pub fn ua_parse_1557_test() {
@@ -16225,11 +13965,9 @@ pub fn ua_parse_1557_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (7665MB; 720x1600; 254x254; 360x800; Xiaomi 25078PC3EG; 15) AppleWebKit/537.36 (KHTML, like Gecko) ROBLOX Android App 2.707.734 Phone Hybrid() GooglePlayStore RobloxApp/2.707.734 (GlobalDist; GooglePlayStore)",
     )
-  should.equal(result.family, "Roblox App")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("707"), patch: Some("734"))),
-  )
+  assert result.family == "Roblox App"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("707"), patch: Some("734")))
 }
 
 pub fn ua_parse_1558_test() {
@@ -16237,11 +13975,9 @@ pub fn ua_parse_1558_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Atom/26.0.0.0 Safari/537.36",
     )
-  should.equal(result.family, "Atom Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "26", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Atom Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "26", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1559_test() {
@@ -16249,8 +13985,8 @@ pub fn ua_parse_1559_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.85 Safari/537.36 QIHU 360SEi18n",
     )
-  should.equal(result.family, "360 Secure Browser")
-  should.equal(result.version, None)
+  assert result.family == "360 Secure Browser"
+  assert result.version == None
 }
 
 pub fn ua_parse_1560_test() {
@@ -16258,8 +13994,8 @@ pub fn ua_parse_1560_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36 QIHU 360ENT",
     )
-  should.equal(result.family, "360 Secure Browser")
-  should.equal(result.version, None)
+  assert result.family == "360 Secure Browser"
+  assert result.version == None
 }
 
 pub fn ua_parse_1561_test() {
@@ -16267,8 +14003,8 @@ pub fn ua_parse_1561_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Decentr Safari/537.36",
     )
-  should.equal(result.family, "Decentr Web3 Browser")
-  should.equal(result.version, None)
+  assert result.family == "Decentr Web3 Browser"
+  assert result.version == None
 }
 
 pub fn ua_parse_1562_test() {
@@ -16276,8 +14012,8 @@ pub fn ua_parse_1562_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.31339 Safari/537.36 Sparrow",
     )
-  should.equal(result.family, "Sparrow Browser")
-  should.equal(result.version, None)
+  assert result.family == "Sparrow Browser"
+  assert result.version == None
 }
 
 pub fn ua_parse_1563_test() {
@@ -16285,8 +14021,8 @@ pub fn ua_parse_1563_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64; Chromium GOST) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
     )
-  should.equal(result.family, "Chromium GOST Browser")
-  should.equal(result.version, None)
+  assert result.family == "Chromium GOST Browser"
+  assert result.version == None
 }
 
 pub fn ua_parse_1564_test() {
@@ -16294,11 +14030,13 @@ pub fn ua_parse_1564_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.6312.123 Safari/537.36 AOLShield/123.0.6312.6-818",
     )
-  should.equal(result.family, "AOL Shield Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "123", minor: Some("0"), patch: Some("6312"))),
-  )
+  assert result.family == "AOL Shield Browser"
+  assert result.version
+    == Some(uaparser.Version(
+      major: "123",
+      minor: Some("0"),
+      patch: Some("6312"),
+    ))
 }
 
 pub fn ua_parse_1565_test() {
@@ -16306,11 +14044,9 @@ pub fn ua_parse_1565_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Hola/1.233.355",
     )
-  should.equal(result.family, "Hola Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("233"), patch: Some("355"))),
-  )
+  assert result.family == "Hola Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("233"), patch: Some("355")))
 }
 
 pub fn ua_parse_1566_test() {
@@ -16318,11 +14054,9 @@ pub fn ua_parse_1566_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 CravingExplorer/2.10.7",
     )
-  should.equal(result.family, "Craving Explorer Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("10"), patch: Some("7"))),
-  )
+  assert result.family == "Craving Explorer Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("10"), patch: Some("7")))
 }
 
 pub fn ua_parse_1567_test() {
@@ -16330,8 +14064,8 @@ pub fn ua_parse_1567_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Talon",
     )
-  should.equal(result.family, "Talon Cyber Security Browser")
-  should.equal(result.version, None)
+  assert result.family == "Talon Cyber Security Browser"
+  assert result.version == None
 }
 
 pub fn ua_parse_1568_test() {
@@ -16339,8 +14073,8 @@ pub fn ua_parse_1568_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux aarch64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.200 Safari/537.36 Qaxbrowser",
     )
-  should.equal(result.family, "QAX Browser")
-  should.equal(result.version, None)
+  assert result.family == "QAX Browser"
+  assert result.version == None
 }
 
 pub fn ua_parse_1569_test() {
@@ -16348,11 +14082,9 @@ pub fn ua_parse_1569_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36 ABB/3.7.1",
     )
-  should.equal(result.family, "Aloha Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("7"), patch: Some("1"))),
-  )
+  assert result.family == "Aloha Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("7"), patch: Some("1")))
 }
 
 pub fn ua_parse_1570_test() {
@@ -16360,11 +14092,9 @@ pub fn ua_parse_1570_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.109 ADG/11.1.4777 Safari/537.36",
     )
-  should.equal(result.family, "AOL Desktop Gold Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "11", minor: Some("1"), patch: Some("4777"))),
-  )
+  assert result.family == "AOL Desktop Gold Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "11", minor: Some("1"), patch: Some("4777")))
 }
 
 pub fn ua_parse_1571_test() {
@@ -16372,11 +14102,9 @@ pub fn ua_parse_1571_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36 SberBrowser/21.0.0.0",
     )
-  should.equal(result.family, "Sber Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "21", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Sber Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "21", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1572_test() {
@@ -16384,11 +14112,9 @@ pub fn ua_parse_1572_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.1.2 Safari/537.36 JiSu/118.0.1.2",
     )
-  should.equal(result.family, "JiSu Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "118", minor: Some("0"), patch: Some("1"))),
-  )
+  assert result.family == "JiSu Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "118", minor: Some("0"), patch: Some("1")))
 }
 
 pub fn ua_parse_1573_test() {
@@ -16396,11 +14122,9 @@ pub fn ua_parse_1573_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Android 14; Mobile VR; rv:128.0) Gecko/128.0 Firefox/128.0 Wolvic/1.8.1",
     )
-  should.equal(result.family, "Wolvic Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("8"), patch: Some("1"))),
-  )
+  assert result.family == "Wolvic Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("8"), patch: Some("1")))
 }
 
 pub fn ua_parse_1574_test() {
@@ -16408,11 +14132,9 @@ pub fn ua_parse_1574_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Safari/537.36 HeyTapBrowser/45.13.4.1 Chrome/125.0.6422.72",
     )
-  should.equal(result.family, "HeyTap Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "45", minor: Some("13"), patch: Some("4"))),
-  )
+  assert result.family == "HeyTap Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "45", minor: Some("13"), patch: Some("4")))
 }
 
 pub fn ua_parse_1575_test() {
@@ -16420,11 +14142,9 @@ pub fn ua_parse_1575_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Safari/537.36 HeyTapBrowser/45.13.5.0.3beta Chrome/125.0.6422.72",
     )
-  should.equal(result.family, "HeyTap Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "45", minor: Some("13"), patch: Some("5"))),
-  )
+  assert result.family == "HeyTap Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "45", minor: Some("13"), patch: Some("5")))
 }
 
 pub fn ua_parse_1576_test() {
@@ -16432,11 +14152,9 @@ pub fn ua_parse_1576_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 15; en-gb; CPH2617 Build/AP3A.240617.008) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.6422.72 Mobile Safari/537.36 HeyTapBrowser/45.13.6.1",
     )
-  should.equal(result.family, "HeyTap Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "45", minor: Some("13"), patch: Some("6"))),
-  )
+  assert result.family == "HeyTap Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "45", minor: Some("13"), patch: Some("6")))
 }
 
 pub fn ua_parse_1577_test() {
@@ -16444,11 +14162,9 @@ pub fn ua_parse_1577_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 14; FNE-AN00 Build/HONORFNE-AN00;) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/97.0.4692.98 Mobile Safari/537.36 T7/13.38 SP-engine/2.76.0 languageType/0 bdh_dvt/0 bdh_de/1 bdh_ds/1 bdapp/1.0 (bdhonorbrowser; bdhonorbrowser) bdhonorbrowser/9.6.0.4 (P1 14) NABar/1.0",
     )
-  should.equal(result.family, "Honor Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("6"), patch: Some("0"))),
-  )
+  assert result.family == "Honor Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("6"), patch: Some("0")))
 }
 
 pub fn ua_parse_1578_test() {
@@ -16456,11 +14172,9 @@ pub fn ua_parse_1578_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.98 Safari/537.36 T7/13.38 languageType/0 bdh_dvt/0 bdh_de/0 bdh_ds/0 bdhonorbrowser/9.6.0.4 (P1 16)",
     )
-  should.equal(result.family, "Honor Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "9", minor: Some("6"), patch: Some("0"))),
-  )
+  assert result.family == "Honor Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "9", minor: Some("6"), patch: Some("0")))
 }
 
 pub fn ua_parse_1579_test() {
@@ -16468,11 +14182,9 @@ pub fn ua_parse_1579_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.114 HonorBrowser/3.0.9.303 Safari/537.36",
     )
-  should.equal(result.family, "Honor Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("9"))),
-  )
+  assert result.family == "Honor Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: Some("9")))
 }
 
 pub fn ua_parse_1580_test() {
@@ -16480,11 +14192,9 @@ pub fn ua_parse_1580_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.114 HonorBrowser/3.1.3.303 Safari/537.36",
     )
-  should.equal(result.family, "Honor Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("1"), patch: Some("3"))),
-  )
+  assert result.family == "Honor Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("1"), patch: Some("3")))
 }
 
 pub fn ua_parse_1581_test() {
@@ -16492,11 +14202,9 @@ pub fn ua_parse_1581_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Android 15; REA-AN00) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.5845.114 HonorBrowser/1.0.0 Mobile Safari/537.36",
     )
-  should.equal(result.family, "Honor Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0"))),
-  )
+  assert result.family == "Honor Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: Some("0")))
 }
 
 pub fn ua_parse_1582_test() {
@@ -16504,11 +14212,9 @@ pub fn ua_parse_1582_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (SMART-TV; Linux; Smart TV) AppleWebKit/537.36 (KHTML, like Gecko) Thano/3.0 Chrome/143.0.7499.34 Safari/537.36",
     )
-  should.equal(result.family, "SmartTV WebBrowser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "3", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "SmartTV WebBrowser"
+  assert result.version
+    == Some(uaparser.Version(major: "3", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1583_test() {
@@ -16516,11 +14222,9 @@ pub fn ua_parse_1583_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 NetType/WIFI MicroMessenger/7.0.20.1781(0x6700143B) WindowsWechat(0x63090c33) XWEB/14315",
     )
-  should.equal(result.family, "WeChat Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("0"), patch: Some("20"))),
-  )
+  assert result.family == "WeChat Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("0"), patch: Some("20")))
 }
 
 pub fn ua_parse_1584_test() {
@@ -16528,11 +14232,9 @@ pub fn ua_parse_1584_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 NetType/WIFI MicroMessenger/7.0.20.1781(0x6700143B) WindowsWechat(0x63090a13) UnifiedPCWindowsWechat(0xf2541510) XWEB/17071",
     )
-  should.equal(result.family, "WeChat Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "7", minor: Some("0"), patch: Some("20"))),
-  )
+  assert result.family == "WeChat Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "7", minor: Some("0"), patch: Some("20")))
 }
 
 pub fn ua_parse_1585_test() {
@@ -16540,11 +14242,13 @@ pub fn ua_parse_1585_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.5563.146 Odin/111.5563.5.1 Safari/537.36",
     )
-  should.equal(result.family, "Odin")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "111", minor: Some("5563"), patch: Some("5"))),
-  )
+  assert result.family == "Odin"
+  assert result.version
+    == Some(uaparser.Version(
+      major: "111",
+      minor: Some("5563"),
+      patch: Some("5"),
+    ))
 }
 
 pub fn ua_parse_1586_test() {
@@ -16552,11 +14256,9 @@ pub fn ua_parse_1586_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; NetCast; U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.79 Safari/537.36 SmartTV/10.0 Colt/2.0",
     )
-  should.equal(result.family, "NetCast Smart TV")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "2", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "NetCast Smart TV"
+  assert result.version
+    == Some(uaparser.Version(major: "2", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1587_test() {
@@ -16564,11 +14266,9 @@ pub fn ua_parse_1587_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) PHX/19.7",
     )
-  should.equal(result.family, "Phoenix Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "19", minor: Some("7"), patch: None)),
-  )
+  assert result.family == "Phoenix Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "19", minor: Some("7"), patch: None))
 }
 
 pub fn ua_parse_1588_test() {
@@ -16576,11 +14276,9 @@ pub fn ua_parse_1588_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; U; Android 15; ar-eg; RMX3760 Build/AP3A.240905.015.A2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.5359.128 Mobile Safari/537.36 PHX/20.0",
     )
-  should.equal(result.family, "Phoenix Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "20", minor: Some("0"), patch: None)),
-  )
+  assert result.family == "Phoenix Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "20", minor: Some("0"), patch: None))
 }
 
 pub fn ua_parse_1589_test() {
@@ -16588,11 +14286,9 @@ pub fn ua_parse_1589_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 NetType/WIFI MicroMessenger/6.8.0(0x16080000) MacWechat/3.8.7(0x13080710) XWEB/1191",
     )
-  should.equal(result.family, "WeChat Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("8"), patch: Some("0"))),
-  )
+  assert result.family == "WeChat Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("8"), patch: Some("0")))
 }
 
 pub fn ua_parse_1590_test() {
@@ -16600,11 +14296,9 @@ pub fn ua_parse_1590_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 NetType/WIFI MicroMessenger/6.8.0(0x16080000) MacWechat/3.8.10(0x13080a10) XWEB/1227",
     )
-  should.equal(result.family, "WeChat Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("8"), patch: Some("0"))),
-  )
+  assert result.family == "WeChat Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("8"), patch: Some("0")))
 }
 
 pub fn ua_parse_1591_test() {
@@ -16612,11 +14306,9 @@ pub fn ua_parse_1591_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.6668.101 Safari/537.36 Language/zh ColorScheme/Light wxwork/5.0.3 (MicroMessenger/6.2) WindowsWechat MailPlugin_Electron WeMail embeddisk wwmver/3.26.503.665 noMediaCs/false",
     )
-  should.equal(result.family, "WeChat Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "WeChat Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_1592_test() {
@@ -16624,11 +14316,9 @@ pub fn ua_parse_1592_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.6668.101 Safari/537.36 Language/zh ColorScheme/Light wxwork/5.0.2 (MicroMessenger/6.2) WindowsWechat MailPlugin_Electron WeMail embeddisk wwmver/3.26.502.625 noMediaCs/false",
     )
-  should.equal(result.family, "WeChat Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "6", minor: Some("2"), patch: None)),
-  )
+  assert result.family == "WeChat Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "6", minor: Some("2"), patch: None))
 }
 
 pub fn ua_parse_1593_test() {
@@ -16636,11 +14326,9 @@ pub fn ua_parse_1593_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/534.24 (KHTML, like Gecko) Chrome/144.0.7559.59 Safari/534.24 Lite Browser/4.12",
     )
-  should.equal(result.family, "Lite Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("12"), patch: None)),
-  )
+  assert result.family == "Lite Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("12"), patch: None))
 }
 
 pub fn ua_parse_1594_test() {
@@ -16648,11 +14336,9 @@ pub fn ua_parse_1594_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Andr0id 12; BRAVIA 4K VH2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.6533.120 Safari/537.36 OMI/4.25.1.92.StableAVB_Sony.1",
     )
-  should.equal(result.family, "Vewd Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("25"), patch: Some("1"))),
-  )
+  assert result.family == "Vewd Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("25"), patch: Some("1")))
 }
 
 pub fn ua_parse_1595_test() {
@@ -16660,11 +14346,9 @@ pub fn ua_parse_1595_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux; Andr0id 12; MMI) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.6261.128 Safari/537.36 OMI/4.24.3.102.Daimos.11 Model/AU-AU401 TiVoAuto",
     )
-  should.equal(result.family, "Vewd Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("24"), patch: Some("3"))),
-  )
+  assert result.family == "Vewd Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("24"), patch: Some("3")))
 }
 
 pub fn ua_parse_1596_test() {
@@ -16672,11 +14356,9 @@ pub fn ua_parse_1596_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Linux ) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.6261.128 Safari/537.36 OMI/4.24.3.93.MIKE.221 Model/Vestel-MB180 VSTVB MB100 FVC/9.0 (BUSH; MB180; ) TiVoOS/1.0.0 (Vestel MB180 BUSH) SmartTvA/3.0.0",
     )
-  should.equal(result.family, "Vewd Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "4", minor: Some("24"), patch: Some("3"))),
-  )
+  assert result.family == "Vewd Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "4", minor: Some("24"), patch: Some("3")))
 }
 
 pub fn ua_parse_1597_test() {
@@ -16684,11 +14366,9 @@ pub fn ua_parse_1597_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 5.1; rv:102.0) Gecko/20100101 Firefox/102.0 Mypal/74.1.4",
     )
-  should.equal(result.family, "Mypal Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "74", minor: Some("1"), patch: Some("4"))),
-  )
+  assert result.family == "Mypal Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "74", minor: Some("1"), patch: Some("4")))
 }
 
 pub fn ua_parse_1598_test() {
@@ -16696,9 +14376,7 @@ pub fn ua_parse_1598_test() {
     uaparser.parse_user_agent(
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101 Firefox/102.0 Mypal/74.1.4",
     )
-  should.equal(result.family, "Mypal Browser")
-  should.equal(
-    result.version,
-    Some(uaparser.Version(major: "74", minor: Some("1"), patch: Some("4"))),
-  )
+  assert result.family == "Mypal Browser"
+  assert result.version
+    == Some(uaparser.Version(major: "74", minor: Some("1"), patch: Some("4")))
 }

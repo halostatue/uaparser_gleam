@@ -9,6 +9,7 @@
 //// ua.version // Some(Version(major: "120", minor: Some("0"), patch: Some("0")))
 //// ```
 
+import capuchin_crypt
 import gleam/dict.{type Dict}
 import gleam/list
 import gleam/option.{type Option, None, Some}
@@ -60,11 +61,10 @@ pub fn parse_user_agent(ua_string: String) -> UserAgent {
 }
 
 fn get_compiled() -> Dict(String, List(CompiledPattern)) {
-  cache_get(cache_key)
+  capuchin_crypt.get(cache_key)
   |> result.lazy_unwrap(fn() {
     let compiled = init_compiled()
-    cache_put(cache_key, compiled)
-    compiled
+    capuchin_crypt.put(cache_key, compiled)
   })
 }
 
@@ -161,11 +161,3 @@ fn interpolate_group(r: String, subs: List(Option(String))) -> Option(String) {
     _ -> Some(r)
   }
 }
-
-@external(erlang, "uaparser_ffi", "cache_get")
-@external(javascript, "./uaparser_ffi.mjs", "cache_get")
-fn cache_get(key: String) -> Result(a, Nil)
-
-@external(erlang, "uaparser_ffi", "cache_put")
-@external(javascript, "./uaparser_ffi.mjs", "cache_put")
-fn cache_put(key: String, value: a) -> Nil
