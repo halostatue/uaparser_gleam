@@ -14380,3 +14380,27 @@ pub fn ua_parse_1598_test() {
   assert result.version
     == Some(uaparser.Version(major: "74", minor: Some("1"), patch: Some("4")))
 }
+
+pub fn ua_parse_1599_test() {
+  let result =
+    uaparser.parse_user_agent(
+      "Mozilla/5.0 (macOS; AArch64) Ladybird/1.0 Chrome/146.0.0.0 AppleWebKit/537.36 Safari/537.36",
+    )
+  assert result.family == "Ladybird"
+  assert result.version
+    == Some(uaparser.Version(major: "1", minor: Some("0"), patch: None))
+}
+
+pub fn ua_parse_1600_test() {
+  let result =
+    uaparser.parse_user_agent(
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0 Teams/26106.2110.4675.2592 (50)",
+    )
+  assert result.family == "Microsoft Teams"
+  assert result.version
+    == Some(uaparser.Version(
+      major: "26106",
+      minor: Some("2110"),
+      patch: Some("4675"),
+    ))
+}
