@@ -66,7 +66,7 @@ jobs:
           gleam-version: ${{ matrix.gleam }}
           rebar3-version: "3"
 
-      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           key: builds@gleam-${{ steps.beam.outputs.gleam-version }}-otp-${{ steps.beam.outputs.otp-version }}-hash-${{ hashFiles('**/manifest.toml') }}
           path: |
@@ -139,7 +139,7 @@ jobs:
         with:
           bun-version: ${{ matrix.bun }}
 
-      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           key: builds@gleam-${{ steps.beam.outputs.gleam-version }}-otp-${{ steps.beam.outputs.otp-version }}-bun-${{ steps.bun.outputs.bun-version }}-hash-${{ hashFiles('**/manifest.toml') }}
           path: |
@@ -204,7 +204,7 @@ jobs:
         with:
           deno-version: ${{ matrix.deno }}
 
-      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           key: builds@gleam-${{ steps.beam.outputs.gleam-version }}-otp-${{ steps.beam.outputs.otp-version }}-deno-${{ steps.deno.outputs.deno-version }}-hash-${{ hashFiles('**/manifest.toml') }}
           path: |
@@ -269,7 +269,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           key: builds@gleam-${{ steps.beam.outputs.gleam-version }}-otp-${{ steps.beam.outputs.otp-version }}-node-${{ steps.node.outputs.node-version }}-hash-${{ hashFiles('**/manifest.toml') }}
           path: |
